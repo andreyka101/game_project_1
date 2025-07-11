@@ -1,0 +1,132 @@
+[gd_scene load_steps=17 format=3 uid="uid://d075b0bi77exp"]
+
+[ext_resource type="Texture2D" uid="uid://im6lwnr8pkik" path="res://photo/enemy ship-Sheet_2.png" id="1_lhd6b"]
+[ext_resource type="Script" uid="uid://c5f2y6hi3fwpn" path="res://ALL_scenes/drone_2/drone_2.gd" id="1_luleb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_luleb"]
+atlas = ExtResource("1_lhd6b")
+region = Rect2(144, 192, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x442r"]
+atlas = ExtResource("1_lhd6b")
+region = Rect2(192, 192, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_urljt"]
+atlas = ExtResource("1_lhd6b")
+region = Rect2(240, 192, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yv1sh"]
+atlas = ExtResource("1_lhd6b")
+region = Rect2(288, 192, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wcvwk"]
+atlas = ExtResource("1_lhd6b")
+region = Rect2(336, 192, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ujkvq"]
+atlas = ExtResource("1_lhd6b")
+region = Rect2(0, 256, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5jqrj"]
+atlas = ExtResource("1_lhd6b")
+region = Rect2(48, 256, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_urkow"]
+atlas = ExtResource("1_lhd6b")
+region = Rect2(96, 256, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0lgby"]
+atlas = ExtResource("1_lhd6b")
+region = Rect2(144, 192, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1557w"]
+atlas = ExtResource("1_lhd6b")
+region = Rect2(192, 256, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_587hg"]
+atlas = ExtResource("1_lhd6b")
+region = Rect2(240, 256, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nng4c"]
+atlas = ExtResource("1_lhd6b")
+region = Rect2(288, 256, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2tib3"]
+atlas = ExtResource("1_lhd6b")
+region = Rect2(336, 256, 48, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1557w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_luleb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x442r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_urljt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yv1sh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wcvwk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ujkvq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5jqrj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_urkow")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0lgby")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1557w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_587hg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nng4c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2tib3")
+}],
+"loop": false,
+"name": &"explosion",
+"speed": 15.0
+}]
+
+[node name="Drone_2" type="Area2D"]
+scale = Vector2(1.6, 1.6)
+script = ExtResource("1_luleb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.767, 1.767)
+sprite_frames = SubResource("SpriteFrames_1557w")
+autoplay = "default"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(5.96046e-08, 0)
+polygon = PackedVector2Array(-3.125, -6.875, 10, -6.875, 15.625, 1.875, 10.625, 21.25, 3.75, 14.375, -3.75, 21.25, -8.75, 1.875)
+
+[node name="Marker2D_LEFT" type="Marker2D" parent="."]
+position = Vector2(-2.5, 21.875)
+
+[node name="Marker2D_RIGHT" type="Marker2D" parent="."]
+position = Vector2(10, 21.875)
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

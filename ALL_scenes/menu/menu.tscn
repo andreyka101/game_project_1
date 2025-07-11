@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsv33acqvp1i0"]
+
+[ext_resource type="Texture2D" uid="uid://bf7jasbtliuxh" path="res://photo/enemy ship-Sheet.png" id="1_6s344"]
+
+[node name="Menu" type="Node2D"]
+
+[node name="EnemyShip-sheet" type="Sprite2D" parent="."]
+position = Vector2(577, 336)
+texture = ExtResource("1_6s344")

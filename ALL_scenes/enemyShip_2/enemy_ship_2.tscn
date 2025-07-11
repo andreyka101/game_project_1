@@ -1,0 +1,81 @@
+[gd_scene load_steps=12 format=3 uid="uid://cy3oss34dfs6h"]
+
+[ext_resource type="Texture2D" uid="uid://v3u3cte1jfmk" path="res://photo/enemy ship 2/enemyship2_1.png" id="1_17d3w"]
+[ext_resource type="Script" uid="uid://qy41fm1pjgvk" path="res://ALL_scenes/enemyShip_2/enemy_ship_2.gd" id="1_vxri1"]
+[ext_resource type="Texture2D" uid="uid://v1cc8hbb1wm4" path="res://photo/enemy ship 2/enemyship2_2.png" id="2_vxri1"]
+[ext_resource type="Texture2D" uid="uid://bgcx4my2p8usi" path="res://photo/enemy ship 2/enemyship2_3.png" id="3_cv310"]
+[ext_resource type="Texture2D" uid="uid://cao4ned2w64g3" path="res://photo/enemy ship 2/enemyship2_4.png" id="4_3fgcm"]
+[ext_resource type="Texture2D" uid="uid://cb1usbhijfff3" path="res://photo/enemy ship 2/enemyship2_5.png" id="5_1r06e"]
+[ext_resource type="Texture2D" uid="uid://bbgjbmjqslh37" path="res://photo/enemy ship 2/enemyship2_6.png" id="6_wm6k6"]
+[ext_resource type="Texture2D" uid="uid://bp41yymhxx70d" path="res://photo/enemy ship 2/enemyship2_7.png" id="7_y75wk"]
+[ext_resource type="Texture2D" uid="uid://bvie7u543iw1r" path="res://photo/enemy ship 2/enemyship2_8.png" id="8_qc6g0"]
+[ext_resource type="Texture2D" uid="uid://b7jb6yqhkkw6k" path="res://photo/enemy ship 2/enemyship2_9.png" id="9_10iv1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ea2jt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_17d3w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_vxri1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_cv310")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_3fgcm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_1r06e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_wm6k6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_y75wk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_qc6g0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_10iv1")
+}],
+"loop": false,
+"name": &"explosion",
+"speed": 15.0
+}]
+
+[node name="EnemyShip_2" type="Area2D" groups=["all_enemy"]]
+scale = Vector2(1.6, 1.6)
+script = ExtResource("1_vxri1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.767, 1.767)
+sprite_frames = SubResource("SpriteFrames_ea2jt")
+autoplay = "default"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, 23, 16, -14, -16, -14)
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(0, 24.375)
+
+[node name="Marker2D_LEFT" type="Marker2D" parent="."]
+position = Vector2(-200, 1500)
+
+[node name="Marker2D_RIGHT" type="Marker2D" parent="."]
+position = Vector2(200, 1500)
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Timer_position" type="Timer" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer_position" to="." method="_on_timer_position_timeout"]

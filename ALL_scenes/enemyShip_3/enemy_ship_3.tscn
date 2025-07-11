@@ -1,0 +1,96 @@
+[gd_scene load_steps=11 format=3 uid="uid://c6dnxjy2yyyc7"]
+
+[ext_resource type="Script" uid="uid://bictaal85je6p" path="res://ALL_scenes/enemyShip_3/enemy_ship_3.gd" id="1_jcr0f"]
+[ext_resource type="Texture2D" uid="uid://bf7jasbtliuxh" path="res://photo/enemy ship-Sheet.png" id="2_riw6s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_puety"]
+atlas = ExtResource("2_riw6s")
+region = Rect2(80, 120, 40, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t63oa"]
+atlas = ExtResource("2_riw6s")
+region = Rect2(120, 120, 40, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_17d04"]
+atlas = ExtResource("2_riw6s")
+region = Rect2(160, 120, 40, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2utln"]
+atlas = ExtResource("2_riw6s")
+region = Rect2(200, 120, 40, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_30ra8"]
+atlas = ExtResource("2_riw6s")
+region = Rect2(240, 120, 40, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27kdx"]
+atlas = ExtResource("2_riw6s")
+region = Rect2(0, 180, 40, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lgp0f"]
+atlas = ExtResource("2_riw6s")
+region = Rect2(40, 180, 40, 60)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yai2u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_puety")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t63oa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_17d04")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2utln")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_30ra8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_27kdx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lgp0f")
+}],
+"loop": false,
+"name": &"explosion",
+"speed": 15.0
+}]
+
+[node name="EnemyShip_3" type="Area2D" groups=["all_enemy"]]
+scale = Vector2(1.6, 1.6)
+script = ExtResource("1_jcr0f")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.767, 1.767)
+sprite_frames = SubResource("SpriteFrames_yai2u")
+animation = &"explosion"
+autoplay = "default"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, 23, 16, -14, -16, -14)
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(0, 24.375)
+
+[node name="Marker2D_LEFT" type="Marker2D" parent="."]
+position = Vector2(-200, 1500)
+
+[node name="Marker2D_RIGHT" type="Marker2D" parent="."]
+position = Vector2(200, 1500)
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Timer_position" type="Timer" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer_position" to="." method="_on_timer_position_timeout"]

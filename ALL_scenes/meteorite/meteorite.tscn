@@ -1,0 +1,87 @@
+[gd_scene load_steps=13 format=3 uid="uid://dnf7wi48ig11i"]
+
+[ext_resource type="Script" uid="uid://5x0a486femoo" path="res://ALL_scenes/meteorite/meteorite.gd" id="1_b5gxj"]
+[ext_resource type="Texture2D" uid="uid://hu0db8gnryj6" path="res://photo/meteorite/meteorite6.png" id="1_hq4cx"]
+[ext_resource type="Texture2D" uid="uid://baoyw7qwqjk71" path="res://photo/meteorite/meteorite7.png" id="2_b5gxj"]
+[ext_resource type="Texture2D" uid="uid://k7phwvc6kfrj" path="res://photo/meteorite/meteorite8.png" id="3_2mnoa"]
+[ext_resource type="Texture2D" uid="uid://bdmmj3jquaw64" path="res://photo/meteorite/meteorite9.png" id="4_0h6n8"]
+[ext_resource type="Texture2D" uid="uid://jpnyn6e1dhno" path="res://photo/meteorite/meteorite1.png" id="5_2ynrk"]
+[ext_resource type="Texture2D" uid="uid://dfo1va75hnugo" path="res://photo/meteorite/meteorite2.png" id="6_k7epk"]
+[ext_resource type="Texture2D" uid="uid://cdqkenbg0c0av" path="res://photo/meteorite/meteorite3.png" id="7_xwsso"]
+[ext_resource type="Texture2D" uid="uid://d0n12qrg13ua8" path="res://photo/meteorite/meteorite4.png" id="8_iax2o"]
+[ext_resource type="Texture2D" uid="uid://dfyh0dj426tm3" path="res://photo/meteorite/meteorite5.png" id="9_i1lca"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6csh7"]
+radius = 25.02
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ixgqu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_hq4cx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_b5gxj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2mnoa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_0h6n8")
+}],
+"loop": false,
+"name": &"explosion",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_2ynrk")
+}],
+"loop": true,
+"name": &"meteor 1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_k7epk")
+}],
+"loop": true,
+"name": &"meteor 2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_xwsso")
+}],
+"loop": true,
+"name": &"meteor 3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_iax2o")
+}],
+"loop": true,
+"name": &"meteor 4",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_i1lca")
+}],
+"loop": true,
+"name": &"meteor 5",
+"speed": 5.0
+}]
+
+[node name="Meteorite" type="Area2D" groups=["all_enemy"]]
+script = ExtResource("1_b5gxj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6csh7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ixgqu")
+animation = &"meteor 2"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

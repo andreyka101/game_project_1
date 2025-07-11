@@ -1,0 +1,47 @@
+[gd_scene load_steps=9 format=3 uid="uid://b1fy6cht8h6e6"]
+
+[ext_resource type="Script" uid="uid://5pr4bskytqbn" path="res://ALL_scenes/bullet/bullet.gd" id="1_mg27r"]
+[ext_resource type="Texture2D" uid="uid://cdt8tbb2jwpmj" path="res://photo/bullet/bullet1.png" id="2_cbnwt"]
+[ext_resource type="Texture2D" uid="uid://bswkhsf13b017" path="res://photo/bullet/bullet2.png" id="3_5tdwo"]
+[ext_resource type="Texture2D" uid="uid://csjn6nylgkyja" path="res://photo/bullet/bullet3.png" id="4_mqvgq"]
+[ext_resource type="Texture2D" uid="uid://s13ow6860lx8" path="res://photo/bullet/bullet4.png" id="5_3pva4"]
+[ext_resource type="Texture2D" uid="uid://cp5sgu6pmhcko" path="res://photo/bullet/bullet5.png" id="6_j6ape"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mg27r"]
+size = Vector2(5, 11)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_di48f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_cbnwt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_5tdwo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_mqvgq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_3pva4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_j6ape")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[node name="Bullet" type="CharacterBody2D" groups=["group_bullet"]]
+script = ExtResource("1_mg27r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_mg27r")
+debug_color = Color(0.788384, 0.379197, 0.540462, 0.42)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["group_bullet"]]
+sprite_frames = SubResource("SpriteFrames_di48f")
+autoplay = "default"
+frame_progress = 0.34819

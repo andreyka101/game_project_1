@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdw3xl8387e4f"]
+
+[ext_resource type="Script" uid="uid://dod02wyv88h72" path="res://ALL_scenes/level/level.gd" id="1_r62w2"]
+[ext_resource type="PackedScene" uid="uid://cwrkixbbjesk6" path="res://ALL_scenes/galaxy_ship/galaxy_ship.tscn" id="2_ekf4v"]
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_r62w2")
+
+[node name="Galaxy_ship" parent="." instance=ExtResource("2_ekf4v")]
+position = Vector2(669, 633)
+scale = Vector2(1.1, 1.1)
