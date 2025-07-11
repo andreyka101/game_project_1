@@ -6,7 +6,7 @@ extends Area2D
 @onready var marker_RIGHT:Marker2D = $Marker2D_RIGHT
 @onready var marker_LEFT:Marker2D = $Marker2D_LEFT
 @onready var level = $".."
-var hp = 300
+var hp = 100
 @onready var sprite2D:AnimatedSprite2D = $"AnimatedSprite2D"
 
 var distance_from_player_X = null
