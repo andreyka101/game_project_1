@@ -176,7 +176,7 @@ autoplay = "100-75%"
 position = Vector2(0, -37)
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.374
 autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

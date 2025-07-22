@@ -36,6 +36,7 @@ motion_scale = Vector2(1.5, 1.5)
 motion_mirroring = Vector2(0, 180)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer4"]
+modulate = Color(0.527155, 0.527155, 0.527155, 1)
 texture = ExtResource("4_qr523")
 
 [node name="ParallaxLayer5" type="ParallaxLayer" parent="."]
@@ -43,4 +44,5 @@ motion_scale = Vector2(2.3, 2.3)
 motion_mirroring = Vector2(0, 180)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer5"]
+modulate = Color(0.540732, 0.540732, 0.540732, 1)
 texture = ExtResource("5_q1n8y")

@@ -4,12 +4,12 @@ extends CharacterBody2D
 @onready var level = $".."
 @onready var marker:Marker2D = $"./Marker2D"
 var attack_bool:bool = false
-var hp_player = 300
+var hp_player = 500
 @onready var sprite:AnimatedSprite2D = $AnimatedSprite2D
 var not_death = true
 #var damage = false
 
-var hp_start_player = 300
+var hp_start_player = 500
 # 250
 
 
@@ -104,6 +104,8 @@ func _on_timer_timeout() -> void:
 
 		# .add_child() - добавляет дочерний узел к узлу или к другой сцене
 		level.add_child(bullet)
+
+
 
 
 

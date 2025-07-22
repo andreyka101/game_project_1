@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bdw3xl8387e4f"]
+[gd_scene load_steps=4 format=3 uid="uid://bdw3xl8387e4f"]
 
 [ext_resource type="Script" uid="uid://dod02wyv88h72" path="res://ALL_scenes/level/level.gd" id="1_r62w2"]
 [ext_resource type="PackedScene" uid="uid://cwalhxdtsnydh" path="res://ALL_scenes/parallaxBackground_var_1/parallax_background_var_1.tscn" id="2_33107"]
 [ext_resource type="PackedScene" uid="uid://cwrkixbbjesk6" path="res://ALL_scenes/galaxy_ship/galaxy_ship.tscn" id="2_ekf4v"]
-[ext_resource type="PackedScene" uid="uid://d075b0bi77exp" path="res://ALL_scenes/drone_2/drone_2.tscn" id="4_1d1fn"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_r62w2")
@@ -16,6 +15,3 @@ transform = Transform2D(4, 0, 0, 4, 641, 360)
 [node name="Galaxy_ship" parent="." instance=ExtResource("2_ekf4v")]
 position = Vector2(373, 630)
 scale = Vector2(1.1, 1.1)
-
-[node name="Drone_2" parent="." instance=ExtResource("4_1d1fn")]
-position = Vector2(390, 8)
