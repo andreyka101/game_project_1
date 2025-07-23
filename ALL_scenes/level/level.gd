@@ -3,7 +3,7 @@ extends Node2D
 
 var num_level_hard = 1
 var num_level_text = 1
-var price_level = 150
+var price_level = 10
 
 
 
@@ -85,39 +85,40 @@ func method_level():
 	while(local_price_level != 0):
 		if(local_price_level < remainder_price):
 			remainder_price = local_price_level
-		var rund_num = randi_range(1,remainder_price)
+		# var rund_num = randi_range(1,remainder_price)
+		var chance_of_appearance = randf_range(1,100)
 
-		if(rund_num == 1):
+		if(local_price_level >= 1 and chance_of_appearance < 30):
 			var meteorite_scene = load("res://ALL_scenes/meteorite/meteorite.tscn")
 			var meteorite:Area2D = meteorite_scene.instantiate()
 			meteorite.position = Vector2(randi_range(-200,1580),50)
 			add_child(meteorite)
 			local_price_level -= 1
-		if(rund_num == 2):
+		if(local_price_level >= 2 and (chance_of_appearance >= 30 and chance_of_appearance < 50)):
 			var enemyShip_1_scene = load("res://ALL_scenes/enemyShip_1/enemy_ship_1.tscn")
 			var enemyShip_1:Area2D = enemyShip_1_scene.instantiate()
 			enemyShip_1.position = Vector2(randi_range(0,1380),50)
 			add_child(enemyShip_1)
 			local_price_level -= 2
-		if(rund_num == 3):
+		if(local_price_level >= 3 and (chance_of_appearance >= 50 and chance_of_appearance < 70)):
 			var enemyShip_2_scene = load("res://ALL_scenes/enemyShip_2/enemy_ship_2.tscn")
 			var enemyShip_2:Area2D = enemyShip_2_scene.instantiate()
 			enemyShip_2.position = Vector2(randi_range(0,1380),50)
 			add_child(enemyShip_2)
 			local_price_level -= 3
-		if(rund_num == 4):
+		if(local_price_level >= 4 and (chance_of_appearance >= 70 and chance_of_appearance < 80)):
 			var enemyShip_3_scene = load("res://ALL_scenes/enemyShip_3/enemy_ship_3.tscn")
 			var enemyShip_3:Area2D = enemyShip_3_scene.instantiate()
 			enemyShip_3.position = Vector2(randi_range(0,1380),50)
 			add_child(enemyShip_3)
 			local_price_level -= 4
-		if(rund_num == 5):
+		if(local_price_level >= 5 and (chance_of_appearance >= 80 and chance_of_appearance < 95)):
 			var drone_1_scene = load("res://ALL_scenes/drone_1/drone_1.tscn")
 			var drone_1:Area2D = drone_1_scene.instantiate()
 			drone_1.position = Vector2(randi_range(0,1380),50)
 			add_child(drone_1)
 			local_price_level -= 5
-		if(rund_num == 6):
+		if(local_price_level >= 6 and (chance_of_appearance >= 95 and chance_of_appearance <= 100)):
 			var drone_2_scene = load("res://ALL_scenes/drone_2/drone_2.tscn")
 			var drone_2:Area2D = drone_2_scene.instantiate()
 			drone_2.position = Vector2(randi_range(0,1380),50)
