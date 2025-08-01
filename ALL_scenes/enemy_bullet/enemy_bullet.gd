@@ -24,7 +24,7 @@ func _physics_process(delta: float) -> void:
 	
 	
 	# проверка как должка двигаться пуля прямо или в бок
-	print(name , global_position)
+	# print(name , global_position)
 	if(sideways_movement):
 		# линейное движение до какой-то точки
 		self.position += self.position.direction_to(position_save) * speed_bullet * delta

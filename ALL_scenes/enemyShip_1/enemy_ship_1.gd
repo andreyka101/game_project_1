@@ -27,6 +27,11 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	# движение корабля
+	if(hp <= 0 and death):
+		death = false
+		sprite2D.play("explosion")
+		await sprite2D.animation_finished
+		self.queue_free()
 	if((position.x <= position_save.x - 15 or position.x >= position_save.x + 15) or (position.y <= position_save.y - 15 or position.y >= position_save.y + 15)) and death:
 		self.position += self.position.direction_to(position_save) * 100 * delta
 	

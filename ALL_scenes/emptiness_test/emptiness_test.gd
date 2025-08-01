@@ -5,9 +5,9 @@ extends Node2D
 #@onready var lab_text = get_node("Label")
 
 
-func _ready() -> void:
-	print($Label.text)
-	print($Label.position)
+# func _ready() -> void:
+	#print($Label.text)
+	# print($Label.position)
 
 
 func _on_button_pressed() -> void:

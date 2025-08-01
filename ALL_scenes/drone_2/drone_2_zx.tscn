@@ -1,61 +1,61 @@
-[gd_scene load_steps=17 format=3 uid="uid://cqvuqsrnep5uu"]
+[gd_scene load_steps=17 format=3 uid="uid://d075b0bi77exp"]
 
-[ext_resource type="Texture2D" uid="uid://im6lwnr8pkik" path="res://photo/enemy ship-Sheet_2.png" id="1_lhd6b"]
-[ext_resource type="Script" uid="uid://bjdafjf4rqkl4" path="res://ALL_scenes/drone_2/drone_2.gd" id="1_luleb"]
+[ext_resource type="Script" uid="uid://c5f2y6hi3fwpn" path="res://ALL_scenes/drone_2/drone_2_zx.gd" id="1_qtkj8"]
+[ext_resource type="Texture2D" uid="uid://im6lwnr8pkik" path="res://photo/enemy ship-Sheet_2.png" id="2_0e0bx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_luleb"]
-atlas = ExtResource("1_lhd6b")
+atlas = ExtResource("2_0e0bx")
 region = Rect2(144, 192, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x442r"]
-atlas = ExtResource("1_lhd6b")
+atlas = ExtResource("2_0e0bx")
 region = Rect2(192, 192, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_urljt"]
-atlas = ExtResource("1_lhd6b")
+atlas = ExtResource("2_0e0bx")
 region = Rect2(240, 192, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yv1sh"]
-atlas = ExtResource("1_lhd6b")
+atlas = ExtResource("2_0e0bx")
 region = Rect2(288, 192, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wcvwk"]
-atlas = ExtResource("1_lhd6b")
+atlas = ExtResource("2_0e0bx")
 region = Rect2(336, 192, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ujkvq"]
-atlas = ExtResource("1_lhd6b")
+atlas = ExtResource("2_0e0bx")
 region = Rect2(0, 256, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5jqrj"]
-atlas = ExtResource("1_lhd6b")
+atlas = ExtResource("2_0e0bx")
 region = Rect2(48, 256, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_urkow"]
-atlas = ExtResource("1_lhd6b")
+atlas = ExtResource("2_0e0bx")
 region = Rect2(96, 256, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0lgby"]
-atlas = ExtResource("1_lhd6b")
+atlas = ExtResource("2_0e0bx")
 region = Rect2(144, 192, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1557w"]
-atlas = ExtResource("1_lhd6b")
+atlas = ExtResource("2_0e0bx")
 region = Rect2(192, 256, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_587hg"]
-atlas = ExtResource("1_lhd6b")
+atlas = ExtResource("2_0e0bx")
 region = Rect2(240, 256, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nng4c"]
-atlas = ExtResource("1_lhd6b")
+atlas = ExtResource("2_0e0bx")
 region = Rect2(288, 256, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2tib3"]
-atlas = ExtResource("1_lhd6b")
+atlas = ExtResource("2_0e0bx")
 region = Rect2(336, 256, 48, 64)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_lhd6b"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_1557w"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -107,12 +107,13 @@ animations = [{
 "speed": 15.0
 }]
 
-[node name="Drone_2" type="CharacterBody2D"]
-script = ExtResource("1_luleb")
+[node name="Drone_2dd" type="CharacterBody2D" groups=["all_enemy", "mechanical_enemy"]]
+scale = Vector2(1.6, 1.6)
+script = ExtResource("1_qtkj8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1.767, 1.767)
-sprite_frames = SubResource("SpriteFrames_lhd6b")
+sprite_frames = SubResource("SpriteFrames_1557w")
 autoplay = "default"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]

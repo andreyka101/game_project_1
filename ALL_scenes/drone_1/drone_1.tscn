@@ -178,11 +178,13 @@ position = Vector2(0.625, -1.25)
 rotation = -1.5708
 scale = Vector2(1.767, 1.767)
 sprite_frames = SubResource("SpriteFrames_uxqsf")
+animation = &"explosion"
 autoplay = "default"
 
-[node name="AnimatedSprite2D_head" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D_head" type="AnimatedSprite2D" parent="." groups=["all_enemy"]]
 scale = Vector2(1.767, 1.767)
 sprite_frames = SubResource("SpriteFrames_ijy8y")
+animation = &"explosion"
 autoplay = "default"
 offset = Vector2(-2, -4)
 

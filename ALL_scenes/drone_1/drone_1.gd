@@ -7,6 +7,7 @@ var speed_rotation = 0
 #var speed = randf_range(60 , 160)
 var speed = 160
 var hp = 50
+var death = false
 
 var arr_enemy = []
 
@@ -40,22 +41,23 @@ func _process(delta: float) -> void:
 
 
 	# дрон летит в сторону корабля игрока
-	if(galaxy_ship.position):
-		position += self.position.direction_to(galaxy_ship.position) * speed * delta
-		look_at(galaxy_ship.position)
 	
 	
-	if(hp <= 0):
+	if(hp <= 0 and !death):
 		sprite_fire.play("explosion")
 		sprite_head.play("explosion")
 		for element_scene in arr_enemy:
 			element_scene.hp -= 1000
 		speed_rotation = 0
 		speed = 0
+		death = true
 		await sprite_head.animation_finished
 		self.queue_free()
-	print(arr_enemy)
+	# print(arr_enemy)
 	
+	if(galaxy_ship.position != null):
+		position += self.position.direction_to(galaxy_ship.position) * speed * delta
+		look_at(galaxy_ship.position)
 	
 
 
@@ -89,19 +91,20 @@ func _on_body_entered(body: Node2D) -> void:
 					element_scene.hp -= 1000
 				speed_rotation = 0
 				speed = 0
+				death = true
 				await sprite_head.animation_finished
 				self.queue_free()
 
 
 
 
-#func _on_boom_area_entered(area: Area2D) -> void:
-	#print(area)
-	#for el_group in area.get_groups():
-		#print(el_group)
-		#if(el_group == "all_enemy"):
-			#area.hp -= 1000
-			#print(area.hp)
+# func _on_boom_area_entered(area: Area2D) -> void:
+# 	print(area)
+# 	for el_group in area.get_groups():
+# 		print(el_group)
+# 		if(el_group == "all_enemy"):
+# 			area.hp -= 1000
+# 			print(area.hp)
 
 
 
@@ -117,5 +120,5 @@ func _on_boom_area_entered(area: Area2D) -> void:
 func _on_boom_area_exited(area: Area2D) -> void:
 	for el_group in area.get_groups():
 		if(el_group == "all_enemy"):
-			#print(arr_enemy.find(area))
+			# print(arr_enemy.find(area))
 			arr_enemy.remove_at(arr_enemy.find(area))
