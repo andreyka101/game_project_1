@@ -84,26 +84,26 @@ func _process(delta: float):
 
 
 # сигнал узла timer срабатывает раз в какое-то время
-# func _on_timer_timeout() -> void:
-# 	#print("ok timer")
+func _on_timer_timeout() -> void:
+	#print("ok timer")
 
-# 	if(attack_bool and not_death):
-# 		# load() - загружает сцену в переменную
-# 		var bullet_scene = load("res://ALL_scenes/bullet/bullet.tscn")
-# 		# .instantiate() - инициализирует сцену как узел (это нужно для дальнейшего использования)
-# 		var bullet:CharacterBody2D = bullet_scene.instantiate()
-# 		#add_child(bullet)
+	if(attack_bool and not_death):
+		# load() - загружает сцену в переменную
+		var bullet_scene = load("res://ALL_scenes/bullet/bullet.tscn")
+		# .instantiate() - инициализирует сцену как узел (это нужно для дальнейшего использования)
+		var bullet:CharacterBody2D = bullet_scene.instantiate()
+		#add_child(bullet)
 		
-# 		#bullet.position.x = 500
-# 		#bullet.position.y = 500
+		#bullet.position.x = 500
+		#bullet.position.y = 500
 		
-# 		bullet.global_position  = marker.global_position 
+		bullet.global_position  = marker.global_position 
 
-# 		# add_child() - добавляет дочерний узел к этой сцене
-# 		# add_child(bullet)
+		# add_child() - добавляет дочерний узел к этой сцене
+		# add_child(bullet)
 
-# 		# .add_child() - добавляет дочерний узел к узлу или к другой сцене
-# 		level.add_child(bullet)
+		# .add_child() - добавляет дочерний узел к узлу или к другой сцене
+		level.add_child(bullet)
 
 
 

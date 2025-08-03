@@ -25,7 +25,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	print(velocity)
+	# print(velocity)
 	if(not shooting and galaxy_ship):
 		if(galaxy_ship.position and (position.x <= galaxy_ship.position.x - 15 or position.x >= galaxy_ship.position.x + 15)):
 			#distance_from_player_X = galaxy_ship.position.x - self.position.x
@@ -41,15 +41,23 @@ func _physics_process(delta: float) -> void:
 				self.velocity.x = speed
 			else:
 				self.velocity.x = -speed
+		else:
+			self.velocity.x = 0
+
 			
+		# self.position.y +=  20 * delta
 		velocity.y = 20
+		
 
 		if(hp <= 0 and death):
 			death = false
 			sprite2D.play("explosion")
 			await sprite2D.animation_finished
+			Global.enemies_released -= 1
+			if(Global.enemies_released == 0):
+				Global.enemies_released = null
 			self.queue_free()
-
+	move_and_slide()
 
 func _on_timer_timeout() -> void:
 		if(not death):
@@ -95,4 +103,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 				death = false
 				sprite2D.play("explosion")
 				await sprite2D.animation_finished
+				Global.enemies_released -= 1
+				if(Global.enemies_released == 0):
+					Global.enemies_released = null
 				self.queue_free()

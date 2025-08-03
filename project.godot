@@ -14,6 +14,10 @@ config/name="game_project_1"
 run/main_scene="uid://bdw3xl8387e4f"
 config/features=PackedStringArray("4.4", "Forward Plus")
 
+[autoload]
+
+Global="*res://ALL_scenes/Global.gd"
+
 [display]
 
 window/size/viewport_width=1280

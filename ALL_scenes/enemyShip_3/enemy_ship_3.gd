@@ -37,6 +37,9 @@ func _physics_process(delta: float) -> void:
 		death = false
 		sprite2D.play("explosion")
 		await sprite2D.animation_finished
+		Global.enemies_released -= 1
+		if(Global.enemies_released == 0):
+			Global.enemies_released = null
 		self.queue_free()
 	
 
@@ -88,6 +91,9 @@ func _on_body_entered(body: Node2D) -> void:
 				death = false
 				sprite2D.play("explosion")
 				await sprite2D.animation_finished
+				Global.enemies_released -= 1
+				if(Global.enemies_released == 0):
+					Global.enemies_released = null
 				self.queue_free()
 
 
