@@ -11,15 +11,16 @@ var price_level = 50
 
 
 func _ready() -> void:
-	method_level()
+	# method_level()
 
 	# тип врага 1 - метеорит
-	#var meteorite_scene = load("res://ALL_scenes/meteorite/meteorite.tscn")
-	#for i in range(10):
-		## создаём метеориты в случайных координатах по x
-		#var meteorite:Area2D = meteorite_scene.instantiate()
-		#meteorite.position = Vector2(randi_range(-200,1580),50)
-		#add_child(meteorite)
+	var meteorite_scene = load("res://ALL_scenes/meteorite/meteorite.tscn")
+	for i in range(10):
+		# создаём метеориты в случайных координатах по x
+		var meteorite:Area2D = meteorite_scene.instantiate()
+		meteorite.position = Vector2(randi_range(-200,1580),50)
+		add_child(meteorite)
+		Global.enemies_released += 1
 	
 	
 	

@@ -55,8 +55,17 @@ func _process(delta: float) -> void:
 		sprite2D.play("explosion")
 		save_num_rotation = 0
 		await sprite2D.animation_finished
+		Global.enemies_released -= 1
+		if(Global.enemies_released == 0):
+			Global.enemies_released = null
 		self.queue_free()
-	
+
+
+	if(position.y > 1000):
+		Global.enemies_released -= 1
+		if(Global.enemies_released == 0):
+			Global.enemies_released = null
+		self.queue_free()
 
 
 func _on_body_entered(body: Node2D) -> void:
@@ -94,8 +103,5 @@ func _on_body_entered(body: Node2D) -> void:
 				sprite2D.play("explosion")
 				save_num_rotation = 0
 				await sprite2D.animation_finished
-				Global.enemies_released -= 1
-				if(Global.enemies_released == 0):
-					Global.enemies_released = null
-				self.queue_free()
+				 
 		
