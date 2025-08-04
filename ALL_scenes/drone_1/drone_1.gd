@@ -2,7 +2,7 @@ extends Area2D
 
 @onready var sprite_head:AnimatedSprite2D =  $AnimatedSprite2D_head
 @onready var sprite_fire:AnimatedSprite2D =  $AnimatedSprite2D_fire
-@onready var galaxy_ship:CharacterBody2D = $"../Galaxy_ship"
+@onready var galaxy_ship:CharacterBody2D = $"../../Galaxy_ship"
 var speed_rotation = 0
 #var speed = randf_range(60 , 160)
 var speed = 160
@@ -55,8 +55,11 @@ func _process(delta: float) -> void:
 		Global.enemies_released -= 1
 		if(Global.enemies_released == 0):
 			Global.enemies_released = null
+		$"../../AudioStreamPlayer2D3".playing = true
 		self.queue_free()
 	# print(arr_enemy)
+	for i in arr_enemy:
+		print(i.hp)
 	
 	if(galaxy_ship.position != null):
 		position += self.position.direction_to(galaxy_ship.position) * speed * delta
@@ -68,12 +71,13 @@ func _on_body_entered(body: Node2D) -> void:
 
 	# если касаемся корабля игрока то наносим ему урон и взрываемся
 	if(body.name == "Galaxy_ship"):
-		body.hp_player -= 300
+		body.hp_player -= 150
 		sprite_head.play("explosion")
 		await sprite_head.animation_finished
 		Global.enemies_released -= 1
 		if(Global.enemies_released == 0):
 			Global.enemies_released = null
+		$"../../AudioStreamPlayer2D3".playing = true
 		self.queue_free()
 		
 		
@@ -90,7 +94,7 @@ func _on_body_entered(body: Node2D) -> void:
 			
 			
 			# смерть дрона
-			if(hp <= 0):
+			if(hp <= 0 and !death):
 				sprite_fire.play("explosion")
 				sprite_head.play("explosion")
 				for element_scene in arr_enemy:
@@ -102,6 +106,7 @@ func _on_body_entered(body: Node2D) -> void:
 				Global.enemies_released -= 1
 				if(Global.enemies_released == 0):
 					Global.enemies_released = null
+				$"../../AudioStreamPlayer2D3".playing = true
 				self.queue_free()
 
 

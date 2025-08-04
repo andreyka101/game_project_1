@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://c6dnxjy2yyyc7"]
+[gd_scene load_steps=12 format=3 uid="uid://c6dnxjy2yyyc7"]
 
 [ext_resource type="Script" uid="uid://bictaal85je6p" path="res://ALL_scenes/enemyShip_3/enemy_ship_3.gd" id="1_jcr0f"]
 [ext_resource type="Texture2D" uid="uid://bf7jasbtliuxh" path="res://photo/enemy ship-Sheet.png" id="2_riw6s"]
+[ext_resource type="AudioStream" uid="uid://dg6belfcx7gn0" path="res://audio/выстел.mp3" id="3_riw6s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_puety"]
 atlas = ExtResource("2_riw6s")
@@ -90,6 +91,10 @@ position = Vector2(200, 1500)
 [node name="Timer" type="Timer" parent="."]
 
 [node name="Timer_position" type="Timer" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_riw6s")
+volume_db = -5.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

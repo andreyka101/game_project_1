@@ -1,19 +1,22 @@
 extends Area2D
 
 
-@onready var galaxy_ship:CharacterBody2D = $"../Galaxy_ship"
+@onready var galaxy_ship:CharacterBody2D = $"../../Galaxy_ship"
 
 # создаём рандомные координаты x
-var save_X = randi_range(0,1280)
+var save_X = randi_range(200,1080)
 
 # создаём рандомную скорость вращения 
 var save_num_rotation = randf_range(-5, 5)
 
 # создаём рандомную скорость перемещения
-var speed = randf_range(10, 200)
+var speed = randf_range(30, 200)
 
 var hp:float
 var sprite2D:AnimatedSprite2D
+
+var death = false
+
 
 
 
@@ -49,22 +52,27 @@ func _process(delta: float) -> void:
 	
 	# вращение метеорита 
 	self.rotation_degrees += save_num_rotation
-	
-	
-	if(hp <= 0):
+	if(hp <= 0 and !death):
+		death = true
 		sprite2D.play("explosion")
 		save_num_rotation = 0
 		await sprite2D.animation_finished
 		Global.enemies_released -= 1
 		if(Global.enemies_released == 0):
 			Global.enemies_released = null
-		self.queue_free()
+		
+		$"../../AudioStreamPlayer2D2".playing = true
+	
+	
 
 
-	if(position.y > 1000):
+
+	if(position.y > 820):
+
 		Global.enemies_released -= 1
 		if(Global.enemies_released == 0):
 			Global.enemies_released = null
+		$"../../AudioStreamPlayer2D2".playing = true
 		self.queue_free()
 
 
@@ -73,16 +81,18 @@ func _on_body_entered(body: Node2D) -> void:
 	#print(body.get_groups())
 	#print(body.name)
 	
+
 	
 	if(body.name == "Galaxy_ship"):
 		#print("ok if")
-		
+		death = true
 		body.hp_player -= 300
 		sprite2D.play("explosion")
 		await sprite2D.animation_finished
 		Global.enemies_released -= 1
 		if(Global.enemies_released == 0):
 			Global.enemies_released = null
+		$"../../AudioStreamPlayer2D2".playing = true
 		self.queue_free()
 		
 		
@@ -99,9 +109,14 @@ func _on_body_entered(body: Node2D) -> void:
 			
 			
 			# смерть метеорита 
-			if(hp <= 0):
+			if(hp <= 0 and !death):
+				death = true
 				sprite2D.play("explosion")
 				save_num_rotation = 0
 				await sprite2D.animation_finished
-				 
+				Global.enemies_released -= 1
+				if(Global.enemies_released == 0):
+					Global.enemies_released = null
+				$"../../AudioStreamPlayer2D2".playing = true
+				self.queue_free()
 		

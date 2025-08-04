@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cwrkixbbjesk6"]
+[gd_scene load_steps=36 format=3 uid="uid://cwrkixbbjesk6"]
 
 [ext_resource type="Script" uid="uid://ckexuwxllay5h" path="res://ALL_scenes/galaxy_ship/galaxy_ship.gd" id="1_qmcd2"]
 [ext_resource type="Texture2D" uid="uid://d4b67mcqip268" path="res://photo/spacecraft/spacecraft1.png" id="2_f03ek"]
@@ -33,6 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://cl546psffk6m8" path="res://photo/spacecraft/spacecraft30.png" id="31_du8uf"]
 [ext_resource type="Texture2D" uid="uid://b1fd4s5ljpnxu" path="res://photo/spacecraft/spacecraft31.png" id="32_6itlf"]
 [ext_resource type="Texture2D" uid="uid://dfbrn07uf3k8o" path="res://photo/spacecraft/spacecraft32.png" id="33_c2qvm"]
+[ext_resource type="AudioStream" uid="uid://bao4vp37pwcq5" path="res://audio/выстрел для игрока.mp3" id="34_lvet8"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xkvga"]
 animations = [{
@@ -178,5 +179,10 @@ position = Vector2(0, -37)
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.374
 autostart = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("34_lvet8")
+volume_db = -15.0
+pitch_scale = 0.6
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -11,6 +11,7 @@ var not_death = true
 
 var hp_start_player = 500
 # 250
+var stop = false
 
 
 func  _physics_process(delta: float) -> void:
@@ -59,7 +60,7 @@ func  _physics_process(delta: float) -> void:
 	# position.direction_to(x) - вычисляет плавное движение к точке x
 
 	# движение корабля 
-	if((position.x <= get_global_mouse_position().x - 15 or position.x >= get_global_mouse_position().x + 15) or (position.y <= get_global_mouse_position().y - 15 or position.y >= get_global_mouse_position().y + 15)) and not_death:
+	if((position.x <= get_global_mouse_position().x - 15 or position.x >= get_global_mouse_position().x + 15) or (position.y <= get_global_mouse_position().y - 15 or position.y >= get_global_mouse_position().y + 15)) and not_death and !stop:
 		if((get_global_mouse_position().x >0 and get_global_mouse_position().x < 1280 and get_global_mouse_position().y < 700 and get_global_mouse_position().y > 530) or (global_position.x >30 and global_position.x < 1250 and global_position.y < 680 and global_position.y > 480)):
 			self.global_position +=  self.position.direction_to(get_global_mouse_position()) * 500 * delta
 		else:
@@ -77,9 +78,14 @@ func _process(delta: float):
 		#attack_bool = true
 	#if(Input.is_action_just_released("attack")):
 		#attack_bool = false
-		
-		
+	if(stop):
+		self.visible = false
+	else:
+		self.visible = true
 	attack_bool = true
+
+	if(hp_player < 0):
+		hp_player = 0
 
 
 
@@ -87,7 +93,7 @@ func _process(delta: float):
 func _on_timer_timeout() -> void:
 	#print("ok timer")
 
-	if(attack_bool and not_death):
+	if(attack_bool and not_death and !stop):
 		# load() - загружает сцену в переменную
 		var bullet_scene = load("res://ALL_scenes/bullet/bullet.tscn")
 		# .instantiate() - инициализирует сцену как узел (это нужно для дальнейшего использования)
@@ -98,6 +104,8 @@ func _on_timer_timeout() -> void:
 		#bullet.position.y = 500
 		
 		bullet.global_position  = marker.global_position 
+
+		$AudioStreamPlayer2D.playing = true
 
 		# add_child() - добавляет дочерний узел к этой сцене
 		# add_child(bullet)

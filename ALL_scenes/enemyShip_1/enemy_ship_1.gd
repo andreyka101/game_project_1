@@ -34,6 +34,7 @@ func _physics_process(delta: float) -> void:
 		Global.enemies_released -= 1
 		if(Global.enemies_released == 0):
 			Global.enemies_released = null
+		$"../../AudioStreamPlayer2D2".playing = true
 		self.queue_free()
 	if((position.x <= position_save.x - 15 or position.x >= position_save.x + 15) or (position.y <= position_save.y - 15 or position.y >= position_save.y + 15)) and death:
 		self.position += self.position.direction_to(position_save) * 100 * delta
@@ -51,6 +52,7 @@ func _on_timer_timeout() -> void:
 		level.add_child(bullet)
 		# таймер будет срабатывать в случайное время
 		timer.wait_time = randf_range(1 , 3)
+		$AudioStreamPlayer2D.playing = true
 
 
 func _on_body_entered(body: Node2D) -> void:
@@ -67,13 +69,14 @@ func _on_body_entered(body: Node2D) -> void:
 			
 			
 			# смерть корабля
-			if(hp <= 0):
+			if(hp <= 0 and death):
 				death = false
 				sprite2D.play("explosion")
 				await sprite2D.animation_finished
 				Global.enemies_released -= 1
 				if(Global.enemies_released == 0):
 					Global.enemies_released = null
+				$"../../AudioStreamPlayer2D2".playing = true
 				self.queue_free()
 
 

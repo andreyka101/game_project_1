@@ -1,17 +1,69 @@
-[gd_scene load_steps=4 format=3 uid="uid://bdw3xl8387e4f"]
+[gd_scene load_steps=7 format=3 uid="uid://bdw3xl8387e4f"]
 
 [ext_resource type="Script" uid="uid://dod02wyv88h72" path="res://ALL_scenes/level/level.gd" id="1_r62w2"]
 [ext_resource type="PackedScene" uid="uid://cwalhxdtsnydh" path="res://ALL_scenes/parallaxBackground_var_1/parallax_background_var_1.tscn" id="2_33107"]
 [ext_resource type="PackedScene" uid="uid://cwrkixbbjesk6" path="res://ALL_scenes/galaxy_ship/galaxy_ship.tscn" id="2_ekf4v"]
+[ext_resource type="AudioStream" uid="uid://ct46c5a5v7cdg" path="res://audio/пик.mp3" id="4_33107"]
+[ext_resource type="AudioStream" uid="uid://dgg2a4pm86uav" path="res://audio/взрыв.mp3" id="5_sk66d"]
+[ext_resource type="AudioStream" uid="uid://dcbpx02rorcru" path="res://audio/взрыв дрона.mp3" id="6_pj7pm"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_r62w2")
 
 [node name="ParallaxBackground_var_1" parent="." instance=ExtResource("2_33107")]
-offset = Vector2(641, 360)
+offset = Vector2(640, 360)
 scale = Vector2(4, 4)
-transform = Transform2D(4, 0, 0, 4, 641, 360)
+transform = Transform2D(4, 0, 0, 4, 640, 360)
+
+[node name="Enemies" type="Node2D" parent="."]
 
 [node name="Galaxy_ship" parent="." instance=ExtResource("2_ekf4v")]
 position = Vector2(373, 630)
 scale = Vector2(1.1, 1.1)
+
+[node name="Button" type="Button" parent="."]
+visible = false
+offset_left = 502.0
+offset_top = 301.0
+offset_right = 768.0
+offset_bottom = 429.0
+theme_override_font_sizes/font_size = 34
+text = "продолжить"
+
+[node name="Label_text_level" type="Label" parent="."]
+light_mask = 512
+visibility_layer = 512
+z_index = 100
+offset_top = -1.0
+offset_right = 181.0
+offset_bottom = 87.0
+theme_override_font_sizes/font_size = 29
+text = "level 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label_text_hp" type="Label" parent="."]
+offset_left = 1126.0
+offset_top = 1.0
+offset_right = 1276.0
+offset_bottom = 87.0
+theme_override_colors/font_color = Color(0.737603, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 0.434235, 0.434235, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 30
+text = "hp 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_33107")
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_sk66d")
+volume_db = 7.0
+
+[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_pj7pm")
+volume_db = -10.0
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

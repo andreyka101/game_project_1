@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-@onready var galaxy_ship:CharacterBody2D = $"../Galaxy_ship"
+@onready var galaxy_ship:CharacterBody2D = $"../../Galaxy_ship"
 @onready var timer:Timer = $Timer
 @onready var marker_RIGHT:Marker2D = $Marker2D_RIGHT
 @onready var marker_LEFT:Marker2D = $Marker2D_LEFT
@@ -49,13 +49,14 @@ func _physics_process(delta: float) -> void:
 		velocity.y = 20
 		
 
-		if(hp <= 0 and death):
-			death = false
+		if(hp <= 0 and !death):
+			death = true
 			sprite2D.play("explosion")
 			await sprite2D.animation_finished
 			Global.enemies_released -= 1
 			if(Global.enemies_released == 0):
 				Global.enemies_released = null
+			$"../../AudioStreamPlayer2D2".playing = true
 			self.queue_free()
 	move_and_slide()
 
@@ -80,6 +81,7 @@ func _on_timer_timeout() -> void:
 			# таймер будет срабатывать в случайное время
 			#await get_tree().create_timer(0.1).timeout
 			shooting = false
+			$AudioStreamPlayer2D.playing = true
 
 
 # func _on_body_entered(body: Node2D) -> void:
@@ -99,11 +101,12 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			
 			
 			# смерть корабля
-			if(hp <= 0):
-				death = false
+			if(hp <= 0 and !death):
+				death = true
 				sprite2D.play("explosion")
 				await sprite2D.animation_finished
 				Global.enemies_released -= 1
 				if(Global.enemies_released == 0):
 					Global.enemies_released = null
+				$"../../AudioStreamPlayer2D2".playing = true
 				self.queue_free()
