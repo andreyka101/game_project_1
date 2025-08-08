@@ -23,7 +23,7 @@ func _ready() -> void:
 	# for i in range(20):
 	# 	# создаём метеориты в случайных координатах по x
 	# 	var meteorite:Area2D = meteorite_scene.instantiate()
-	# 	meteorite.position = Vector2(randi_range(-200,1580),50)
+	# 	meteorite.position = Vector2(randi_range(-200,1020),50)
 	# 	enemies.add_child(meteorite)
 	# 	Global.enemies_released += 1
 	
@@ -36,7 +36,7 @@ func _ready() -> void:
 	# 	# создаём корабли в случайных координатах по x
 	# 	var enemyShip_1:Area2D = enemyShip_1_scene.instantiate()
 	# 	# enemyShip_1.position = Vector2(randi_range(-200,1580),50)
-	# 	enemyShip_1.position = Vector2(randi_range(0,1380),50)
+	# 	enemyShip_1.position = Vector2(randi_range(0,720),50)
 	# 	enemies.add_child(enemyShip_1)
 	# 	Global.enemies_released += 1
 
@@ -48,7 +48,7 @@ func _ready() -> void:
 	# for i in range(10):
 	# 	# создаём корабли в случайных координатах по x
 	# 	var enemyShip_2:Area2D = enemyShip_2_scene.instantiate()
-	# 	enemyShip_2.position = Vector2(randi_range(0,1380),50)
+	# 	enemyShip_2.position = Vector2(randi_range(0,720),50)
 	# 	enemies.add_child(enemyShip_2)
 	# 	Global.enemies_released += 1
 
@@ -60,7 +60,7 @@ func _ready() -> void:
 	# for i in range(10):
 	# 	# создаём корабли в случайных координатах по x
 	# 	var enemyShip_3:Area2D = enemyShip_3_scene.instantiate()
-	# 	enemyShip_3.position = Vector2(randi_range(0,1380),50)
+	# 	enemyShip_3.position = Vector2(randi_range(0,720),50)
 	# 	enemies.add_child(enemyShip_3)
 	# 	Global.enemies_released += 1
 	
@@ -72,7 +72,7 @@ func _ready() -> void:
 	# for i in range(20):
 	# 	# создаём корабли в случайных координатах по x
 	# 	var drone_1:Area2D = drone_1_scene.instantiate()
-	# 	drone_1.position = Vector2(randi_range(0,1380),50)
+	# 	drone_1.position = Vector2(randi_range(0,720),50)
 	# 	enemies.add_child(drone_1)
 	# 	Global.enemies_released += 1
 	
@@ -83,7 +83,7 @@ func _ready() -> void:
 	# var drone_2_scene = load("res://ALL_scenes/drone_2/drone_2.tscn")
 	# for i in range(5):
 	# 	var drone_2:CharacterBody2D = drone_2_scene.instantiate() 
-	# 	drone_2.position = Vector2(randi_range(0,1380),50)
+	# 	drone_2.position = Vector2(randi_range(0,720),50)
 	# 	enemies.add_child(drone_2)
 	# 	Global.enemies_released += 1
 
@@ -108,42 +108,42 @@ func method_level():
 		if((local_price_level >= 1 and chance_of_appearance < 30) or local_price_level == 1):
 			var meteorite_scene = load("res://ALL_scenes/meteorite/meteorite.tscn")
 			var meteorite:Area2D = meteorite_scene.instantiate()
-			meteorite.position = Vector2(randi_range(-200,1580),50)
+			meteorite.position = Vector2(randi_range(-200,1020),50)
 			enemies.add_child(meteorite)
 			local_price_level -= 1
 			Global.enemies_released += 1
 		if(local_price_level >= 2 and (chance_of_appearance >= 30 and chance_of_appearance < 50)):
 			var enemyShip_1_scene = load("res://ALL_scenes/enemyShip_1/enemy_ship_1.tscn")
 			var enemyShip_1:Area2D = enemyShip_1_scene.instantiate()
-			enemyShip_1.position = Vector2(randi_range(0,1380),50)
+			enemyShip_1.position = Vector2(randi_range(0,720),50)
 			enemies.add_child(enemyShip_1)
 			local_price_level -= 2
 			Global.enemies_released += 1
 		if(local_price_level >= 3 and (chance_of_appearance >= 50 and chance_of_appearance < 70)):
 			var enemyShip_2_scene = load("res://ALL_scenes/enemyShip_2/enemy_ship_2.tscn")
 			var enemyShip_2:Area2D = enemyShip_2_scene.instantiate()
-			enemyShip_2.position = Vector2(randi_range(0,1380),50)
+			enemyShip_2.position = Vector2(randi_range(0,720),50)
 			enemies.add_child(enemyShip_2)
 			local_price_level -= 3
 			Global.enemies_released += 1
 		if(local_price_level >= 4 and (chance_of_appearance >= 70 and chance_of_appearance < 80)):
 			var enemyShip_3_scene = load("res://ALL_scenes/enemyShip_3/enemy_ship_3.tscn")
 			var enemyShip_3:Area2D = enemyShip_3_scene.instantiate()
-			enemyShip_3.position = Vector2(randi_range(0,1380),50)
+			enemyShip_3.position = Vector2(randi_range(0,720),50)
 			enemies.add_child(enemyShip_3)
 			local_price_level -= 4
 			Global.enemies_released += 1
 		if(local_price_level >= 5 and (chance_of_appearance >= 80 and chance_of_appearance < 95)):
 			var drone_1_scene = load("res://ALL_scenes/drone_1/drone_1.tscn")
 			var drone_1:Area2D = drone_1_scene.instantiate()
-			drone_1.position = Vector2(randi_range(0,1380),50)
+			drone_1.position = Vector2(randi_range(0,720),50)
 			enemies.add_child(drone_1)
 			local_price_level -= 5
 			Global.enemies_released += 1
 		if(local_price_level >= 6 and (chance_of_appearance >= 95 and chance_of_appearance <= 100)):
 			var drone_2_scene = load("res://ALL_scenes/drone_2/drone_2.tscn")
 			var drone_2:CharacterBody2D = drone_2_scene.instantiate() 
-			drone_2.position = Vector2(randi_range(0,1380),50)
+			drone_2.position = Vector2(randi_range(0,720),50)
 			enemies.add_child(drone_2)
 			local_price_level -= 6
 			Global.enemies_released += 1
@@ -161,6 +161,7 @@ func _process(delta: float) -> void:
 		$Button.visible = true
 		Global.enemies_released = 0
 		galaxy_ship.hp_player = galaxy_ship.hp_start_player
+		$ParallaxBackground_var_1.speed = 3
 
 
 func _on_button_pressed() -> void:
@@ -168,6 +169,7 @@ func _on_button_pressed() -> void:
 	price_level += 5
 	galaxy_ship.stop = false
 	$Button.visible = false
+	$ParallaxBackground_var_1.speed = 15
 	method_level()
 
 

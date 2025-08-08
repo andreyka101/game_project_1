@@ -4,7 +4,7 @@ extends Area2D
 @onready var galaxy_ship:CharacterBody2D = $"../../Galaxy_ship"
 
 # создаём рандомные координаты x
-var save_X = randi_range(200,1080)
+var save_X = randi_range(200,520)
 
 # создаём рандомную скорость вращения 
 var save_num_rotation = randf_range(-5, 5)
@@ -26,7 +26,7 @@ func _ready() -> void:
 	#print("start")
 
 	# создаём рандомный размер
-	var scale_num = randf_range(0.6 , 2.0)
+	var scale_num = randf_range(1.6 , 3.0)
 	# задаём сохранённый размер по ширине и высоте 
 	self.scale = Vector2(scale_num  , scale_num)
 
@@ -67,7 +67,7 @@ func _process(delta: float) -> void:
 
 
 
-	if(position.y > 820):
+	if(position.y > 1700):
 
 		Global.enemies_released -= 1
 		if(Global.enemies_released == 0):

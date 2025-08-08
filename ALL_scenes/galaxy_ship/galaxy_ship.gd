@@ -59,17 +59,21 @@ func  _physics_process(delta: float) -> void:
 
 	# position.direction_to(x) - вычисляет плавное движение к точке x
 
+
+
+
+
 	# движение корабля 
-	if((position.x <= get_global_mouse_position().x - 15 or position.x >= get_global_mouse_position().x + 15) or (position.y <= get_global_mouse_position().y - 15 or position.y >= get_global_mouse_position().y + 15)) and not_death and !stop:
-		if((get_global_mouse_position().x >0 and get_global_mouse_position().x < 1280 and get_global_mouse_position().y < 700 and get_global_mouse_position().y > 530) or (global_position.x >30 and global_position.x < 1250 and global_position.y < 680 and global_position.y > 480)):
-			self.global_position +=  self.position.direction_to(get_global_mouse_position()) * 500 * delta
-		else:
-			if(get_global_mouse_position() > self.global_position and self.global_position.x >30 and self.global_position.x < 1250):
-				self.global_position.x += 500 * delta
-			if(get_global_mouse_position() < self.global_position and self.global_position.x >30 and self.global_position.x < 1250):
-				self.global_position.x -= 500 * delta
+	# if((position.x <= get_global_mouse_position().x - 15 or position.x >= get_global_mouse_position().x + 15) or (position.y <= get_global_mouse_position().y - 15 or position.y >= get_global_mouse_position().y + 15)) and not_death and !stop:
+	# 	if((get_global_mouse_position().x >0 and get_global_mouse_position().x < 1280 and get_global_mouse_position().y < 700 and get_global_mouse_position().y > 530) or (global_position.x >30 and global_position.x < 1250 and global_position.y < 680 and global_position.y > 480)):
+	# 		self.global_position +=  self.position.direction_to(get_global_mouse_position())  * 300 * delta
+	# 	else:
+	# 		if(get_global_mouse_position() > self.global_position and self.global_position.x >30 and self.global_position.x < 1250):
+	# 			self.global_position.x += 500 * delta
+	# 		if(get_global_mouse_position() < self.global_position and self.global_position.x >30 and self.global_position.x < 1250):
+	# 			self.global_position.x -= 500 * delta
 
-
+	self.global_position +=  self.position.direction_to(get_global_mouse_position())  * 300 * delta
 
 
 func _process(delta: float):

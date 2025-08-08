@@ -34,6 +34,7 @@ animations = [{
 }]
 
 [node name="Bullet" type="CharacterBody2D" groups=["group_bullet"]]
+scale = Vector2(2, 2)
 script = ExtResource("1_mg27r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

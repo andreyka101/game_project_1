@@ -40,7 +40,7 @@ func _physics_process(delta: float) -> void:
 	
 
 	# если пуля улетела слишком далеко за экран то уделяем её 
-	if(self.position.y > 850):
+	if(self.position.y > 1700):
 		queue_free()
 
 

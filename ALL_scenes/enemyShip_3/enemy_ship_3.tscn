@@ -67,7 +67,7 @@ animations = [{
 }]
 
 [node name="EnemyShip_3" type="Area2D" groups=["all_enemy"]]
-scale = Vector2(1.6, 1.6)
+scale = Vector2(2.6, 2.6)
 script = ExtResource("1_jcr0f")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

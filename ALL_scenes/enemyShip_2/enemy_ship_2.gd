@@ -12,7 +12,7 @@ var death = true
 var hp = 300
 @onready var sprite2D:AnimatedSprite2D = $"AnimatedSprite2D"
 
-var position_save = Vector2(randi_range(10 , 1270) , randi_range(10 , 350))
+var position_save = Vector2(randi_range(10 , 710) , randi_range(10 , 600))
 
 
 
@@ -98,6 +98,6 @@ func _on_body_entered(body: Node2D) -> void:
 
 # раз в какое-то время корабль меняет своё направление
 func _on_timer_position_timeout() -> void:
-	position_save = Vector2(randi_range(10 , 1270) , randi_range(10 , 350))
+	position_save = Vector2(randi_range(10 , 710) , randi_range(10 , 600))
 	# меняем время срабатывания этого таймера
 	timer_position.wait_time = randf_range(7 , 15)

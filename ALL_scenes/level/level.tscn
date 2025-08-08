@@ -11,22 +11,22 @@
 script = ExtResource("1_r62w2")
 
 [node name="ParallaxBackground_var_1" parent="." instance=ExtResource("2_33107")]
-offset = Vector2(640, 360)
-scale = Vector2(4, 4)
-transform = Transform2D(4, 0, 0, 4, 640, 360)
+offset = Vector2(640, 611)
+scale = Vector2(8, 12)
+transform = Transform2D(8, 0, 0, 12, 640, 611)
 
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Galaxy_ship" parent="." instance=ExtResource("2_ekf4v")]
 position = Vector2(373, 630)
-scale = Vector2(1.1, 1.1)
+scale = Vector2(2.1, 2.1)
 
 [node name="Button" type="Button" parent="."]
 visible = false
-offset_left = 502.0
-offset_top = 301.0
-offset_right = 768.0
-offset_bottom = 429.0
+offset_left = 238.0
+offset_top = 695.0
+offset_right = 504.0
+offset_bottom = 823.0
 theme_override_font_sizes/font_size = 34
 text = "продолжить"
 
@@ -34,19 +34,22 @@ text = "продолжить"
 light_mask = 512
 visibility_layer = 512
 z_index = 100
-offset_top = -1.0
-offset_right = 181.0
-offset_bottom = 87.0
+offset_left = -64.0
+offset_top = -19.0
+offset_right = 117.0
+offset_bottom = 69.0
+scale = Vector2(2, 2)
 theme_override_font_sizes/font_size = 29
 text = "level 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label_text_hp" type="Label" parent="."]
-offset_left = 1126.0
-offset_top = 1.0
-offset_right = 1276.0
-offset_bottom = 87.0
+offset_left = 464.0
+offset_top = -39.0
+offset_right = 614.0
+offset_bottom = 47.0
+scale = Vector2(2, 2)
 theme_override_colors/font_color = Color(0.737603, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 0.434235, 0.434235, 1)
 theme_override_constants/outline_size = 6
