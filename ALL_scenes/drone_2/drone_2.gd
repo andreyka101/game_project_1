@@ -8,6 +8,7 @@ extends CharacterBody2D
 @onready var level = $".."
 var hp = 100
 @onready var sprite2D:AnimatedSprite2D = $"AnimatedSprite2D"
+@onready var collisionPolygon:CollisionPolygon2D = $CollisionPolygon2D
 
 var distance_from_player_X = null
 var direction = null
@@ -26,31 +27,21 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	# print(velocity)
-	if(not shooting and galaxy_ship):
+	if(not shooting and galaxy_ship and !death):
 		if(galaxy_ship.position and (position.x <= galaxy_ship.position.x - 15 or position.x >= galaxy_ship.position.x + 15)):
-			#distance_from_player_X = galaxy_ship.position.x - self.position.x
-			#self.position.x += distance_from_player_X * 3 * delta
-			#print(distance_from_player_X)
-			
-
-			# if(galaxy_ship.position.x - self.position.x > 0):
-			# 	self.position.x +=  speed * delta
-			# else:
-			# 	self.position.x -=  speed * delta
 			if(galaxy_ship.position.x - self.position.x > 0):
 				self.velocity.x = speed
 			else:
 				self.velocity.x = -speed
 		else:
 			self.velocity.x = 0
+		velocity.y = 75
 
-			
-		# self.position.y +=  20 * delta
-		velocity.y = 20
 		
 
 		if(hp <= 0 and !death):
 			death = true
+			collisionPolygon.visible = false
 			sprite2D.play("explosion")
 			await sprite2D.animation_finished
 			Global.enemies_released -= 1
@@ -58,6 +49,14 @@ func _physics_process(delta: float) -> void:
 				Global.enemies_released = null
 			$"../../AudioStreamPlayer2D2".playing = true
 			self.queue_free()
+
+
+	if(position.y > 1700):
+		Global.enemies_released -= 1
+		if(Global.enemies_released == 0):
+			Global.enemies_released = null
+		self.queue_free()
+
 	move_and_slide()
 
 func _on_timer_timeout() -> void:
@@ -88,6 +87,18 @@ func _on_timer_timeout() -> void:
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
+	if(body.name == "Galaxy_ship" and !death):
+		death = true
+		body.hp_player -= 70
+		sprite2D.play("explosion")
+		await sprite2D.animation_finished
+		Global.enemies_released -= 1
+		if(Global.enemies_released == 0):
+			Global.enemies_released = null
+		$"../../AudioStreamPlayer2D2".playing = true
+		self.queue_free()
+
+
 	for i_group in body.get_groups():
 		#print(i_group)
 		# если в группе есть пуля то наносим урон кораблю и удаляем пулю
@@ -103,6 +114,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			# смерть корабля
 			if(hp <= 0 and !death):
 				death = true
+				collisionPolygon.visible = false
 				sprite2D.play("explosion")
 				await sprite2D.animation_finished
 				Global.enemies_released -= 1

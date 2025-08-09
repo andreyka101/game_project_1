@@ -6,7 +6,7 @@ var position_save = null
 
 
 
-var damage_bullet = 100
+var damage_bullet = 20
 var speed_bullet = 400
 
 

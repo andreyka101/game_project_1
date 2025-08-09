@@ -10,9 +10,11 @@ config_version=5
 
 [application]
 
-config/name="game_project_1"
+config/name="Stellar second"
+config/version="0.1"
 run/main_scene="uid://bdw3xl8387e4f"
 config/features=PackedStringArray("4.4", "Forward Plus")
+config/icon="uid://sswvx7b8mby3"
 
 [autoload]
 

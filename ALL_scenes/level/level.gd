@@ -29,7 +29,6 @@ func _ready() -> void:
 	
 	
 	
-	
 	# тип врага 2 - белый корабль
 	# var enemyShip_1_scene = load("res://ALL_scenes/enemyShip_1/enemy_ship_1.tscn")
 	# for i in range(10):

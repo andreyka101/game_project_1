@@ -17,6 +17,8 @@ var sprite2D:AnimatedSprite2D
 
 var death = false
 
+var damage:int
+
 
 
 
@@ -27,6 +29,7 @@ func _ready() -> void:
 
 	# создаём рандомный размер
 	var scale_num = randf_range(1.6 , 3.0)
+	damage = scale_num * 20
 	# задаём сохранённый размер по ширине и высоте 
 	self.scale = Vector2(scale_num  , scale_num)
 
@@ -47,7 +50,7 @@ func _process(delta: float) -> void:
 	#position += self.position.direction_to(galaxy_ship.position) * 300 * delta
 	
 	# метеорит летит в низ на рандомные координаты по x
-	position += self.position.direction_to(Vector2i(save_X , 1000)) * speed * delta
+	position += self.position.direction_to(Vector2i(save_X , 1700)) * speed * delta
 	
 	
 	# вращение метеорита 
@@ -60,8 +63,8 @@ func _process(delta: float) -> void:
 		Global.enemies_released -= 1
 		if(Global.enemies_released == 0):
 			Global.enemies_released = null
-		
 		$"../../AudioStreamPlayer2D2".playing = true
+		self.queue_free()
 	
 	
 
@@ -72,7 +75,6 @@ func _process(delta: float) -> void:
 		Global.enemies_released -= 1
 		if(Global.enemies_released == 0):
 			Global.enemies_released = null
-		$"../../AudioStreamPlayer2D2".playing = true
 		self.queue_free()
 
 
@@ -86,7 +88,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if(body.name == "Galaxy_ship"):
 		#print("ok if")
 		death = true
-		body.hp_player -= 300
+		body.hp_player -= damage
 		sprite2D.play("explosion")
 		await sprite2D.animation_finished
 		Global.enemies_released -= 1

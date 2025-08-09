@@ -109,7 +109,7 @@ animations = [{
 }]
 
 [node name="Drone_2" type="CharacterBody2D"]
-scale = Vector2(2.6, 2.6)
+scale = Vector2(2.8, 2.8)
 script = ExtResource("1_luleb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -118,15 +118,15 @@ sprite_frames = SubResource("SpriteFrames_lhd6b")
 autoplay = "default"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(0.4, 0)
+position = Vector2(0.3, 0)
 scale = Vector2(0.9, 0.9)
-polygon = PackedVector2Array(-3.22222, -11.8056, 9.97222, -11.8056, 15.625, 1.875, 10.625, 21.25, 3.75, 14.375, -3.75, 21.25, -8.75, 1.875)
+polygon = PackedVector2Array(1.53968, -9.52381, 5.50794, -9.52381, 13.0476, 1.98413, 10.6667, 18.254, 3.75, 14.375, -2.8254, 18.254, -5.60317, 1.98413)
 
 [node name="Marker2D_LEFT" type="Marker2D" parent="."]
-position = Vector2(-2.5, 21.875)
+position = Vector2(-3.21429, 21.875)
 
 [node name="Marker2D_RIGHT" type="Marker2D" parent="."]
-position = Vector2(10, 21.875)
+position = Vector2(10.3571, 21.875)
 
 [node name="Timer" type="Timer" parent="."]
 
@@ -134,7 +134,7 @@ position = Vector2(10, 21.875)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 position = Vector2(5.96046e-08, 0)
-polygon = PackedVector2Array(-3.125, -6.875, 10, -6.875, 15.625, 1.875, 10.625, 21.25, 3.75, 14.375, -3.75, 21.25, -8.75, 1.875)
+polygon = PackedVector2Array(-2.85714, -10.7143, 10, -10.7143, 15.625, 1.875, 10.625, 21.25, 3.75, 14.375, -3.75, 21.25, -8.75, 1.875)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_x442r")
