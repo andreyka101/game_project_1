@@ -69,4 +69,12 @@ volume_db = 7.0
 stream = ExtResource("6_pj7pm")
 volume_db = -10.0
 
+[node name="Label_version" type="Label" parent="."]
+offset_left = 22.0
+offset_top = 1528.0
+offset_right = 265.0
+offset_bottom = 1583.0
+theme_override_font_sizes/font_size = 40
+text = "version 0.1.0"
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
