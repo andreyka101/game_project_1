@@ -70,7 +70,7 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 
 	# если касаемся корабля игрока то наносим ему урон и взрываемся
-	if(body.name == "Galaxy_ship"):
+	if(body.name == "Galaxy_ship" and !death):
 		body.hp_player -= 150
 		sprite_head.play("explosion")
 		await sprite_head.animation_finished
@@ -136,3 +136,17 @@ func _on_boom_area_exited(area: Area2D) -> void:
 		if(el_group == "all_enemy"):
 			# print(arr_enemy.find(area))
 			arr_enemy.remove_at(arr_enemy.find(area))
+
+
+func _on_boom_body_entered(body: Node2D) -> void:
+	#print(area)
+	for el_group in body.get_groups():
+		if(el_group == "all_enemy"):
+			arr_enemy.append(body)
+
+
+func _on_boom_body_exited(body: Node2D) -> void:
+	for el_group in body.get_groups():
+		if(el_group == "all_enemy"):
+			# print(arr_enemy.find(area))
+			arr_enemy.remove_at(arr_enemy.find(body))

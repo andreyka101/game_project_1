@@ -108,7 +108,7 @@ animations = [{
 "speed": 15.0
 }]
 
-[node name="Drone_2" type="CharacterBody2D"]
+[node name="Drone_2" type="CharacterBody2D" groups=["all_enemy"]]
 scale = Vector2(2.8, 2.8)
 script = ExtResource("1_luleb")
 

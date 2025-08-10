@@ -85,7 +85,7 @@ func _on_body_entered(body: Node2D) -> void:
 	
 
 	
-	if(body.name == "Galaxy_ship"):
+	if(body.name == "Galaxy_ship" and !death):
 		#print("ok if")
 		death = true
 		body.hp_player -= damage

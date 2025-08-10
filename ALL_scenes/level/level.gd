@@ -80,7 +80,7 @@ func _ready() -> void:
 	
 	# тип врага 6 - желтый дрон
 	# var drone_2_scene = load("res://ALL_scenes/drone_2/drone_2.tscn")
-	# for i in range(5):
+	# for i in range(10):
 	# 	var drone_2:CharacterBody2D = drone_2_scene.instantiate() 
 	# 	drone_2.position = Vector2(randi_range(0,720),50)
 	# 	enemies.add_child(drone_2)

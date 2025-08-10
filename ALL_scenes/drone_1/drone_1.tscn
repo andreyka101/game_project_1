@@ -200,3 +200,5 @@ debug_color = Color(0.7, 0, 0.278464, 0.42)
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="area_entered" from="Boom" to="." method="_on_boom_area_entered"]
 [connection signal="area_exited" from="Boom" to="." method="_on_boom_area_exited"]
+[connection signal="body_entered" from="Boom" to="." method="_on_boom_body_entered"]
+[connection signal="body_exited" from="Boom" to="." method="_on_boom_body_exited"]
