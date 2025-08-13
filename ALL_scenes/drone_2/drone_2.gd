@@ -26,9 +26,13 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if (Global.stop_game):
+		sprite2D.stop()
+
+
 	# print(velocity)
 	if(not shooting and galaxy_ship and !death):
-		if(galaxy_ship.position and (position.x <= galaxy_ship.position.x - 15 or position.x >= galaxy_ship.position.x + 15)):
+		if(galaxy_ship.position and !Global.stop_game and (position.x <= galaxy_ship.position.x - 15 or position.x >= galaxy_ship.position.x + 15)):
 			if(galaxy_ship.position.x - self.position.x > 0):
 				self.velocity.x = speed
 			else:
@@ -49,6 +53,7 @@ func _physics_process(delta: float) -> void:
 				Global.enemies_released = null
 			$"../../AudioStreamPlayer2D2".playing = true
 			self.queue_free()
+	
 
 
 	if(position.y > 1700):
@@ -60,8 +65,8 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _on_timer_timeout() -> void:
-		if(not death):
-			timer.wait_time = randf_range(1 , 2)
+		timer.wait_time = randf_range(1 , 2)
+		if(not death and !Global.stop_game):
 			shooting = true
 			#await get_tree().create_timer(0.3).timeout
 			

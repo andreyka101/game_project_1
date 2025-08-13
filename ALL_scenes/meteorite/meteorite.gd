@@ -50,11 +50,13 @@ func _process(delta: float) -> void:
 	#position += self.position.direction_to(galaxy_ship.position) * 300 * delta
 	
 	# метеорит летит в низ на рандомные координаты по x
-	position += self.position.direction_to(Vector2i(save_X , 1700)) * speed * delta
+	if (!Global.stop_game):
+		position += self.position.direction_to(Vector2i(save_X , 1700)) * speed * delta
 	
 	
 	# вращение метеорита 
-	self.rotation_degrees += save_num_rotation
+	if (!Global.stop_game):
+		self.rotation_degrees += save_num_rotation
 	if(hp <= 0 and !death):
 		death = true
 		sprite2D.play("explosion")
@@ -86,7 +88,6 @@ func _on_body_entered(body: Node2D) -> void:
 
 	
 	if(body.name == "Galaxy_ship" and !death):
-		#print("ok if")
 		death = true
 		body.hp_player -= damage
 		sprite2D.play("explosion")

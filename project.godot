@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Stellar second"
 config/version="0.1.0"
-run/main_scene="uid://bdw3xl8387e4f"
+run/main_scene="uid://c4v8de0ys2m5x"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="uid://sswvx7b8mby3"
 

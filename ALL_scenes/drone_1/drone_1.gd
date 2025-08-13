@@ -24,9 +24,13 @@ func _ready() -> void:
 	
 
 func _process(delta: float) -> void:
+	if (Global.stop_game):
+		sprite_fire.stop()
+		sprite_head.stop()
 
-	# вращаем голову
-	sprite_head.rotation_degrees += speed_rotation
+	if (!Global.stop_game):
+		# вращаем голову
+		sprite_head.rotation_degrees += speed_rotation
 
 
 	# градус головы не увеличивается больше 360
@@ -61,7 +65,7 @@ func _process(delta: float) -> void:
 	for i in arr_enemy:
 		print(i.hp)
 	
-	if(galaxy_ship.position != null):
+	if(galaxy_ship.position != null and !Global.stop_game):
 		position += self.position.direction_to(galaxy_ship.position) * speed * delta
 		look_at(galaxy_ship.position)
 	

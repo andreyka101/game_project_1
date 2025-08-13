@@ -1,0 +1,76 @@
+[gd_scene load_steps=8 format=3 uid="uid://c4v8de0ys2m5x"]
+
+[ext_resource type="Script" uid="uid://0l62ytrgsqtl" path="res://ALL_scenes/parallaxBackground_var_1/parallax_background_var_1.gd" id="1_jjm30"]
+[ext_resource type="Script" uid="uid://bosluq4mvch4n" path="res://ALL_scenes/main_menu/main_menu.gd" id="1_nv16c"]
+[ext_resource type="Texture2D" uid="uid://dwchpicdfqh6n" path="res://photo/parallax background var 1/parallax background 5.png" id="2_nv16c"]
+[ext_resource type="Texture2D" uid="uid://bo2x1uoin55v4" path="res://photo/parallax background var 1/parallax background 4.png" id="3_1ya2w"]
+[ext_resource type="Texture2D" uid="uid://dxdxrqobir3pq" path="res://photo/parallax background var 1/parallax background 3.png" id="4_s6wwn"]
+[ext_resource type="Texture2D" uid="uid://hxavil8dt0s2" path="res://photo/parallax background var 1/parallax background 2.png" id="5_qc061"]
+[ext_resource type="Texture2D" uid="uid://cr3ywdl3c6ics" path="res://photo/parallax background var 1/parallax background 1.png" id="6_e43k7"]
+
+[node name="Main_menu" type="Node2D"]
+script = ExtResource("1_nv16c")
+
+[node name="ParallaxBackground_var_1" type="ParallaxBackground" parent="."]
+offset = Vector2(1091, 721)
+scale = Vector2(10, 10)
+transform = Transform2D(10, 0, 0, 10, 1091, 721)
+scroll_base_scale = Vector2(3, 3)
+script = ExtResource("1_jjm30")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground_var_1"]
+motion_scale = Vector2(0.1, 0.1)
+motion_mirroring = Vector2(0, 180)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground_var_1/ParallaxLayer"]
+position = Vector2(10, 12)
+texture = ExtResource("2_nv16c")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground_var_1"]
+motion_scale = Vector2(0.3, 0.3)
+motion_mirroring = Vector2(0, 180)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground_var_1/ParallaxLayer2"]
+texture = ExtResource("3_1ya2w")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground_var_1"]
+motion_scale = Vector2(0.7, 0.7)
+motion_mirroring = Vector2(0, 180)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground_var_1/ParallaxLayer3"]
+texture = ExtResource("4_s6wwn")
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground_var_1"]
+motion_scale = Vector2(1.5, 1.5)
+motion_mirroring = Vector2(0, 180)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground_var_1/ParallaxLayer4"]
+modulate = Color(0.527155, 0.527155, 0.527155, 1)
+texture = ExtResource("5_qc061")
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground_var_1"]
+motion_scale = Vector2(2.3, 2.3)
+motion_mirroring = Vector2(0, 180)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground_var_1/ParallaxLayer5"]
+modulate = Color(0.540732, 0.540732, 0.540732, 1)
+texture = ExtResource("6_e43k7")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 196.0
+offset_top = 673.0
+offset_right = 513.0
+offset_bottom = 899.0
+theme_override_font_sizes/font_size = 62
+text = "играть
+"
+
+[node name="Label_version" type="Label" parent="."]
+offset_left = 22.0
+offset_top = 1528.0
+offset_right = 265.0
+offset_bottom = 1583.0
+theme_override_font_sizes/font_size = 40
+text = "Alpha version 0.2.0"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

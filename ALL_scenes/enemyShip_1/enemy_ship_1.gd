@@ -11,6 +11,8 @@ var hp = 300
 
 var position_save = Vector2(randi_range(10 , 710) , randi_range(10 , 600))
 
+var damage = 70
+
 
 
 func _ready() -> void:
@@ -29,6 +31,41 @@ func _physics_process(delta: float) -> void:
 	# движение корабля
 	if(hp <= 0 and death):
 		death = false
+		if (Global.stop_game):
+			sprite2D.pause()
+		else:
+			sprite2D.play("explosion")
+			await sprite2D.animation_finished
+			Global.enemies_released -= 1
+			if(Global.enemies_released == 0):
+				Global.enemies_released = null
+			$"../../AudioStreamPlayer2D2".playing = true
+			self.queue_free()
+	if((position.x <= position_save.x - 15 or position.x >= position_save.x + 15) or (position.y <= position_save.y - 15 or position.y >= position_save.y + 15)) and death and !Global.stop_game:
+		self.position += self.position.direction_to(position_save) * 100 * delta
+	if (Global.stop_game):
+		sprite2D.stop()
+	elif(death):
+		sprite2D.play_backwards()
+
+
+# создаем пулю раз в какое-то время
+func _on_timer_timeout() -> void:
+	#print("on_timer_timeout")
+	if(death and !Global.stop_game):
+		var bullet_scene = load("res://ALL_scenes/enemy_bullet/enemy_bullet.tscn")
+		var bullet:Area2D = bullet_scene.instantiate()
+		bullet.global_position = marker.global_position
+		level.add_child(bullet)
+		# таймер будет срабатывать в случайное время
+		$AudioStreamPlayer2D.playing = true
+	timer.wait_time = randf_range(1 , 3)
+
+
+func _on_body_entered(body: Node2D) -> void:
+	if(body.name == "Galaxy_ship" and death):
+		death = true
+		body.hp_player -= damage
 		sprite2D.play("explosion")
 		await sprite2D.animation_finished
 		Global.enemies_released -= 1
@@ -36,26 +73,6 @@ func _physics_process(delta: float) -> void:
 			Global.enemies_released = null
 		$"../../AudioStreamPlayer2D2".playing = true
 		self.queue_free()
-	if((position.x <= position_save.x - 15 or position.x >= position_save.x + 15) or (position.y <= position_save.y - 15 or position.y >= position_save.y + 15)) and death:
-		self.position += self.position.direction_to(position_save) * 100 * delta
-	
-
-
-
-# создаем пулю раз в какое-то время
-func _on_timer_timeout() -> void:
-	#print("on_timer_timeout")
-	if(death):
-		var bullet_scene = load("res://ALL_scenes/enemy_bullet/enemy_bullet.tscn")
-		var bullet:Area2D = bullet_scene.instantiate()
-		bullet.global_position = marker.global_position
-		level.add_child(bullet)
-		# таймер будет срабатывать в случайное время
-		timer.wait_time = randf_range(1 , 3)
-		$AudioStreamPlayer2D.playing = true
-
-
-func _on_body_entered(body: Node2D) -> void:
 	for i_group in body.get_groups():
 		#print(i_group)
 		# если в группе есть пуля то наносим урон кораблю и удаляем пулю
@@ -80,8 +97,10 @@ func _on_body_entered(body: Node2D) -> void:
 				self.queue_free()
 
 
+
 # раз в какое-то время корабль меняет своё направление
 func _on_timer_position_timeout() -> void:
-	position_save = Vector2(randi_range(10 , 710) , randi_range(10 , 600))
-	# меняем время срабатывания этого таймера
+	if (!Global.stop_game):
+		position_save = Vector2(randi_range(10 , 710) , randi_range(10 , 600))
+		# меняем время срабатывания этого таймера
 	timer_position.wait_time = randf_range(7 , 15)

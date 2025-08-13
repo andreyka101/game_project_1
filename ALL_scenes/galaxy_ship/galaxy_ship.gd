@@ -19,22 +19,26 @@ func  _physics_process(delta: float) -> void:
 	
 	
 	# меняем анимацию исходя от процента hp
-	if((hp_start_player/100) * 100 >= hp_player and (hp_start_player/100) * 75 < hp_player and not_death):
-		#print(hp_player)
-		sprite.play("100-75%")
-	elif((hp_start_player/100) * 75 >= hp_player and (hp_start_player/100) * 50 < hp_player and not_death):
-		#print(hp_player)
-		sprite.play("75-50%")
-	elif((hp_start_player/100) * 50 >= hp_player and (hp_start_player/100) * 25 < hp_player and not_death):
-		#print(hp_player)
-		sprite.play("50-25%")
-	elif((hp_start_player/100) * 25 >= hp_player and (hp_start_player/100) * 0 < hp_player and not_death):
-		#print(hp_player)
-		sprite.play("25-0%")
+	if (!Global.stop_game):
+		if((hp_start_player/100) * 100 >= hp_player and (hp_start_player/100) * 75 < hp_player and not_death):
+			#print(hp_player)
+			sprite.play("100-75%")
+		elif((hp_start_player/100) * 75 >= hp_player and (hp_start_player/100) * 50 < hp_player and not_death):
+			#print(hp_player)
+			sprite.play("75-50%")
+		elif((hp_start_player/100) * 50 >= hp_player and (hp_start_player/100) * 25 < hp_player and not_death):
+			#print(hp_player)
+			sprite.play("50-25%")
+		elif((hp_start_player/100) * 25 >= hp_player and (hp_start_player/100) * 0 < hp_player and not_death):
+			#print(hp_player)
+			sprite.play("25-0%")
+	else:
+		sprite.stop()
 	
 
 	# если hp у корабля меньше или равен нулю то
 	if(hp_player <= 0 and not_death):
+		hp_player = 0
 		not_death = false
 		# корабль взрывается 
 		sprite.play("explosion")
@@ -64,7 +68,7 @@ func  _physics_process(delta: float) -> void:
 
 
 	# движение корабля 
-	if((position.x <= get_global_mouse_position().x - 15 or position.x >= get_global_mouse_position().x + 15) or (position.y <= get_global_mouse_position().y - 15 or position.y >= get_global_mouse_position().y + 15)) and not_death and !stop:
+	if((position.x <= get_global_mouse_position().x - 15 or position.x >= get_global_mouse_position().x + 15) or (position.y <= get_global_mouse_position().y - 15 or position.y >= get_global_mouse_position().y + 15)) and not_death and !stop and !Global.stop_game:
 
 		# self.global_position +=  self.position.direction_to(get_global_mouse_position())  * 300 * 5 * delta
 		self.velocity =  self.position.direction_to(get_global_mouse_position())  * 300 *2
@@ -119,7 +123,7 @@ func _process(delta: float):
 func _on_timer_timeout() -> void:
 	#print("ok timer")
 
-	if(attack_bool and not_death and !stop):
+	if(attack_bool and not_death and !stop and !Global.stop_game):
 		# load() - загружает сцену в переменную
 		var bullet_scene = load("res://ALL_scenes/bullet/bullet.tscn")
 		# .instantiate() - инициализирует сцену как узел (это нужно для дальнейшего использования)

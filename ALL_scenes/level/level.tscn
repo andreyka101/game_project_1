@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bdw3xl8387e4f"]
+[gd_scene load_steps=16 format=3 uid="uid://bdw3xl8387e4f"]
 
 [ext_resource type="Script" uid="uid://dod02wyv88h72" path="res://ALL_scenes/level/level.gd" id="1_r62w2"]
 [ext_resource type="PackedScene" uid="uid://cwalhxdtsnydh" path="res://ALL_scenes/parallaxBackground_var_1/parallax_background_var_1.tscn" id="2_33107"]
@@ -6,6 +6,34 @@
 [ext_resource type="AudioStream" uid="uid://ct46c5a5v7cdg" path="res://audio/пик.mp3" id="4_33107"]
 [ext_resource type="AudioStream" uid="uid://dgg2a4pm86uav" path="res://audio/взрыв.mp3" id="5_sk66d"]
 [ext_resource type="AudioStream" uid="uid://dcbpx02rorcru" path="res://audio/взрыв дрона.mp3" id="6_pj7pm"]
+[ext_resource type="Script" uid="uid://cg4ut8kvh0vyt" path="res://ALL_scenes/level/menu_button.gd" id="7_j6lan"]
+[ext_resource type="Texture2D" uid="uid://dr3ugebox2y6a" path="res://photo/stop.svg" id="8_j6lan"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k7y63"]
+bg_color = Color(0.087, 0, 0.188, 0.707)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k7y63"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lrlx6"]
+bg_color = Color(0.710448, 0.710448, 0.710448, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o7vg8"]
+bg_color = Color(0.262397, 0.262397, 0.262397, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o7vg8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ubrqf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pix0r"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_r62w2")
@@ -18,7 +46,7 @@ transform = Transform2D(8, 0, 0, 12, 640, 611)
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Galaxy_ship" parent="." instance=ExtResource("2_ekf4v")]
-position = Vector2(373, 630)
+position = Vector2(360, 1050)
 scale = Vector2(2.1, 2.1)
 
 [node name="Button" type="Button" parent="."]
@@ -45,10 +73,11 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label_text_hp" type="Label" parent="."]
-offset_left = 464.0
-offset_top = -39.0
-offset_right = 614.0
-offset_bottom = 47.0
+z_index = 100
+offset_left = 443.0
+offset_top = -22.0
+offset_right = 593.0
+offset_bottom = 64.0
 scale = Vector2(2, 2)
 theme_override_colors/font_color = Color(0.737603, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 0.434235, 0.434235, 1)
@@ -69,12 +98,196 @@ volume_db = 7.0
 stream = ExtResource("6_pj7pm")
 volume_db = -10.0
 
-[node name="Label_version" type="Label" parent="."]
-offset_left = 22.0
-offset_top = 1528.0
-offset_right = 265.0
-offset_bottom = 1583.0
-theme_override_font_sizes/font_size = 40
-text = "version 0.1.0"
+[node name="Menu_button" type="Node2D" parent="."]
+script = ExtResource("7_j6lan")
+
+[node name="Settings_level" type="Node2D" parent="Menu_button"]
+visible = false
+z_index = 90
+
+[node name="Background" type="Label" parent="Menu_button/Settings_level"]
+offset_right = 720.0
+offset_bottom = 1600.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_k7y63")
+
+[node name="Control_hp" type="Control" parent="Menu_button/Settings_level"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 2.0
+offset_top = 142.0
+offset_right = 720.0
+offset_bottom = 263.0
+
+[node name="Label" type="Label" parent="Menu_button/Settings_level/Control_hp"]
+layout_mode = 0
+offset_left = 83.0
+offset_top = 12.0
+offset_right = 373.0
+offset_bottom = 108.0
+theme_override_font_sizes/font_size = 31
+text = "max hp = 500"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Menu_button/Settings_level/Control_hp"]
+layout_mode = 0
+offset_left = 434.0
+offset_top = 12.0
+offset_right = 576.0
+offset_bottom = 108.0
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.995572, 0.995572, 0.995572, 1)
+theme_override_font_sizes/font_size = 31
+theme_override_styles/focus = SubResource("StyleBoxEmpty_k7y63")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lrlx6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_o7vg8")
+theme_override_styles/normal = SubResource("StyleBoxFlat_lrlx6")
+text = "+ 50"
+
+[node name="Control_speed" type="Control" parent="Menu_button/Settings_level"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 292.0
+offset_right = 718.0
+offset_bottom = 413.0
+
+[node name="Label" type="Label" parent="Menu_button/Settings_level/Control_speed"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 12.0
+offset_right = 367.0
+offset_bottom = 108.0
+theme_override_font_sizes/font_size = 31
+text = "скорость = 300"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Menu_button/Settings_level/Control_speed"]
+layout_mode = 0
+offset_left = 434.0
+offset_top = 12.0
+offset_right = 576.0
+offset_bottom = 108.0
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.995572, 0.995572, 0.995572, 1)
+theme_override_font_sizes/font_size = 31
+theme_override_styles/focus = SubResource("StyleBoxEmpty_k7y63")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lrlx6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_o7vg8")
+theme_override_styles/normal = SubResource("StyleBoxFlat_lrlx6")
+text = "+ 50"
+
+[node name="Control_speed_bullet" type="Control" parent="Menu_button/Settings_level"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 444.0
+offset_right = 718.0
+offset_bottom = 565.0
+
+[node name="Label" type="Label" parent="Menu_button/Settings_level/Control_speed_bullet"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 12.0
+offset_right = 412.0
+offset_bottom = 108.0
+theme_override_font_sizes/font_size = 31
+text = "скорость пули = 500"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Menu_button/Settings_level/Control_speed_bullet"]
+layout_mode = 0
+offset_left = 434.0
+offset_top = 12.0
+offset_right = 576.0
+offset_bottom = 108.0
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.995572, 0.995572, 0.995572, 1)
+theme_override_font_sizes/font_size = 31
+theme_override_styles/focus = SubResource("StyleBoxEmpty_k7y63")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lrlx6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_o7vg8")
+theme_override_styles/normal = SubResource("StyleBoxFlat_lrlx6")
+text = "+ 50"
+
+[node name="Control_damage" type="Control" parent="Menu_button/Settings_level"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 586.0
+offset_right = 718.0
+offset_bottom = 707.0
+
+[node name="Label" type="Label" parent="Menu_button/Settings_level/Control_damage"]
+layout_mode = 0
+offset_left = 83.0
+offset_top = 12.0
+offset_right = 366.0
+offset_bottom = 108.0
+theme_override_font_sizes/font_size = 31
+text = "урон = 500"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Menu_button/Settings_level/Control_damage"]
+layout_mode = 0
+offset_left = 434.0
+offset_top = 12.0
+offset_right = 576.0
+offset_bottom = 108.0
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.995572, 0.995572, 0.995572, 1)
+theme_override_font_sizes/font_size = 31
+theme_override_styles/focus = SubResource("StyleBoxEmpty_k7y63")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lrlx6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_o7vg8")
+theme_override_styles/normal = SubResource("StyleBoxFlat_lrlx6")
+text = "+ 50"
+
+[node name="Сontinue" type="Button" parent="Menu_button/Settings_level"]
+offset_left = 120.0
+offset_top = 1366.0
+offset_right = 591.0
+offset_bottom = 1489.0
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 35
+theme_override_styles/focus = SubResource("StyleBoxEmpty_o7vg8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lrlx6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_o7vg8")
+theme_override_styles/normal = SubResource("StyleBoxFlat_lrlx6")
+text = "продолжить"
+
+[node name="Pause" type="Button" parent="Menu_button"]
+z_index = 50
+offset_left = 23.0
+offset_top = 1512.0
+offset_right = 93.0
+offset_bottom = 1582.0
+theme_override_colors/icon_pressed_color = Color(0.622196, 0.622196, 0.622196, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ubrqf")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_pix0r")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_pix0r")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_pix0r")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_pix0r")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_pix0r")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pix0r")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_pix0r")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pix0r")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_pix0r")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pix0r")
+icon = ExtResource("8_j6lan")
+expand_icon = true
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Menu_button/Settings_level/Сontinue" to="Menu_button" method="_on_сontinue_pressed"]
+[connection signal="pressed" from="Menu_button/Pause" to="Menu_button" method="_on_pause_pressed"]

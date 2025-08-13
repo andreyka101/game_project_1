@@ -9,6 +9,7 @@ var position_save = null
 var damage_bullet = 20
 var speed_bullet = 400
 
+@onready var sprite2D:AnimatedSprite2D = $"AnimatedSprite2D"
 
 
 
@@ -21,19 +22,22 @@ func  _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if (Global.stop_game):
+		sprite2D.stop()
 	
 	
 	# проверка как должка двигаться пуля прямо или в бок
 	# print(name , global_position)
-	if(sideways_movement):
-		# линейное движение до какой-то точки
-		self.position += self.position.direction_to(position_save) * speed_bullet * delta
-		
-		# пуля смотрит на какую-то точку
-		look_at(position_save)
-	else:
-		
-		self.position.y += speed_bullet * delta
+	if (!Global.stop_game):
+		if(sideways_movement):
+			# линейное движение до какой-то точки
+			self.position += self.position.direction_to(position_save) * speed_bullet * delta
+			
+			# пуля смотрит на какую-то точку
+			look_at(position_save)
+		else:
+			
+			self.position.y += speed_bullet * delta
 	
 	
 	
