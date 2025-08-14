@@ -9,12 +9,15 @@ extends CharacterBody2D
 var hp = 100
 @onready var sprite2D:AnimatedSprite2D = $"AnimatedSprite2D"
 @onready var collisionPolygon:CollisionPolygon2D = $CollisionPolygon2D
+@onready var bullets_of_enemies:Node2D = $"../../Bullets_of_enemies"
 
 var distance_from_player_X = null
 var direction = null
 var death = false
 var shooting = false
 var speed = 200
+
+var name_str = "shooting drone"
 
 
 func _ready() -> void:
@@ -26,12 +29,14 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if (Global.stop_game):
-		sprite2D.stop()
+	if(Global.stop_game):
+		timer.paused = true
+	else:
+		timer.paused = false
 
 
 	# print(velocity)
-	if(not shooting and galaxy_ship and !death):
+	if(not shooting and galaxy_ship and !death and !Global.stop_game):
 		if(galaxy_ship.position and !Global.stop_game and (position.x <= galaxy_ship.position.x - 15 or position.x >= galaxy_ship.position.x + 15)):
 			if(galaxy_ship.position.x - self.position.x > 0):
 				self.velocity.x = speed
@@ -40,7 +45,8 @@ func _physics_process(delta: float) -> void:
 		else:
 			self.velocity.x = 0
 		velocity.y = 75
-
+	else:
+		self.velocity = Vector2(0,0)
 		
 
 		if(hp <= 0 and !death):
@@ -75,12 +81,12 @@ func _on_timer_timeout() -> void:
 			var bullet_RIGHT:Area2D = bullet_scene.instantiate()
 			bullet_RIGHT.speed_bullet = bullet_RIGHT.speed_bullet * 1.5
 			bullet_RIGHT.global_position = marker_RIGHT.global_position
-			level.add_child(bullet_RIGHT)
+			bullets_of_enemies.add_child(bullet_RIGHT)
 			
 			var bullet_LEFT:Area2D = bullet_scene.instantiate()
 			bullet_LEFT.speed_bullet = bullet_LEFT.speed_bullet * 1.5
 			bullet_LEFT.global_position = marker_LEFT.global_position
-			level.add_child(bullet_LEFT)
+			bullets_of_enemies.add_child(bullet_LEFT)
 			
 			# таймер будет срабатывать в случайное время
 			#await get_tree().create_timer(0.1).timeout

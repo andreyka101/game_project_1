@@ -177,7 +177,7 @@ autoplay = "100-75%"
 position = Vector2(0, -37)
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.663
+wait_time = 0.7
 autostart = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

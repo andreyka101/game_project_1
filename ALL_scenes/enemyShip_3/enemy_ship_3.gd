@@ -11,10 +11,12 @@ var death = true
 @onready var timer_position:Timer = $Timer_position
 var hp = 300
 @onready var sprite2D:AnimatedSprite2D = $"AnimatedSprite2D"
+@onready var bullets_of_enemies:Node2D = $"../../Bullets_of_enemies"
 
 var position_save = Vector2(randi_range(10 , 710) , randi_range(10 , 600))
 
 var damage = 70
+var name_str = "triple ship"
 
 
 func _ready() -> void:
@@ -30,6 +32,13 @@ func _ready() -> void:
 	
 
 func _physics_process(delta: float) -> void:
+	if(Global.stop_game):
+		timer.paused = true
+		timer_position.paused = true
+	else:
+		timer.paused = false
+		timer_position.paused = false
+
 	# движение корабля
 	if((position.x <= position_save.x - 15 or position.x >= position_save.x + 15) or (position.y <= position_save.y - 15 or position.y >= position_save.y + 15)) and death and !Global.stop_game:
 		self.position += self.position.direction_to(position_save) * 100 * delta
@@ -43,8 +52,8 @@ func _physics_process(delta: float) -> void:
 			Global.enemies_released = null
 		$"../../AudioStreamPlayer2D2".playing = true
 		self.queue_free()
-	if (Global.stop_game):
-		sprite2D.stop()
+	# if (Global.stop_game):
+	# 	sprite2D.stop()
 	
 
 
@@ -58,19 +67,19 @@ func _on_timer_timeout() -> void:
 		# пуля 1 прямо ------------
 		var bullet:Area2D = bullet_scene.instantiate()
 		bullet.global_position = marker.global_position
-		level.add_child(bullet)
+		bullets_of_enemies.add_child(bullet)
 		# пуля 2 в бок ------------
 		var bullet_LEFT:Area2D = bullet_scene.instantiate()
 		bullet_LEFT.global_position = marker.global_position
 		bullet_LEFT.position_save = marker_LEFT.global_position
 		bullet_LEFT.sideways_movement = true
-		level.add_child(bullet_LEFT)
+		bullets_of_enemies.add_child(bullet_LEFT)
 		# пуля 3 в бок ------------
 		var bullet_RIGHT:Area2D = bullet_scene.instantiate()
 		bullet_RIGHT.global_position = marker.global_position
 		bullet_RIGHT.position_save = marker_RIGHT.global_position
 		bullet_RIGHT.sideways_movement = true
-		level.add_child(bullet_RIGHT)
+		bullets_of_enemies.add_child(bullet_RIGHT)
 		$AudioStreamPlayer2D.playing = true
 		
 		

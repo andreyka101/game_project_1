@@ -122,29 +122,29 @@ offset_bottom = 263.0
 layout_mode = 0
 offset_left = 83.0
 offset_top = 12.0
-offset_right = 373.0
+offset_right = 463.0
 offset_bottom = 108.0
-theme_override_font_sizes/font_size = 31
+theme_override_font_sizes/font_size = 36
 text = "max hp = 500"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="Menu_button/Settings_level/Control_hp"]
+[node name="Button_hp" type="Button" parent="Menu_button/Settings_level/Control_hp"]
 layout_mode = 0
-offset_left = 434.0
+offset_left = 498.0
 offset_top = 12.0
-offset_right = 576.0
+offset_right = 640.0
 offset_bottom = 108.0
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0.995572, 0.995572, 0.995572, 1)
-theme_override_font_sizes/font_size = 31
+theme_override_font_sizes/font_size = 36
 theme_override_styles/focus = SubResource("StyleBoxEmpty_k7y63")
 theme_override_styles/hover = SubResource("StyleBoxFlat_lrlx6")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_o7vg8")
 theme_override_styles/normal = SubResource("StyleBoxFlat_lrlx6")
-text = "+ 50"
+text = "+ 10%"
 
 [node name="Control_speed" type="Control" parent="Menu_button/Settings_level"]
 layout_mode = 3
@@ -157,29 +157,29 @@ offset_bottom = 413.0
 layout_mode = 0
 offset_left = 80.0
 offset_top = 12.0
-offset_right = 367.0
+offset_right = 466.0
 offset_bottom = 108.0
-theme_override_font_sizes/font_size = 31
+theme_override_font_sizes/font_size = 36
 text = "скорость = 300"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="Menu_button/Settings_level/Control_speed"]
+[node name="Button_speed" type="Button" parent="Menu_button/Settings_level/Control_speed"]
 layout_mode = 0
-offset_left = 434.0
+offset_left = 498.0
 offset_top = 12.0
-offset_right = 576.0
+offset_right = 640.0
 offset_bottom = 108.0
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0.995572, 0.995572, 0.995572, 1)
-theme_override_font_sizes/font_size = 31
+theme_override_font_sizes/font_size = 36
 theme_override_styles/focus = SubResource("StyleBoxEmpty_k7y63")
 theme_override_styles/hover = SubResource("StyleBoxFlat_lrlx6")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_o7vg8")
 theme_override_styles/normal = SubResource("StyleBoxFlat_lrlx6")
-text = "+ 50"
+text = "+ 10%"
 
 [node name="Control_speed_bullet" type="Control" parent="Menu_button/Settings_level"]
 layout_mode = 3
@@ -192,29 +192,29 @@ offset_bottom = 565.0
 layout_mode = 0
 offset_left = 16.0
 offset_top = 12.0
-offset_right = 412.0
+offset_right = 483.0
 offset_bottom = 108.0
-theme_override_font_sizes/font_size = 31
+theme_override_font_sizes/font_size = 36
 text = "скорость пули = 500"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="Menu_button/Settings_level/Control_speed_bullet"]
+[node name="Button_speed_bullet" type="Button" parent="Menu_button/Settings_level/Control_speed_bullet"]
 layout_mode = 0
-offset_left = 434.0
+offset_left = 498.0
 offset_top = 12.0
-offset_right = 576.0
+offset_right = 640.0
 offset_bottom = 108.0
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0.995572, 0.995572, 0.995572, 1)
-theme_override_font_sizes/font_size = 31
+theme_override_font_sizes/font_size = 36
 theme_override_styles/focus = SubResource("StyleBoxEmpty_k7y63")
 theme_override_styles/hover = SubResource("StyleBoxFlat_lrlx6")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_o7vg8")
 theme_override_styles/normal = SubResource("StyleBoxFlat_lrlx6")
-text = "+ 50"
+text = "+ 10%"
 
 [node name="Control_damage" type="Control" parent="Menu_button/Settings_level"]
 layout_mode = 3
@@ -227,29 +227,29 @@ offset_bottom = 707.0
 layout_mode = 0
 offset_left = 83.0
 offset_top = 12.0
-offset_right = 366.0
+offset_right = 465.0
 offset_bottom = 108.0
-theme_override_font_sizes/font_size = 31
+theme_override_font_sizes/font_size = 36
 text = "урон = 500"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="Menu_button/Settings_level/Control_damage"]
+[node name="Button_damage" type="Button" parent="Menu_button/Settings_level/Control_damage"]
 layout_mode = 0
-offset_left = 434.0
+offset_left = 498.0
 offset_top = 12.0
-offset_right = 576.0
+offset_right = 640.0
 offset_bottom = 108.0
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0.995572, 0.995572, 0.995572, 1)
-theme_override_font_sizes/font_size = 31
+theme_override_font_sizes/font_size = 36
 theme_override_styles/focus = SubResource("StyleBoxEmpty_k7y63")
 theme_override_styles/hover = SubResource("StyleBoxFlat_lrlx6")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_o7vg8")
 theme_override_styles/normal = SubResource("StyleBoxFlat_lrlx6")
-text = "+ 50"
+text = "+ 10%"
 
 [node name="Сontinue" type="Button" parent="Menu_button/Settings_level"]
 offset_left = 120.0
@@ -266,6 +266,41 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_lrlx6")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_o7vg8")
 theme_override_styles/normal = SubResource("StyleBoxFlat_lrlx6")
 text = "продолжить"
+
+[node name="Control_reload" type="Control" parent="Menu_button/Settings_level"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 731.0
+offset_right = 718.0
+offset_bottom = 852.0
+
+[node name="Label" type="Label" parent="Menu_button/Settings_level/Control_reload"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 12.0
+offset_right = 471.0
+offset_bottom = 108.0
+theme_override_font_sizes/font_size = 36
+text = "перезарядка = 500"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button_reload" type="Button" parent="Menu_button/Settings_level/Control_reload"]
+layout_mode = 0
+offset_left = 498.0
+offset_top = 12.0
+offset_right = 640.0
+offset_bottom = 108.0
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.995572, 0.995572, 0.995572, 1)
+theme_override_font_sizes/font_size = 36
+theme_override_styles/focus = SubResource("StyleBoxEmpty_k7y63")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lrlx6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_o7vg8")
+theme_override_styles/normal = SubResource("StyleBoxFlat_lrlx6")
+text = "- 10%"
 
 [node name="Pause" type="Button" parent="Menu_button"]
 z_index = 50
@@ -288,6 +323,15 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_pix0r")
 icon = ExtResource("8_j6lan")
 expand_icon = true
 
+[node name="Bullets_of_enemies" type="Node2D" parent="."]
+
+[node name="Player_bullets" type="Node2D" parent="."]
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Menu_button/Settings_level/Control_hp/Button_hp" to="Menu_button" method="_on_button_hp_pressed"]
+[connection signal="pressed" from="Menu_button/Settings_level/Control_speed/Button_speed" to="Menu_button" method="_on_button_speed_pressed"]
+[connection signal="pressed" from="Menu_button/Settings_level/Control_speed_bullet/Button_speed_bullet" to="Menu_button" method="_on_button_speed_bullet_pressed"]
+[connection signal="pressed" from="Menu_button/Settings_level/Control_damage/Button_damage" to="Menu_button" method="_on_button_damage_pressed"]
 [connection signal="pressed" from="Menu_button/Settings_level/Сontinue" to="Menu_button" method="_on_сontinue_pressed"]
+[connection signal="pressed" from="Menu_button/Settings_level/Control_reload/Button_reload" to="Menu_button" method="_on_button_reload_pressed"]
 [connection signal="pressed" from="Menu_button/Pause" to="Menu_button" method="_on_pause_pressed"]

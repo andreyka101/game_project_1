@@ -8,10 +8,13 @@ var death = true
 @onready var timer_position:Timer = $Timer_position
 var hp = 300
 @onready var sprite2D:AnimatedSprite2D = $"AnimatedSprite2D"
+@onready var bullets_of_enemies:Node2D = $"../../Bullets_of_enemies"
 
 var position_save = Vector2(randi_range(10 , 710) , randi_range(10 , 600))
 
 var damage = 70
+
+var name_str = "regular ship"
 
 
 
@@ -28,25 +31,33 @@ func _ready() -> void:
 	
 
 func _physics_process(delta: float) -> void:
+	if(Global.stop_game):
+		timer.paused = true
+		timer_position.paused = true
+	else:
+		timer.paused = false
+		timer_position.paused = false
+
 	# движение корабля
 	if(hp <= 0 and death):
 		death = false
-		if (Global.stop_game):
-			sprite2D.pause()
-		else:
-			sprite2D.play("explosion")
-			await sprite2D.animation_finished
-			Global.enemies_released -= 1
-			if(Global.enemies_released == 0):
-				Global.enemies_released = null
-			$"../../AudioStreamPlayer2D2".playing = true
-			self.queue_free()
+		# if (Global.stop_game):
+		# 	sprite2D.stop()
+		# else:
+		# 	sprite2D.play_backwards()
+		sprite2D.play("explosion")
+		await sprite2D.animation_finished
+		Global.enemies_released -= 1
+		if(Global.enemies_released == 0):
+			Global.enemies_released = null
+		$"../../AudioStreamPlayer2D2".playing = true
+		self.queue_free()
 	if((position.x <= position_save.x - 15 or position.x >= position_save.x + 15) or (position.y <= position_save.y - 15 or position.y >= position_save.y + 15)) and death and !Global.stop_game:
 		self.position += self.position.direction_to(position_save) * 100 * delta
-	if (Global.stop_game):
-		sprite2D.stop()
-	elif(death):
-		sprite2D.play_backwards()
+	# if (Global.stop_game):
+	# 	sprite2D.stop()
+	# elif(death):
+	# 	sprite2D.play_backwards()
 
 
 # создаем пулю раз в какое-то время
@@ -56,7 +67,7 @@ func _on_timer_timeout() -> void:
 		var bullet_scene = load("res://ALL_scenes/enemy_bullet/enemy_bullet.tscn")
 		var bullet:Area2D = bullet_scene.instantiate()
 		bullet.global_position = marker.global_position
-		level.add_child(bullet)
+		bullets_of_enemies.add_child(bullet)
 		# таймер будет срабатывать в случайное время
 		$AudioStreamPlayer2D.playing = true
 	timer.wait_time = randf_range(1 , 3)

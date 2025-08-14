@@ -18,7 +18,7 @@ var sprite2D:AnimatedSprite2D
 var death = false
 
 var damage:int
-
+var name_str = "meteorite"
 
 
 

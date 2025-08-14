@@ -1,18 +1,22 @@
 extends CharacterBody2D
 
 
-var damage_bullet = 150
+var damage_bullet = 0
 
 @onready var sprite2D:AnimatedSprite2D = $"AnimatedSprite2D"
+
+var speed = 0
 
 
 func _physics_process(delta: float) -> void:
 	# постоянная скорость пули
 	if (!Global.stop_game):
-		self.position.y -= 600 * delta
+		self.position.y -= speed * delta
 	#self.velocity.y = -300
 	if (Global.stop_game):
 		sprite2D.stop()
+	else:
+		sprite2D.play_backwards()
 	
 	
 	

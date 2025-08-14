@@ -9,6 +9,9 @@ var position_save = null
 var damage_bullet = 20
 var speed_bullet = 400
 
+var name_str = "enemy bullet"
+
+
 @onready var sprite2D:AnimatedSprite2D = $"AnimatedSprite2D"
 
 
@@ -22,8 +25,8 @@ func  _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if (Global.stop_game):
-		sprite2D.stop()
+	# if (Global.stop_game):
+	# 	sprite2D.stop()
 	
 	
 	# проверка как должка двигаться пуля прямо или в бок

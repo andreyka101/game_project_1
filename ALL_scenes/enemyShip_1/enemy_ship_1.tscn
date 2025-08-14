@@ -59,6 +59,7 @@ script = ExtResource("1_g4cu5")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1.767, 1.767)
 sprite_frames = SubResource("SpriteFrames_2mkof")
+animation = &"explosion"
 autoplay = "default"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]

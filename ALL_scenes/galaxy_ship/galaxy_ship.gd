@@ -7,11 +7,15 @@ var attack_bool:bool = false
 var hp_player = 500
 @onready var sprite:AnimatedSprite2D = $AnimatedSprite2D
 var not_death = true
-#var damage = false
-
+@onready var timer: Timer = $Timer
+@onready var player_bullets: Node2D = $"../Player_bullets"
 var hp_start_player = 500
 # 250
 var stop = false
+var speed_ship = 300
+var speed_bullet = 600
+var damage = 150
+var time_timer = 0.7
 
 
 func  _physics_process(delta: float) -> void:
@@ -71,7 +75,7 @@ func  _physics_process(delta: float) -> void:
 	if((position.x <= get_global_mouse_position().x - 15 or position.x >= get_global_mouse_position().x + 15) or (position.y <= get_global_mouse_position().y - 15 or position.y >= get_global_mouse_position().y + 15)) and not_death and !stop and !Global.stop_game:
 
 		# self.global_position +=  self.position.direction_to(get_global_mouse_position())  * 300 * 5 * delta
-		self.velocity =  self.position.direction_to(get_global_mouse_position())  * 300 *2
+		self.velocity =  self.position.direction_to(get_global_mouse_position())  * speed_ship
 	else:
 		velocity = Vector2(0,0)
 
@@ -116,14 +120,19 @@ func _process(delta: float):
 
 	if(hp_player < 0):
 		hp_player = 0
+	
+	if(Global.stop_game):
+		timer.paused = true
+	else:
+		timer.paused = false
 
 
 
 # сигнал узла timer срабатывает раз в какое-то время
 func _on_timer_timeout() -> void:
-	#print("ok timer")
+	# print("timer")
 
-	if(attack_bool and not_death and !stop and !Global.stop_game):
+	if(attack_bool and not_death and !stop):
 		# load() - загружает сцену в переменную
 		var bullet_scene = load("res://ALL_scenes/bullet/bullet.tscn")
 		# .instantiate() - инициализирует сцену как узел (это нужно для дальнейшего использования)
@@ -134,6 +143,8 @@ func _on_timer_timeout() -> void:
 		#bullet.position.y = 500
 		
 		bullet.global_position  = marker.global_position 
+		bullet.speed = speed_bullet
+		bullet.damage_bullet = damage
 
 		$AudioStreamPlayer2D.playing = true
 
@@ -141,7 +152,7 @@ func _on_timer_timeout() -> void:
 		# add_child(bullet)
 
 		# .add_child() - добавляет дочерний узел к узлу или к другой сцене
-		level.add_child(bullet)
+		player_bullets.add_child(bullet)
 
 
 

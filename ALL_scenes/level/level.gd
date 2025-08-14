@@ -6,6 +6,8 @@ var num_level_text = 1
 var price_level = 5
 
 @onready var enemies:Node2D = $Enemies
+@onready var bullets_of_enemies: Node2D = $Bullets_of_enemies
+@onready var player_bullets: Node2D = $Player_bullets
 @onready var label_text_level:Label = $Label_text_level
 @onready var label_text_hp:Label = $Label_text_hp
 @onready var galaxy_ship:CharacterBody2D = $Galaxy_ship
@@ -16,23 +18,23 @@ var price_level = 5
 
 func _ready() -> void:
 
-	method_level()
+	# method_level()
 
 
 	# тип врага 1 - метеорит
-	# var meteorite_scene = load("res://ALL_scenes/meteorite/meteorite.tscn")
-	# for i in range(20):
-	# 	# создаём метеориты в случайных координатах по x
-	# 	var meteorite:Area2D = meteorite_scene.instantiate()
-	# 	meteorite.position = Vector2(randi_range(-200,1020),50)
-	# 	enemies.add_child(meteorite)
-	# 	Global.enemies_released += 1
+	var meteorite_scene = load("res://ALL_scenes/meteorite/meteorite.tscn")
+	for i in range(2):
+		# создаём метеориты в случайных координатах по x
+		var meteorite:Area2D = meteorite_scene.instantiate()
+		meteorite.position = Vector2(randi_range(-100,820),50)
+		enemies.add_child(meteorite)
+		Global.enemies_released += 1
 	
 	
 	
 	# тип врага 2 - белый корабль
 	var enemyShip_1_scene = load("res://ALL_scenes/enemyShip_1/enemy_ship_1.tscn")
-	for i in range(10):
+	for i in range(1):
 		# создаём корабли в случайных координатах по x
 		var enemyShip_1:Area2D = enemyShip_1_scene.instantiate()
 		# enemyShip_1.position = Vector2(randi_range(-200,1580),50)
@@ -44,48 +46,48 @@ func _ready() -> void:
 	
 	
 	# тип врага 3 - красный корабль
-	# var enemyShip_2_scene = load("res://ALL_scenes/enemyShip_2/enemy_ship_2.tscn")
-	# for i in range(10):
-	# 	# создаём корабли в случайных координатах по x
-	# 	var enemyShip_2:Area2D = enemyShip_2_scene.instantiate()
-	# 	enemyShip_2.position = Vector2(randi_range(0,720),50)
-	# 	enemies.add_child(enemyShip_2)
-	# 	Global.enemies_released += 1
+	var enemyShip_2_scene = load("res://ALL_scenes/enemyShip_2/enemy_ship_2.tscn")
+	for i in range(1):
+		# создаём корабли в случайных координатах по x
+		var enemyShip_2:Area2D = enemyShip_2_scene.instantiate()
+		enemyShip_2.position = Vector2(randi_range(0,720),50)
+		enemies.add_child(enemyShip_2)
+		Global.enemies_released += 1
 
 	
 	
 	
 	# тип врага 4 - черный корабль
-	# var enemyShip_3_scene = load("res://ALL_scenes/enemyShip_3/enemy_ship_3.tscn")
-	# for i in range(10):
-	# 	# создаём корабли в случайных координатах по x
-	# 	var enemyShip_3:Area2D = enemyShip_3_scene.instantiate()
-	# 	enemyShip_3.position = Vector2(randi_range(0,720),50)
-	# 	enemies.add_child(enemyShip_3)
-	# 	Global.enemies_released += 1
+	var enemyShip_3_scene = load("res://ALL_scenes/enemyShip_3/enemy_ship_3.tscn")
+	for i in range(1):
+		# создаём корабли в случайных координатах по x
+		var enemyShip_3:Area2D = enemyShip_3_scene.instantiate()
+		enemyShip_3.position = Vector2(randi_range(0,720),50)
+		enemies.add_child(enemyShip_3)
+		Global.enemies_released += 1
 	
 	
 	
 	
 	# тип врага 5 - круглый дрон
-	# var drone_1_scene = load("res://ALL_scenes/drone_1/drone_1.tscn")
-	# for i in range(1):
-	# 	# создаём корабли в случайных координатах по x
-	# 	var drone_1:Area2D = drone_1_scene.instantiate()
-	# 	drone_1.position = Vector2(randi_range(0,720),50)
-	# 	enemies.add_child(drone_1)
-	# 	Global.enemies_released += 1
+	var drone_1_scene = load("res://ALL_scenes/drone_1/drone_1.tscn")
+	for i in range(1):
+		# создаём корабли в случайных координатах по x
+		var drone_1:Area2D = drone_1_scene.instantiate()
+		drone_1.position = Vector2(randi_range(200,920),50)
+		enemies.add_child(drone_1)
+		Global.enemies_released += 1
 	
 	
 	
 	
 	# тип врага 6 - желтый дрон
-	# var drone_2_scene = load("res://ALL_scenes/drone_2/drone_2.tscn")
-	# for i in range(10):
-	# 	var drone_2:CharacterBody2D = drone_2_scene.instantiate() 
-	# 	drone_2.position = Vector2(randi_range(0,720),50)
-	# 	enemies.add_child(drone_2)
-	# 	Global.enemies_released += 1
+	var drone_2_scene = load("res://ALL_scenes/drone_2/drone_2.tscn")
+	for i in range(1):
+		var drone_2:CharacterBody2D = drone_2_scene.instantiate() 
+		drone_2.position = Vector2(randi_range(0,720),50)
+		enemies.add_child(drone_2)
+		Global.enemies_released += 1
 
 
 
@@ -150,15 +152,19 @@ func method_level():
 	
 
 func _process(delta: float) -> void:
-	# print(Global.enemies_released)
+	# print(len(enemies.get_children()))
+
+	
 	label_text_level.text = "level " + str(num_level_text)
 	if(galaxy_ship):
 		label_text_hp.text = "hp " + str(galaxy_ship.hp_player)
 	else:
 		get_tree().change_scene_to_file("res://ALL_scenes/main_menu/main_menu.tscn")
 
-	if(Global.enemies_released == null):
-		for child in enemies.get_children():
+	if(len(enemies.get_children()) == 0):
+		for child in bullets_of_enemies.get_children():
+			child.queue_free()
+		for child in player_bullets.get_children():
 			child.queue_free()
 		$AudioStreamPlayer2D.playing = true
 		galaxy_ship.position = Vector2(360,1050)

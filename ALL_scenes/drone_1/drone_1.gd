@@ -9,6 +9,8 @@ var speed = 160
 var hp = 50
 var death = false
 
+var name_str = "explosive drone"
+
 var arr_enemy = []
 
 
@@ -24,9 +26,9 @@ func _ready() -> void:
 	
 
 func _process(delta: float) -> void:
-	if (Global.stop_game):
-		sprite_fire.stop()
-		sprite_head.stop()
+	# if (Global.stop_game):
+	# 	sprite_fire.stop()
+	# 	sprite_head.stop()
 
 	if (!Global.stop_game):
 		# вращаем голову
@@ -62,8 +64,8 @@ func _process(delta: float) -> void:
 		$"../../AudioStreamPlayer2D3".playing = true
 		self.queue_free()
 	# print(arr_enemy)
-	for i in arr_enemy:
-		print(i.hp)
+	# for i in arr_enemy:
+		# print(i.hp)
 	
 	if(galaxy_ship.position != null and !Global.stop_game):
 		position += self.position.direction_to(galaxy_ship.position) * speed * delta
