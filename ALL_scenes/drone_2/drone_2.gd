@@ -54,18 +54,12 @@ func _physics_process(delta: float) -> void:
 			collisionPolygon.visible = false
 			sprite2D.play("explosion")
 			await sprite2D.animation_finished
-			Global.enemies_released -= 1
-			if(Global.enemies_released == 0):
-				Global.enemies_released = null
 			$"../../AudioStreamPlayer2D2".playing = true
 			self.queue_free()
 	
 
 
 	if(position.y > 1700):
-		Global.enemies_released -= 1
-		if(Global.enemies_released == 0):
-			Global.enemies_released = null
 		self.queue_free()
 
 	move_and_slide()
@@ -91,7 +85,6 @@ func _on_timer_timeout() -> void:
 			# таймер будет срабатывать в случайное время
 			#await get_tree().create_timer(0.1).timeout
 			shooting = false
-			$AudioStreamPlayer2D.playing = true
 
 
 # func _on_body_entered(body: Node2D) -> void:
@@ -103,9 +96,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		body.hp_player -= 70
 		sprite2D.play("explosion")
 		await sprite2D.animation_finished
-		Global.enemies_released -= 1
-		if(Global.enemies_released == 0):
-			Global.enemies_released = null
 		$"../../AudioStreamPlayer2D2".playing = true
 		self.queue_free()
 
@@ -128,8 +118,5 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 				collisionPolygon.visible = false
 				sprite2D.play("explosion")
 				await sprite2D.animation_finished
-				Global.enemies_released -= 1
-				if(Global.enemies_released == 0):
-					Global.enemies_released = null
 				$"../../AudioStreamPlayer2D2".playing = true
 				self.queue_free()

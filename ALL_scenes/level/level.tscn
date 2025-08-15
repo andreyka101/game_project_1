@@ -4,10 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://cwalhxdtsnydh" path="res://ALL_scenes/parallaxBackground_var_1/parallax_background_var_1.tscn" id="2_33107"]
 [ext_resource type="PackedScene" uid="uid://cwrkixbbjesk6" path="res://ALL_scenes/galaxy_ship/galaxy_ship.tscn" id="2_ekf4v"]
 [ext_resource type="AudioStream" uid="uid://ct46c5a5v7cdg" path="res://audio/пик.mp3" id="4_33107"]
-[ext_resource type="AudioStream" uid="uid://dgg2a4pm86uav" path="res://audio/взрыв.mp3" id="5_sk66d"]
-[ext_resource type="AudioStream" uid="uid://dcbpx02rorcru" path="res://audio/взрыв дрона.mp3" id="6_pj7pm"]
 [ext_resource type="Script" uid="uid://cg4ut8kvh0vyt" path="res://ALL_scenes/level/menu_button.gd" id="7_j6lan"]
+[ext_resource type="AudioStream" uid="uid://dj6ecbvgbhs1f" path="res://audio/explosions of enemies/boom_1.mp3" id="7_ubrqf"]
 [ext_resource type="Texture2D" uid="uid://dr3ugebox2y6a" path="res://photo/stop.svg" id="8_j6lan"]
+[ext_resource type="AudioStream" uid="uid://8jft41wplprp" path="res://audio/explosions of enemies/boom_2.mp3" id="8_pix0r"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k7y63"]
 bg_color = Color(0.087, 0, 0.188, 0.707)
@@ -86,17 +86,6 @@ theme_override_font_sizes/font_size = 30
 text = "hp 100"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_33107")
-
-[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_sk66d")
-volume_db = 7.0
-
-[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("6_pj7pm")
-volume_db = -10.0
 
 [node name="Menu_button" type="Node2D" parent="."]
 script = ExtResource("7_j6lan")
@@ -326,6 +315,21 @@ expand_icon = true
 [node name="Bullets_of_enemies" type="Node2D" parent="."]
 
 [node name="Player_bullets" type="Node2D" parent="."]
+
+[node name="All_audio" type="Node2D" parent="."]
+
+[node name="AudioEnd_level" type="AudioStreamPlayer2D" parent="All_audio"]
+stream = ExtResource("4_33107")
+
+[node name="Enemy_explosion_sound" type="Node2D" parent="All_audio"]
+
+[node name="AudioBoom_1" type="AudioStreamPlayer2D" parent="All_audio/Enemy_explosion_sound"]
+stream = ExtResource("7_ubrqf")
+volume_db = 7.0
+
+[node name="AudioBoom_2" type="AudioStreamPlayer2D" parent="All_audio/Enemy_explosion_sound"]
+stream = ExtResource("8_pix0r")
+volume_db = -10.0
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Menu_button/Settings_level/Control_hp/Button_hp" to="Menu_button" method="_on_button_hp_pressed"]

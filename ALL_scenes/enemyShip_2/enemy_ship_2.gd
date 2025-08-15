@@ -47,9 +47,6 @@ func _physics_process(delta: float) -> void:
 		death = false
 		sprite2D.play("explosion")
 		await sprite2D.animation_finished
-		Global.enemies_released -= 1
-		if(Global.enemies_released == 0):
-			Global.enemies_released = null
 		$"../../AudioStreamPlayer2D2".playing = true
 		self.queue_free()
 	# if (Global.stop_game):
@@ -76,7 +73,6 @@ func _on_timer_timeout() -> void:
 		bullet_RIGHT.position_save = marker_RIGHT.global_position
 		bullet_RIGHT.sideways_movement = true
 		bullets_of_enemies.add_child(bullet_RIGHT)
-		$AudioStreamPlayer2D.playing = true
 
 
 		# таймер будет срабатывать в случайное время
@@ -89,9 +85,6 @@ func _on_body_entered(body: Node2D) -> void:
 		body.hp_player -= damage
 		sprite2D.play("explosion")
 		await sprite2D.animation_finished
-		Global.enemies_released -= 1
-		if(Global.enemies_released == 0):
-			Global.enemies_released = null
 		$"../../AudioStreamPlayer2D2".playing = true
 		self.queue_free()
 	for i_group in body.get_groups():
@@ -111,9 +104,6 @@ func _on_body_entered(body: Node2D) -> void:
 				death = false
 				sprite2D.play("explosion")
 				await sprite2D.animation_finished
-				Global.enemies_released -= 1
-				if(Global.enemies_released == 0):
-					Global.enemies_released = null
 				$"../../AudioStreamPlayer2D2".playing = true
 				self.queue_free()
 

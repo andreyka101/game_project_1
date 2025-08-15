@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://oo3lvhh7se86"]
+[gd_scene load_steps=12 format=3 uid="uid://oo3lvhh7se86"]
 
 [ext_resource type="Texture2D" uid="uid://1lb52xrihl8y" path="res://photo/enemy ship/enemy ship1.png" id="1_5ufwg"]
 [ext_resource type="Script" uid="uid://de1vbcjb2036x" path="res://ALL_scenes/enemyShip_1/enemy_ship_1.gd" id="1_g4cu5"]
@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://c1i2ks6dsjnvt" path="res://photo/enemy ship/enemy ship7.png" id="7_4tyvm"]
 [ext_resource type="Texture2D" uid="uid://ifuvqngsuu45" path="res://photo/enemy ship/enemy ship8.png" id="8_3ewus"]
 [ext_resource type="Texture2D" uid="uid://b5iaevb18e4ni" path="res://photo/enemy ship/enemy ship9.png" id="9_jq8ie"]
-[ext_resource type="AudioStream" uid="uid://dg6belfcx7gn0" path="res://audio/выстел.mp3" id="11_2jomk"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2mkof"]
 animations = [{
@@ -72,10 +71,6 @@ process_callback = 0
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(0, 24.375)
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("11_2jomk")
-volume_db = -5.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

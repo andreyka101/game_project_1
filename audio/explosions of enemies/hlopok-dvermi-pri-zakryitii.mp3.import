@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dt2ybr12xmlg1"
+path="res://.godot/imported/hlopok-dvermi-pri-zakryitii.mp3-ec89ae4f31b90f4c5c9b3a719743462d.mp3str"
+
+[deps]
+
+source_file="res://audio/explosions of enemies/hlopok-dvermi-pri-zakryitii.mp3"
+dest_files=["res://.godot/imported/hlopok-dvermi-pri-zakryitii.mp3-ec89ae4f31b90f4c5c9b3a719743462d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

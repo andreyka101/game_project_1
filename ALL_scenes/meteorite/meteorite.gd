@@ -62,9 +62,6 @@ func _process(delta: float) -> void:
 		sprite2D.play("explosion")
 		save_num_rotation = 0
 		await sprite2D.animation_finished
-		Global.enemies_released -= 1
-		if(Global.enemies_released == 0):
-			Global.enemies_released = null
 		$"../../AudioStreamPlayer2D2".playing = true
 		self.queue_free()
 	
@@ -73,10 +70,6 @@ func _process(delta: float) -> void:
 
 
 	if(position.y > 1700):
-
-		Global.enemies_released -= 1
-		if(Global.enemies_released == 0):
-			Global.enemies_released = null
 		self.queue_free()
 
 
@@ -92,9 +85,6 @@ func _on_body_entered(body: Node2D) -> void:
 		body.hp_player -= damage
 		sprite2D.play("explosion")
 		await sprite2D.animation_finished
-		Global.enemies_released -= 1
-		if(Global.enemies_released == 0):
-			Global.enemies_released = null
 		$"../../AudioStreamPlayer2D2".playing = true
 		self.queue_free()
 		
@@ -117,9 +107,6 @@ func _on_body_entered(body: Node2D) -> void:
 				sprite2D.play("explosion")
 				save_num_rotation = 0
 				await sprite2D.animation_finished
-				Global.enemies_released -= 1
-				if(Global.enemies_released == 0):
-					Global.enemies_released = null
 				$"../../AudioStreamPlayer2D2".playing = true
 				self.queue_free()
 		

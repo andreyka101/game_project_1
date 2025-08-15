@@ -58,9 +58,6 @@ func _process(delta: float) -> void:
 		speed = 0
 		death = true
 		await sprite_head.animation_finished
-		Global.enemies_released -= 1
-		if(Global.enemies_released == 0):
-			Global.enemies_released = null
 		$"../../AudioStreamPlayer2D3".playing = true
 		self.queue_free()
 	# print(arr_enemy)
@@ -80,9 +77,6 @@ func _on_body_entered(body: Node2D) -> void:
 		body.hp_player -= 150
 		sprite_head.play("explosion")
 		await sprite_head.animation_finished
-		Global.enemies_released -= 1
-		if(Global.enemies_released == 0):
-			Global.enemies_released = null
 		$"../../AudioStreamPlayer2D3".playing = true
 		self.queue_free()
 		
@@ -109,9 +103,6 @@ func _on_body_entered(body: Node2D) -> void:
 				speed = 0
 				death = true
 				await sprite_head.animation_finished
-				Global.enemies_released -= 1
-				if(Global.enemies_released == 0):
-					Global.enemies_released = null
 				$"../../AudioStreamPlayer2D3".playing = true
 				self.queue_free()
 
