@@ -18,6 +18,7 @@ var shooting = false
 var speed = 200
 
 var name_str = "shooting drone"
+var audio_boom:AudioStreamPlayer2D
 
 
 func _ready() -> void:
@@ -26,6 +27,7 @@ func _ready() -> void:
 
 	# запускаем и меняет время срабатывания таймера
 	timer.start(randf_range(1 , 2))
+	audio_boom = get_node("../../All_audio/Enemy_explosion_sound/AudioBoom_%s" % (randi_range(1,11)))
 
 
 func _physics_process(delta: float) -> void:
@@ -54,7 +56,7 @@ func _physics_process(delta: float) -> void:
 			collisionPolygon.visible = false
 			sprite2D.play("explosion")
 			await sprite2D.animation_finished
-			$"../../AudioStreamPlayer2D2".playing = true
+			audio_boom.playing = true
 			self.queue_free()
 	
 
@@ -96,7 +98,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		body.hp_player -= 70
 		sprite2D.play("explosion")
 		await sprite2D.animation_finished
-		$"../../AudioStreamPlayer2D2".playing = true
+		audio_boom.playing = true
 		self.queue_free()
 
 
@@ -118,5 +120,5 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 				collisionPolygon.visible = false
 				sprite2D.play("explosion")
 				await sprite2D.animation_finished
-				$"../../AudioStreamPlayer2D2".playing = true
+				audio_boom.playing = true
 				self.queue_free()

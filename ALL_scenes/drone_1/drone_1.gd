@@ -12,6 +12,7 @@ var death = false
 var name_str = "explosive drone"
 
 var arr_enemy = []
+var audio_boom:AudioStreamPlayer2D
 
 
 
@@ -21,6 +22,7 @@ func _ready() -> void:
 		speed_rotation = 5
 	else:
 		speed_rotation = -5
+	audio_boom = get_node("../../All_audio/Enemy_explosion_sound/AudioBoom_%s" % (randi_range(1,11)))
 		
 	
 	
@@ -58,7 +60,7 @@ func _process(delta: float) -> void:
 		speed = 0
 		death = true
 		await sprite_head.animation_finished
-		$"../../AudioStreamPlayer2D3".playing = true
+		audio_boom.playing = true
 		self.queue_free()
 	# print(arr_enemy)
 	# for i in arr_enemy:
@@ -77,7 +79,7 @@ func _on_body_entered(body: Node2D) -> void:
 		body.hp_player -= 150
 		sprite_head.play("explosion")
 		await sprite_head.animation_finished
-		$"../../AudioStreamPlayer2D3".playing = true
+		audio_boom.playing = true
 		self.queue_free()
 		
 		
@@ -103,7 +105,7 @@ func _on_body_entered(body: Node2D) -> void:
 				speed = 0
 				death = true
 				await sprite_head.animation_finished
-				$"../../AudioStreamPlayer2D3".playing = true
+				audio_boom.playing = true
 				self.queue_free()
 
 

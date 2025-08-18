@@ -6,6 +6,7 @@ var damage_bullet = 0
 @onready var sprite2D:AnimatedSprite2D = $"AnimatedSprite2D"
 
 var speed = 0
+var name_str = "player bullet"
 
 
 func _physics_process(delta: float) -> void:

@@ -17,6 +17,7 @@ var position_save = Vector2(randi_range(10 , 710) , randi_range(10 , 600))
 
 var damage = 70
 var name_str = "triple ship"
+var audio_boom:AudioStreamPlayer2D
 
 
 func _ready() -> void:
@@ -28,6 +29,7 @@ func _ready() -> void:
 	
 	
 	timer_position.start(randf_range(7 , 15))
+	audio_boom = get_node("../../All_audio/Enemy_explosion_sound/AudioBoom_%s" % (randi_range(1,11)))
 	
 	
 
@@ -47,7 +49,7 @@ func _physics_process(delta: float) -> void:
 		death = false
 		sprite2D.play("explosion")
 		await sprite2D.animation_finished
-		$"../../AudioStreamPlayer2D2".playing = true
+		audio_boom.playing = true
 		self.queue_free()
 	# if (Global.stop_game):
 	# 	sprite2D.stop()
@@ -89,7 +91,7 @@ func _on_body_entered(body: Node2D) -> void:
 		body.hp_player -= damage
 		sprite2D.play("explosion")
 		await sprite2D.animation_finished
-		$"../../AudioStreamPlayer2D2".playing = true
+		audio_boom.playing = true
 		self.queue_free()
 	for i_group in body.get_groups():
 		#print(i_group)
@@ -108,7 +110,7 @@ func _on_body_entered(body: Node2D) -> void:
 				death = false
 				sprite2D.play("explosion")
 				await sprite2D.animation_finished
-				$"../../AudioStreamPlayer2D2".playing = true
+				audio_boom.playing = true
 				self.queue_free()
 
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://cqvuqsrnep5uu"]
+[gd_scene load_steps=18 format=3 uid="uid://cqvuqsrnep5uu"]
 
 [ext_resource type="Texture2D" uid="uid://im6lwnr8pkik" path="res://photo/enemy ship-Sheet_2.png" id="1_lhd6b"]
 [ext_resource type="Script" uid="uid://bjdafjf4rqkl4" path="res://ALL_scenes/drone_2/drone_2.gd" id="1_luleb"]
+[ext_resource type="Script" uid="uid://do2tj7ew3pd5h" path="res://ALL_scenes/drone_2/area_2d.gd" id="3_x442r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_luleb"]
 atlas = ExtResource("1_lhd6b")
@@ -130,6 +131,7 @@ position = Vector2(10.3571, 21.875)
 [node name="Timer" type="Timer" parent="."]
 
 [node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("3_x442r")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 position = Vector2(5.96046e-08, 0)

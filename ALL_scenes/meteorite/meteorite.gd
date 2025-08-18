@@ -19,6 +19,7 @@ var death = false
 
 var damage:int
 var name_str = "meteorite"
+var audio_boom:AudioStreamPlayer2D
 
 
 
@@ -39,6 +40,8 @@ func _ready() -> void:
 	sprite2D = $AnimatedSprite2D
 	# рандомная анимация
 	sprite2D.play("meteor " + str(randi_range(1 , 5)))
+
+	audio_boom = get_node("../../All_audio/Enemy_explosion_sound/AudioBoom_%s" % (randi_range(1,11)))
 
 
 
@@ -62,7 +65,7 @@ func _process(delta: float) -> void:
 		sprite2D.play("explosion")
 		save_num_rotation = 0
 		await sprite2D.animation_finished
-		$"../../AudioStreamPlayer2D2".playing = true
+		audio_boom.playing = true
 		self.queue_free()
 	
 	
@@ -85,7 +88,7 @@ func _on_body_entered(body: Node2D) -> void:
 		body.hp_player -= damage
 		sprite2D.play("explosion")
 		await sprite2D.animation_finished
-		$"../../AudioStreamPlayer2D2".playing = true
+		audio_boom.playing = true
 		self.queue_free()
 		
 		
@@ -107,6 +110,6 @@ func _on_body_entered(body: Node2D) -> void:
 				sprite2D.play("explosion")
 				save_num_rotation = 0
 				await sprite2D.animation_finished
-				$"../../AudioStreamPlayer2D2".playing = true
+				audio_boom.playing = true
 				self.queue_free()
 		

@@ -1,8 +1,9 @@
-[gd_scene load_steps=27 format=3 uid="uid://d36n0aw1kh5dr"]
+[gd_scene load_steps=28 format=3 uid="uid://d36n0aw1kh5dr"]
 
 [ext_resource type="Texture2D" uid="uid://bf7jasbtliuxh" path="res://photo/enemy ship-Sheet.png" id="1_213qv"]
 [ext_resource type="Script" uid="uid://bkuot4tcfv875" path="res://ALL_scenes/drone_1/drone_1.gd" id="1_jdim8"]
 [ext_resource type="Texture2D" uid="uid://im6lwnr8pkik" path="res://photo/enemy ship-Sheet_2.png" id="3_4lyen"]
+[ext_resource type="Script" uid="uid://bvm7ca45is780" path="res://ALL_scenes/drone_1/boom.gd" id="4_k61ij"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jdim8"]
 atlas = ExtResource("1_213qv")
@@ -192,6 +193,7 @@ offset = Vector2(-2, -4)
 shape = SubResource("CircleShape2D_1u84v")
 
 [node name="Boom" type="Area2D" parent="."]
+script = ExtResource("4_k61ij")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boom"]
 shape = SubResource("CircleShape2D_jdim8")

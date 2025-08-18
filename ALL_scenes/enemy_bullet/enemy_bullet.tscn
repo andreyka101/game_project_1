@@ -47,4 +47,5 @@ sprite_frames = SubResource("SpriteFrames_q2jto")
 frame_progress = 0.127599
 flip_v = true
 
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

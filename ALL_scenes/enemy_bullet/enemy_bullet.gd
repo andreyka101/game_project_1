@@ -54,7 +54,15 @@ func _physics_process(delta: float) -> void:
 
 # наносим урон игроку при вхождении
 func _on_body_entered(body: Node2D) -> void:
-		if(body.name == "Galaxy_ship"):
+	if(body.name == "Galaxy_ship"):
+	
+		body.hp_player -= damage_bullet
+		self.queue_free()
 		
-			body.hp_player -= damage_bullet
-			self.queue_free()
+
+
+func _on_area_entered(area: Node2D) -> void:
+	print(area.name)
+	print(area.name_str)
+	if(area.name_str == "meteorite"):
+		self.queue_free()
