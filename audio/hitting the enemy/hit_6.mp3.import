@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cp0qh08o30ud3"
+path="res://.godot/imported/hit_6.mp3-2ba184ad9e7162665cf04f00704401e0.mp3str"
+
+[deps]
+
+source_file="res://audio/hitting the enemy/hit_6.mp3"
+dest_files=["res://.godot/imported/hit_6.mp3-2ba184ad9e7162665cf04f00704401e0.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
