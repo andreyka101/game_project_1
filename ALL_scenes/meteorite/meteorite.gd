@@ -10,7 +10,7 @@ var save_X = randi_range(200,520)
 var save_num_rotation = randf_range(-5, 5)
 
 # создаём рандомную скорость перемещения
-var speed = randf_range(30, 200)
+var speed = randf_range(30, 40)
 
 var hp:float
 var sprite2D:AnimatedSprite2D
@@ -19,8 +19,8 @@ var death = false
 
 var damage:int
 var name_str = "meteorite"
-var audio_boom:AudioStreamPlayer2D
 
+@onready var level = $"../.."
 
 
 
@@ -35,13 +35,12 @@ func _ready() -> void:
 	self.scale = Vector2(scale_num  , scale_num)
 
 	# задаём hp относительно размера
-	hp = scale_num * 120
+	hp = scale_num * 1200
 	
 	sprite2D = $AnimatedSprite2D
 	# рандомная анимация
 	sprite2D.play("meteor " + str(randi_range(1 , 5)))
 
-	audio_boom = get_node("../../All_audio/Enemy_explosion_sound/AudioBoom_%s" % (randi_range(1,11)))
 
 
 
@@ -65,7 +64,9 @@ func _process(delta: float) -> void:
 		sprite2D.play("explosion")
 		save_num_rotation = 0
 		await sprite2D.animation_finished
-		audio_boom.playing = true
+		var enemy_explosion_sound_scene = load("res://ALL_scenes/enemy_explosion_sound/enemy_explosion_sound.tscn")
+		var enemy_explosion_sound = enemy_explosion_sound_scene.instantiate()
+		level.add_child(enemy_explosion_sound)
 		self.queue_free()
 	
 	
@@ -88,7 +89,9 @@ func _on_body_entered(body: Node2D) -> void:
 		body.hp_player -= damage
 		sprite2D.play("explosion")
 		await sprite2D.animation_finished
-		audio_boom.playing = true
+		var enemy_explosion_sound_scene = load("res://ALL_scenes/enemy_explosion_sound/enemy_explosion_sound.tscn")
+		var enemy_explosion_sound = enemy_explosion_sound_scene.instantiate()
+		level.add_child(enemy_explosion_sound)
 		self.queue_free()
 		
 		
@@ -102,6 +105,9 @@ func _on_body_entered(body: Node2D) -> void:
 				sprite2D.self_modulate = "#ff4551"
 				await get_tree().create_timer(0.2).timeout
 				sprite2D.self_modulate = "#fff"
+				var enemy_hit_sound_scene = load("res://ALL_scenes/enemy_hit_sound/enemy_hit_sound.tscn")
+				var enemy_hit_sound = enemy_hit_sound_scene.instantiate()
+				level.add_child(enemy_hit_sound)
 			
 			
 			# смерть метеорита 
@@ -110,6 +116,8 @@ func _on_body_entered(body: Node2D) -> void:
 				sprite2D.play("explosion")
 				save_num_rotation = 0
 				await sprite2D.animation_finished
-				audio_boom.playing = true
+				var enemy_explosion_sound_scene = load("res://ALL_scenes/enemy_explosion_sound/enemy_explosion_sound.tscn")
+				var enemy_explosion_sound = enemy_explosion_sound_scene.instantiate()
+				level.add_child(enemy_explosion_sound)
 				self.queue_free()
 		

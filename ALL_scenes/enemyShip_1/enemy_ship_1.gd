@@ -2,7 +2,7 @@ extends Area2D
 
 
 var death = true
-@onready var level = $".."
+@onready var level = $"../.."
 @onready var timer:Timer = $Timer
 @onready var marker:Marker2D = $Marker2D
 @onready var timer_position:Timer = $Timer_position
@@ -15,7 +15,7 @@ var position_save = Vector2(randi_range(10 , 710) , randi_range(10 , 600))
 var damage = 70
 
 var name_str = "regular ship"
-var audio_boom:AudioStreamPlayer2D
+
 
 
 
@@ -28,8 +28,6 @@ func _ready() -> void:
 	
 	
 	timer_position.start(randf_range(7 , 15))
-
-	audio_boom = get_node("../../All_audio/Enemy_explosion_sound/AudioBoom_%s" % (randi_range(1,11)))
 	
 	
 
@@ -50,7 +48,9 @@ func _physics_process(delta: float) -> void:
 		# 	sprite2D.play_backwards()
 		sprite2D.play("explosion")
 		await sprite2D.animation_finished
-		audio_boom.playing = true
+		var enemy_explosion_sound_scene = load("res://ALL_scenes/enemy_explosion_sound/enemy_explosion_sound.tscn")
+		var enemy_explosion_sound = enemy_explosion_sound_scene.instantiate()
+		level.add_child(enemy_explosion_sound)
 		self.queue_free()
 	if((position.x <= position_save.x - 15 or position.x >= position_save.x + 15) or (position.y <= position_save.y - 15 or position.y >= position_save.y + 15)) and death and !Global.stop_game:
 		self.position += self.position.direction_to(position_save) * 100 * delta
@@ -77,7 +77,9 @@ func _on_body_entered(body: Node2D) -> void:
 		body.hp_player -= damage
 		sprite2D.play("explosion")
 		await sprite2D.animation_finished
-		audio_boom.playing = true
+		var enemy_explosion_sound_scene = load("res://ALL_scenes/enemy_explosion_sound/enemy_explosion_sound.tscn")
+		var enemy_explosion_sound = enemy_explosion_sound_scene.instantiate()
+		level.add_child(enemy_explosion_sound)
 		self.queue_free()
 	for i_group in body.get_groups():
 		#print(i_group)
@@ -96,7 +98,9 @@ func _on_body_entered(body: Node2D) -> void:
 				death = false
 				sprite2D.play("explosion")
 				await sprite2D.animation_finished
-				audio_boom.playing = true
+				var enemy_explosion_sound_scene = load("res://ALL_scenes/enemy_explosion_sound/enemy_explosion_sound.tscn")
+				var enemy_explosion_sound = enemy_explosion_sound_scene.instantiate()
+				level.add_child(enemy_explosion_sound)
 				self.queue_free()
 
 

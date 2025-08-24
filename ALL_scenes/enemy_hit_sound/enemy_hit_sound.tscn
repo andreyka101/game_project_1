@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvalsn83avmtg"]
+
+[ext_resource type="Script" uid="uid://dpucu1l7lwavv" path="res://ALL_scenes/enemy_hit_sound/enemy_hit_sound.gd" id="1_hwy1f"]
+
+[node name="Enemy_hit_sound" type="AudioStreamPlayer2D"]
+script = ExtResource("1_hwy1f")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

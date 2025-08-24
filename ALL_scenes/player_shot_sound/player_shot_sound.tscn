@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://c25agcsh3rqdo"]
+
+[ext_resource type="AudioStream" uid="uid://bao4vp37pwcq5" path="res://audio/выстрел для игрока.mp3" id="1_ocf0l"]
+[ext_resource type="Script" uid="uid://paf7cvav0kw" path="res://ALL_scenes/player_shot_sound/player_shot_sound.gd" id="2_ocf0l"]
+
+[node name="Player_shot_sound" type="AudioStreamPlayer2D"]
+rotation = -0.00919245
+stream = ExtResource("1_ocf0l")
+pitch_scale = 1.71
+script = ExtResource("2_ocf0l")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

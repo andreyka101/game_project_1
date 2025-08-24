@@ -3,6 +3,7 @@ extends Area2D
 @onready var sprite_head:AnimatedSprite2D =  $AnimatedSprite2D_head
 @onready var sprite_fire:AnimatedSprite2D =  $AnimatedSprite2D_fire
 @onready var galaxy_ship:CharacterBody2D = $"../../Galaxy_ship"
+@onready var level = $"../.."
 var speed_rotation = 0
 #var speed = randf_range(60 , 160)
 var speed = 160
@@ -12,7 +13,6 @@ var death = false
 var name_str = "explosive drone"
 
 var arr_enemy = []
-var audio_boom:AudioStreamPlayer2D
 
 
 
@@ -22,7 +22,6 @@ func _ready() -> void:
 		speed_rotation = 5
 	else:
 		speed_rotation = -5
-	audio_boom = get_node("../../All_audio/Enemy_explosion_sound/AudioBoom_%s" % (randi_range(1,11)))
 		
 	
 	
@@ -60,7 +59,9 @@ func _process(delta: float) -> void:
 		speed = 0
 		death = true
 		await sprite_head.animation_finished
-		audio_boom.playing = true
+		var enemy_explosion_sound_scene = load("res://ALL_scenes/enemy_explosion_sound/enemy_explosion_sound.tscn")
+		var enemy_explosion_sound = enemy_explosion_sound_scene.instantiate()
+		level.add_child(enemy_explosion_sound)
 		self.queue_free()
 	# print(arr_enemy)
 	# for i in arr_enemy:
@@ -79,7 +80,9 @@ func _on_body_entered(body: Node2D) -> void:
 		body.hp_player -= 150
 		sprite_head.play("explosion")
 		await sprite_head.animation_finished
-		audio_boom.playing = true
+		var enemy_explosion_sound_scene = load("res://ALL_scenes/enemy_explosion_sound/enemy_explosion_sound.tscn")
+		var enemy_explosion_sound = enemy_explosion_sound_scene.instantiate()
+		level.add_child(enemy_explosion_sound)
 		self.queue_free()
 		
 		
@@ -105,7 +108,9 @@ func _on_body_entered(body: Node2D) -> void:
 				speed = 0
 				death = true
 				await sprite_head.animation_finished
-				audio_boom.playing = true
+				var enemy_explosion_sound_scene = load("res://ALL_scenes/enemy_explosion_sound/enemy_explosion_sound.tscn")
+				var enemy_explosion_sound = enemy_explosion_sound_scene.instantiate()
+				level.add_child(enemy_explosion_sound)
 				self.queue_free()
 
 

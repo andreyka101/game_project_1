@@ -9,6 +9,7 @@ var hp_player = 500
 var not_death = true
 @onready var timer: Timer = $Timer
 @onready var player_bullets: Node2D = $"../Player_bullets"
+# @onready var audio:AudioStreamPlayer2D = $AudioStreamPlayer2D
 var hp_start_player = 500
 # 250
 var stop = false
@@ -16,6 +17,14 @@ var speed_ship = 300
 var speed_bullet = 600
 var damage = 150
 var time_timer = 0.7
+
+var acceleration = 500.0
+var current_speed = 0.0
+var target_speed = 0.0
+
+
+
+
 
 
 func  _physics_process(delta: float) -> void:
@@ -76,8 +85,15 @@ func  _physics_process(delta: float) -> void:
 
 		# self.global_position +=  self.position.direction_to(get_global_mouse_position())  * 300 * 5 * delta
 		self.velocity =  self.position.direction_to(get_global_mouse_position())  * speed_ship
+		
 	else:
 		velocity = Vector2(0,0)
+
+
+	# target_speed =  self.position.direction_to(get_global_mouse_position()) * speed_ship
+	# self.velocity = current_speed * delta
+	# position = position.lerp(get_global_mouse_position(), speed_ship)
+	# print(position.lerp(get_global_mouse_position(), speed_ship))
 
 	move_and_slide()
 
@@ -130,28 +146,20 @@ func _process(delta: float):
 
 # сигнал узла timer срабатывает раз в какое-то время
 func _on_timer_timeout() -> void:
-	# print("timer")
 
 	if(attack_bool and not_death and !stop):
-		# load() - загружает сцену в переменную
 		var bullet_scene = load("res://ALL_scenes/bullet/bullet.tscn")
-		# .instantiate() - инициализирует сцену как узел (это нужно для дальнейшего использования)
 		var bullet:CharacterBody2D = bullet_scene.instantiate()
-		#add_child(bullet)
-		
-		#bullet.position.x = 500
-		#bullet.position.y = 500
-		
 		bullet.global_position  = marker.global_position 
 		bullet.speed = speed_bullet
 		bullet.damage_bullet = damage
 
-		$AudioStreamPlayer2D.playing = true
 
-		# add_child() - добавляет дочерний узел к этой сцене
-		# add_child(bullet)
+		var player_shot_sound_scene = load("res://ALL_scenes/player_shot_sound/player_shot_sound.tscn")
+		var player_shot_sound = player_shot_sound_scene.instantiate()
+		level.add_child(player_shot_sound)
 
-		# .add_child() - добавляет дочерний узел к узлу или к другой сцене
+
 		player_bullets.add_child(bullet)
 
 

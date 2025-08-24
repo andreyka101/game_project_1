@@ -174,7 +174,7 @@ animation = &"75-50%"
 autoplay = "100-75%"
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(0, -37)
+position = Vector2(0, -39)
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.7
