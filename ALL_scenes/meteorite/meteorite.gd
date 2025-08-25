@@ -31,8 +31,22 @@ func _ready() -> void:
 	self.scale = Vector2(scale_num  , scale_num)
 	sprite2D = $AnimatedSprite2D
 	sprite2D.play("meteor " + str(randi_range(1 , 5)))
-	
-	speed = randf_range(30, 200)
+
+	if(enemy_level > 0 and enemy_level < 30):
+		speed = randf_range(20, 150)
+	if(enemy_level >= 30 and enemy_level < 50):
+		speed = randf_range(30, 200)
+	if(enemy_level >= 50 and enemy_level < 70):
+		speed = randf_range(40, 200)
+	if(enemy_level >= 70 and enemy_level < 90):
+		speed = randf_range(50, 210)
+	if(enemy_level >= 90 and enemy_level < 110):
+		speed = randf_range(50, 250)
+	if(enemy_level >= 110 and enemy_level < 210):
+		speed = randf_range(50, 300)
+	if(enemy_level >= 210):
+		speed = randf_range(70, 350)
+
 	if(enemy_level == 1):
 		damage = scale_num * 50
 		hp = scale_num * 60
@@ -61,15 +75,26 @@ func _ready() -> void:
 		damage = scale_num * 380
 		hp = scale_num * 400
 	elif(enemy_level >= 10 and enemy_level < 60):
-		# var multiplier = (enemy_level)
-		damage = scale_num * (enemy_level * 50 - 20)
-		hp = scale_num * (enemy_level * 50)
+		var multiplier = (enemy_level / 10 - 1) * 20
+		damage = scale_num * (enemy_level * (multiplier + 50) - 20)
+		hp = scale_num * (enemy_level * (multiplier + 50))
+	elif(enemy_level >= 60 and enemy_level < 110):
+		var multiplier = (enemy_level / 10 - 1) * 50
+		damage = scale_num * (enemy_level * (multiplier + 50) - 20)
+		hp = scale_num * (enemy_level * (multiplier + 50))
+	elif(enemy_level >= 110):
+		var multiplier = (enemy_level / 10 - 1) * 100
+		damage = scale_num * (enemy_level * (multiplier + 70) - 20)
+		hp = scale_num * (enemy_level * (multiplier + 70))
 
 
 
 
 func _process(delta: float) -> void:
-	#print(galaxy_ship.position.y)
+	print("speed =" , speed)
+	print("hp =" , hp)
+	print("damage =" , damage)
+	print("scale =" , scale)
 	
 	# метеорит преследует игрока
 	#position += self.position.direction_to(galaxy_ship.position) * 300 * delta
