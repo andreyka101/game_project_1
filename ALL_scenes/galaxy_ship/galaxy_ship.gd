@@ -4,25 +4,28 @@ extends CharacterBody2D
 @onready var level = $".."
 @onready var marker:Marker2D = $"./Marker2D"
 var attack_bool:bool = false
-var hp_player = 500
 @onready var sprite:AnimatedSprite2D = $AnimatedSprite2D
 var not_death = true
 @onready var timer: Timer = $Timer
 @onready var player_bullets: Node2D = $"../Player_bullets"
 # @onready var audio:AudioStreamPlayer2D = $AudioStreamPlayer2D
-var hp_start_player = 500
+var hp_player = 300
+var hp_start_player = 300
 # 250
 var stop = false
-var speed_ship = 300
-var speed_bullet = 600
-var damage = 150
-var time_timer = 0.7
+var speed_ship = 200
+var speed_bullet = 400
+var damage = 50
+var time_timer = 1.2
 
 var acceleration = 500.0
 var current_speed = 0.0
 var target_speed = 0.0
 
 
+
+func _ready() -> void:
+	timer.wait_time = time_timer
 
 
 

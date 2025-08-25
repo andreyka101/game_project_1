@@ -44,27 +44,27 @@ func _on_сontinue_pressed() -> void:
 
 
 func _on_button_hp_pressed() -> void:
-	galaxy_ship.hp_start_player += (galaxy_ship.hp_start_player/100) * 10
-	galaxy_ship.hp_player += (galaxy_ship.hp_player/100) * 10
+	galaxy_ship.hp_start_player +=  round((galaxy_ship.hp_start_player/100.0) * 10 * 100) / 100.0
+	galaxy_ship.hp_player +=  round((galaxy_ship.hp_player/100.0) * 10 * 100) / 100.0
 	label_hp.text = "max hp = " + str(galaxy_ship.hp_start_player)
 
 func _on_button_speed_pressed() -> void:
-	galaxy_ship.speed_ship += (galaxy_ship.speed_ship/100) * 10
+	galaxy_ship.speed_ship +=  round((galaxy_ship.speed_ship/100.0) * 10 * 100) / 100.0
 	label_speed.text = "скорость = " + str(galaxy_ship.speed_ship)
 
 
 func _on_button_speed_bullet_pressed() -> void:
-	galaxy_ship.speed_bullet += (galaxy_ship.speed_bullet/100) * 10
+	galaxy_ship.speed_bullet +=  round((galaxy_ship.speed_bullet/100.0) * 10 * 100) / 100.0
 	label_speed_bullet.text = "скорость пули = " + str(galaxy_ship.speed_bullet)
 
 
 func _on_button_damage_pressed() -> void:
-	galaxy_ship.damage += (galaxy_ship.damage/100) * 10
+	galaxy_ship.damage +=  round((galaxy_ship.damage/100.0) * 10 * 100) / 100.0
 	label_damage.text = "урон = " + str(galaxy_ship.damage)
 
 
 func _on_button_reload_pressed() -> void:
-	galaxy_ship.time_timer -= (galaxy_ship.time_timer/100) * 10
+	galaxy_ship.time_timer -=  round((galaxy_ship.time_timer/100.0) * 10 * 100) / 100.0
 	galaxy_ship.timer.wait_time = galaxy_ship.time_timer
 	label_reload.text = "перезарядка = " + str(galaxy_ship.time_timer)
 	

@@ -10,15 +10,16 @@ var save_X = randi_range(200,520)
 var save_num_rotation = randf_range(-5, 5)
 
 # создаём рандомную скорость перемещения
-var speed = randf_range(30, 40)
 
-var hp:float
 var sprite2D:AnimatedSprite2D
 
 var death = false
 
-var damage:int
+var hp:float
+var damage:float
+var speed:float
 var name_str = "meteorite"
+var enemy_level = 1
 
 @onready var level = $"../.."
 
@@ -26,21 +27,43 @@ var name_str = "meteorite"
 
 
 func _ready() -> void:
-	#print("start")
-
-	# создаём рандомный размер
 	var scale_num = randf_range(1.6 , 3.0)
-	damage = scale_num * 20
-	# задаём сохранённый размер по ширине и высоте 
 	self.scale = Vector2(scale_num  , scale_num)
-
-	# задаём hp относительно размера
-	hp = scale_num * 1200
-	
 	sprite2D = $AnimatedSprite2D
-	# рандомная анимация
 	sprite2D.play("meteor " + str(randi_range(1 , 5)))
-
+	
+	speed = randf_range(30, 200)
+	if(enemy_level == 1):
+		damage = scale_num * 50
+		hp = scale_num * 60
+	elif(enemy_level == 2):
+		damage = scale_num * 70
+		hp = scale_num * 80
+	elif(enemy_level == 3):
+		damage = scale_num * 90
+		hp = scale_num * 100
+	elif(enemy_level == 4):
+		damage = scale_num * 110
+		hp = scale_num * 120
+	elif(enemy_level == 5):
+		damage = scale_num * 130
+		hp = scale_num * 150
+	elif(enemy_level == 6):
+		damage = scale_num * 180
+		hp = scale_num * 200
+	elif(enemy_level == 7):
+		damage = scale_num * 230
+		hp = scale_num * 250
+	elif(enemy_level == 8):
+		damage = scale_num * 300
+		hp = scale_num * 320
+	elif(enemy_level == 9):
+		damage = scale_num * 380
+		hp = scale_num * 400
+	elif(enemy_level >= 10 and enemy_level < 60):
+		# var multiplier = (enemy_level)
+		damage = scale_num * (enemy_level * 50 - 20)
+		hp = scale_num * (enemy_level * 50)
 
 
 

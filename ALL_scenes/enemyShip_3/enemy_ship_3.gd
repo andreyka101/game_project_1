@@ -105,6 +105,9 @@ func _on_body_entered(body: Node2D) -> void:
 				sprite2D.self_modulate = "#ff4551"
 				await get_tree().create_timer(0.2).timeout
 				sprite2D.self_modulate = "#fff"
+				var enemy_hit_sound_scene = load("res://ALL_scenes/enemy_hit_sound/enemy_hit_sound.tscn")
+				var enemy_hit_sound = enemy_hit_sound_scene.instantiate()
+				level.add_child(enemy_hit_sound)
 			
 			
 			# смерть корабля
