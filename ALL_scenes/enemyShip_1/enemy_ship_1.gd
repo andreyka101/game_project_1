@@ -6,13 +6,13 @@ var death = true
 @onready var timer:Timer = $Timer
 @onready var marker:Marker2D = $Marker2D
 @onready var timer_position:Timer = $Timer_position
-var hp = 300
+var hp = 100
 @onready var sprite2D:AnimatedSprite2D = $"AnimatedSprite2D"
 @onready var bullets_of_enemies:Node2D = $"../../Bullets_of_enemies"
 
 var position_save = Vector2(randi_range(10 , 710) , randi_range(10 , 600))
 
-var damage = 70
+var damage = 100
 
 var name_str = "regular ship"
 
