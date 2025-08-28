@@ -6,28 +6,71 @@ var death = true
 @onready var timer:Timer = $Timer
 @onready var marker:Marker2D = $Marker2D
 @onready var timer_position:Timer = $Timer_position
-var hp = 100
 @onready var sprite2D:AnimatedSprite2D = $"AnimatedSprite2D"
 @onready var bullets_of_enemies:Node2D = $"../../Bullets_of_enemies"
 
 var position_save = Vector2(randi_range(10 , 710) , randi_range(10 , 600))
 
-var damage = 100
-
 var name_str = "regular ship"
 
+var hp
+var damage_ship
+var damage_enemyBullet
+var speed_ship
+var speed_enemyBullet
+var timer_num:Array
+var timer_position_num:Array
+var enemy_level = 1
 
 
 
 func _ready() -> void:
-	# меняет время срабатывания таймера
-	#timer.wait_time = randf_range(1 , 3)
+	timer_num = [2,4]
+	timer_position_num = [8,17]
 
-	# запускаем и меняет время срабатывания таймера
-	timer.start(randf_range(1 , 3))
-	
-	
-	timer_position.start(randf_range(7 , 15))
+	# timer_num = [1,3]
+	# timer_position_num = [7,15]
+
+
+	speed_ship = 80
+	speed_enemyBullet = 300
+
+	if(enemy_level >= 1 and enemy_level <= 10):
+		hp = (enemy_level * 0.5 + 0.5) * 100
+		damage_ship = (enemy_level * 0.5 + 0.5) * 100
+		damage_enemyBullet = 10 + (enemy_level * 5)
+	elif(enemy_level > 10 and enemy_level <= 20):
+		hp = enemy_level * 0.7 * 100
+		damage_ship = enemy_level * 0.7 * 100
+		damage_enemyBullet = enemy_level * 7
+	elif(enemy_level > 20 and enemy_level <= 30):
+		hp = enemy_level * 0.8 * 100
+		damage_ship = enemy_level * 0.8 * 100
+		damage_enemyBullet = enemy_level * 8
+	elif(enemy_level > 30 and enemy_level <= 40):
+		hp = enemy_level * 0.9 * 100
+		damage_ship = enemy_level * 0.9 * 100
+		damage_enemyBullet = enemy_level * 9
+	elif(enemy_level > 40 and enemy_level <= 50):
+		hp = enemy_level * 100
+		damage_ship = enemy_level * 100
+		damage_enemyBullet = enemy_level * 10
+	elif(enemy_level > 50 and enemy_level <= 80):
+		hp = enemy_level * 1.5 * 100
+		damage_ship = enemy_level * 1.5 * 100
+		damage_enemyBullet = enemy_level * 15
+	elif(enemy_level > 80 and enemy_level <= 110):
+		hp = enemy_level * 2.5 * 100
+		damage_ship = enemy_level * 2.5 * 100
+		damage_enemyBullet = enemy_level * 25
+	elif(enemy_level > 110):
+		hp = enemy_level * 4 * 100
+		damage_ship = enemy_level * 4 * 100
+		damage_enemyBullet = enemy_level * 4
+
+
+	timer.start(randf_range(timer_num[0] , timer_num[1]))
+	timer_position.start(randf_range(timer_position_num[0] , timer_position_num[1]))
 	
 	
 
@@ -53,7 +96,7 @@ func _physics_process(delta: float) -> void:
 		level.add_child(enemy_explosion_sound)
 		self.queue_free()
 	if((position.x <= position_save.x - 15 or position.x >= position_save.x + 15) or (position.y <= position_save.y - 15 or position.y >= position_save.y + 15)) and death and !Global.stop_game:
-		self.position += self.position.direction_to(position_save) * 100 * delta
+		self.position += self.position.direction_to(position_save) * speed_ship * delta
 	# if (Global.stop_game):
 	# 	sprite2D.stop()
 	# elif(death):
@@ -67,14 +110,18 @@ func _on_timer_timeout() -> void:
 		var bullet_scene = load("res://ALL_scenes/enemy_bullet/enemy_bullet.tscn")
 		var bullet:Area2D = bullet_scene.instantiate()
 		bullet.global_position = marker.global_position
+		bullet.damage_bullet = damage_enemyBullet
+		bullet.speed_bullet = speed_enemyBullet
 		bullets_of_enemies.add_child(bullet)
-	timer.wait_time = randf_range(1 , 3)
+	var w1 = randf_range(timer_num[0] , timer_num[1])
+	print(w1)
+	timer.wait_time = w1
 
 
 func _on_body_entered(body: Node2D) -> void:
 	if(body.name == "Galaxy_ship" and death):
 		death = true
-		body.hp_player -= damage
+		body.hp_player -= damage_ship
 		sprite2D.play("explosion")
 		await sprite2D.animation_finished
 		var enemy_explosion_sound_scene = load("res://ALL_scenes/enemy_explosion_sound/enemy_explosion_sound.tscn")
@@ -113,4 +160,4 @@ func _on_timer_position_timeout() -> void:
 	if (!Global.stop_game):
 		position_save = Vector2(randi_range(10 , 710) , randi_range(10 , 600))
 		# меняем время срабатывания этого таймера
-	timer_position.wait_time = randf_range(7 , 15)
+	timer_position.wait_time = randf_range(timer_position_num[0] , timer_position_num[1])

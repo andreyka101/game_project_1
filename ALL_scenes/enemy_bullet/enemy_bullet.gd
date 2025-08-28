@@ -6,8 +6,8 @@ var position_save = null
 
 
 
-var damage_bullet = 20
-var speed_bullet = 400
+var damage_bullet = 0
+var speed_bullet = 0
 
 var name_str = "enemy bullet"
 
@@ -62,7 +62,7 @@ func _on_body_entered(body: Node2D) -> void:
 
 
 func _on_area_entered(area: Node2D) -> void:
-	print(area.name)
-	print(area.name_str)
+	# print(area.name)
+	# print(area.name_str)
 	if(area.name_str == "meteorite"):
 		self.queue_free()

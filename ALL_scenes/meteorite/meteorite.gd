@@ -34,17 +34,17 @@ func _ready() -> void:
 
 	if(enemy_level > 0 and enemy_level < 30):
 		speed = randf_range(20, 150)
-	if(enemy_level >= 30 and enemy_level < 50):
+	elif(enemy_level >= 30 and enemy_level < 50):
 		speed = randf_range(30, 200)
-	if(enemy_level >= 50 and enemy_level < 70):
+	elif(enemy_level >= 50 and enemy_level < 70):
 		speed = randf_range(40, 200)
-	if(enemy_level >= 70 and enemy_level < 90):
+	elif(enemy_level >= 70 and enemy_level < 90):
 		speed = randf_range(50, 210)
-	if(enemy_level >= 90 and enemy_level < 110):
+	elif(enemy_level >= 90 and enemy_level < 110):
 		speed = randf_range(50, 250)
-	if(enemy_level >= 110 and enemy_level < 210):
+	elif(enemy_level >= 110 and enemy_level < 210):
 		speed = randf_range(50, 300)
-	if(enemy_level >= 210):
+	elif(enemy_level >= 210):
 		speed = randf_range(70, 350)
 
 	if(enemy_level == 1):
@@ -91,10 +91,10 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	print("speed =" , speed)
+	# print("speed =" , speed)
 	print("hp =" , hp)
-	print("damage =" , damage)
-	print("scale =" , scale)
+	# print("damage =" , damage)
+	# print("scale =" , scale)
 	
 	# метеорит преследует игрока
 	#position += self.position.direction_to(galaxy_ship.position) * 300 * delta
