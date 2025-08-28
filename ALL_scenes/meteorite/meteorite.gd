@@ -48,44 +48,51 @@ func _ready() -> void:
 		speed = randf_range(70, 350)
 
 	if(enemy_level == 1):
-		damage = scale_num * 50
+		damage = scale_num * ( 60 /10.0)*7
 		hp = scale_num * 60
 	elif(enemy_level == 2):
-		damage = scale_num * 70
-		hp = scale_num * 80
+		damage = scale_num * ( 90 /10.0)*7
+		hp = scale_num * 90
 	elif(enemy_level == 3):
-		damage = scale_num * 90
-		hp = scale_num * 100
-	elif(enemy_level == 4):
-		damage = scale_num * 110
+		damage = scale_num * ( 120 /10.0)*7
 		hp = scale_num * 120
-	elif(enemy_level == 5):
-		damage = scale_num * 130
+	elif(enemy_level == 4):
+		damage = scale_num * ( 150 /10.0)*7
 		hp = scale_num * 150
+	elif(enemy_level == 5):
+		damage = scale_num * ( 190 /10.0)*7
+		hp = scale_num * 190
 	elif(enemy_level == 6):
-		damage = scale_num * 180
-		hp = scale_num * 200
+		damage = scale_num * ( 220 /10.0)*7
+		hp = scale_num * 220
 	elif(enemy_level == 7):
-		damage = scale_num * 230
+		damage = scale_num * ( 250 /10.0)*7
 		hp = scale_num * 250
 	elif(enemy_level == 8):
-		damage = scale_num * 300
-		hp = scale_num * 320
+		damage = scale_num * ( 280 /10.0)*7
+		hp = scale_num * 280
 	elif(enemy_level == 9):
-		damage = scale_num * 380
-		hp = scale_num * 400
+		damage = scale_num * ( 310 /10.0)*7
+		hp = scale_num * 310
+	elif(enemy_level == 10):
+		damage = scale_num * ( 340 /10.0)*7
+		hp = scale_num * 340
 	elif(enemy_level >= 10 and enemy_level < 60):
-		var multiplier = (enemy_level / 10 - 1) * 20
-		damage = scale_num * (enemy_level * (multiplier + 50) - 20)
-		hp = scale_num * (enemy_level * (multiplier + 50))
-	elif(enemy_level >= 60 and enemy_level < 110):
-		var multiplier = (enemy_level / 10 - 1) * 50
-		damage = scale_num * (enemy_level * (multiplier + 50) - 20)
-		hp = scale_num * (enemy_level * (multiplier + 50))
-	elif(enemy_level >= 110):
-		var multiplier = (enemy_level / 10 - 1) * 100
-		damage = scale_num * (enemy_level * (multiplier + 70) - 20)
-		hp = scale_num * (enemy_level * (multiplier + 70))
+		var multiplier = (enemy_level / 10) * 5
+		damage = ((scale_num * enemy_level * (multiplier + 35)) /10.0)*7
+		hp = scale_num * (multiplier + 35) * enemy_level
+	elif(enemy_level >= 60 and enemy_level < 80):
+		var multiplier = (enemy_level / 10) * 10
+		damage = ((scale_num * enemy_level * (multiplier + 35)) /10.0)*7
+		hp = scale_num * (multiplier + 35) * enemy_level
+	elif(enemy_level >= 80 and enemy_level < 100):
+		var multiplier = (enemy_level / 10) * 15
+		damage = ((scale_num * enemy_level * (multiplier + 38)) /10.0)*7
+		hp = scale_num * (multiplier + 38) * enemy_level
+	elif(enemy_level >= 100):
+		var multiplier = (enemy_level / 10) * 21
+		damage = ((scale_num * enemy_level * multiplier) /10.0)*7
+		hp = scale_num * multiplier * enemy_level
 
 
 

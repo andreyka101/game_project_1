@@ -25,47 +25,97 @@ var enemy_level = 1
 
 
 func _ready() -> void:
-	timer_num = [2,4]
-	timer_position_num = [8,17]
+	if(enemy_level >= 1 and enemy_level < 5):
+		timer_num = [3,4.5]
+		timer_position_num = [10,18]
+		speed_ship = 80
+		speed_enemyBullet = 300
+	if(enemy_level >= 5 and enemy_level < 10):
+		timer_num = [2.5,4]
+		timer_position_num = [9,17]
+		speed_ship = 100
+		speed_enemyBullet = 310
+	if(enemy_level >= 10 and enemy_level < 20):
+		timer_num = [2,3.5]
+		timer_position_num = [8,16]
+		speed_ship = 120
+		speed_enemyBullet = 320
+	if(enemy_level >= 20 and enemy_level < 30):
+		timer_num = [1.5,3]
+		timer_position_num = [7,15]
+		speed_ship = 140
+		speed_enemyBullet = 330
+	if(enemy_level >= 30 and enemy_level < 40):
+		timer_num = [1,3]
+		timer_position_num = [6,14]
+		speed_ship = 170
+		speed_enemyBullet = 340
+	if(enemy_level >= 40 and enemy_level < 50):
+		timer_num = [1,2.5]
+		timer_position_num = [5,13]
+		speed_ship = 200
+		speed_enemyBullet = 350
+	if(enemy_level >= 50 and enemy_level < 60):
+		timer_num = [1,2.5]
+		timer_position_num = [4,11]
+		speed_ship = 250
+		speed_enemyBullet = 360
+	if(enemy_level >= 60 and enemy_level < 80):
+		timer_num = [1,2]
+		timer_position_num = [3,9]
+		speed_ship = 300
+		speed_enemyBullet = 370
+	if(enemy_level >= 80 and enemy_level < 100):
+		timer_num = [0.7,2]
+		timer_position_num = [2,6]
+		speed_ship = 350
+		speed_enemyBullet = 380
+	if(enemy_level > 100):
+		timer_num = [0.5,2]
+		timer_position_num = [1.5,4]
+		speed_ship = 400
+		speed_enemyBullet = 390
 
-	# timer_num = [1,3]
-	# timer_position_num = [7,15]
 
+		# speed_ship = 80
+		# speed_enemyBullet = 300
 
-	speed_ship = 80
-	speed_enemyBullet = 300
 
 	if(enemy_level >= 1 and enemy_level <= 10):
 		hp = (enemy_level * 0.5 + 0.5) * 100
-		damage_ship = (enemy_level * 0.5 + 0.5) * 100
+		damage_ship = (((enemy_level * 0.5 + 0.5) * 100) /10.0)*7
 		damage_enemyBullet = 10 + (enemy_level * 5)
-	elif(enemy_level > 10 and enemy_level <= 20):
-		hp = enemy_level * 0.7 * 100
-		damage_ship = enemy_level * 0.7 * 100
+	elif(enemy_level > 10 and enemy_level < 20):
+		hp = enemy_level * 0.6 * 100
+		damage_ship = ((enemy_level * 0.6 * 100) /10.0)*7
 		damage_enemyBullet = enemy_level * 7
-	elif(enemy_level > 20 and enemy_level <= 30):
-		hp = enemy_level * 0.8 * 100
-		damage_ship = enemy_level * 0.8 * 100
+	elif(enemy_level >= 20 and enemy_level < 30):
+		hp = enemy_level * 0.7 * 100
+		damage_ship = ((enemy_level * 0.7 * 100) /10.0)*7
 		damage_enemyBullet = enemy_level * 8
-	elif(enemy_level > 30 and enemy_level <= 40):
-		hp = enemy_level * 0.9 * 100
-		damage_ship = enemy_level * 0.9 * 100
+	elif(enemy_level >= 30 and enemy_level < 40):
+		hp = enemy_level * 0.8 * 100
+		damage_ship =((enemy_level * 0.8 * 100) /10.0)*7
 		damage_enemyBullet = enemy_level * 9
-	elif(enemy_level > 40 and enemy_level <= 50):
-		hp = enemy_level * 100
-		damage_ship = enemy_level * 100
+	elif(enemy_level >= 40 and enemy_level < 50):
+		hp = enemy_level * 0.9 * 100
+		damage_ship = ((enemy_level * 0.9 * 100) /10.0)*7
 		damage_enemyBullet = enemy_level * 10
-	elif(enemy_level > 50 and enemy_level <= 80):
+	elif(enemy_level >= 50 and enemy_level < 60):
+		hp = enemy_level * 100
+		damage_ship = ((enemy_level * 100) /10.0)*7
+		damage_enemyBullet = enemy_level * 10
+	elif(enemy_level >= 60 and enemy_level < 80):
 		hp = enemy_level * 1.5 * 100
-		damage_ship = enemy_level * 1.5 * 100
+		damage_ship = ((enemy_level * 1.5 * 100) /10.0)*7
 		damage_enemyBullet = enemy_level * 15
-	elif(enemy_level > 80 and enemy_level <= 110):
+	elif(enemy_level >= 80 and enemy_level < 100):
 		hp = enemy_level * 2.5 * 100
-		damage_ship = enemy_level * 2.5 * 100
+		damage_ship = ((enemy_level * 2.5 * 100) /10.0)*7
 		damage_enemyBullet = enemy_level * 25
-	elif(enemy_level > 110):
+	elif(enemy_level >= 100):
 		hp = enemy_level * 4 * 100
-		damage_ship = enemy_level * 4 * 100
+		damage_ship = ((enemy_level * 4 * 100) /10.0)*7
 		damage_enemyBullet = enemy_level * 4
 
 

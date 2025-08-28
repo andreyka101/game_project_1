@@ -17,30 +17,32 @@ var end_level = false
 
 
 func _ready() -> void:
+	print(27/10.0)
 	
 
 	# method_level()
 
 
 	# тип врага 1 - метеорит
-	var meteorite_scene = load("res://ALL_scenes/meteorite/meteorite.tscn")
-	for i in range(1):
-		# создаём метеориты в случайных координатах по x
-		var meteorite:Area2D = meteorite_scene.instantiate()
-		meteorite.position = Vector2(randi_range(-100,820),50)
-		meteorite.enemy_level = 10
-		enemies.add_child(meteorite)
+	# var meteorite_scene = load("res://ALL_scenes/meteorite/meteorite.tscn")
+	# for i in range(1):
+	# 	# создаём метеориты в случайных координатах по x
+	# 	var meteorite:Area2D = meteorite_scene.instantiate()
+	# 	meteorite.position = Vector2(randi_range(-100,820),50)
+	# 	meteorite.enemy_level = 10
+	# 	enemies.add_child(meteorite)
 	
 	
 	
 	# тип врага 2 - белый корабль
-	# var enemyShip_1_scene = load("res://ALL_scenes/enemyShip_1/enemy_ship_1.tscn")
-	# for i in range(6):
-	# 	# создаём корабли в случайных координатах по x
-	# 	var enemyShip_1:Area2D = enemyShip_1_scene.instantiate()
-	# 	# enemyShip_1.position = Vector2(randi_range(-200,1580),50)
-	# 	enemyShip_1.position = Vector2(randi_range(0,720),50)
-	# 	enemies.add_child(enemyShip_1)
+	var enemyShip_1_scene = load("res://ALL_scenes/enemyShip_1/enemy_ship_1.tscn")
+	for i in range(6):
+		# создаём корабли в случайных координатах по x
+		var enemyShip_1:Area2D = enemyShip_1_scene.instantiate()
+		# enemyShip_1.position = Vector2(randi_range(-200,1580),50)
+		enemyShip_1.position = Vector2(randi_range(0,720),50)
+		enemyShip_1.enemy_level = 5
+		enemies.add_child(enemyShip_1)
 		
 
 	
