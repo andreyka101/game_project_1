@@ -70,7 +70,7 @@ func _ready() -> void:
 		timer_position_num = [2,6]
 		speed_ship = 350
 		speed_enemyBullet = 380
-	if(enemy_level > 100):
+	if(enemy_level >= 100):
 		timer_num = [0.5,2]
 		timer_position_num = [1.5,4]
 		speed_ship = 400
@@ -163,9 +163,7 @@ func _on_timer_timeout() -> void:
 		bullet.damage_bullet = damage_enemyBullet
 		bullet.speed_bullet = speed_enemyBullet
 		bullets_of_enemies.add_child(bullet)
-	var w1 = randf_range(timer_num[0] , timer_num[1])
-	print(w1)
-	timer.wait_time = w1
+	timer.wait_time = randf_range(timer_num[0] , timer_num[1])
 
 
 func _on_body_entered(body: Node2D) -> void:

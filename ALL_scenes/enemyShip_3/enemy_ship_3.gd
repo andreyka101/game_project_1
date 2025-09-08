@@ -1,7 +1,6 @@
 extends Area2D
 
 
-
 var death = true
 @onready var level = $"../.."
 @onready var timer:Timer = $Timer
@@ -9,25 +8,121 @@ var death = true
 @onready var marker_LEFT:Marker2D = $Marker2D_LEFT
 @onready var marker_RIGHT:Marker2D = $Marker2D_RIGHT
 @onready var timer_position:Timer = $Timer_position
-var hp = 300
 @onready var sprite2D:AnimatedSprite2D = $"AnimatedSprite2D"
 @onready var bullets_of_enemies:Node2D = $"../../Bullets_of_enemies"
 
 var position_save = Vector2(randi_range(10 , 710) , randi_range(10 , 600))
 
-var damage = 70
-var name_str = "triple ship"
+var name_str = "regular ship"
+
+var hp
+var damage_ship
+var damage_enemyBullet
+var speed_ship
+var speed_enemyBullet
+var timer_num:Array
+var timer_position_num:Array
+var enemy_level = 1
+
 
 
 func _ready() -> void:
-	# меняет время срабатывания таймера
-	#timer.wait_time = randf_range(1 , 3)
+	if(enemy_level >= 1 and enemy_level < 5):
+		timer_num = [3,4.5]
+		timer_position_num = [10,18]
+		speed_ship = 80
+		speed_enemyBullet = 300
+	if(enemy_level >= 5 and enemy_level < 10):
+		timer_num = [2.5,4]
+		timer_position_num = [9,17]
+		speed_ship = 100
+		speed_enemyBullet = 310
+	if(enemy_level >= 10 and enemy_level < 20):
+		timer_num = [2,3.5]
+		timer_position_num = [8,16]
+		speed_ship = 120
+		speed_enemyBullet = 320
+	if(enemy_level >= 20 and enemy_level < 30):
+		timer_num = [1.5,3]
+		timer_position_num = [7,15]
+		speed_ship = 140
+		speed_enemyBullet = 330
+	if(enemy_level >= 30 and enemy_level < 40):
+		timer_num = [1,3]
+		timer_position_num = [6,14]
+		speed_ship = 170
+		speed_enemyBullet = 340
+	if(enemy_level >= 40 and enemy_level < 50):
+		timer_num = [1,2.5]
+		timer_position_num = [5,13]
+		speed_ship = 200
+		speed_enemyBullet = 350
+	if(enemy_level >= 50 and enemy_level < 60):
+		timer_num = [1,2.5]
+		timer_position_num = [4,11]
+		speed_ship = 250
+		speed_enemyBullet = 360
+	if(enemy_level >= 60 and enemy_level < 80):
+		timer_num = [1,2]
+		timer_position_num = [3,9]
+		speed_ship = 300
+		speed_enemyBullet = 370
+	if(enemy_level >= 80 and enemy_level < 100):
+		timer_num = [0.7,2]
+		timer_position_num = [2,6]
+		speed_ship = 350
+		speed_enemyBullet = 380
+	if(enemy_level >= 100):
+		timer_num = [0.5,2]
+		timer_position_num = [1.5,4]
+		speed_ship = 400
+		speed_enemyBullet = 390
 
-	# запускаем и меняет время срабатывания таймера
-	timer.start(randf_range(1 , 3))
-	
-	
-	timer_position.start(randf_range(7 , 15))
+
+		# speed_ship = 80
+		# speed_enemyBullet = 300
+
+
+	if(enemy_level >= 1 and enemy_level <= 10):
+		hp = (enemy_level * 0.5 + 0.5) * 150
+		damage_ship = (((enemy_level * 0.5 + 0.5) * 150) /10.0)*7
+		damage_enemyBullet = 10 + (enemy_level * 5)
+	elif(enemy_level > 10 and enemy_level < 20):
+		hp = enemy_level * 0.6 * 150
+		damage_ship = ((enemy_level * 0.6 * 150) /10.0)*7
+		damage_enemyBullet = enemy_level * 7
+	elif(enemy_level >= 20 and enemy_level < 30):
+		hp = enemy_level * 0.7 * 150
+		damage_ship = ((enemy_level * 0.7 * 150) /10.0)*7
+		damage_enemyBullet = enemy_level * 8
+	elif(enemy_level >= 30 and enemy_level < 40):
+		hp = enemy_level * 0.8 * 150
+		damage_ship =((enemy_level * 0.8 * 150) /10.0)*7
+		damage_enemyBullet = enemy_level * 9
+	elif(enemy_level >= 40 and enemy_level < 50):
+		hp = enemy_level * 0.9 * 150
+		damage_ship = ((enemy_level * 0.9 * 150) /10.0)*7
+		damage_enemyBullet = enemy_level * 10
+	elif(enemy_level >= 50 and enemy_level < 60):
+		hp = enemy_level * 150
+		damage_ship = ((enemy_level * 150) /10.0)*7
+		damage_enemyBullet = enemy_level * 10
+	elif(enemy_level >= 60 and enemy_level < 80):
+		hp = enemy_level * 1.5 * 150
+		damage_ship = ((enemy_level * 1.5 * 150) /10.0)*7
+		damage_enemyBullet = enemy_level * 15
+	elif(enemy_level >= 80 and enemy_level < 100):
+		hp = enemy_level * 2.5 * 150
+		damage_ship = ((enemy_level * 2.5 * 150) /10.0)*7
+		damage_enemyBullet = enemy_level * 25
+	elif(enemy_level >= 100):
+		hp = enemy_level * 4 * 150
+		damage_ship = ((enemy_level * 4 * 150) /10.0)*7
+		damage_enemyBullet = enemy_level * 4
+
+
+	timer.start(randf_range(timer_num[0] , timer_num[1]))
+	timer_position.start(randf_range(timer_position_num[0] , timer_position_num[1]))
 	
 	
 
@@ -40,55 +135,61 @@ func _physics_process(delta: float) -> void:
 		timer_position.paused = false
 
 	# движение корабля
-	if((position.x <= position_save.x - 15 or position.x >= position_save.x + 15) or (position.y <= position_save.y - 15 or position.y >= position_save.y + 15)) and death and !Global.stop_game:
-		self.position += self.position.direction_to(position_save) * 100 * delta
-
 	if(hp <= 0 and death):
 		death = false
+		# if (Global.stop_game):
+		# 	sprite2D.stop()
+		# else:
+		# 	sprite2D.play_backwards()
 		sprite2D.play("explosion")
 		await sprite2D.animation_finished
 		var enemy_explosion_sound_scene = load("res://ALL_scenes/enemy_explosion_sound/enemy_explosion_sound.tscn")
 		var enemy_explosion_sound = enemy_explosion_sound_scene.instantiate()
 		level.add_child(enemy_explosion_sound)
 		self.queue_free()
+	if((position.x <= position_save.x - 15 or position.x >= position_save.x + 15) or (position.y <= position_save.y - 15 or position.y >= position_save.y + 15)) and death and !Global.stop_game:
+		self.position += self.position.direction_to(position_save) * speed_ship * delta
 	# if (Global.stop_game):
 	# 	sprite2D.stop()
-	
-
+	# elif(death):
+	# 	sprite2D.play_backwards()
 
 
 # создаем пулю раз в какое-то время
 func _on_timer_timeout() -> void:
 	#print("on_timer_timeout")
 	if(death and !Global.stop_game):
-		# создаём две пули которые будут лететь в бок и одну пулю которая будут лететь прямо 
+		# создаём две пули которые будут лететь в бок
 		var bullet_scene = load("res://ALL_scenes/enemy_bullet/enemy_bullet.tscn")
 		# пуля 1 прямо ------------
 		var bullet:Area2D = bullet_scene.instantiate()
 		bullet.global_position = marker.global_position
+		bullet.damage_bullet = damage_enemyBullet
+		bullet.speed_bullet = speed_enemyBullet
 		bullets_of_enemies.add_child(bullet)
 		# пуля 2 в бок ------------
 		var bullet_LEFT:Area2D = bullet_scene.instantiate()
 		bullet_LEFT.global_position = marker.global_position
 		bullet_LEFT.position_save = marker_LEFT.global_position
 		bullet_LEFT.sideways_movement = true
+		bullet_LEFT.damage_bullet = damage_enemyBullet
+		bullet_LEFT.speed_bullet = speed_enemyBullet
 		bullets_of_enemies.add_child(bullet_LEFT)
 		# пуля 3 в бок ------------
 		var bullet_RIGHT:Area2D = bullet_scene.instantiate()
 		bullet_RIGHT.global_position = marker.global_position
 		bullet_RIGHT.position_save = marker_RIGHT.global_position
 		bullet_RIGHT.sideways_movement = true
+		bullet_RIGHT.damage_bullet = damage_enemyBullet
+		bullet_RIGHT.speed_bullet = speed_enemyBullet
 		bullets_of_enemies.add_child(bullet_RIGHT)
-		
-		
-		# таймер будет срабатывать в случайное время
-	timer.wait_time = randf_range(1 , 3)
+	timer.wait_time = randf_range(timer_num[0] , timer_num[1])
 
 
 func _on_body_entered(body: Node2D) -> void:
 	if(body.name == "Galaxy_ship" and death):
 		death = true
-		body.hp_player -= damage
+		body.hp_player -= damage_ship
 		sprite2D.play("explosion")
 		await sprite2D.animation_finished
 		var enemy_explosion_sound_scene = load("res://ALL_scenes/enemy_explosion_sound/enemy_explosion_sound.tscn")
@@ -121,9 +222,10 @@ func _on_body_entered(body: Node2D) -> void:
 				self.queue_free()
 
 
+
 # раз в какое-то время корабль меняет своё направление
 func _on_timer_position_timeout() -> void:
 	if (!Global.stop_game):
 		position_save = Vector2(randi_range(10 , 710) , randi_range(10 , 600))
-	# меняем время срабатывания этого таймера
-	timer_position.wait_time = randf_range(7 , 15)
+		# меняем время срабатывания этого таймера
+	timer_position.wait_time = randf_range(timer_position_num[0] , timer_position_num[1])
