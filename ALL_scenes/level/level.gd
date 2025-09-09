@@ -35,14 +35,15 @@ func _ready() -> void:
 	
 	
 	# тип врага 2 - белый корабль
-	# var enemyShip_1_scene = load("res://ALL_scenes/enemyShip_1/enemy_ship_1.tscn")
-	# for i in range(1):
-	# 	# создаём корабли в случайных координатах по x
-	# 	var enemyShip_1:Area2D = enemyShip_1_scene.instantiate()
-	# 	# enemyShip_1.position = Vector2(randi_range(-200,1580),50)
-	# 	enemyShip_1.position = Vector2(randi_range(0,720),50)
-	# 	# enemyShip_1.enemy_level = 101
-	# 	enemies.add_child(enemyShip_1)
+	var enemyShip_1_scene = load("res://ALL_scenes/enemyShip_1/enemy_ship_1.tscn")
+	for i in range(1):
+		# создаём корабли в случайных координатах по x
+		var enemyShip_1:Area2D = enemyShip_1_scene.instantiate()
+		# enemyShip_1.position = Vector2(randi_range(-200,1580),50)
+		enemyShip_1.position = Vector2(randi_range(0,720),50)
+		enemyShip_1.enemy_level = 1
+		enemyShip_1.super_enemy = true
+		enemies.add_child(enemyShip_1)
 		
 
 	
@@ -75,13 +76,13 @@ func _ready() -> void:
 	
 	
 	# тип врага 5 - круглый дрон
-	var drone_1_scene = load("res://ALL_scenes/drone_1/drone_1.tscn")
-	for i in range(1):
-		# создаём корабли в случайных координатах по x
-		var drone_1:Area2D = drone_1_scene.instantiate()
-		drone_1.position = Vector2(randi_range(200,920),50)
-		drone_1.enemy_level = 10
-		enemies.add_child(drone_1)
+	# var drone_1_scene = load("res://ALL_scenes/drone_1/drone_1.tscn")
+	# for i in range(1):
+	# 	# создаём корабли в случайных координатах по x
+	# 	var drone_1:Area2D = drone_1_scene.instantiate()
+	# 	drone_1.position = Vector2(randi_range(200,920),50)
+	# 	drone_1.enemy_level = 10
+	# 	enemies.add_child(drone_1)
 		
 	
 	
@@ -92,6 +93,7 @@ func _ready() -> void:
 	# for i in range(1):
 	# 	var drone_2:CharacterBody2D = drone_2_scene.instantiate() 
 	# 	drone_2.position = Vector2(randi_range(0,720),50)
+	# 	drone_2.enemy_level = 3
 	# 	enemies.add_child(drone_2)
 		
 

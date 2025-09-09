@@ -16,14 +16,14 @@ var distance_from_player_X = null
 var direction = null
 var death = false
 var shooting = false
-var speed = 200
 
 var name_str = "shooting drone"
 
 var hp
-var damage_ship
+var damage_drone
 var damage_enemyBullet
-var speed_ship
+var speed_drone
+var drone_speed_to_side
 var speed_enemyBullet
 var timer_num:Array
 var enemy_level = 1
@@ -32,96 +32,93 @@ var enemy_level = 1
 func _ready() -> void:
 	# меняет время срабатывания таймера
 	#timer.wait_time = randf_range(1 , 3)
-
-	# запускаем и меняет время срабатывания таймера
-	# timer.start(randf_range(1 , 2))
-	# if(enemy_level >= 1 and enemy_level < 5):
-	# 	timer_num = [3,4.5]
-	# 	timer_position_num = [10,18]
-	# 	speed_ship = 80
-	# 	speed_enemyBullet = 300
-	# if(enemy_level >= 5 and enemy_level < 10):
-	# 	timer_num = [2.5,4]
-	# 	timer_position_num = [9,17]
-	# 	speed_ship = 100
-	# 	speed_enemyBullet = 310
-	# if(enemy_level >= 10 and enemy_level < 20):
-	# 	timer_num = [2,3.5]
-	# 	timer_position_num = [8,16]
-	# 	speed_ship = 120
-	# 	speed_enemyBullet = 320
-	# if(enemy_level >= 20 and enemy_level < 30):
-	# 	timer_num = [1.5,3]
-	# 	timer_position_num = [7,15]
-	# 	speed_ship = 140
-	# 	speed_enemyBullet = 330
-	# if(enemy_level >= 30 and enemy_level < 40):
-	# 	timer_num = [1,3]
-	# 	timer_position_num = [6,14]
-	# 	speed_ship = 170
-	# 	speed_enemyBullet = 340
-	# if(enemy_level >= 40 and enemy_level < 50):
-	# 	timer_num = [1,2.5]
-	# 	timer_position_num = [5,13]
-	# 	speed_ship = 200
-	# 	speed_enemyBullet = 350
-	# if(enemy_level >= 50 and enemy_level < 60):
-	# 	timer_num = [1,2.5]
-	# 	timer_position_num = [4,11]
-	# 	speed_ship = 250
-	# 	speed_enemyBullet = 360
-	# if(enemy_level >= 60 and enemy_level < 80):
-	# 	timer_num = [1,2]
-	# 	timer_position_num = [3,9]
-	# 	speed_ship = 300
-	# 	speed_enemyBullet = 370
-	# if(enemy_level >= 80 and enemy_level < 100):
-	# 	timer_num = [0.7,2]
-	# 	timer_position_num = [2,6]
-	# 	speed_ship = 350
-	# 	speed_enemyBullet = 380
-	# if(enemy_level >= 100):
-	# 	timer_num = [0.5,2]
-	# 	timer_position_num = [1.5,4]
-	# 	speed_ship = 400
-	# 	speed_enemyBullet = 390
+	if(enemy_level >= 1 and enemy_level < 5):
+		timer_num = [2,3]
+		speed_drone = 40
+		drone_speed_to_side = 150
+		speed_enemyBullet = 300
+	if(enemy_level >= 5 and enemy_level < 10):
+		timer_num = [1.75,2.75]
+		speed_drone = 60
+		drone_speed_to_side = 170
+		speed_enemyBullet = 310
+	if(enemy_level >= 10 and enemy_level < 20):
+		timer_num = [1.5,2.5]
+		speed_drone = 80
+		drone_speed_to_side = 190
+		speed_enemyBullet = 320
+	if(enemy_level >= 20 and enemy_level < 30):
+		timer_num = [1.25,2.25]
+		speed_drone = 100
+		drone_speed_to_side = 210
+		speed_enemyBullet = 330
+	if(enemy_level >= 30 and enemy_level < 40):
+		timer_num = [1,2]
+		speed_drone = 120
+		drone_speed_to_side = 230
+		speed_enemyBullet = 340
+	if(enemy_level >= 40 and enemy_level < 50):
+		timer_num = [0.75,2]
+		speed_drone = 140
+		drone_speed_to_side = 250
+		speed_enemyBullet = 350
+	if(enemy_level >= 50 and enemy_level < 60):
+		timer_num = [0.75,1.75]
+		speed_drone = 160
+		drone_speed_to_side = 270
+		speed_enemyBullet = 360
+	if(enemy_level >= 60 and enemy_level < 80):
+		timer_num = [0.75,1.5]
+		speed_drone = 180
+		drone_speed_to_side = 290
+		speed_enemyBullet = 370
+	if(enemy_level >= 80 and enemy_level < 100):
+		timer_num = [0.5,1.5]
+		speed_drone = 200
+		drone_speed_to_side = 310
+		speed_enemyBullet = 380
+	if(enemy_level >= 100):
+		timer_num = [0.5,1.25]
+		speed_drone = 220
+		drone_speed_to_side = 330
+		speed_enemyBullet = 390
 
 
 	if(enemy_level >= 1 and enemy_level <= 10):
 		hp = (enemy_level * 0.5 + 0.5) * 100
-		damage_ship = (((enemy_level * 0.5 + 0.5) * 100) /10.0)*7
+		damage_drone = (((enemy_level * 0.5 + 0.5) * 100) /10.0)*1.7
 		damage_enemyBullet = 10 + (enemy_level * 5)
 	elif(enemy_level > 10 and enemy_level < 20):
 		hp = enemy_level * 0.6 * 100
-		damage_ship = ((enemy_level * 0.6 * 100) /10.0)*7
+		damage_drone = ((enemy_level * 0.6 * 100) /10.0)*1.7
 		damage_enemyBullet = enemy_level * 7
 	elif(enemy_level >= 20 and enemy_level < 30):
 		hp = enemy_level * 0.7 * 100
-		damage_ship = ((enemy_level * 0.7 * 100) /10.0)*7
+		damage_drone = ((enemy_level * 0.7 * 100) /10.0)*1.7
 		damage_enemyBullet = enemy_level * 8
 	elif(enemy_level >= 30 and enemy_level < 40):
 		hp = enemy_level * 0.8 * 100
-		damage_ship =((enemy_level * 0.8 * 100) /10.0)*7
+		damage_drone =((enemy_level * 0.8 * 100) /10.0)*1.7
 		damage_enemyBullet = enemy_level * 9
 	elif(enemy_level >= 40 and enemy_level < 50):
 		hp = enemy_level * 0.9 * 100
-		damage_ship = ((enemy_level * 0.9 * 100) /10.0)*7
+		damage_drone = ((enemy_level * 0.9 * 100) /10.0)*1.7
 		damage_enemyBullet = enemy_level * 10
 	elif(enemy_level >= 50 and enemy_level < 60):
 		hp = enemy_level * 100
-		damage_ship = ((enemy_level * 100) /10.0)*7
+		damage_drone = ((enemy_level * 100) /10.0)*1.7
 		damage_enemyBullet = enemy_level * 10
 	elif(enemy_level >= 60 and enemy_level < 80):
 		hp = enemy_level * 1.5 * 100
-		damage_ship = ((enemy_level * 1.5 * 100) /10.0)*7
+		damage_drone = ((enemy_level * 1.5 * 100) /10.0)*1.7
 		damage_enemyBullet = enemy_level * 15
 	elif(enemy_level >= 80 and enemy_level < 100):
 		hp = enemy_level * 2.5 * 100
-		damage_ship = ((enemy_level * 2.5 * 100) /10.0)*7
+		damage_drone = ((enemy_level * 2.5 * 100) /10.0)*1.7
 		damage_enemyBullet = enemy_level * 25
 	elif(enemy_level >= 100):
 		hp = enemy_level * 4 * 100
-		damage_ship = ((enemy_level * 4 * 100) /10.0)*7
+		damage_drone = ((enemy_level * 4 * 100) /10.0)*1.7
 		damage_enemyBullet = enemy_level * 4
 
 
@@ -139,12 +136,12 @@ func _physics_process(delta: float) -> void:
 	if(not shooting and galaxy_ship and !death and !Global.stop_game):
 		if(galaxy_ship.position and !Global.stop_game and (position.x <= galaxy_ship.position.x - 15 or position.x >= galaxy_ship.position.x + 15)):
 			if(galaxy_ship.position.x - self.position.x > 0):
-				self.velocity.x = speed
+				self.velocity.x = drone_speed_to_side
 			else:
-				self.velocity.x = -speed
+				self.velocity.x = -drone_speed_to_side
 		else:
 			self.velocity.x = 0
-		velocity.y = 75
+		velocity.y = speed_drone
 	else:
 		self.velocity = Vector2(0,0)
 		
@@ -167,7 +164,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _on_timer_timeout() -> void:
-		timer.wait_time = randf_range(1 , 2)
+		timer.wait_time = randf_range(timer_num[0] , timer_num[1])
 		if(not death and !Global.stop_game):
 			shooting = true
 			#await get_tree().create_timer(0.3).timeout
@@ -177,11 +174,15 @@ func _on_timer_timeout() -> void:
 			var bullet_RIGHT:Area2D = bullet_scene.instantiate()
 			bullet_RIGHT.speed_bullet = bullet_RIGHT.speed_bullet * 1.5
 			bullet_RIGHT.global_position = marker_RIGHT.global_position
+			bullet_RIGHT.damage_bullet = damage_enemyBullet
+			bullet_RIGHT.speed_bullet = speed_enemyBullet
 			bullets_of_enemies.add_child(bullet_RIGHT)
 			
 			var bullet_LEFT:Area2D = bullet_scene.instantiate()
 			bullet_LEFT.speed_bullet = bullet_LEFT.speed_bullet * 1.5
 			bullet_LEFT.global_position = marker_LEFT.global_position
+			bullet_LEFT.damage_bullet = damage_enemyBullet
+			bullet_LEFT.speed_bullet = speed_enemyBullet
 			bullets_of_enemies.add_child(bullet_LEFT)
 			
 			# таймер будет срабатывать в случайное время

@@ -21,10 +21,14 @@ var speed_enemyBullet
 var timer_num:Array
 var timer_position_num:Array
 var enemy_level = 1
+var super_enemy = false
 
 
 
 func _ready() -> void:
+	if(super_enemy):
+		enemy_level += 1
+
 	if(enemy_level >= 1 and enemy_level < 5):
 		timer_num = [3,4.5]
 		timer_position_num = [10,18]

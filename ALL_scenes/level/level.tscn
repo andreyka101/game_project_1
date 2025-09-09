@@ -300,6 +300,14 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_o7vg8")
 theme_override_styles/normal = SubResource("StyleBoxFlat_lrlx6")
 text = "- 10%"
 
+[node name="Label_enemy_level" type="Label" parent="Menu_button/Settings_level"]
+offset_left = 205.0
+offset_top = 1182.0
+offset_right = 508.0
+offset_bottom = 1243.0
+theme_override_font_sizes/font_size = 44
+text = "Enemy Level 0"
+
 [node name="Pause" type="Button" parent="Menu_button"]
 z_index = 50
 offset_left = 23.0

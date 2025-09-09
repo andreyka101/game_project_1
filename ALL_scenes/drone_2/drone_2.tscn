@@ -120,7 +120,7 @@ autoplay = "default"
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(0.3, 0)
 scale = Vector2(0.9, 0.9)
-polygon = PackedVector2Array(1.53968, -9.52381, 5.50794, -9.52381, 13.0476, 1.98413, 10.6667, 18.254, 3.75, 14.375, -2.8254, 18.254, -5.60317, 1.98413)
+polygon = PackedVector2Array(1.53968, -9.52381, 5.50794, -9.52381, 13.0476, 1.98413, 9.98413, 16.6667, 4.03175, 12.6984, -2.71429, 17.0635, -5.60317, 1.98413)
 
 [node name="Marker2D_LEFT" type="Marker2D" parent="."]
 position = Vector2(-3.21429, 21.875)
