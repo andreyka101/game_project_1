@@ -8,6 +8,7 @@ var death = true
 @onready var timer_position:Timer = $Timer_position
 @onready var sprite2D:AnimatedSprite2D = $"AnimatedSprite2D"
 @onready var bullets_of_enemies:Node2D = $"../../Bullets_of_enemies"
+@onready var super_enemy_star: Sprite2D = $Super_enemy_star
 
 var position_save = Vector2(randi_range(10 , 710) , randi_range(10 , 600))
 
@@ -28,6 +29,8 @@ var super_enemy = false
 func _ready() -> void:
 	if(super_enemy):
 		enemy_level += 1
+		var num_scale_star = randf_range(0.3 , 0.5)
+		super_enemy_star.scale = Vector2(num_scale_star , num_scale_star)
 
 	if(enemy_level >= 1 and enemy_level < 5):
 		timer_num = [3,4.5]

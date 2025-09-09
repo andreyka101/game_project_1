@@ -72,9 +72,9 @@ process_callback = 0
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(0, 24.375)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-5, -8.84615)
-scale = Vector2(0.422476, 0.422476)
+[node name="Super_enemy_star" type="Sprite2D" parent="."]
+position = Vector2(-18, -26)
+scale = Vector2(0.3, 0.3)
 texture = ExtResource("11_2jomk")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
