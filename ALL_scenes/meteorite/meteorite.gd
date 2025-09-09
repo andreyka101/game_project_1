@@ -12,6 +12,8 @@ var save_num_rotation = randf_range(-5, 5)
 # создаём рандомную скорость перемещения
 
 var sprite2D:AnimatedSprite2D
+@onready var super_enemy_star: Sprite2D = $Super_enemy_star
+@onready var timer_star: Timer = $Timer_star
 
 var death = false
 
@@ -20,6 +22,9 @@ var damage:float
 var speed:float
 var name_str = "meteorite"
 var enemy_level = 1
+var super_enemy = false
+var move_star:Vector2
+var speed_rotation_star
 
 @onready var level = $"../.."
 
@@ -27,6 +32,18 @@ var enemy_level = 1
 
 
 func _ready() -> void:
+	if(super_enemy):
+		enemy_level += 2
+		var num_scale_star = randf_range(0.3 , 0.5)
+		super_enemy_star.scale = Vector2(num_scale_star , num_scale_star)
+		super_enemy_star.visible = true
+		if (randi_range(0, 1) == 1):
+			speed_rotation_star = randf_range(2 , 7)
+		else:
+			speed_rotation_star = randf_range(-2 , -7)
+		super_enemy_star.position = Vector2(randf_range(-25,25) , randf_range(-25,25))
+		move_star = Vector2(randf_range(-25,25) , randf_range(-25,25))
+
 	var scale_num = randf_range(1.6 , 3.0)
 	self.scale = Vector2(scale_num  , scale_num)
 	sprite2D = $AnimatedSprite2D
@@ -109,6 +126,9 @@ func _process(delta: float) -> void:
 	# метеорит летит в низ на рандомные координаты по x
 	if (!Global.stop_game):
 		position += self.position.direction_to(Vector2i(save_X , 1700)) * speed * delta
+		timer_star.paused = false
+	else:
+		timer_star.paused = true
 	
 	
 	# вращение метеорита 
@@ -124,8 +144,14 @@ func _process(delta: float) -> void:
 		level.add_child(enemy_explosion_sound)
 		self.queue_free()
 	
-	
 
+	if(super_enemy and !Global.stop_game):
+		super_enemy_star.position += super_enemy_star.position.direction_to(move_star) * 30 * delta
+		super_enemy_star.rotation_degrees += speed_rotation_star
+		if (super_enemy_star.rotation_degrees >= 360):
+			super_enemy_star.rotation_degrees -= 360
+		if (super_enemy_star.rotation_degrees <= -360):
+			super_enemy_star.rotation_degrees += 360
 
 
 	if(position.y > 1700):
@@ -176,3 +202,8 @@ func _on_body_entered(body: Node2D) -> void:
 				level.add_child(enemy_explosion_sound)
 				self.queue_free()
 		
+
+
+func _on_timer_star_timeout() -> void:
+	if(super_enemy):
+		move_star = Vector2(randf_range(-25,25) , randf_range(-25,25))

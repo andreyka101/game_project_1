@@ -230,3 +230,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 				var enemy_explosion_sound = enemy_explosion_sound_scene.instantiate()
 				level.add_child(enemy_explosion_sound)
 				self.queue_free()
+
+
+func _on_timer_star_timeout() -> void:
+	pass # Replace with function body.

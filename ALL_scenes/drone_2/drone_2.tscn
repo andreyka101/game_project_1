@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://cqvuqsrnep5uu"]
+[gd_scene load_steps=19 format=3 uid="uid://cqvuqsrnep5uu"]
 
 [ext_resource type="Texture2D" uid="uid://im6lwnr8pkik" path="res://photo/enemy ship-Sheet_2.png" id="1_lhd6b"]
 [ext_resource type="Script" uid="uid://bjdafjf4rqkl4" path="res://ALL_scenes/drone_2/drone_2.gd" id="1_luleb"]
 [ext_resource type="Script" uid="uid://do2tj7ew3pd5h" path="res://ALL_scenes/drone_2/area_2d.gd" id="3_x442r"]
+[ext_resource type="Texture2D" uid="uid://bk44h7aiav5kq" path="res://photo/super enemy star.png" id="4_urljt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_luleb"]
 atlas = ExtResource("1_lhd6b")
@@ -137,5 +138,16 @@ script = ExtResource("3_x442r")
 position = Vector2(5.96046e-08, 0)
 polygon = PackedVector2Array(-2.85714, -10.7143, 10, -10.7143, 15.625, 1.875, 10.625, 21.25, 3.75, 14.375, -3.75, 21.25, -8.75, 1.875)
 
+[node name="Super_enemy_star" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-14, 22)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_urljt")
+
+[node name="Timer_star" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer_star" to="." method="_on_timer_star_timeout"]

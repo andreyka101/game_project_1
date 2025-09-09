@@ -207,3 +207,7 @@ func _on_boom_body_exited(body: Node2D) -> void:
 		if (el_group == "all_enemy"):
 			# print(arr_enemy.find(area))
 			arr_enemy.remove_at(arr_enemy.find(body))
+
+
+func _on_timer_star_timeout() -> void:
+	pass # Replace with function body.

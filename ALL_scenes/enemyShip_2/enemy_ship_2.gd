@@ -10,6 +10,8 @@ var death = true
 @onready var timer_position:Timer = $Timer_position
 @onready var sprite2D:AnimatedSprite2D = $"AnimatedSprite2D"
 @onready var bullets_of_enemies:Node2D = $"../../Bullets_of_enemies"
+@onready var super_enemy_star: Sprite2D = $Super_enemy_star
+@onready var timer_star: Timer = $Timer_star
 
 var position_save = Vector2(randi_range(10 , 710) , randi_range(10 , 600))
 
@@ -23,10 +25,29 @@ var speed_enemyBullet
 var timer_num:Array
 var timer_position_num:Array
 var enemy_level = 1
+var super_enemy = false
+var move_star:Vector2
+var speed_rotation_star
 
 
 
 func _ready() -> void:
+	if(super_enemy):
+		enemy_level += 2
+		var num_scale_star = randf_range(0.3 , 0.5)
+		super_enemy_star.scale = Vector2(num_scale_star , num_scale_star)
+		super_enemy_star.visible = true
+		if (randi_range(0, 1) == 1):
+			speed_rotation_star = randf_range(2 , 7)
+		else:
+			speed_rotation_star = randf_range(-2 , -7)
+		if (randi_range(0, 1) == 1):
+			super_enemy_star.position = Vector2(randf_range(-20,20) , randf_range(-30,5))
+			move_star = Vector2(randf_range(-20,20) , randf_range(-30,5))
+		else:
+			super_enemy_star.position = Vector2(randf_range(-14,14) , randf_range(5,20))
+			move_star = Vector2(randf_range(-14,14) , randf_range(5,20))
+
 	if(enemy_level >= 1 and enemy_level < 5):
 		timer_num = [3,4.5]
 		timer_position_num = [10,18]
@@ -130,9 +151,11 @@ func _physics_process(delta: float) -> void:
 	if(Global.stop_game):
 		timer.paused = true
 		timer_position.paused = true
+		timer_star.paused = true
 	else:
 		timer.paused = false
 		timer_position.paused = false
+		timer_star.paused = false
 
 	# движение корабля
 	if(hp <= 0 and death):
@@ -149,10 +172,14 @@ func _physics_process(delta: float) -> void:
 		self.queue_free()
 	if((position.x <= position_save.x - 15 or position.x >= position_save.x + 15) or (position.y <= position_save.y - 15 or position.y >= position_save.y + 15)) and death and !Global.stop_game:
 		self.position += self.position.direction_to(position_save) * speed_ship * delta
-	# if (Global.stop_game):
-	# 	sprite2D.stop()
-	# elif(death):
-	# 	sprite2D.play_backwards()
+
+	if(super_enemy and !Global.stop_game):
+		super_enemy_star.position += super_enemy_star.position.direction_to(move_star) * 30 * delta
+		super_enemy_star.rotation_degrees += speed_rotation_star
+		if (super_enemy_star.rotation_degrees >= 360):
+			super_enemy_star.rotation_degrees -= 360
+		if (super_enemy_star.rotation_degrees <= -360):
+			super_enemy_star.rotation_degrees += 360
 
 
 # создаем пулю раз в какое-то время
@@ -223,3 +250,11 @@ func _on_timer_position_timeout() -> void:
 		position_save = Vector2(randi_range(10 , 710) , randi_range(10 , 600))
 		# меняем время срабатывания этого таймера
 	timer_position.wait_time = randf_range(timer_position_num[0] , timer_position_num[1])
+
+
+func _on_timer_star_timeout() -> void:
+	if(super_enemy):
+		if (randi_range(0, 1) == 1):
+			move_star = Vector2(randf_range(-20,20) , randf_range(-30,5))
+		else:
+			move_star = Vector2(randf_range(-14,14) , randf_range(5,20))

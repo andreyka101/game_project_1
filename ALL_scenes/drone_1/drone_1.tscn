@@ -1,9 +1,10 @@
-[gd_scene load_steps=28 format=3 uid="uid://d36n0aw1kh5dr"]
+[gd_scene load_steps=29 format=3 uid="uid://d36n0aw1kh5dr"]
 
 [ext_resource type="Texture2D" uid="uid://bf7jasbtliuxh" path="res://photo/enemy ship-Sheet.png" id="1_213qv"]
 [ext_resource type="Script" uid="uid://bkuot4tcfv875" path="res://ALL_scenes/drone_1/drone_1.gd" id="1_jdim8"]
 [ext_resource type="Texture2D" uid="uid://im6lwnr8pkik" path="res://photo/enemy ship-Sheet_2.png" id="3_4lyen"]
 [ext_resource type="Script" uid="uid://bvm7ca45is780" path="res://ALL_scenes/drone_1/boom.gd" id="4_k61ij"]
+[ext_resource type="Texture2D" uid="uid://bk44h7aiav5kq" path="res://photo/super enemy star.png" id="5_88wv4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jdim8"]
 atlas = ExtResource("1_213qv")
@@ -184,10 +185,7 @@ autoplay = "default"
 [node name="AnimatedSprite2D_head" type="AnimatedSprite2D" parent="." groups=["all_enemy"]]
 scale = Vector2(1.767, 1.767)
 sprite_frames = SubResource("SpriteFrames_ijy8y")
-animation = &"explosion"
 autoplay = "default"
-frame = 6
-frame_progress = 1.0
 offset = Vector2(-2, -4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -200,8 +198,19 @@ script = ExtResource("4_k61ij")
 shape = SubResource("CircleShape2D_jdim8")
 debug_color = Color(0.7, 0, 0.278464, 0.42)
 
+[node name="Super_enemy_star" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-14, 22)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("5_88wv4")
+
+[node name="Timer_star" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="area_entered" from="Boom" to="." method="_on_boom_area_entered"]
 [connection signal="area_exited" from="Boom" to="." method="_on_boom_area_exited"]
 [connection signal="body_entered" from="Boom" to="." method="_on_boom_body_entered"]
 [connection signal="body_exited" from="Boom" to="." method="_on_boom_body_exited"]
+[connection signal="timeout" from="Timer_star" to="." method="_on_timer_star_timeout"]

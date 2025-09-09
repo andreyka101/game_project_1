@@ -73,10 +73,16 @@ process_callback = 0
 position = Vector2(0, 24.375)
 
 [node name="Super_enemy_star" type="Sprite2D" parent="."]
-position = Vector2(-18, -26)
+visible = false
+position = Vector2(-14, 22)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("11_2jomk")
+
+[node name="Timer_star" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Timer_position" to="." method="_on_timer_position_timeout"]
+[connection signal="timeout" from="Timer_star" to="." method="_on_timer_star_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dnf7wi48ig11i"]
+[gd_scene load_steps=14 format=3 uid="uid://dnf7wi48ig11i"]
 
 [ext_resource type="Script" uid="uid://5x0a486femoo" path="res://ALL_scenes/meteorite/meteorite.gd" id="1_b5gxj"]
 [ext_resource type="Texture2D" uid="uid://hu0db8gnryj6" path="res://photo/meteorite/meteorite6.png" id="1_hq4cx"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cdqkenbg0c0av" path="res://photo/meteorite/meteorite3.png" id="7_xwsso"]
 [ext_resource type="Texture2D" uid="uid://d0n12qrg13ua8" path="res://photo/meteorite/meteorite4.png" id="8_iax2o"]
 [ext_resource type="Texture2D" uid="uid://dfyh0dj426tm3" path="res://photo/meteorite/meteorite5.png" id="9_i1lca"]
+[ext_resource type="Texture2D" uid="uid://bk44h7aiav5kq" path="res://photo/super enemy star.png" id="11_2mnoa"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6csh7"]
 radius = 25.02
@@ -82,6 +83,17 @@ shape = SubResource("CircleShape2D_6csh7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ixgqu")
-animation = &"explosion"
+animation = &"meteor 2"
+
+[node name="Super_enemy_star" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-25, -25)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("11_2mnoa")
+
+[node name="Timer_star" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer_star" to="." method="_on_timer_star_timeout"]

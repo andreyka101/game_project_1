@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://c6dnxjy2yyyc7"]
+[gd_scene load_steps=12 format=3 uid="uid://c6dnxjy2yyyc7"]
 
 [ext_resource type="Script" uid="uid://bictaal85je6p" path="res://ALL_scenes/enemyShip_3/enemy_ship_3.gd" id="1_jcr0f"]
 [ext_resource type="Texture2D" uid="uid://bf7jasbtliuxh" path="res://photo/enemy ship-Sheet.png" id="2_riw6s"]
+[ext_resource type="Texture2D" uid="uid://bk44h7aiav5kq" path="res://photo/super enemy star.png" id="3_riw6s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_puety"]
 atlas = ExtResource("2_riw6s")
@@ -91,6 +92,17 @@ position = Vector2(200, 1500)
 
 [node name="Timer_position" type="Timer" parent="."]
 
+[node name="Super_enemy_star" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-14, 22)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_riw6s")
+
+[node name="Timer_star" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Timer_position" to="." method="_on_timer_position_timeout"]
+[connection signal="timeout" from="Timer_star" to="." method="_on_timer_star_timeout"]
