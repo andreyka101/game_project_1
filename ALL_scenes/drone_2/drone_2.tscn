@@ -140,7 +140,7 @@ polygon = PackedVector2Array(-2.85714, -10.7143, 10, -10.7143, 15.625, 1.875, 10
 
 [node name="Super_enemy_star" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(-14, 22)
+position = Vector2(-12.5, 26.0714)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("4_urljt")
 

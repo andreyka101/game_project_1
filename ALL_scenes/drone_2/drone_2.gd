@@ -10,7 +10,8 @@ extends CharacterBody2D
 @onready var sprite2D:AnimatedSprite2D = $"AnimatedSprite2D"
 @onready var collisionPolygon:CollisionPolygon2D = $CollisionPolygon2D
 @onready var bullets_of_enemies:Node2D = $"../../Bullets_of_enemies"
-
+@onready var super_enemy_star: Sprite2D = $Super_enemy_star
+@onready var timer_star: Timer = $Timer_star
 
 var distance_from_player_X = null
 var direction = null
@@ -27,9 +28,24 @@ var drone_speed_to_side
 var speed_enemyBullet
 var timer_num:Array
 var enemy_level = 1
+var super_enemy = false
+var move_star:Vector2
+var speed_rotation_star
 
 
 func _ready() -> void:
+	if(super_enemy):
+		enemy_level += 2
+		var num_scale_star = randf_range(0.3 , 0.5)
+		super_enemy_star.scale = Vector2(num_scale_star , num_scale_star)
+		super_enemy_star.visible = true
+		if (randi_range(0, 1) == 1):
+			speed_rotation_star = randf_range(2 , 7)
+		else:
+			speed_rotation_star = randf_range(-2 , -7)
+		super_enemy_star.position = Vector2(randf_range(-15,15) , randf_range(-15,25))
+		move_star = Vector2(randf_range(-15,15) , randf_range(-15,25))
+
 	# меняет время срабатывания таймера
 	#timer.wait_time = randf_range(1 , 3)
 	if(enemy_level >= 1 and enemy_level < 5):
@@ -128,8 +144,10 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if(Global.stop_game):
 		timer.paused = true
+		timer_star.paused = true
 	else:
 		timer.paused = false
+		timer_star.paused = false
 
 
 	# print(velocity)
@@ -156,7 +174,13 @@ func _physics_process(delta: float) -> void:
 			level.add_child(enemy_explosion_sound)
 			self.queue_free()
 	
-
+	if(super_enemy and !Global.stop_game):
+		super_enemy_star.position += super_enemy_star.position.direction_to(move_star) * 30 * delta
+		super_enemy_star.rotation_degrees += speed_rotation_star
+		if (super_enemy_star.rotation_degrees >= 360):
+			super_enemy_star.rotation_degrees -= 360
+		if (super_enemy_star.rotation_degrees <= -360):
+			super_enemy_star.rotation_degrees += 360
 
 	if(position.y > 1700):
 		self.queue_free()
@@ -233,4 +257,5 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 
 func _on_timer_star_timeout() -> void:
-	pass # Replace with function body.
+	if(super_enemy):
+		move_star = Vector2(randf_range(-15,15) , randf_range(-15,25))

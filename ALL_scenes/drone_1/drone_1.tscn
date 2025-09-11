@@ -200,7 +200,7 @@ debug_color = Color(0.7, 0, 0.278464, 0.42)
 
 [node name="Super_enemy_star" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(-14, 22)
+position = Vector2(-15.7692, -15.3846)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("5_88wv4")
 
