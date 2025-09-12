@@ -44,7 +44,8 @@ func _ready() -> void:
 		super_enemy_star.position = Vector2(randf_range(-25,25) , randf_range(-25,25))
 		move_star = Vector2(randf_range(-25,25) , randf_range(-25,25))
 
-	var scale_num = randf_range(1.6 , 3.0)
+	# var scale_num = randf_range(1.6 , 3.0)
+	var scale_num = 3
 	self.scale = Vector2(scale_num  , scale_num)
 	sprite2D = $AnimatedSprite2D
 	sprite2D.play("meteor " + str(randi_range(1 , 5)))
@@ -64,59 +65,47 @@ func _ready() -> void:
 	elif(enemy_level >= 210):
 		speed = randf_range(70, 350)
 
-	if(enemy_level == 1):
-		damage = scale_num * ( 60 /10.0)*7
-		hp = scale_num * 60
-	elif(enemy_level == 2):
-		damage = scale_num * ( 90 /10.0)*7
-		hp = scale_num * 90
-	elif(enemy_level == 3):
-		damage = scale_num * ( 120 /10.0)*7
-		hp = scale_num * 120
-	elif(enemy_level == 4):
-		damage = scale_num * ( 150 /10.0)*7
-		hp = scale_num * 150
-	elif(enemy_level == 5):
-		damage = scale_num * ( 190 /10.0)*7
-		hp = scale_num * 190
-	elif(enemy_level == 6):
-		damage = scale_num * ( 220 /10.0)*7
-		hp = scale_num * 220
-	elif(enemy_level == 7):
-		damage = scale_num * ( 250 /10.0)*7
-		hp = scale_num * 250
-	elif(enemy_level == 8):
-		damage = scale_num * ( 280 /10.0)*7
-		hp = scale_num * 280
-	elif(enemy_level == 9):
-		damage = scale_num * ( 310 /10.0)*7
-		hp = scale_num * 310
-	elif(enemy_level == 10):
-		damage = scale_num * ( 340 /10.0)*7
-		hp = scale_num * 340
-	elif(enemy_level >= 10 and enemy_level < 60):
-		var multiplier = (enemy_level / 10) * 5
-		damage = ((scale_num * enemy_level * (multiplier + 35)) /10.0)*7
-		hp = scale_num * (multiplier + 35) * enemy_level
+
+		# damage = scale_num * ( 60 /10.0)*8
+		damage = 3 * ( 50 /10.0)*8
+		# hp = scale_num * 60
+		hp = 3 * 50
+
+
+	if(enemy_level >= 1 and enemy_level <= 10):
+		hp = ((enemy_level * 0.5 + 0.5) * 50) * scale_num
+		damage = ((((enemy_level * 0.5 + 0.5) * 50) * scale_num) /10.0)*8
+	elif(enemy_level > 10 and enemy_level < 20):
+		hp = (enemy_level * 0.6 * 50) * scale_num
+		damage = (((enemy_level * 0.6 * 50) * scale_num) /10.0)*8
+	elif(enemy_level >= 20 and enemy_level < 30):
+		hp = (enemy_level * 0.7 * 50) * scale_num
+		damage = (((enemy_level * 0.7 * 50) * scale_num) /10.0)*8
+	elif(enemy_level >= 30 and enemy_level < 40):
+		hp = (enemy_level * 0.8 * 50) * scale_num
+		damage =(((enemy_level * 0.8 * 50) * scale_num) /10.0)*8
+	elif(enemy_level >= 40 and enemy_level < 50):
+		hp = (enemy_level * 0.9 * 50) * scale_num
+		damage = (((enemy_level * 0.9 * 50) * scale_num) /10.0)*8
+	elif(enemy_level >= 50 and enemy_level < 60):
+		hp = (enemy_level * 50) * scale_num
+		damage = (((enemy_level * 50) * scale_num) /10.0)*8
 	elif(enemy_level >= 60 and enemy_level < 80):
-		var multiplier = (enemy_level / 10) * 10
-		damage = ((scale_num * enemy_level * (multiplier + 35)) /10.0)*7
-		hp = scale_num * (multiplier + 35) * enemy_level
+		hp = (enemy_level * 1.5 * 50) * scale_num
+		damage = (((enemy_level * 1.5 * 50) * scale_num) /10.0)*8
 	elif(enemy_level >= 80 and enemy_level < 100):
-		var multiplier = (enemy_level / 10) * 15
-		damage = ((scale_num * enemy_level * (multiplier + 38)) /10.0)*7
-		hp = scale_num * (multiplier + 38) * enemy_level
+		hp = (enemy_level * 2.5 * 50) * scale_num
+		damage = (((enemy_level * 2.5 * 50) * scale_num) /10.0)*8
 	elif(enemy_level >= 100):
-		var multiplier = (enemy_level / 10) * 21
-		damage = ((scale_num * enemy_level * multiplier) /10.0)*7
-		hp = scale_num * multiplier * enemy_level
+		hp = (enemy_level * 4 * 50) * scale_num
+		damage = (((enemy_level * 4 * 50) * scale_num) /10.0)*8
 
 
 
 
 func _process(delta: float) -> void:
 	# print("speed =" , speed)
-	print("hp =" , hp)
+	# print("hp =" , hp)
 	# print("damage =" , damage)
 	# print("scale =" , scale)
 	

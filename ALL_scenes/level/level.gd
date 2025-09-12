@@ -3,7 +3,8 @@ extends Node2D
 
 var num_level_hard = 1
 var num_level_text = 1
-var price_level = 5
+var price_level = 3
+var start_price_level = 3
 var end_level = false
 
 @onready var enemies:Node2D = $Enemies
@@ -13,115 +14,82 @@ var end_level = false
 @onready var label_text_hp:Label = $Label_text_hp
 @onready var galaxy_ship:CharacterBody2D = $Galaxy_ship
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $All_audio/AudioEnd_level
+var meteorite_scene = load("res://ALL_scenes/meteorite/meteorite.tscn")
+var enemyShip_White_scene = load("res://ALL_scenes/enemyShip_1/enemy_ship_1.tscn")
+var enemyShip_Red_scene = load("res://ALL_scenes/enemyShip_2/enemy_ship_2.tscn")
+var enemyShip_Black_scene = load("res://ALL_scenes/enemyShip_3/enemy_ship_3.tscn")
+var drone_Violet_scene = load("res://ALL_scenes/drone_1/drone_1.tscn")
+var drone_Уellow_scene = load("res://ALL_scenes/drone_2/drone_2.tscn")
+
+
+# func _ready() -> void:
+	# print(start_price_level / 50)
+
+	# method_level()
+	# await get_tree().create_timer(2).timeout
+	# for i in range(10):
+		# creatingEnemies_meteorite()
+		# creatingEnemies_enemy_ship_White()
+		# creatingEnemies_enemy_ship_Red()
+		# creatingEnemies_enemy_ship_Black()
+		# creatingEnemies_drone_Violet()
+		# creatingEnemies_drone_Уellow()
+
+func creatingEnemies_meteorite():
+	if(price_level >= 1):
+		var meteorite:Area2D = meteorite_scene.instantiate()
+		meteorite.position = Vector2(randi_range(-100,820),-90)
+		meteorite.enemy_level = 1
+		# meteorite.super_enemy = true
+		price_level -= 1
+		enemies.add_child(meteorite)
+func creatingEnemies_enemy_ship_White():
+	if(price_level >= 2):
+		var enemyShip_1:Area2D = enemyShip_White_scene.instantiate()
+		enemyShip_1.position = Vector2(randi_range(0,720),-50)
+		enemyShip_1.enemy_level = 1
+		# enemyShip_1.super_enemy = true
+		price_level -= 1
+		enemies.add_child(enemyShip_1)
+func creatingEnemies_enemy_ship_Red():
+	if(price_level >= 2):
+		var enemyShip_2:Area2D = enemyShip_Red_scene.instantiate()
+		enemyShip_2.position = Vector2(randi_range(0,720),-50)
+		enemyShip_2.enemy_level = 1
+		# enemyShip_2.super_enemy = true
+		price_level -= 1
+		enemies.add_child(enemyShip_2)
+func creatingEnemies_enemy_ship_Black():
+	if(price_level >= 3):
+		var enemyShip_3:Area2D = enemyShip_Black_scene.instantiate()
+		enemyShip_3.position = Vector2(randi_range(0,720),-50)
+		enemyShip_3.enemy_level = 1
+		# enemyShip_3.super_enemy = true
+		price_level -= 1
+		enemies.add_child(enemyShip_3)
+func creatingEnemies_drone_Violet():
+	if(price_level >= 2):
+		var drone_1:Area2D = drone_Violet_scene.instantiate()
+		drone_1.position = Vector2(randi_range(200,920),-10)
+		drone_1.enemy_level = 1
+		# drone_1.super_enemy = true
+		price_level -= 1
+		enemies.add_child(drone_1)
+func creatingEnemies_drone_Уellow():
+	if(price_level >= 3):
+		var drone_2:CharacterBody2D = drone_Уellow_scene.instantiate() 
+		drone_2.position = Vector2(randi_range(0,720),-150)
+		drone_2.enemy_level = 1
+		# drone_2.super_enemy = true
+		price_level -= 1
+		enemies.add_child(drone_2)
 
 
 
 
-func _ready() -> void:
-	
-
-	method_level()
-
-
-	# тип врага 1 - метеорит
-	# var meteorite_scene = load("res://ALL_scenes/meteorite/meteorite.tscn")
-	# for i in range(1):
-	# 	# создаём метеориты в случайных координатах по x
-	# 	var meteorite:Area2D = meteorite_scene.instantiate()
-	# 	meteorite.position = Vector2(randi_range(-100,820),50)
-	# 	meteorite.enemy_level = 1
-	# 	meteorite.super_enemy = true
-	# 	enemies.add_child(meteorite)
-	
-	
-	
-	# тип врага 2 - белый корабль
-	# var enemyShip_1_scene = load("res://ALL_scenes/enemyShip_1/enemy_ship_1.tscn")
-	# for i in range(1):
-	# 	# создаём корабли в случайных координатах по x
-	# 	var enemyShip_1:Area2D = enemyShip_1_scene.instantiate()
-	# 	# enemyShip_1.position = Vector2(randi_range(-200,1580),50)
-	# 	enemyShip_1.position = Vector2(randi_range(0,720),50)
-	# 	enemyShip_1.enemy_level = 1
-	# 	enemyShip_1.super_enemy = true
-	# 	enemies.add_child(enemyShip_1)
-		
-
-	
-	
-	
-	# тип врага 3 - красный корабль
-	# var enemyShip_2_scene = load("res://ALL_scenes/enemyShip_2/enemy_ship_2.tscn")
-	# for i in range(1):
-	# 	# создаём корабли в случайных координатах по x
-	# 	var enemyShip_2:Area2D = enemyShip_2_scene.instantiate()
-	# 	enemyShip_2.position = Vector2(randi_range(0,720),50)
-	# 	enemyShip_2.enemy_level = 1
-	# 	enemyShip_2.super_enemy = true
-	# 	enemies.add_child(enemyShip_2)
-		
-
-	
-	
-	
-	# тип врага 4 - черный корабль
-	# var enemyShip_3_scene = load("res://ALL_scenes/enemyShip_3/enemy_ship_3.tscn")
-	# for i in range(1):
-	# 	# создаём корабли в случайных координатах по x
-	# 	var enemyShip_3:Area2D = enemyShip_3_scene.instantiate()
-	# 	enemyShip_3.position = Vector2(randi_range(0,720),50)
-	# 	enemyShip_3.enemy_level = 1
-	# 	enemyShip_3.super_enemy = true
-	# 	enemies.add_child(enemyShip_3)
-		
-	
-	
-	
-	
-	# тип врага 5 - круглый дрон
-	# var drone_1_scene = load("res://ALL_scenes/drone_1/drone_1.tscn")
-	# for i in range(1):
-	# 	# создаём корабли в случайных координатах по x
-	# 	var drone_1:Area2D = drone_1_scene.instantiate()
-	# 	drone_1.position = Vector2(randi_range(200,920),50)
-	# 	drone_1.enemy_level = 1
-	# 	drone_1.super_enemy = true
-	# 	enemies.add_child(drone_1)
-		
-	
-	
-	
-	
-	# тип врага 6 - желтый дрон
-	# var drone_2_scene = load("res://ALL_scenes/drone_2/drone_2.tscn")
-	# for i in range(1):
-	# 	var drone_2:CharacterBody2D = drone_2_scene.instantiate() 
-	# 	drone_2.position = Vector2(randi_range(0,720),50)
-	# 	drone_2.enemy_level = 1
-	# 	# drone_2.super_enemy = true
-	# 	enemies.add_child(drone_2)
-		
-
-
-
-func method_level():
-	# var num = randi_range(3,4)
-	var num
-	if(price_level == 4):
-		num = 4
-	else:
-		num = 3
-	while(price_level != 0 or num != 0):
-		num -= 1
-		if(price_level >= 1):
-			var meteorite_scene = load("res://ALL_scenes/meteorite/meteorite.tscn")
-			var meteorite:Area2D = meteorite_scene.instantiate()
-			meteorite.position = Vector2(randi_range(-100,820),50)
-			enemies.add_child(meteorite)
-			price_level -= 1
-		
 
 func _process(delta: float) -> void:
+	# print(25%10)
 	
 	label_text_level.text = "level " + str(num_level_text)
 	if(galaxy_ship):
@@ -129,7 +97,7 @@ func _process(delta: float) -> void:
 	else:
 		get_tree().change_scene_to_file("res://ALL_scenes/main_menu/main_menu.tscn")
 
-	if(len(enemies.get_children()) == 0 and !end_level):
+	if(len(enemies.get_children()) == 0 and !end_level and price_level == 0):
 		end_level = true
 		for child in bullets_of_enemies.get_children():
 			child.queue_free()
@@ -141,13 +109,23 @@ func _process(delta: float) -> void:
 		galaxy_ship.hp_player = galaxy_ship.hp_start_player
 		$ParallaxBackground_var_1.speed = 3
 		audio_stream_player_2d.playing = true
-		print(audio_stream_player_2d)
+		# print(audio_stream_player_2d)
+	elif(len(enemies.get_children()) <= 1 and price_level != 0):
+		method_level()
+
 
 
 func _on_button_pressed() -> void:
 	end_level = false
 	num_level_text += 1
-	price_level += 5
+	num_level_hard += 1
+	if((num_level_hard % 100) >= 1 and (num_level_hard % 100) < 6):
+		if((num_level_hard % 100) >= 1 and (num_level_hard % 100) < 4):
+			start_price_level += 3
+	elif((num_level_hard % 100) >= 6 and (num_level_hard % 100) < 12):
+		if((num_level_hard % 100) >= 6 and (num_level_hard % 100) < 9):
+			start_price_level += 3
+	price_level = start_price_level
 	galaxy_ship.stop = false
 	$Button.visible = false
 	$ParallaxBackground_var_1.speed = 15
@@ -159,3 +137,66 @@ func _input(event):
 	# сворачивание экрана на ESC
 	if(event.is_action_pressed("esc_key")):
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+
+
+
+
+
+
+
+func method_level():
+	var num
+	if((num_level_hard / 100)+1 >= 1 and (num_level_hard / 100)+1 < 6):
+		num = 3
+	elif((num_level_hard / 100)+1 >= 6 and (num_level_hard / 100)+1 < 10):
+		num = 4
+	elif((num_level_hard / 100)+1 >= 10 and (num_level_hard / 100)+1 < 15):
+		num = randi_range(4,5)
+	elif((num_level_hard / 100)+1 >= 15 and (num_level_hard / 100)+1 < 20):
+		num = randi_range(4,6)
+	elif((num_level_hard / 100)+1 >= 15 and (num_level_hard / 100)+1 < 20):
+		num = randi_range(5,7)
+	elif((num_level_hard / 100)+1 >= 20 and (num_level_hard / 100)+1 < 40):
+		num = randi_range(5,8)
+	elif((num_level_hard / 100)+1 >= 40 and (num_level_hard / 100)+1 < 60):
+		num = randi_range(6,9)
+	elif((num_level_hard / 100)+1 >= 60 and (num_level_hard / 100)+1 < 80):
+		num = randi_range(7,11)
+	elif((num_level_hard / 100)+1 >= 60 and (num_level_hard / 100)+1 < 80):
+		num = randi_range(8,13)
+	elif((num_level_hard / 100)+1 >= 80):
+		num = randi_range(9,15)
+
+
+	while(price_level != 0 and num != 0):
+		num -= 1
+		if((num_level_hard % 100) == 1):
+			creatingEnemies_meteorite()
+		elif((num_level_hard % 100) == 2):
+			creatingEnemies_meteorite()
+		elif((num_level_hard % 100) == 3):
+			if(randi_range(0 , 100) >= 95):
+				creatingEnemies_enemy_ship_White()
+			else:
+				creatingEnemies_meteorite()
+		elif((num_level_hard % 100) == 3):
+			if(randi_range(0 , 100) >= 5 or price_level == 1):
+				creatingEnemies_meteorite()
+			else:
+				creatingEnemies_enemy_ship_White()
+		elif((num_level_hard % 100) == 4):
+			if(randi_range(0 , 100) >= 30 or price_level == 1):
+				creatingEnemies_meteorite()
+			else:
+				creatingEnemies_enemy_ship_White()
+		elif((num_level_hard % 100) == 5):
+			if(randi_range(0 , 100) >= 60 or price_level == 1):
+				creatingEnemies_meteorite()
+			else:
+				creatingEnemies_enemy_ship_White()
+
+
+
+	
+
+

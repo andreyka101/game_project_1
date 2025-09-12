@@ -139,11 +139,12 @@ func _ready() -> void:
 	elif(enemy_level >= 100):
 		hp = enemy_level * 4 * 125
 		damage_ship = ((enemy_level * 4 * 125) /10.0)*7
-		damage_enemyBullet = enemy_level * 4
+		damage_enemyBullet = enemy_level * 40
 
 
-	timer.start(randf_range(timer_num[0] , timer_num[1]))
 	timer_position.start(randf_range(timer_position_num[0] , timer_position_num[1]))
+	await get_tree().create_timer(randf_range(0 , 0.5)).timeout
+	timer.start(randf_range(timer_num[0] , timer_num[1]))
 	
 	
 

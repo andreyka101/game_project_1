@@ -31,6 +31,7 @@ var enemy_level = 1
 var super_enemy = false
 var move_star:Vector2
 var speed_rotation_star
+var start = true
 
 
 func _ready() -> void:
@@ -135,13 +136,17 @@ func _ready() -> void:
 	elif(enemy_level >= 100):
 		hp = enemy_level * 4 * 100
 		damage_drone = ((enemy_level * 4 * 100) /10.0)*1.7
-		damage_enemyBullet = enemy_level * 4
+		damage_enemyBullet = enemy_level * 40
 
 
-	timer.start(randf_range(timer_num[0] , timer_num[1]))
 
 
 func _physics_process(delta: float) -> void:
+	if(start and self.position.y > 2):
+		start = false
+		await get_tree().create_timer(randf_range(0 , 0.5)).timeout
+		timer.start(randf_range(timer_num[0] , timer_num[1]))
+
 	if(Global.stop_game):
 		timer.paused = true
 		timer_star.paused = true
