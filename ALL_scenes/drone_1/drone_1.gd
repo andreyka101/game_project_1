@@ -20,13 +20,27 @@ var damage
 var speed
 var enemy_level = 1
 var super_enemy = false
+var mega_enemy = false
 var move_star:Vector2
 var speed_rotation_star
 
 
 func _ready() -> void:
 	if(super_enemy):
+		enemy_level += 1
+		var num_scale_star = randf_range(0.3 , 0.5)
+		super_enemy_star.scale = Vector2(num_scale_star , num_scale_star)
+		super_enemy_star.visible = true
+		if (randi_range(0, 1) == 1):
+			speed_rotation_star = randf_range(2 , 7)
+		else:
+			speed_rotation_star = randf_range(-2 , -7)
+
+		move_star = Vector2(randf_range(-15,15) , randf_range(-15,15))
+		super_enemy_star.position = Vector2(randf_range(-15,15) , randf_range(-15,15))
+	elif(mega_enemy):
 		enemy_level += 2
+		super_enemy_star.modulate = "ff0000"
 		var num_scale_star = randf_range(0.3 , 0.5)
 		super_enemy_star.scale = Vector2(num_scale_star , num_scale_star)
 		super_enemy_star.visible = true
@@ -149,7 +163,7 @@ func _process(delta: float) -> void:
 		look_at(galaxy_ship.position)
 	
 
-	if(super_enemy and !Global.stop_game):
+	if((super_enemy or mega_enemy) and !Global.stop_game):
 		super_enemy_star.position += super_enemy_star.position.direction_to(move_star) * 30 * delta
 		super_enemy_star.rotation_degrees += speed_rotation_star
 		if (super_enemy_star.rotation_degrees >= 360):
@@ -241,5 +255,5 @@ func _on_boom_body_exited(body: Node2D) -> void:
 
 
 func _on_timer_star_timeout() -> void:
-	if(super_enemy):
+	if(super_enemy or mega_enemy):
 		move_star = Vector2(randf_range(-15,15) , randf_range(-15,15))

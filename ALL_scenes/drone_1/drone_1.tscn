@@ -169,7 +169,7 @@ animations = [{
 radius = 11.2673
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jdim8"]
-radius = 37.3255
+radius = 41.5402
 
 [node name="Drone_1" type="Area2D" groups=["all_enemy"]]
 scale = Vector2(2.6, 2.6)
@@ -185,7 +185,10 @@ autoplay = "default"
 [node name="AnimatedSprite2D_head" type="AnimatedSprite2D" parent="." groups=["all_enemy"]]
 scale = Vector2(1.767, 1.767)
 sprite_frames = SubResource("SpriteFrames_ijy8y")
+animation = &"explosion"
 autoplay = "default"
+frame = 6
+frame_progress = 1.0
 offset = Vector2(-2, -4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
