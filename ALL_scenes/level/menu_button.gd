@@ -9,6 +9,7 @@ extends Node2D
 @onready var label_speed_bullet: Label = $Settings_level/Control_speed_bullet/Label
 @onready var label_damage: Label = $Settings_level/Control_damage/Label
 @onready var label_reload: Label = $Settings_level/Control_reload/Label
+@onready var label_dps: Label = $Settings_level/Label_dps
 
 func _on_pause_pressed() -> void:
 	# print(enemies.type)
@@ -21,6 +22,7 @@ func _on_pause_pressed() -> void:
 	label_speed_bullet.text = "скорость пули = " + str(galaxy_ship.speed_bullet)
 	label_damage.text = "урон = " + str(galaxy_ship.damage)
 	label_reload.text = "перезарядка = " + str(galaxy_ship.time_timer)
+	label_dps.text = "DPS = " + str(round(((1 / galaxy_ship.time_timer) * galaxy_ship.damage) * 10 * 100) / 100.0)
 	for child in enemies.get_children():
 		if(child.name_str == "explosive drone"):
 			child.sprite_fire.stop()
@@ -61,10 +63,12 @@ func _on_button_speed_bullet_pressed() -> void:
 func _on_button_damage_pressed() -> void:
 	galaxy_ship.damage +=  round((galaxy_ship.damage/100.0) * 10 * 100) / 100.0
 	label_damage.text = "урон = " + str(galaxy_ship.damage)
+	label_dps.text = "DPS = " + str(round(((1 / galaxy_ship.time_timer) * galaxy_ship.damage) * 10 * 100) / 100.0)
 
 
 func _on_button_reload_pressed() -> void:
 	galaxy_ship.time_timer -=  round((galaxy_ship.time_timer/100.0) * 10 * 100) / 100.0
 	galaxy_ship.timer.wait_time = galaxy_ship.time_timer
 	label_reload.text = "перезарядка = " + str(galaxy_ship.time_timer)
+	label_dps.text = "DPS = " + str(round(((1 / galaxy_ship.time_timer) * galaxy_ship.damage) * 10 * 100) / 100.0)
 	

@@ -308,6 +308,14 @@ offset_bottom = 1243.0
 theme_override_font_sizes/font_size = 44
 text = "Enemy Level 0"
 
+[node name="Label_dps" type="Label" parent="Menu_button/Settings_level"]
+offset_left = 172.0
+offset_top = 987.0
+offset_right = 466.0
+offset_bottom = 1054.0
+theme_override_font_sizes/font_size = 42
+text = "DPS = 0"
+
 [node name="Pause" type="Button" parent="Menu_button"]
 z_index = 50
 offset_left = 23.0

@@ -16,6 +16,7 @@ var end_level = false
 @onready var player_bullets: Node2D = $Player_bullets
 @onready var label_text_level:Label = $Label_text_level
 @onready var label_text_hp:Label = $Label_text_hp
+@onready var label_dps: Label = $Menu_button/Settings_level/Label_dps
 @onready var galaxy_ship:CharacterBody2D = $Galaxy_ship
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $All_audio/AudioEnd_level
 var meteorite_scene = load("res://ALL_scenes/meteorite/meteorite.tscn")
@@ -27,9 +28,11 @@ var drone_Уellow_scene = load("res://ALL_scenes/drone_2/drone_2.tscn")
 var arr_enemies = []
 
 
-# func _ready() -> void:
+func _ready() -> void:
 	# print(start_price_level / 50)
-
+	# print(1 / 1,"-+-++--++-")
+	label_dps.text = "DPS = " + str(round(((1 / galaxy_ship.time_timer) * galaxy_ship.damage) * 10 * 100) / 100.0)
+	# label_dps.text = "DPS = " str((1 / galaxy_ship.time_timer) * galaxy_ship.damage)
 	# method_level()
 	# await get_tree().create_timer(2).timeout
 	# for i in range(1):
