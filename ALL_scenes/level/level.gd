@@ -596,34 +596,10 @@ func method_level():
 		# 38
 			if(randi_range(0 , 100) <= 5 or price_level == 1):
 				number_enemies_on_wave -= 1
-				creatingEnemies_meteorite()
+				creatingEnemies_drone_Violet()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
-		# 7
-		# elif((num_level_hard % 100) == 4):
-		# 	if(randi_range(0 , 100) <= 70 or price_level == 1):
-		# 		number_enemies_on_wave -= 1
-		# 		creatingEnemies_meteorite()
-		# 	else:
-		# 		number_enemies_on_wave -= 1
-		# 		creatingEnemies_enemy_ship_White()
-		# # 7
-		# elif((num_level_hard % 100) == 5):
-		# 	if(randi_range(0 , 100) <= 40 or price_level == 1):
-		# 		number_enemies_on_wave -= 1
-		# 		creatingEnemies_meteorite()
-		# 	else:
-		# 		number_enemies_on_wave -= 1
-		# 		creatingEnemies_enemy_ship_White()
-		# # 7
-		# elif((num_level_hard % 100) == 6):
-		# 	if(randi_range(0 , 100) <= 10 or price_level == 1):
-		# 		number_enemies_on_wave -= 1
-		# 		creatingEnemies_meteorite()
-		# 	else:
-		# 		number_enemies_on_wave -= 1
-		# 		creatingEnemies_enemy_ship_White()
 
 
 	for enemy in arr_enemies:
