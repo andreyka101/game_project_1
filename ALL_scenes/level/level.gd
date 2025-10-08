@@ -135,7 +135,7 @@ func creatingEnemies_drone_Уellow(enemy_difficulty = 0):
 
 
 func _process(delta: float) -> void:
-	print(price_level)
+	# print(price_level)
 	label_text_level.text = "level " + str(num_level_text)
 	if(galaxy_ship):
 		label_text_hp.text = "hp " + str(int(galaxy_ship.hp_player))
@@ -169,11 +169,8 @@ func _on_button_pressed() -> void:
 	$Button.visible = false
 	$ParallaxBackground_var_1.speed = 15
 
-	if((num_level_hard % 100) >= 1 and (num_level_hard % 100) < 7):
-		if((num_level_hard % 100) >= 1 and (num_level_hard % 100) < 4):
-			start_price_level += 2
-		else:
-			start_price_level += 0
+	if((num_level_hard % 100) >= 1 and (num_level_hard % 100) < 4):
+		start_price_level += 2
 	elif((num_level_hard % 100) == 7):
 			start_price_level += 3
 	elif((num_level_hard % 100) == 10):
@@ -192,6 +189,8 @@ func _on_button_pressed() -> void:
 	# 		start_price_level += 4
 	price_level = start_price_level
 	method_level()
+	# print(start_price_level)
+	print(num_level_hard,"--=--=--=--")
 
 
 
@@ -224,6 +223,7 @@ func method_level():
 
 	# print(start_price_level)
 	while(price_level != 0 and number_enemies_on_wave != 0):
+		print(number_enemies_on_wave)
 		# 3
 		if((num_level_hard % 100) == 1):
 			number_enemies_on_wave -= 1
@@ -592,8 +592,8 @@ func method_level():
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
-		elif((num_level_hard % 100) == 38):
 		# 38
+		elif((num_level_hard % 100) == 38):
 			if(randi_range(0 , 100) <= 5 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_drone_Violet()
