@@ -190,7 +190,7 @@ func _on_button_pressed() -> void:
 	price_level = start_price_level
 	method_level()
 	# print(start_price_level)
-	# print(num_level_hard)
+	print(num_level_hard,"--=--=--=--")
 
 
 
