@@ -1,14 +1,14 @@
 extends Node2D
 
 
-# var num_level_hard = 1
-# var num_level_text = 1
-# var price_level = 3
-# var start_price_level = 3
-var num_level_hard = 232
-var num_level_text = 32
-var price_level = 32
-var start_price_level = 32
+var num_level_hard = 1
+var num_level_text = 1
+var price_level = 3
+var start_price_level = 3
+# var num_level_hard = 232
+# var num_level_text = 32
+# var price_level = 32
+# var start_price_level = 32
 var end_level = false
 
 @onready var enemies:Node2D = $Enemies
