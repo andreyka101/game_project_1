@@ -1,14 +1,14 @@
 extends Node2D
 
 
-var num_level_hard = 1
-var num_level_text = 1
-var price_level = 3
-var start_price_level = 3
-# var num_level_hard = 232
-# var num_level_text = 32
-# var price_level = 32
-# var start_price_level = 32
+# var num_level_hard = 1
+# var num_level_text = 1
+# var price_level = 3
+# var start_price_level = 3
+var num_level_hard = 25
+var num_level_text = 25
+var price_level = 17
+var start_price_level = 17
 var end_level = false
 
 @onready var enemies:Node2D = $Enemies
@@ -181,7 +181,7 @@ func _on_button_pressed() -> void:
 			start_price_level = round(start_price_level / 1.5)
 	elif((num_level_hard % 100) == 23):
 			start_price_level = round(start_price_level * 1.5)
-	elif((num_level_hard % 100) == 26 or (num_level_hard % 100) == 28 or (num_level_hard % 100) == 30 or (num_level_hard % 100) == 34):
+	elif((num_level_hard % 100) == 26 or (num_level_hard % 100) == 28 or (num_level_hard % 100) == 30 or (num_level_hard % 100) == 34 or (num_level_hard % 100) == 38):
 			start_price_level += 4
 	# elif((num_level_hard % 100) == 28):
 	# 		start_price_level += 4
@@ -592,7 +592,7 @@ func method_level():
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
-		# 33
+		# 37 
 		elif((num_level_hard % 100) == 38):
 			if(randi_range(0 , 100) <= 5 or price_level == 1):
 				number_enemies_on_wave -= 1
