@@ -189,8 +189,8 @@ func _on_button_pressed() -> void:
 	# 		start_price_level += 4
 	price_level = start_price_level
 	method_level()
-	# print(start_price_level)
 	print(num_level_hard,"--=--=--=--")
+	print(start_price_level)
 
 
 
@@ -223,7 +223,7 @@ func method_level():
 
 	# print(start_price_level)
 	while(price_level != 0 and number_enemies_on_wave != 0):
-		print(number_enemies_on_wave)
+		# print(number_enemies_on_wave)
 		# 3
 		if((num_level_hard % 100) == 1):
 			number_enemies_on_wave -= 1
@@ -415,7 +415,7 @@ func method_level():
 					creatingEnemies_drone_Violet(1)
 				else:
 					creatingEnemies_drone_Violet()
-		# 16
+		# 17
 		elif((num_level_hard % 100) == 23):
 			if(randi_range(0 , 100) <= 50 or price_level == 1):
 				number_enemies_on_wave -= 1
@@ -429,7 +429,7 @@ func method_level():
 					creatingEnemies_drone_Violet(1)
 				else:
 					creatingEnemies_drone_Violet()
-		# 16
+		# 17
 		elif((num_level_hard % 100) == 24):
 			if(randi_range(0 , 100) <= 50 or price_level == 1):
 				number_enemies_on_wave -= 1
@@ -443,7 +443,7 @@ func method_level():
 					creatingEnemies_drone_Violet()
 				else:
 					creatingEnemies_drone_Violet(1)
-		# 16
+		# 17
 		elif((num_level_hard % 100) == 25):
 			if(randi_range(0 , 100) <= 80 or price_level == 1):
 				number_enemies_on_wave -= 1
@@ -451,7 +451,7 @@ func method_level():
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
-		# 20
+		# 21
 		elif((num_level_hard % 100) == 26):
 			if(randi_range(0 , 100) <= 60 or price_level == 1):
 				number_enemies_on_wave -= 1
@@ -462,7 +462,7 @@ func method_level():
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
-		# 20
+		# 21
 		elif((num_level_hard % 100) == 27):
 			if(randi_range(0 , 100) <= 60 or price_level == 1):
 				number_enemies_on_wave -= 1
@@ -473,7 +473,7 @@ func method_level():
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
-		# 26
+		# 25
 		elif((num_level_hard % 100) == 28):
 			if(randi_range(0 , 100) <= 40 or price_level == 1):
 				number_enemies_on_wave -= 1
@@ -484,7 +484,7 @@ func method_level():
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
-		# 26
+		# 25
 		elif((num_level_hard % 100) == 29):
 			if(randi_range(0 , 100) <= 40 or price_level == 1):
 				number_enemies_on_wave -= 1
@@ -495,7 +495,7 @@ func method_level():
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
-		# 32
+		# 29
 		elif((num_level_hard % 100) == 30):
 			if(randi_range(0 , 100) <= 20 or price_level == 1):
 				number_enemies_on_wave -= 1
@@ -506,7 +506,7 @@ func method_level():
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
-		# 32
+		# 29
 		elif((num_level_hard % 100) == 31):
 			if(randi_range(0 , 100) <= 20 or price_level == 1):
 				number_enemies_on_wave -= 1
@@ -517,7 +517,7 @@ func method_level():
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
-		# 32 ------
+		# 29
 		elif((num_level_hard % 100) == 32):
 			if(randi_range(0 , 100) <= 40 or price_level == 1):
 				number_enemies_on_wave -= 1
@@ -531,7 +531,7 @@ func method_level():
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
-		# 32
+		# 29
 		elif((num_level_hard % 100) == 33):
 			if(randi_range(0 , 100) <= 40 or price_level == 1):
 				number_enemies_on_wave -= 1
@@ -545,7 +545,7 @@ func method_level():
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
-		# 38
+		# 33
 		elif((num_level_hard % 100) == 34):
 			if(randi_range(0 , 100) <= 20 or price_level == 1):
 				number_enemies_on_wave -= 1
@@ -559,7 +559,7 @@ func method_level():
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
-		# 38
+		# 33
 		elif((num_level_hard % 100) == 35):
 			if(randi_range(0 , 100) <= 20 or price_level == 1):
 				number_enemies_on_wave -= 1
@@ -573,7 +573,7 @@ func method_level():
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
-		# 38
+		# 33
 		elif((num_level_hard % 100) == 36):
 			if(randi_range(0 , 100) <= 30 or price_level == 1):
 				number_enemies_on_wave -= 1
@@ -581,7 +581,7 @@ func method_level():
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
-		# 38
+		# 33
 		elif((num_level_hard % 100) == 37):
 			if(randi_range(0 , 100) <= 30 or price_level == 1):
 				number_enemies_on_wave -= 1
@@ -592,7 +592,7 @@ func method_level():
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
-		# 38
+		# 33
 		elif((num_level_hard % 100) == 38):
 			if(randi_range(0 , 100) <= 5 or price_level == 1):
 				number_enemies_on_wave -= 1
