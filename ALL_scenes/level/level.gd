@@ -135,7 +135,7 @@ func creatingEnemies_drone_Уellow(enemy_difficulty = 0):
 
 
 func _process(delta: float) -> void:
-	# print(price_level)
+	print(len(enemies.get_children()))
 	label_text_level.text = "level " + str(num_level_text)
 	if(galaxy_ship):
 		label_text_hp.text = "hp " + str(int(galaxy_ship.hp_player))
@@ -189,8 +189,8 @@ func _on_button_pressed() -> void:
 	# 		start_price_level += 4
 	price_level = start_price_level
 	method_level()
-	print(num_level_hard,"--=--=--=--")
-	print(start_price_level)
+	# print(num_level_hard,"--=--=--=--")
+	# print(start_price_level)
 
 
 
