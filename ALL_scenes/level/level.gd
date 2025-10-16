@@ -736,7 +736,7 @@ func method_level():
 					creatingEnemies_meteorite()
 			else:
 				number_enemies_on_wave -= 1
-				creatingEnemies_enemy_ship_Black() #000000FF
+				creatingEnemies_enemy_ship_Black()
 		# 40
 		elif((num_level_hard % 100) == 38):
 			if(randi_range(0 , 100) <= 5 or price_level == 1):
