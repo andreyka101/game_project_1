@@ -13,7 +13,7 @@ var death = true
 @onready var super_enemy_star: Sprite2D = $Super_enemy_star
 @onready var timer_star: Timer = $Timer_star
 
-var position_save = Vector2(randi_range(10 , 710) , randi_range(10 , 600))
+var position_save = Vector2(randi_range(10 , 710) , randi_range(40 , 1100))
 
 var name_str = "regular ship"
 

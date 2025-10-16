@@ -55,7 +55,7 @@ transform = Transform2D(8, 0, 0, 12, 640, 611)
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Galaxy_ship" parent="." instance=ExtResource("2_ekf4v")]
-position = Vector2(360, 1050)
+position = Vector2(374, 1243)
 scale = Vector2(2.1, 2.1)
 
 [node name="Button" type="Button" parent="."]
