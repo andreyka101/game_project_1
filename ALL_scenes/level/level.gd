@@ -5,10 +5,10 @@ extends Node2D
 # var num_level_text = 1
 # var price_level = 3
 # var start_price_level = 3
-var num_level_hard = 35
-var num_level_text = 35
-var price_level = 33
-var start_price_level = 33
+var num_level_hard = 43
+var num_level_text = 43
+var price_level = 50
+var start_price_level = 50
 var end_level = false
 
 @onready var enemies:Node2D = $Enemies
@@ -187,7 +187,7 @@ func _on_button_pressed() -> void:
 			start_price_level += 4
 	elif((num_level_hard % 100) == 36):
 			start_price_level += 7
-	elif((num_level_hard % 100) == 39 or (num_level_hard % 100) == 41 or (num_level_hard % 100) == 45):
+	elif((num_level_hard % 100) == 39 or (num_level_hard % 100) == 41 or (num_level_hard % 100) == 45 or (num_level_hard % 100) == 47):
 			start_price_level += 5
 	price_level = start_price_level
 	method_level()
@@ -718,33 +718,39 @@ func method_level():
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
 		#LINK - ++++++++++++++++++++++
-		# 33
-		elif((num_level_hard % 100) == 36):
-			if(randi_range(0 , 100) <= 30 or price_level == 1):
+		# 60
+		elif((num_level_hard % 100) == 47):
+			if(randi_range(0 , 100) <= 40 or price_level == 1):
 				number_enemies_on_wave -= 1
-				creatingEnemies_meteorite()
+				creatingEnemies_drone_Violet(1)
 			else:
 				number_enemies_on_wave -= 1
-				creatingEnemies_enemy_ship_Black()
-		# 33
-		elif((num_level_hard % 100) == 37):
-			if(randi_range(0 , 100) <= 30 or price_level == 1):
-				number_enemies_on_wave -= 1
-				if(randi_range(1 ,4) == 1):
-					creatingEnemies_drone_Violet()
+				if(randi_range(1 , 5) == 1):
+					creatingEnemies_enemy_ship_Black(1)
 				else:
-					creatingEnemies_meteorite()
+					creatingEnemies_enemy_ship_Black()
+		# 60
+		elif((num_level_hard % 100) == 48):
+			if(randi_range(0 , 100) <= 20 or price_level == 1):
+				number_enemies_on_wave -= 1
+				creatingEnemies_drone_Violet(1)
 			else:
 				number_enemies_on_wave -= 1
-				creatingEnemies_enemy_ship_Black()
-		# 40
-		elif((num_level_hard % 100) == 38):
+				if(randi_range(1 , 4) == 1):
+					creatingEnemies_enemy_ship_Black(1)
+				else:
+					creatingEnemies_enemy_ship_Black()
+		# 60
+		elif((num_level_hard % 100) == 49):
 			if(randi_range(0 , 100) <= 5 or price_level == 1):
 				number_enemies_on_wave -= 1
-				creatingEnemies_drone_Violet()
+				creatingEnemies_drone_Violet(1)
 			else:
 				number_enemies_on_wave -= 1
-				creatingEnemies_enemy_ship_Black()
+				if(randi_range(1 , 3) == 1):
+					creatingEnemies_enemy_ship_Black(1)
+				else:
+					creatingEnemies_enemy_ship_Black()
 
 
 	for enemy in arr_enemies:
