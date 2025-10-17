@@ -158,7 +158,9 @@ func _process(delta: float) -> void:
 		method_level()
 	elif(len(enemies.get_children()) <= 2 and price_level != 0 and ((num_level_hard % 100)>=23 and (num_level_hard % 100)<36)):
 		method_level()
-	elif(len(enemies.get_children()) <= 3 and price_level != 0 and ((num_level_hard % 100)>=36 and (num_level_hard % 100)<99)):
+	elif(len(enemies.get_children()) <= 3 and price_level != 0 and ((num_level_hard % 100)>=36 and (num_level_hard % 100)<50)):
+		method_level()
+	elif(len(enemies.get_children()) <= 4 and price_level != 0 and ((num_level_hard % 100)>=50 and (num_level_hard % 100)<99)):
 		method_level()
 
 
@@ -208,12 +210,10 @@ func method_level():
 		number_enemies_on_wave = 4
 	elif((num_level_hard % 100) >= 15 and (num_level_hard % 100) < 36):
 		number_enemies_on_wave = randi_range(4,5)
-	elif((num_level_hard % 100) >= 36 and (num_level_hard % 100) < 99):
+	elif((num_level_hard % 100) >= 36 and (num_level_hard % 100) < 50):
 		number_enemies_on_wave = randi_range(5,7)
-	# elif((num_level_hard % 100) >= 20 and (num_level_hard % 100) < 40):
-	# 	number_enemies_on_wave = randi_range(5,8)
-	# elif((num_level_hard % 100) >= 40 and (num_level_hard % 100) < 60):
-	# 	number_enemies_on_wave = randi_range(6,9)
+	elif((num_level_hard % 100) >= 50 and (num_level_hard % 100) < 99):
+		number_enemies_on_wave = randi_range(6,9)
 	# elif((num_level_hard % 100) >= 60 and (num_level_hard % 100) < 80):
 	# 	number_enemies_on_wave = randi_range(7,11)
 	# elif((num_level_hard % 100) >= 60 and (num_level_hard % 100) < 80):
@@ -742,6 +742,17 @@ func method_level():
 					creatingEnemies_enemy_ship_Black()
 		# 60
 		elif((num_level_hard % 100) == 49):
+			if(randi_range(0 , 100) <= 5 or price_level == 1):
+				number_enemies_on_wave -= 1
+				creatingEnemies_drone_Violet(1)
+			else:
+				number_enemies_on_wave -= 1
+				if(randi_range(1 , 3) == 1):
+					creatingEnemies_enemy_ship_Black(1)
+				else:
+					creatingEnemies_enemy_ship_Black()
+		# 60
+		elif((num_level_hard % 100) == 50):
 			if(randi_range(0 , 100) <= 5 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_drone_Violet(1)
