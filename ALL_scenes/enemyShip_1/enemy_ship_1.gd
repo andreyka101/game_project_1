@@ -31,6 +31,7 @@ var speed_rotation_star
 
 
 func _ready() -> void:
+	
 	if(super_enemy):
 		enemy_level += 1
 		var num_scale_star = randf_range(0.3 , 0.5)

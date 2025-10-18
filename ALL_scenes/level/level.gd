@@ -5,19 +5,26 @@ extends Node2D
 # var num_level_text = 1
 # var price_level = 3
 # var start_price_level = 3
-var num_level_hard = 99
-var num_level_text = 99
-var price_level = 100
-var start_price_level = 100
+
+var num_level_hard = 5
+var num_level_text = 5
+var price_level = 7
+var start_price_level = 7
+
+# var num_level_hard = 100
+# var num_level_text = 100
+# var price_level = 100
+# var start_price_level = 100
+
 var end_level = false
 
-@onready var enemies:Node2D = $Enemies
+@onready var enemies: Node2D = $Enemies
 @onready var bullets_of_enemies: Node2D = $Bullets_of_enemies
 @onready var player_bullets: Node2D = $Player_bullets
-@onready var label_text_level:Label = $Label_text_level
-@onready var label_text_hp:Label = $Label_text_hp
+@onready var label_text_level: Label = $Label_text_level
+@onready var label_text_hp: Label = $Label_text_hp
 @onready var label_dps: Label = $Menu_button/Settings_level/Label_dps
-@onready var galaxy_ship:CharacterBody2D = $Galaxy_ship
+@onready var galaxy_ship: CharacterBody2D = $Galaxy_ship
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $All_audio/AudioEnd_level
 var meteorite_scene = load("res://ALL_scenes/meteorite/meteorite.tscn")
 var enemyShip_White_scene = load("res://ALL_scenes/enemyShip_1/enemy_ship_1.tscn")
@@ -29,6 +36,9 @@ var arr_enemies = []
 
 
 func _ready() -> void:
+	print(Time.get_unix_time_from_system())
+	await get_tree().create_timer(5).timeout
+	print(Time.get_unix_time_from_system())
 	# print(start_price_level / 50)
 	# print(1 / 1,"-+-++--++-")
 	label_dps.text = "DPS = " + str(round(((1 / galaxy_ship.time_timer) * galaxy_ship.damage) * 10 * 100) / 100.0)
@@ -46,125 +56,121 @@ func _ready() -> void:
 	# 	enemies.add_child(enemy)
 
 func creatingEnemies_meteorite(enemy_difficulty = 0):
-	if(price_level >= 1):
-		var meteorite:Area2D = meteorite_scene.instantiate()
-		meteorite.position = Vector2(randi_range(-100,820),-90)
+	if (price_level >= 1):
+		var meteorite: Area2D = meteorite_scene.instantiate()
+		meteorite.position = Vector2(randi_range(-100, 820), -90)
 		meteorite.enemy_level = 1
-		if(enemy_difficulty == 0):
+		if (enemy_difficulty == 0):
 			meteorite.super_enemy = false
-		elif(enemy_difficulty == 1):
+		elif (enemy_difficulty == 1):
 			meteorite.super_enemy = true
-		elif(enemy_difficulty == 2):
+		elif (enemy_difficulty == 2):
 			meteorite.mega_enemy = true
 		price_level -= 1
 		arr_enemies.append(meteorite)
 		# enemies.add_child(meteorite)
 func creatingEnemies_enemy_ship_White(enemy_difficulty = 0):
-	if(price_level >= 2):
-		var enemyShip_1:Area2D = enemyShip_White_scene.instantiate()
-		enemyShip_1.position = Vector2(randi_range(0,720),-50)
+	if (price_level >= 2):
+		var enemyShip_1: Area2D = enemyShip_White_scene.instantiate()
+		enemyShip_1.position = Vector2(randi_range(0, 720), -50)
 		enemyShip_1.enemy_level = 1
-		if(enemy_difficulty == 0):
+		if (enemy_difficulty == 0):
 			enemyShip_1.super_enemy = false
-		if(enemy_difficulty == 1):
+		if (enemy_difficulty == 1):
 			enemyShip_1.super_enemy = true
-		if(enemy_difficulty == 2):
+		if (enemy_difficulty == 2):
 			enemyShip_1.mega_enemy = true
 		price_level -= 2
 		arr_enemies.append(enemyShip_1)
 		# enemies.add_child(enemyShip_1)
 func creatingEnemies_enemy_ship_Red(enemy_difficulty = 0):
-	if(price_level >= 2):
-		var enemyShip_2:Area2D = enemyShip_Red_scene.instantiate()
-		enemyShip_2.position = Vector2(randi_range(0,720),-50)
+	if (price_level >= 2):
+		var enemyShip_2: Area2D = enemyShip_Red_scene.instantiate()
+		enemyShip_2.position = Vector2(randi_range(0, 720), -50)
 		enemyShip_2.enemy_level = 1
-		if(enemy_difficulty == 0):
+		if (enemy_difficulty == 0):
 			enemyShip_2.super_enemy = false
-		if(enemy_difficulty == 1):
+		if (enemy_difficulty == 1):
 			enemyShip_2.super_enemy = true
-		if(enemy_difficulty == 2):
+		if (enemy_difficulty == 2):
 			enemyShip_2.mega_enemy = true
 		price_level -= 2
 		arr_enemies.append(enemyShip_2)
 		# enemies.add_child(enemyShip_2)
 func creatingEnemies_enemy_ship_Black(enemy_difficulty = 0):
-	if(price_level >= 3):
-		var enemyShip_3:Area2D = enemyShip_Black_scene.instantiate()
-		enemyShip_3.position = Vector2(randi_range(0,720),-50)
+	if (price_level >= 3):
+		var enemyShip_3: Area2D = enemyShip_Black_scene.instantiate()
+		enemyShip_3.position = Vector2(randi_range(0, 720), -50)
 		enemyShip_3.enemy_level = 1
-		if(enemy_difficulty == 0):
+		if (enemy_difficulty == 0):
 			enemyShip_3.super_enemy = false
-		if(enemy_difficulty == 1):
+		if (enemy_difficulty == 1):
 			enemyShip_3.super_enemy = true
-		if(enemy_difficulty == 2):
+		if (enemy_difficulty == 2):
 			enemyShip_3.mega_enemy = true
 		price_level -= 3
 		arr_enemies.append(enemyShip_3)
 		# enemies.add_child(enemyShip_3)
 func creatingEnemies_drone_Violet(enemy_difficulty = 0):
-	if(price_level >= 1):
-		var drone_1:Area2D = drone_Violet_scene.instantiate()
-		drone_1.position = Vector2(randi_range(200,920),-10)
+	if (price_level >= 1):
+		var drone_1: Area2D = drone_Violet_scene.instantiate()
+		drone_1.position = Vector2(randi_range(200, 920), -10)
 		drone_1.enemy_level = 1
-		if(enemy_difficulty == 0):
+		if (enemy_difficulty == 0):
 			drone_1.super_enemy = false
-		if(enemy_difficulty == 1):
+		if (enemy_difficulty == 1):
 			drone_1.super_enemy = true
-		if(enemy_difficulty == 2):
+		if (enemy_difficulty == 2):
 			drone_1.mega_enemy = true
 		price_level -= 1
 		arr_enemies.append(drone_1)
 		# enemies.add_child(drone_1)
 func creatingEnemies_drone_Уellow(enemy_difficulty = 0):
-	if(price_level >= 2):
-		var drone_2:CharacterBody2D = drone_Уellow_scene.instantiate() 
-		drone_2.position = Vector2(randi_range(0,720),-150)
+	if (price_level >= 2):
+		var drone_2: CharacterBody2D = drone_Уellow_scene.instantiate()
+		drone_2.position = Vector2(randi_range(0, 720), -150)
 		drone_2.enemy_level = 1
-		if(enemy_difficulty == 0):
+		if (enemy_difficulty == 0):
 			drone_2.super_enemy = false
-		if(enemy_difficulty == 1):
+		if (enemy_difficulty == 1):
 			drone_2.super_enemy = true
-		if(enemy_difficulty == 2):
+		if (enemy_difficulty == 2):
 			drone_2.mega_enemy = true
 		price_level -= 2
 		arr_enemies.append(drone_2)
 		# enemies.add_child(drone_2)
 
 
-
-
-
 func _process(delta: float) -> void:
-	print(len(enemies.get_children()))
+	# print(len(enemies.get_children()))
 	label_text_level.text = "level " + str(num_level_text)
-	if(galaxy_ship):
+	if (galaxy_ship):
 		label_text_hp.text = "hp " + str(int(galaxy_ship.hp_player))
 	else:
 		get_tree().change_scene_to_file("res://ALL_scenes/main_menu/main_menu.tscn")
 
-	if(len(enemies.get_children()) == 0 and !end_level and price_level == 0):
+	if (len(enemies.get_children()) == 0 and !end_level and price_level == 0):
 		end_level = true
 		for child in bullets_of_enemies.get_children():
 			child.queue_free()
 		for child in player_bullets.get_children():
 			child.queue_free()
-		galaxy_ship.position = Vector2(360,1050)
+		galaxy_ship.position = Vector2(360, 1050)
 		galaxy_ship.stop = true
 		$Button.visible = true
 		galaxy_ship.hp_player = galaxy_ship.hp_start_player
 		$ParallaxBackground_var_1.speed = 3
 		audio_stream_player_2d.playing = true
-	elif(len(enemies.get_children()) <= 1 and price_level != 0 and ((num_level_hard % 100)>=1 and (num_level_hard % 100)<23)):
+	elif (len(enemies.get_children()) <= 1 and price_level != 0 and ((num_level_hard % 100) >= 1 and (num_level_hard % 100) < 23)):
 		method_level()
-	elif(len(enemies.get_children()) <= 2 and price_level != 0 and ((num_level_hard % 100)>=23 and (num_level_hard % 100)<36)):
+	elif (len(enemies.get_children()) <= 2 and price_level != 0 and ((num_level_hard % 100) >= 23 and (num_level_hard % 100) < 36)):
 		method_level()
-	elif(len(enemies.get_children()) <= 3 and price_level != 0 and ((num_level_hard % 100)>=36 and (num_level_hard % 100)<50)):
+	elif (len(enemies.get_children()) <= 3 and price_level != 0 and ((num_level_hard % 100) >= 36 and (num_level_hard % 100) < 50)):
 		method_level()
-	elif(len(enemies.get_children()) <= 4 and price_level != 0 and ((num_level_hard % 100)>=50 and (num_level_hard % 100)<74)):
+	elif (len(enemies.get_children()) <= 4 and price_level != 0 and ((num_level_hard % 100) >= 50 and (num_level_hard % 100) < 74)):
 		method_level()
-	elif(len(enemies.get_children()) <= 5 and price_level != 0 and ((num_level_hard % 100)>=74 and (num_level_hard % 100)<=99)):
+	elif (len(enemies.get_children()) <= 5 and price_level != 0 and ((num_level_hard % 100) >= 74 and (num_level_hard % 100) <= 100)):
 		method_level()
-
 
 
 func _on_button_pressed() -> void:
@@ -175,23 +181,23 @@ func _on_button_pressed() -> void:
 	$Button.visible = false
 	$ParallaxBackground_var_1.speed = 15
 
-	if((num_level_hard % 100) >= 1 and (num_level_hard % 100) < 4):
+	if ((num_level_hard % 100) >= 1 and (num_level_hard % 100) < 4):
 		start_price_level += 2
-	elif((num_level_hard % 100) == 7):
+	elif ((num_level_hard % 100) == 7):
 			start_price_level += 3
-	elif((num_level_hard % 100) == 10):
+	elif ((num_level_hard % 100) == 10):
 			start_price_level += 3
-	elif((num_level_hard % 100) == 13):
+	elif ((num_level_hard % 100) == 13):
 			start_price_level += 3
-	elif((num_level_hard % 100) == 15):
+	elif ((num_level_hard % 100) == 15):
 			start_price_level = round(start_price_level / 1.5)
-	elif((num_level_hard % 100) == 23):
+	elif ((num_level_hard % 100) == 23):
 			start_price_level = round(start_price_level * 1.5)
-	elif((num_level_hard % 100) == 26 or (num_level_hard % 100) == 28 or (num_level_hard % 100) == 30 or (num_level_hard % 100) == 34):
+	elif ((num_level_hard % 100) == 26 or (num_level_hard % 100) == 28 or (num_level_hard % 100) == 30 or (num_level_hard % 100) == 34):
 			start_price_level += 4
-	elif((num_level_hard % 100) == 36):
+	elif ((num_level_hard % 100) == 36):
 			start_price_level += 7
-	elif((num_level_hard % 100) == 39 or (num_level_hard % 100) == 41 or (num_level_hard % 100) == 45 or (num_level_hard % 100) == 47 or (num_level_hard % 100) == 62 or (num_level_hard % 100) == 66 or (num_level_hard % 100) == 74 or (num_level_hard % 100) == 83 or (num_level_hard % 100) == 86 or (num_level_hard % 100) == 90 or (num_level_hard % 100) == 94):
+	elif ((num_level_hard % 100) == 39 or (num_level_hard % 100) == 41 or (num_level_hard % 100) == 45 or (num_level_hard % 100) == 47 or (num_level_hard % 100) == 62 or (num_level_hard % 100) == 66 or (num_level_hard % 100) == 74 or (num_level_hard % 100) == 83 or (num_level_hard % 100) == 86 or (num_level_hard % 100) == 90 or (num_level_hard % 100) == 94):
 			start_price_level += 5
 	price_level = start_price_level
 	method_level()
@@ -199,375 +205,370 @@ func _on_button_pressed() -> void:
 	# print(start_price_level)
 
 
-
-
-
-
-
 func method_level():
 	var number_enemies_on_wave
-	if((num_level_hard % 100) >= 1 and (num_level_hard % 100) < 10):
+	if ((num_level_hard % 100) >= 1 and (num_level_hard % 100) < 10):
 		number_enemies_on_wave = 3
-	elif((num_level_hard % 100) >= 10 and (num_level_hard % 100) < 15):
+	elif ((num_level_hard % 100) >= 10 and (num_level_hard % 100) < 15):
 		number_enemies_on_wave = 4
-	elif((num_level_hard % 100) >= 15 and (num_level_hard % 100) < 36):
-		number_enemies_on_wave = randi_range(4,5)
-	elif((num_level_hard % 100) >= 36 and (num_level_hard % 100) < 50):
-		number_enemies_on_wave = randi_range(5,7)
-	elif((num_level_hard % 100) >= 50 and (num_level_hard % 100) < 86):
-		number_enemies_on_wave = randi_range(6,9)
-	elif((num_level_hard % 100) >= 86 and (num_level_hard % 100) <= 99):
-		number_enemies_on_wave = randi_range(6,10)
+	elif ((num_level_hard % 100) >= 15 and (num_level_hard % 100) < 36):
+		number_enemies_on_wave = randi_range(4, 5)
+	elif ((num_level_hard % 100) >= 36 and (num_level_hard % 100) < 50):
+		number_enemies_on_wave = randi_range(5, 7)
+	elif ((num_level_hard % 100) >= 50 and (num_level_hard % 100) < 86):
+		number_enemies_on_wave = randi_range(6, 9)
+	elif ((num_level_hard % 100) >= 86 and (num_level_hard % 100) <= 100):
+		number_enemies_on_wave = randi_range(6, 10)
 	# elif((num_level_hard % 100) >= 80):
 	# 	number_enemies_on_wave = randi_range(9,15)
 
 	# print(start_price_level)
-	while(price_level != 0 and number_enemies_on_wave != 0):
+	while (price_level != 0 and number_enemies_on_wave != 0):
 		# print(number_enemies_on_wave)
 		# 3
-		if((num_level_hard % 100) == 1):
+		if ((num_level_hard % 100) == 1):
 			number_enemies_on_wave -= 1
 			creatingEnemies_meteorite()
 		# 5
-		elif((num_level_hard % 100) == 2):
+		elif ((num_level_hard % 100) == 2):
 			number_enemies_on_wave -= 1
 			creatingEnemies_meteorite()
 		# 7
-		elif((num_level_hard % 100) == 3):
-			if(randi_range(0 , 100) <= 95 or price_level == 1):
+		elif ((num_level_hard % 100) == 3):
+			if (randi_range(0, 100) <= 95 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_White()
 		# 7
-		elif((num_level_hard % 100) == 4):
-			if(randi_range(0 , 100) <= 70 or price_level == 1):
+		elif ((num_level_hard % 100) == 4):
+			if (randi_range(0, 100) <= 75 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_White()
 		# 7
-		elif((num_level_hard % 100) == 5):
-			if(randi_range(0 , 100) <= 40 or price_level == 1):
+		elif ((num_level_hard % 100) == 5):
+			if (randi_range(0, 100) <= 50 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_White()
 		# 7
-		elif((num_level_hard % 100) == 6):
-			if(randi_range(0 , 100) <= 10 or price_level == 1):
+		elif ((num_level_hard % 100) == 6):
+			if (randi_range(0, 100) <= 25 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_White()
 		# 10
-		elif((num_level_hard % 100) == 7):
-			if(randi_range(0 , 100) <= 10 or price_level == 1):
+		elif ((num_level_hard % 100) == 7):
+			if (randi_range(0, 100) <= 10 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_White()
 		# 10
-		elif((num_level_hard % 100) == 8):
-			if(randi_range(0 , 100) <= 70 or price_level == 1):
+		elif ((num_level_hard % 100) == 8):
+			if (randi_range(0, 100) <= 75 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Red()
 		# 10
-		elif((num_level_hard % 100) == 9):
-			if(randi_range(0 , 100) <= 40 or price_level == 1):
+		elif ((num_level_hard % 100) == 9):
+			if (randi_range(0, 100) <= 50 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Red()
 		# 13
-		elif((num_level_hard % 100) == 10):
-			if(randi_range(0 , 100) <= 40 or price_level == 1):
+		elif ((num_level_hard % 100) == 25):
+			if (randi_range(0, 100) <= 40 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Red()
 		# 13
-		elif((num_level_hard % 100) == 11):
-			if(randi_range(0 , 100) <= 10 or price_level == 1):
+		elif ((num_level_hard % 100) == 11):
+			if (randi_range(0, 100) <= 10 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
-			elif(randi_range(0 , 100) <= 60):
+			elif (randi_range(0, 100) <= 60):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_White()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Red()
 		# 13
-		elif((num_level_hard % 100) == 12):
-			if(randi_range(0 , 100) <= 10 or price_level == 1):
+		elif ((num_level_hard % 100) == 12):
+			if (randi_range(0, 100) <= 10 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
-			elif(randi_range(0 , 100) <= 30):
+			elif (randi_range(0, 100) <= 40):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_White()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Red()
 		# 16
-		elif((num_level_hard % 100) == 13):
-			if(randi_range(0 , 100) <= 10 or price_level == 1):
+		elif ((num_level_hard % 100) == 13):
+			if (randi_range(0, 100) <= 10 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
-			elif(randi_range(0 , 100) <= 30):
+			elif (randi_range(0, 100) <= 20):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_White()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Red()
 		# 16
-		elif((num_level_hard % 100) == 14):
-			if(randi_range(0 , 100) <= 10 or price_level == 1):
+		elif ((num_level_hard % 100) == 14):
+			if (randi_range(0, 100) <= 10 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Red()
 		# 11
-		elif((num_level_hard % 100) == 15):
-			if(randi_range(0 , 100) <= 75 or price_level == 1):
+		elif ((num_level_hard % 100) == 15):
+			if (randi_range(0, 100) <= 75 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_drone_Violet()
 		# 11
-		elif((num_level_hard % 100) == 16):
-			if(randi_range(0 , 100) <= 50 or price_level == 1):
+		elif ((num_level_hard % 100) == 16):
+			if (randi_range(0, 100) <= 50 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_drone_Violet()
 		# 11
-		elif((num_level_hard % 100) == 17):
-			if(randi_range(0 , 100) <= 25 or price_level == 1):
+		elif ((num_level_hard % 100) == 17):
+			if (randi_range(0, 100) <= 25 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_drone_Violet()
 		# 11
-		elif((num_level_hard % 100) == 18):
-			if(randi_range(0 , 100) <= 75 or price_level == 1):
+		elif ((num_level_hard % 100) == 18):
+			if (randi_range(0, 100) <= 75 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_drone_Violet(1)
 		# 11
-		elif((num_level_hard % 100) == 19):
-			if(randi_range(0 , 100) <= 50 or price_level == 1):
+		elif ((num_level_hard % 100) == 19):
+			if (randi_range(0, 100) <= 50 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_drone_Violet(1)
 		# 11
-		elif((num_level_hard % 100) == 20):
-			if(randi_range(0 , 100) <= 25 or price_level == 1):
+		elif ((num_level_hard % 100) == 20):
+			if (randi_range(0, 100) <= 25 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_drone_Violet(1)
 		# 11
-		elif((num_level_hard % 100) == 21):
-			if(randi_range(0 , 100) <= 50 or price_level == 1):
+		elif ((num_level_hard % 100) == 21):
+			if (randi_range(0, 100) <= 50 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite(1)
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_drone_Violet()
 		# 11
-		elif((num_level_hard % 100) == 21):
-			if(randi_range(0 , 100) <= 75 or price_level == 1):
+		elif ((num_level_hard % 100) == 21):
+			if (randi_range(0, 100) <= 75 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite(1)
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_drone_Violet()
 		# 11
-		elif((num_level_hard % 100) == 22):
-			if(randi_range(0 , 100) <= 50 or price_level == 1):
+		elif ((num_level_hard % 100) == 22):
+			if (randi_range(0, 100) <= 50 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1,2) == 1):
+				if (randi_range(1, 2) == 1):
 					creatingEnemies_meteorite(1)
 				else:
 					creatingEnemies_meteorite()
 			else:
 				number_enemies_on_wave -= 1
-				if(randi_range(1,2) == 1):
+				if (randi_range(1, 2) == 1):
 					creatingEnemies_drone_Violet(1)
 				else:
 					creatingEnemies_drone_Violet()
 		# 17
-		elif((num_level_hard % 100) == 23):
-			if(randi_range(0 , 100) <= 50 or price_level == 1):
+		elif ((num_level_hard % 100) == 23):
+			if (randi_range(0, 100) <= 50 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1,2) == 1):
+				if (randi_range(1, 2) == 1):
 					creatingEnemies_meteorite(1)
 				else:
 					creatingEnemies_meteorite()
 			else:
 				number_enemies_on_wave -= 1
-				if(randi_range(1,2) == 1):
+				if (randi_range(1, 2) == 1):
 					creatingEnemies_drone_Violet(1)
 				else:
 					creatingEnemies_drone_Violet()
 		# 17
-		elif((num_level_hard % 100) == 24):
-			if(randi_range(0 , 100) <= 50 or price_level == 1):
+		elif ((num_level_hard % 100) == 24):
+			if (randi_range(0, 100) <= 50 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1,3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_meteorite()
 				else:
 					creatingEnemies_meteorite(1)
 			else:
 				number_enemies_on_wave -= 1
-				if(randi_range(1,3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_drone_Violet()
 				else:
 					creatingEnemies_drone_Violet(1)
 		# 17
-		elif((num_level_hard % 100) == 25):
-			if(randi_range(0 , 100) <= 80 or price_level == 1):
+		elif ((num_level_hard % 100) == 25):
+			if (randi_range(0, 100) <= 80 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
 		# 21
-		elif((num_level_hard % 100) == 26):
-			if(randi_range(0 , 100) <= 60 or price_level == 1):
+		elif ((num_level_hard % 100) == 26):
+			if (randi_range(0, 100) <= 60 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
-			elif(randi_range(0 , 100) <= 20):
+			elif (randi_range(0, 100) <= 20):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_White()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
 		# 21
-		elif((num_level_hard % 100) == 27):
-			if(randi_range(0 , 100) <= 60 or price_level == 1):
+		elif ((num_level_hard % 100) == 27):
+			if (randi_range(0, 100) <= 60 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
-			elif(randi_range(0 , 100) <= 20):
+			elif (randi_range(0, 100) <= 20):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Red()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
 		# 25
-		elif((num_level_hard % 100) == 28):
-			if(randi_range(0 , 100) <= 40 or price_level == 1):
+		elif ((num_level_hard % 100) == 28):
+			if (randi_range(0, 100) <= 40 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
-			elif(randi_range(0 , 100) <= 40):
+			elif (randi_range(0, 100) <= 40):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_White()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
 		# 25
-		elif((num_level_hard % 100) == 29):
-			if(randi_range(0 , 100) <= 40 or price_level == 1):
+		elif ((num_level_hard % 100) == 29):
+			if (randi_range(0, 100) <= 40 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
-			elif(randi_range(0 , 100) <= 40):
+			elif (randi_range(0, 100) <= 40):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Red()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
 		# 29
-		elif((num_level_hard % 100) == 30):
-			if(randi_range(0 , 100) <= 20 or price_level == 1):
+		elif ((num_level_hard % 100) == 30):
+			if (randi_range(0, 100) <= 20 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
-			elif(randi_range(0 , 100) <= 60):
+			elif (randi_range(0, 100) <= 60):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_White()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
 		# 29
-		elif((num_level_hard % 100) == 31):
-			if(randi_range(0 , 100) <= 20 or price_level == 1):
+		elif ((num_level_hard % 100) == 31):
+			if (randi_range(0, 100) <= 20 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
-			elif(randi_range(0 , 100) <= 60):
+			elif (randi_range(0, 100) <= 60):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Red()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
 		# 29
-		elif((num_level_hard % 100) == 32):
-			if(randi_range(0 , 100) <= 40 or price_level == 1):
+		elif ((num_level_hard % 100) == 32):
+			if (randi_range(0, 100) <= 40 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 ,4) == 1):
+				if (randi_range(1, 4) == 1):
 					creatingEnemies_drone_Violet()
 				else:
 					creatingEnemies_meteorite()
-			elif(randi_range(0 , 100) <= 20):
+			elif (randi_range(0, 100) <= 20):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_White()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
 		# 29
-		elif((num_level_hard % 100) == 33):
-			if(randi_range(0 , 100) <= 40 or price_level == 1):
+		elif ((num_level_hard % 100) == 33):
+			if (randi_range(0, 100) <= 40 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 ,4) == 1):
+				if (randi_range(1, 4) == 1):
 					creatingEnemies_drone_Violet()
 				else:
 					creatingEnemies_meteorite()
-			elif(randi_range(0 , 100) <= 20):
+			elif (randi_range(0, 100) <= 20):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Red()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
 		# 33
-		elif((num_level_hard % 100) == 34):
-			if(randi_range(0 , 100) <= 20 or price_level == 1):
+		elif ((num_level_hard % 100) == 34):
+			if (randi_range(0, 100) <= 20 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 ,4) == 1):
+				if (randi_range(1, 4) == 1):
 					creatingEnemies_drone_Violet()
 				else:
 					creatingEnemies_meteorite()
-			elif(randi_range(0 , 100) <= 30):
+			elif (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_White()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
 		# 33
-		elif((num_level_hard % 100) == 35):
-			if(randi_range(0 , 100) <= 20 or price_level == 1):
+		elif ((num_level_hard % 100) == 35):
+			if (randi_range(0, 100) <= 20 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 ,4) == 1):
+				if (randi_range(1, 4) == 1):
 					creatingEnemies_drone_Violet()
 				else:
 					creatingEnemies_meteorite()
-			elif(randi_range(0 , 100) <= 30):
+			elif (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Red()
 			else:
@@ -575,86 +576,86 @@ func method_level():
 				creatingEnemies_enemy_ship_Black()
 		# -------------------------
 		# 40
-		elif((num_level_hard % 100) == 36):
-			if(randi_range(0 , 100) <= 80 or price_level == 1):
+		elif ((num_level_hard % 100) == 36):
+			if (randi_range(0, 100) <= 80 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_drone_Violet()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
 		# 40
-		elif((num_level_hard % 100) == 37):
-			if(randi_range(0 , 100) <= 60 or price_level == 1):
+		elif ((num_level_hard % 100) == 37):
+			if (randi_range(0, 100) <= 60 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_drone_Violet()
-			elif(randi_range(0 , 100) <= 20):
+			elif (randi_range(0, 100) <= 20):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_White()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
 		# 40
-		elif((num_level_hard % 100) == 38):
-			if(randi_range(0 , 100) <= 60 or price_level == 1):
+		elif ((num_level_hard % 100) == 38):
+			if (randi_range(0, 100) <= 60 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_drone_Violet()
-			elif(randi_range(0 , 100) <= 20):
+			elif (randi_range(0, 100) <= 20):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Red()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
 		# 45
-		elif((num_level_hard % 100) == 39):
-			if(randi_range(0 , 100) <= 40 or price_level == 1):
+		elif ((num_level_hard % 100) == 39):
+			if (randi_range(0, 100) <= 40 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 4) == 1):
+				if (randi_range(1, 4) == 1):
 					creatingEnemies_drone_Violet(1)
 				else:
 					creatingEnemies_drone_Violet()
-			elif(randi_range(0 , 100) <= 40):
+			elif (randi_range(0, 100) <= 40):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_White()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
 		# 45
-		elif((num_level_hard % 100) == 40):
-			if(randi_range(0 , 100) <= 40 or price_level == 1):
+		elif ((num_level_hard % 100) == 40):
+			if (randi_range(0, 100) <= 40 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 4) == 1):
+				if (randi_range(1, 4) == 1):
 					creatingEnemies_drone_Violet(1)
 				else:
 					creatingEnemies_drone_Violet()
-			elif(randi_range(0 , 100) <= 40):
+			elif (randi_range(0, 100) <= 40):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Red()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
 		# 50
-		elif((num_level_hard % 100) == 41):
-			if(randi_range(0 , 100) <= 20 or price_level == 1):
+		elif ((num_level_hard % 100) == 41):
+			if (randi_range(0, 100) <= 20 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_drone_Violet(1)
 				else:
 					creatingEnemies_drone_Violet()
-			elif(randi_range(0 , 100) <= 60):
+			elif (randi_range(0, 100) <= 60):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_White()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
 		# 50
-		elif((num_level_hard % 100) == 42):
-			if(randi_range(0 , 100) <= 20 or price_level == 1):
+		elif ((num_level_hard % 100) == 42):
+			if (randi_range(0, 100) <= 20 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_drone_Violet(1)
 				else:
 					creatingEnemies_drone_Violet()
-			elif(randi_range(0 , 100) <= 60):
+			elif (randi_range(0, 100) <= 60):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Red()
 			else:
@@ -662,41 +663,41 @@ func method_level():
 				creatingEnemies_enemy_ship_Black()
 			#LINK -  ++++++++++++++++++
 		#50
-		elif((num_level_hard % 100) == 43):
-			if(randi_range(0 , 100) <= 40 or price_level == 1):
+		elif ((num_level_hard % 100) == 43):
+			if (randi_range(0, 100) <= 40 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 2) == 1):
+				if (randi_range(1, 2) == 1):
 					creatingEnemies_drone_Violet(1)
 				else:
 					creatingEnemies_drone_Violet()
-			elif(randi_range(0 , 100) <= 20):
+			elif (randi_range(0, 100) <= 20):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_White()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
 		# 50
-		elif((num_level_hard % 100) == 44):
-			if(randi_range(0 , 100) <= 40 or price_level == 1):
+		elif ((num_level_hard % 100) == 44):
+			if (randi_range(0, 100) <= 40 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 2) == 1):
+				if (randi_range(1, 2) == 1):
 					creatingEnemies_drone_Violet(1)
 				else:
 					creatingEnemies_drone_Violet()
-			elif(randi_range(0 , 100) <= 20):
+			elif (randi_range(0, 100) <= 20):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Red()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
 		# 55
-		elif((num_level_hard % 100) == 45):
-			if(randi_range(0 , 100) <= 20 or price_level == 1):
+		elif ((num_level_hard % 100) == 45):
+			if (randi_range(0, 100) <= 20 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_drone_Violet(1)
-			elif(randi_range(0 , 100) <= 30):
+			elif (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 5) == 1):
+				if (randi_range(1, 5) == 1):
 					creatingEnemies_enemy_ship_White(1)
 				else:
 					creatingEnemies_enemy_ship_White()
@@ -704,13 +705,13 @@ func method_level():
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
 		# 55
-		elif((num_level_hard % 100) == 46):
-			if(randi_range(0 , 100) <= 20 or price_level == 1):
+		elif ((num_level_hard % 100) == 46):
+			if (randi_range(0, 100) <= 20 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_drone_Violet(1)
-			elif(randi_range(0 , 100) <= 30):
+			elif (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 5) == 1):
+				if (randi_range(1, 5) == 1):
 					creatingEnemies_enemy_ship_Red(1)
 				else:
 					creatingEnemies_enemy_ship_Red()
@@ -719,58 +720,58 @@ func method_level():
 				creatingEnemies_enemy_ship_Black()
 		#LINK - ++++++++++++++++++++++
 		# 60
-		elif((num_level_hard % 100) == 47):
-			if(randi_range(0 , 100) <= 40 or price_level == 1):
+		elif ((num_level_hard % 100) == 47):
+			if (randi_range(0, 100) <= 40 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_drone_Violet(1)
 			else:
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 5) == 1):
+				if (randi_range(1, 5) == 1):
 					creatingEnemies_enemy_ship_Black(1)
 				else:
 					creatingEnemies_enemy_ship_Black()
 		# 60
-		elif((num_level_hard % 100) == 48):
-			if(randi_range(0 , 100) <= 20 or price_level == 1):
+		elif ((num_level_hard % 100) == 48):
+			if (randi_range(0, 100) <= 20 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_drone_Violet(1)
 			else:
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 4) == 1):
+				if (randi_range(1, 4) == 1):
 					creatingEnemies_enemy_ship_Black(1)
 				else:
 					creatingEnemies_enemy_ship_Black()
 		# 60
-		elif((num_level_hard % 100) == 49):
-			if(randi_range(0 , 100) <= 5 or price_level == 1):
+		elif ((num_level_hard % 100) == 49):
+			if (randi_range(0, 100) <= 5 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_drone_Violet(1)
 			else:
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_enemy_ship_Black(1)
 				else:
 					creatingEnemies_enemy_ship_Black()
 		#LINK - ////////////////////////////////////////////////////////
 		# 60
-		elif((num_level_hard % 100) == 50):
-			if(randi_range(0 , 100) <= 80 or price_level == 1):
+		elif ((num_level_hard % 100) == 50):
+			if (randi_range(0, 100) <= 80 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_drone_Уellow()
 		# 60
-		elif((num_level_hard % 100) == 51):
-			if(randi_range(0 , 100) <= 60 or price_level == 1):
+		elif ((num_level_hard % 100) == 51):
+			if (randi_range(0, 100) <= 60 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_drone_Уellow()
 		# 60
-		elif((num_level_hard % 100) == 52):
-			if(randi_range(0 , 100) <= 40 or price_level == 1):
+		elif ((num_level_hard % 100) == 52):
+			if (randi_range(0, 100) <= 40 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
 			else:
@@ -778,33 +779,33 @@ func method_level():
 				creatingEnemies_drone_Уellow()
 		#LINK - ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		# 60
-		elif((num_level_hard % 100) == 53):
-			if(randi_range(0 , 100) <= 50 or price_level == 1):
+		elif ((num_level_hard % 100) == 53):
+			if (randi_range(0, 100) <= 50 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
-			if(randi_range(0 , 100) <= 30):
+			if (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_White()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_drone_Уellow()
 		# 60
-		elif((num_level_hard % 100) == 54):
-			if(randi_range(0 , 100) <= 30 or price_level == 1):
+		elif ((num_level_hard % 100) == 54):
+			if (randi_range(0, 100) <= 30 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
-			if(randi_range(0 , 100) <= 40):
+			if (randi_range(0, 100) <= 40):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_White()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_drone_Уellow()
 		# 60
-		elif((num_level_hard % 100) == 55):
-			if(randi_range(0 , 100) <= 10 or price_level == 1):
+		elif ((num_level_hard % 100) == 55):
+			if (randi_range(0, 100) <= 10 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
-			if(randi_range(0 , 100) <= 50):
+			if (randi_range(0, 100) <= 50):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_White()
 			else:
@@ -812,33 +813,33 @@ func method_level():
 				creatingEnemies_drone_Уellow()
 		#LINK - ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		# 60
-		elif((num_level_hard % 100) == 56):
-			if(randi_range(0 , 100) <= 50 or price_level == 1):
+		elif ((num_level_hard % 100) == 56):
+			if (randi_range(0, 100) <= 50 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
-			if(randi_range(0 , 100) <= 30):
+			if (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Red()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_drone_Уellow()
 		# 60
-		elif((num_level_hard % 100) == 57):
-			if(randi_range(0 , 100) <= 30 or price_level == 1):
+		elif ((num_level_hard % 100) == 57):
+			if (randi_range(0, 100) <= 30 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
-			if(randi_range(0 , 100) <= 40):
+			if (randi_range(0, 100) <= 40):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Red()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_drone_Уellow()
 		# 60
-		elif((num_level_hard % 100) == 58):
-			if(randi_range(0 , 100) <= 10 or price_level == 1):
+		elif ((num_level_hard % 100) == 58):
+			if (randi_range(0, 100) <= 10 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
-			if(randi_range(0 , 100) <= 50):
+			if (randi_range(0, 100) <= 50):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Red()
 			else:
@@ -846,33 +847,33 @@ func method_level():
 				creatingEnemies_drone_Уellow()
 		#LINK - ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		# 60
-		elif((num_level_hard % 100) == 59):
-			if(randi_range(0 , 100) <= 50 or price_level == 1):
+		elif ((num_level_hard % 100) == 59):
+			if (randi_range(0, 100) <= 50 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
-			if(randi_range(0 , 100) <= 30):
+			if (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_drone_Уellow()
 		# 60
-		elif((num_level_hard % 100) == 60):
-			if(randi_range(0 , 100) <= 30 or price_level == 1):
+		elif ((num_level_hard % 100) == 60):
+			if (randi_range(0, 100) <= 30 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
-			if(randi_range(0 , 100) <= 40):
+			if (randi_range(0, 100) <= 40):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_drone_Уellow()
 		# 60
-		elif((num_level_hard % 100) == 61):
-			if(randi_range(0 , 100) <= 10 or price_level == 1):
+		elif ((num_level_hard % 100) == 61):
+			if (randi_range(0, 100) <= 10 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
-			if(randi_range(0 , 100) <= 50):
+			if (randi_range(0, 100) <= 50):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
 			else:
@@ -880,56 +881,56 @@ func method_level():
 				creatingEnemies_drone_Уellow()
 		#LINK - ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		# 65
-		elif((num_level_hard % 100) == 62):
-			if(randi_range(0 , 100) <= 40 or price_level == 1):
+		elif ((num_level_hard % 100) == 62):
+			if (randi_range(0, 100) <= 40 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
-			if(randi_range(0 , 100) <= 25):
+			if (randi_range(0, 100) <= 25):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_White()
-			if(randi_range(0 , 100) <= 20):
+			if (randi_range(0, 100) <= 20):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Red()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_drone_Уellow()
 		# 65
-		elif((num_level_hard % 100) == 63):
-			if(randi_range(0 , 100) <= 30 or price_level == 1):
+		elif ((num_level_hard % 100) == 63):
+			if (randi_range(0, 100) <= 30 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
-			if(randi_range(0 , 100) <= 30):
+			if (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_White()
-			if(randi_range(0 , 100) <= 20):
+			if (randi_range(0, 100) <= 20):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Red()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_drone_Уellow()
 		# 65
-		elif((num_level_hard % 100) == 64):
-			if(randi_range(0 , 100) <= 15 or price_level == 1):
+		elif ((num_level_hard % 100) == 64):
+			if (randi_range(0, 100) <= 15 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
-			if(randi_range(0 , 100) <= 30):
+			if (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_White()
-			if(randi_range(0 , 100) <= 30):
+			if (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Red()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_drone_Уellow()
 		# 65
-		elif((num_level_hard % 100) == 65):
-			if(randi_range(0 , 100) <= 5 or price_level == 1):
+		elif ((num_level_hard % 100) == 65):
+			if (randi_range(0, 100) <= 5 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
-			if(randi_range(0 , 100) <= 30):
+			if (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_White()
-			if(randi_range(0 , 100) <= 35):
+			if (randi_range(0, 100) <= 35):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Red()
 			else:
@@ -937,56 +938,56 @@ func method_level():
 				creatingEnemies_drone_Уellow()
 		#LINK - ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		# 70
-		elif((num_level_hard % 100) == 66):
-			if(randi_range(0 , 100) <= 40 or price_level == 1):
+		elif ((num_level_hard % 100) == 66):
+			if (randi_range(0, 100) <= 40 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
-			if(randi_range(0 , 100) <= 25):
+			if (randi_range(0, 100) <= 25):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_White()
-			if(randi_range(0 , 100) <= 20):
+			if (randi_range(0, 100) <= 20):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_drone_Уellow()
 		# 70
-		elif((num_level_hard % 100) == 67):
-			if(randi_range(0 , 100) <= 30 or price_level == 1):
+		elif ((num_level_hard % 100) == 67):
+			if (randi_range(0, 100) <= 30 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
-			if(randi_range(0 , 100) <= 30):
+			if (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_White()
-			if(randi_range(0 , 100) <= 20):
+			if (randi_range(0, 100) <= 20):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_drone_Уellow()
 		# 70
-		elif((num_level_hard % 100) == 68):
-			if(randi_range(0 , 100) <= 15 or price_level == 1):
+		elif ((num_level_hard % 100) == 68):
+			if (randi_range(0, 100) <= 15 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
-			if(randi_range(0 , 100) <= 30):
+			if (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_White()
-			if(randi_range(0 , 100) <= 30):
+			if (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_drone_Уellow()
 		# 70
-		elif((num_level_hard % 100) == 69):
-			if(randi_range(0 , 100) <= 5 or price_level == 1):
+		elif ((num_level_hard % 100) == 69):
+			if (randi_range(0, 100) <= 5 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
-			if(randi_range(0 , 100) <= 30):
+			if (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_White()
-			if(randi_range(0 , 100) <= 35):
+			if (randi_range(0, 100) <= 35):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
 			else:
@@ -994,56 +995,56 @@ func method_level():
 				creatingEnemies_drone_Уellow()
 		#LINK - ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		# 75
-		elif((num_level_hard % 100) == 70):
-			if(randi_range(0 , 100) <= 40 or price_level == 1):
+		elif ((num_level_hard % 100) == 70):
+			if (randi_range(0, 100) <= 40 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
-			if(randi_range(0 , 100) <= 25):
+			if (randi_range(0, 100) <= 25):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Red()
-			if(randi_range(0 , 100) <= 20):
+			if (randi_range(0, 100) <= 20):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_drone_Уellow()
 		# 75
-		elif((num_level_hard % 100) == 71):
-			if(randi_range(0 , 100) <= 30 or price_level == 1):
+		elif ((num_level_hard % 100) == 71):
+			if (randi_range(0, 100) <= 30 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
-			if(randi_range(0 , 100) <= 30):
+			if (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Red()
-			if(randi_range(0 , 100) <= 20):
+			if (randi_range(0, 100) <= 20):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_drone_Уellow()
 		# 75
-		elif((num_level_hard % 100) == 72):
-			if(randi_range(0 , 100) <= 15 or price_level == 1):
+		elif ((num_level_hard % 100) == 72):
+			if (randi_range(0, 100) <= 15 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
-			if(randi_range(0 , 100) <= 30):
+			if (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Red()
-			if(randi_range(0 , 100) <= 30):
+			if (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
 			else:
 				number_enemies_on_wave -= 1
 				creatingEnemies_drone_Уellow()
 		# 75
-		elif((num_level_hard % 100) == 73):
-			if(randi_range(0 , 100) <= 5 or price_level == 1):
+		elif ((num_level_hard % 100) == 73):
+			if (randi_range(0, 100) <= 5 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
-			if(randi_range(0 , 100) <= 30):
+			if (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Red()
-			if(randi_range(0 , 100) <= 35):
+			if (randi_range(0, 100) <= 35):
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Black()
 			else:
@@ -1051,602 +1052,602 @@ func method_level():
 				creatingEnemies_drone_Уellow()
 		#LINK - ////////////////////////////////////////////////////////
 		# 80
-		elif((num_level_hard % 100) == 74):
-			if(randi_range(0 , 100) <= 80 or price_level == 1):
+		elif ((num_level_hard % 100) == 74):
+			if (randi_range(0, 100) <= 80 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 2) == 1):
+				if (randi_range(1, 2) == 1):
 					creatingEnemies_drone_Violet(1)
 				else:
 					creatingEnemies_meteorite(1)
 			else:
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 4) == 1):
+				if (randi_range(1, 4) == 1):
 					creatingEnemies_drone_Уellow(1)
 				else:
 					creatingEnemies_drone_Уellow()
 		# 80
-		elif((num_level_hard % 100) == 75):
-			if(randi_range(0 , 100) <= 60 or price_level == 1):
+		elif ((num_level_hard % 100) == 75):
+			if (randi_range(0, 100) <= 60 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 2) == 1):
+				if (randi_range(1, 2) == 1):
 					creatingEnemies_drone_Violet(1)
 				else:
 					creatingEnemies_meteorite(1)
 			else:
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 4) == 1):
+				if (randi_range(1, 4) == 1):
 					creatingEnemies_drone_Уellow(1)
 				else:
 					creatingEnemies_drone_Уellow()
 		# 80
-		elif((num_level_hard % 100) == 76):
-			if(randi_range(0 , 100) <= 40 or price_level == 1):
+		elif ((num_level_hard % 100) == 76):
+			if (randi_range(0, 100) <= 40 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 2) == 1):
+				if (randi_range(1, 2) == 1):
 					creatingEnemies_drone_Violet(1)
 				else:
 					creatingEnemies_meteorite(1)
 			else:
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 4) == 1):
-					creatingEnemies_drone_Уellow(1)
-				else:
-					creatingEnemies_drone_Уellow()
-		#LINK - ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		# 80
-		elif((num_level_hard % 100) == 77):
-			if(randi_range(0 , 100) <= 50 or price_level == 1):
-				number_enemies_on_wave -= 1
-				if(randi_range(1 , 2) == 1):
-					creatingEnemies_drone_Violet(1)
-				else:
-					creatingEnemies_meteorite(1)
-			elif(randi_range(0 , 100) <= 30):
-				number_enemies_on_wave -= 1
-				if(randi_range(1 , 4) == 1):
-					creatingEnemies_enemy_ship_White(1)
-				else:
-					creatingEnemies_enemy_ship_White()
-			else:
-				number_enemies_on_wave -= 1
-				if(randi_range(1 , 4) == 1):
-					creatingEnemies_drone_Уellow(1)
-				else:
-					creatingEnemies_drone_Уellow()
-		# 80
-		elif((num_level_hard % 100) == 78):
-			if(randi_range(0 , 100) <= 30 or price_level == 1):
-				number_enemies_on_wave -= 1
-				if(randi_range(1 , 2) == 1):
-					creatingEnemies_drone_Violet(1)
-				else:
-					creatingEnemies_meteorite(1)
-			elif(randi_range(0 , 100) <= 40):
-				number_enemies_on_wave -= 1
-				if(randi_range(1 , 4) == 1):
-					creatingEnemies_enemy_ship_White(1)
-				else:
-					creatingEnemies_enemy_ship_White()
-			else:
-				number_enemies_on_wave -= 1
-				if(randi_range(1 , 4) == 1):
-					creatingEnemies_drone_Уellow(1)
-				else:
-					creatingEnemies_drone_Уellow()
-		# 80
-		elif((num_level_hard % 100) == 79):
-			if(randi_range(0 , 100) <= 10 or price_level == 1):
-				number_enemies_on_wave -= 1
-				if(randi_range(1 , 2) == 1):
-					creatingEnemies_drone_Violet(1)
-				else:
-					creatingEnemies_meteorite(1)
-			elif(randi_range(0 , 100) <= 50):
-				number_enemies_on_wave -= 1
-				if(randi_range(1 , 4) == 1):
-					creatingEnemies_enemy_ship_White(1)
-				else:
-					creatingEnemies_enemy_ship_White()
-			else:
-				number_enemies_on_wave -= 1
-				if(randi_range(1 , 4) == 1):
+				if (randi_range(1, 4) == 1):
 					creatingEnemies_drone_Уellow(1)
 				else:
 					creatingEnemies_drone_Уellow()
 		#LINK - ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		# 80
-		elif((num_level_hard % 100) == 80):
-			if(randi_range(0 , 100) <= 50 or price_level == 1):
+		elif ((num_level_hard % 100) == 77):
+			if (randi_range(0, 100) <= 50 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 2) == 1):
+				if (randi_range(1, 2) == 1):
 					creatingEnemies_drone_Violet(1)
 				else:
 					creatingEnemies_meteorite(1)
-			elif(randi_range(0 , 100) <= 30):
+			elif (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 4) == 1):
-					creatingEnemies_enemy_ship_Red(1)
+				if (randi_range(1, 4) == 1):
+					creatingEnemies_enemy_ship_White(1)
 				else:
-					creatingEnemies_enemy_ship_Red()
+					creatingEnemies_enemy_ship_White()
 			else:
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 4) == 1):
+				if (randi_range(1, 4) == 1):
 					creatingEnemies_drone_Уellow(1)
 				else:
 					creatingEnemies_drone_Уellow()
 		# 80
-		elif((num_level_hard % 100) == 81):
-			if(randi_range(0 , 100) <= 30 or price_level == 1):
+		elif ((num_level_hard % 100) == 78):
+			if (randi_range(0, 100) <= 30 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 2) == 1):
+				if (randi_range(1, 2) == 1):
 					creatingEnemies_drone_Violet(1)
 				else:
 					creatingEnemies_meteorite(1)
-			elif(randi_range(0 , 100) <= 40):
+			elif (randi_range(0, 100) <= 40):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 4) == 1):
-					creatingEnemies_enemy_ship_Red(1)
+				if (randi_range(1, 4) == 1):
+					creatingEnemies_enemy_ship_White(1)
 				else:
-					creatingEnemies_enemy_ship_Red()
+					creatingEnemies_enemy_ship_White()
 			else:
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 4) == 1):
+				if (randi_range(1, 4) == 1):
 					creatingEnemies_drone_Уellow(1)
 				else:
 					creatingEnemies_drone_Уellow()
 		# 80
-		elif((num_level_hard % 100) == 82):
-			if(randi_range(0 , 100) <= 10 or price_level == 1):
+		elif ((num_level_hard % 100) == 79):
+			if (randi_range(0, 100) <= 10 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 2) == 1):
+				if (randi_range(1, 2) == 1):
 					creatingEnemies_drone_Violet(1)
 				else:
 					creatingEnemies_meteorite(1)
-			elif(randi_range(0 , 100) <= 50):
+			elif (randi_range(0, 100) <= 50):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 4) == 1):
+				if (randi_range(1, 4) == 1):
+					creatingEnemies_enemy_ship_White(1)
+				else:
+					creatingEnemies_enemy_ship_White()
+			else:
+				number_enemies_on_wave -= 1
+				if (randi_range(1, 4) == 1):
+					creatingEnemies_drone_Уellow(1)
+				else:
+					creatingEnemies_drone_Уellow()
+		#LINK - ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		# 80
+		elif ((num_level_hard % 100) == 80):
+			if (randi_range(0, 100) <= 50 or price_level == 1):
+				number_enemies_on_wave -= 1
+				if (randi_range(1, 2) == 1):
+					creatingEnemies_drone_Violet(1)
+				else:
+					creatingEnemies_meteorite(1)
+			elif (randi_range(0, 100) <= 30):
+				number_enemies_on_wave -= 1
+				if (randi_range(1, 4) == 1):
 					creatingEnemies_enemy_ship_Red(1)
 				else:
 					creatingEnemies_enemy_ship_Red()
 			else:
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 4) == 1):
+				if (randi_range(1, 4) == 1):
+					creatingEnemies_drone_Уellow(1)
+				else:
+					creatingEnemies_drone_Уellow()
+		# 80
+		elif ((num_level_hard % 100) == 81):
+			if (randi_range(0, 100) <= 30 or price_level == 1):
+				number_enemies_on_wave -= 1
+				if (randi_range(1, 2) == 1):
+					creatingEnemies_drone_Violet(1)
+				else:
+					creatingEnemies_meteorite(1)
+			elif (randi_range(0, 100) <= 40):
+				number_enemies_on_wave -= 1
+				if (randi_range(1, 4) == 1):
+					creatingEnemies_enemy_ship_Red(1)
+				else:
+					creatingEnemies_enemy_ship_Red()
+			else:
+				number_enemies_on_wave -= 1
+				if (randi_range(1, 4) == 1):
+					creatingEnemies_drone_Уellow(1)
+				else:
+					creatingEnemies_drone_Уellow()
+		# 80
+		elif ((num_level_hard % 100) == 82):
+			if (randi_range(0, 100) <= 10 or price_level == 1):
+				number_enemies_on_wave -= 1
+				if (randi_range(1, 2) == 1):
+					creatingEnemies_drone_Violet(1)
+				else:
+					creatingEnemies_meteorite(1)
+			elif (randi_range(0, 100) <= 50):
+				number_enemies_on_wave -= 1
+				if (randi_range(1, 4) == 1):
+					creatingEnemies_enemy_ship_Red(1)
+				else:
+					creatingEnemies_enemy_ship_Red()
+			else:
+				number_enemies_on_wave -= 1
+				if (randi_range(1, 4) == 1):
 					creatingEnemies_drone_Уellow(1)
 				else:
 					creatingEnemies_drone_Уellow()
 		#LINK - ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		# 85
-		elif((num_level_hard % 100) == 83):
-			if(randi_range(0 , 100) <= 50 or price_level == 1):
+		elif ((num_level_hard % 100) == 83):
+			if (randi_range(0, 100) <= 50 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 2) == 1):
+				if (randi_range(1, 2) == 1):
 					creatingEnemies_drone_Violet(1)
 				else:
 					creatingEnemies_meteorite(1)
-			elif(randi_range(0 , 100) <= 30):
+			elif (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 4) == 1):
+				if (randi_range(1, 4) == 1):
 					creatingEnemies_enemy_ship_Black(1)
 				else:
 					creatingEnemies_enemy_ship_Black()
 			else:
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 4) == 1):
+				if (randi_range(1, 4) == 1):
 					creatingEnemies_drone_Уellow(1)
 				else:
 					creatingEnemies_drone_Уellow()
 		# 85
-		elif((num_level_hard % 100) == 84):
-			if(randi_range(0 , 100) <= 30 or price_level == 1):
+		elif ((num_level_hard % 100) == 84):
+			if (randi_range(0, 100) <= 30 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 2) == 1):
+				if (randi_range(1, 2) == 1):
 					creatingEnemies_drone_Violet(1)
 				else:
 					creatingEnemies_meteorite(1)
-			elif(randi_range(0 , 100) <= 40):
+			elif (randi_range(0, 100) <= 40):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 4) == 1):
+				if (randi_range(1, 4) == 1):
 					creatingEnemies_enemy_ship_Black(1)
 				else:
 					creatingEnemies_enemy_ship_Black()
 			else:
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 4) == 1):
+				if (randi_range(1, 4) == 1):
 					creatingEnemies_drone_Уellow(1)
 				else:
 					creatingEnemies_drone_Уellow()
 		# 85
-		elif((num_level_hard % 100) == 85):
-			if(randi_range(0 , 100) <= 10 or price_level == 1):
+		elif ((num_level_hard % 100) == 85):
+			if (randi_range(0, 100) <= 10 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 2) == 1):
+				if (randi_range(1, 2) == 1):
 					creatingEnemies_drone_Violet(1)
 				else:
 					creatingEnemies_meteorite(1)
-			elif(randi_range(0 , 100) <= 50):
+			elif (randi_range(0, 100) <= 50):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 4) == 1):
+				if (randi_range(1, 4) == 1):
 					creatingEnemies_enemy_ship_Black(1)
 				else:
 					creatingEnemies_enemy_ship_Black()
 			else:
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 4) == 1):
+				if (randi_range(1, 4) == 1):
 					creatingEnemies_drone_Уellow(1)
 				else:
 					creatingEnemies_drone_Уellow()
 		#LINK - ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		# 90
-		elif((num_level_hard % 100) == 86):
-			if(randi_range(0 , 100) <= 40 or price_level == 1):
+		elif ((num_level_hard % 100) == 86):
+			if (randi_range(0, 100) <= 40 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 2) == 1):
+				if (randi_range(1, 2) == 1):
 					creatingEnemies_drone_Violet(1)
 				else:
 					creatingEnemies_meteorite(1)
-			elif(randi_range(0 , 100) <= 25):
+			elif (randi_range(0, 100) <= 25):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_enemy_ship_White(1)
 				else:
 					creatingEnemies_enemy_ship_White()
-			elif(randi_range(0 , 100) <= 20):
+			elif (randi_range(0, 100) <= 20):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_enemy_ship_Red(1)
 				else:
 					creatingEnemies_enemy_ship_Red()
 			else:
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_drone_Уellow(1)
 				else:
 					creatingEnemies_drone_Уellow()
 		# 90
-		elif((num_level_hard % 100) == 87):
-			if(randi_range(0 , 100) <= 30 or price_level == 1):
+		elif ((num_level_hard % 100) == 87):
+			if (randi_range(0, 100) <= 30 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 2) == 1):
+				if (randi_range(1, 2) == 1):
 					creatingEnemies_drone_Violet(1)
 				else:
 					creatingEnemies_meteorite(1)
-			elif(randi_range(0 , 100) <= 30):
+			elif (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_enemy_ship_White(1)
 				else:
 					creatingEnemies_enemy_ship_White()
-			elif(randi_range(0 , 100) <= 20):
+			elif (randi_range(0, 100) <= 20):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_enemy_ship_Red(1)
 				else:
 					creatingEnemies_enemy_ship_Red()
 			else:
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_drone_Уellow(1)
 				else:
 					creatingEnemies_drone_Уellow()
 		# 90
-		elif((num_level_hard % 100) == 88):
-			if(randi_range(0 , 100) <= 15 or price_level == 1):
+		elif ((num_level_hard % 100) == 88):
+			if (randi_range(0, 100) <= 15 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 2) == 1):
+				if (randi_range(1, 2) == 1):
 					creatingEnemies_drone_Violet(1)
 				else:
 					creatingEnemies_meteorite(1)
-			elif(randi_range(0 , 100) <= 30):
+			elif (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_enemy_ship_White(1)
 				else:
 					creatingEnemies_enemy_ship_White()
-			elif(randi_range(0 , 100) <= 30):
+			elif (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_enemy_ship_Red(1)
 				else:
 					creatingEnemies_enemy_ship_Red()
 			else:
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_drone_Уellow(1)
 				else:
 					creatingEnemies_drone_Уellow()
 		# 90
-		elif((num_level_hard % 100) == 89):
-			if(randi_range(0 , 100) <= 5 or price_level == 1):
+		elif ((num_level_hard % 100) == 89):
+			if (randi_range(0, 100) <= 5 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 2) == 1):
+				if (randi_range(1, 2) == 1):
 					creatingEnemies_drone_Violet(1)
 				else:
 					creatingEnemies_meteorite(1)
-			elif(randi_range(0 , 100) <= 30):
+			elif (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_enemy_ship_White(1)
 				else:
 					creatingEnemies_enemy_ship_White()
-			elif(randi_range(0 , 100) <= 35):
+			elif (randi_range(0, 100) <= 35):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_enemy_ship_Red(1)
 				else:
 					creatingEnemies_enemy_ship_Red()
 			else:
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_drone_Уellow(1)
 				else:
 					creatingEnemies_drone_Уellow()
 		#LINK - ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		# 95
-		elif((num_level_hard % 100) == 90):
-			if(randi_range(0 , 100) <= 40 or price_level == 1):
+		elif ((num_level_hard % 100) == 90):
+			if (randi_range(0, 100) <= 40 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 2) == 1):
+				if (randi_range(1, 2) == 1):
 					creatingEnemies_drone_Violet(1)
 				else:
 					creatingEnemies_meteorite(1)
-			elif(randi_range(0 , 100) <= 25):
+			elif (randi_range(0, 100) <= 25):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_enemy_ship_White(1)
 				else:
 					creatingEnemies_enemy_ship_White()
-			elif(randi_range(0 , 100) <= 20):
+			elif (randi_range(0, 100) <= 20):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_enemy_ship_Black(1)
 				else:
 					creatingEnemies_enemy_ship_Black()
 			else:
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_drone_Уellow(1)
 				else:
 					creatingEnemies_drone_Уellow()
 		# 95
-		elif((num_level_hard % 100) == 91):
-			if(randi_range(0 , 100) <= 30 or price_level == 1):
+		elif ((num_level_hard % 100) == 91):
+			if (randi_range(0, 100) <= 30 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 2) == 1):
+				if (randi_range(1, 2) == 1):
 					creatingEnemies_drone_Violet(1)
 				else:
 					creatingEnemies_meteorite(1)
-			elif(randi_range(0 , 100) <= 30):
+			elif (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_enemy_ship_White(1)
 				else:
 					creatingEnemies_enemy_ship_White()
-			elif(randi_range(0 , 100) <= 20):
+			elif (randi_range(0, 100) <= 20):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_enemy_ship_Black(1)
 				else:
 					creatingEnemies_enemy_ship_Black()
 			else:
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_drone_Уellow(1)
 				else:
 					creatingEnemies_drone_Уellow()
 		# 95
-		elif((num_level_hard % 100) == 92):
-			if(randi_range(0 , 100) <= 15 or price_level == 1):
+		elif ((num_level_hard % 100) == 92):
+			if (randi_range(0, 100) <= 15 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 2) == 1):
+				if (randi_range(1, 2) == 1):
 					creatingEnemies_drone_Violet(1)
 				else:
 					creatingEnemies_meteorite(1)
-			elif(randi_range(0 , 100) <= 30):
+			elif (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_enemy_ship_White(1)
 				else:
 					creatingEnemies_enemy_ship_White()
-			elif(randi_range(0 , 100) <= 30):
+			elif (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_enemy_ship_Black(1)
 				else:
 					creatingEnemies_enemy_ship_Black()
 			else:
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_drone_Уellow(1)
 				else:
 					creatingEnemies_drone_Уellow()
 		# 95
-		elif((num_level_hard % 100) == 93):
-			if(randi_range(0 , 100) <= 5 or price_level == 1):
+		elif ((num_level_hard % 100) == 93):
+			if (randi_range(0, 100) <= 5 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 2) == 1):
+				if (randi_range(1, 2) == 1):
 					creatingEnemies_drone_Violet(1)
 				else:
 					creatingEnemies_meteorite(1)
-			elif(randi_range(0 , 100) <= 30):
+			elif (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_enemy_ship_White(1)
 				else:
 					creatingEnemies_enemy_ship_White()
-			elif(randi_range(0 , 100) <= 35):
+			elif (randi_range(0, 100) <= 35):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_enemy_ship_Black(1)
 				else:
 					creatingEnemies_enemy_ship_Black()
 			else:
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_drone_Уellow(1)
 				else:
 					creatingEnemies_drone_Уellow()
 		#LINK - ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		# 100
-		elif((num_level_hard % 100) == 94):
-			if(randi_range(0 , 100) <= 40 or price_level == 1):
+		elif ((num_level_hard % 100) == 94):
+			if (randi_range(0, 100) <= 40 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 2) == 1):
+				if (randi_range(1, 2) == 1):
 					creatingEnemies_drone_Violet(1)
 				else:
 					creatingEnemies_meteorite(1)
-			elif(randi_range(0 , 100) <= 25):
+			elif (randi_range(0, 100) <= 25):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_enemy_ship_Red(1)
 				else:
 					creatingEnemies_enemy_ship_Red()
-			elif(randi_range(0 , 100) <= 20):
+			elif (randi_range(0, 100) <= 20):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_enemy_ship_Black(1)
 				else:
 					creatingEnemies_enemy_ship_Black()
 			else:
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_drone_Уellow(1)
 				else:
 					creatingEnemies_drone_Уellow()
 		# 100
-		elif((num_level_hard % 100) == 95):
-			if(randi_range(0 , 100) <= 30 or price_level == 1):
+		elif ((num_level_hard % 100) == 95):
+			if (randi_range(0, 100) <= 30 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 2) == 1):
+				if (randi_range(1, 2) == 1):
 					creatingEnemies_drone_Violet(1)
 				else:
 					creatingEnemies_meteorite(1)
-			elif(randi_range(0 , 100) <= 30):
+			elif (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_enemy_ship_Red(1)
 				else:
 					creatingEnemies_enemy_ship_Red()
-			elif(randi_range(0 , 100) <= 20):
+			elif (randi_range(0, 100) <= 20):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_enemy_ship_Black(1)
 				else:
 					creatingEnemies_enemy_ship_Black()
 			else:
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_drone_Уellow(1)
 				else:
 					creatingEnemies_drone_Уellow()
 		# 100
-		elif((num_level_hard % 100) == 96):
-			if(randi_range(0 , 100) <= 15 or price_level == 1):
+		elif ((num_level_hard % 100) == 96):
+			if (randi_range(0, 100) <= 15 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 2) == 1):
+				if (randi_range(1, 2) == 1):
 					creatingEnemies_drone_Violet(1)
 				else:
 					creatingEnemies_meteorite(1)
-			elif(randi_range(0 , 100) <= 30):
+			elif (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_enemy_ship_Red(1)
 				else:
 					creatingEnemies_enemy_ship_Red()
-			elif(randi_range(0 , 100) <= 30):
+			elif (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_enemy_ship_Black(1)
 				else:
 					creatingEnemies_enemy_ship_Black()
 			else:
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_drone_Уellow(1)
 				else:
 					creatingEnemies_drone_Уellow()
 		# 100
-		elif((num_level_hard % 100) == 97):
-			if(randi_range(0 , 100) <= 5 or price_level == 1):
+		elif ((num_level_hard % 100) == 97):
+			if (randi_range(0, 100) <= 5 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 2) == 1):
+				if (randi_range(1, 2) == 1):
 					creatingEnemies_drone_Violet(1)
 				else:
 					creatingEnemies_meteorite(1)
-			elif(randi_range(0 , 100) <= 30):
+			elif (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_enemy_ship_Red(1)
 				else:
 					creatingEnemies_enemy_ship_Red()
-			elif(randi_range(0 , 100) <= 35):
+			elif (randi_range(0, 100) <= 35):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_enemy_ship_Black(1)
 				else:
 					creatingEnemies_enemy_ship_Black()
 			else:
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_drone_Уellow(1)
 				else:
 					creatingEnemies_drone_Уellow()
 		#LINK - ==========================================
 		# 100
-		elif((num_level_hard % 100) == 98):
-			if(randi_range(0 , 100) <= 30 or price_level == 1):
+		elif ((num_level_hard % 100) == 98):
+			if (randi_range(0, 100) <= 30 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 2) == 1):
+				if (randi_range(1, 2) == 1):
 					creatingEnemies_drone_Violet(2)
 				else:
 					creatingEnemies_meteorite(2)
-			elif(randi_range(0 , 100) <= 30):
+			elif (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_enemy_ship_White(2)
 				else:
 					creatingEnemies_enemy_ship_White(1)
-			elif(randi_range(0 , 100) <= 20):
+			elif (randi_range(0, 100) <= 20):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_enemy_ship_Black(2)
 				else:
 					creatingEnemies_enemy_ship_Black(1)
 			else:
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_drone_Уellow(2)
 				else:
 					creatingEnemies_drone_Уellow(1)
 		# 100
-		elif((num_level_hard % 100) == 99):
-			print("eee")
-			if(randi_range(0 , 100) <= 15 or price_level == 1):
+		elif ((num_level_hard % 100) == 99):
+			if (randi_range(0, 100) <= 15 or price_level == 1):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 2) == 1):
+				if (randi_range(1, 2) == 1):
 					creatingEnemies_drone_Violet(2)
 				else:
 					creatingEnemies_meteorite(2)
-			elif(randi_range(0 , 100) <= 30):
+			elif (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_enemy_ship_Red(2)
 				else:
 					creatingEnemies_enemy_ship_Red(1)
-			elif(randi_range(0 , 100) <= 30):
+			elif (randi_range(0, 100) <= 30):
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_enemy_ship_Black(2)
 				else:
 					creatingEnemies_enemy_ship_Black(1)
 			else:
 				number_enemies_on_wave -= 1
-				if(randi_range(1 , 3) == 1):
+				if (randi_range(1, 3) == 1):
 					creatingEnemies_drone_Уellow(2)
 				else:
 					creatingEnemies_drone_Уellow(1)
 		# none
-		elif((num_level_hard % 100) == 0 and num_level_hard != 0):
+		elif ((num_level_hard % 100) == 0):
 			number_enemies_on_wave = 0
+			num_level_hard = 1
 			price_level = 1
 			creatingEnemies_drone_Violet()
 
@@ -1654,6 +1655,3 @@ func method_level():
 	for enemy in arr_enemies:
 		enemies.add_child(enemy)
 	arr_enemies = []
-
-
-	
