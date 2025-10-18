@@ -1054,7 +1054,10 @@ func method_level():
 		elif((num_level_hard % 100) == 74):
 			if(randi_range(0 , 100) <= 80 or price_level == 1):
 				number_enemies_on_wave -= 1
-				creatingEnemies_drone_Violet(1)
+				if(randi_range(1 , 2) == 1):
+					creatingEnemies_drone_Violet(1)
+				else:
+					creatingEnemies_meteorite(1)
 			else:
 				number_enemies_on_wave -= 1
 				if(randi_range(1 , 4) == 1):
@@ -1065,7 +1068,10 @@ func method_level():
 		elif((num_level_hard % 100) == 75):
 			if(randi_range(0 , 100) <= 60 or price_level == 1):
 				number_enemies_on_wave -= 1
-				creatingEnemies_drone_Violet(1)
+				if(randi_range(1 , 2) == 1):
+					creatingEnemies_drone_Violet(1)
+				else:
+					creatingEnemies_meteorite(1)
 			else:
 				number_enemies_on_wave -= 1
 				if(randi_range(1 , 4) == 1):
@@ -1076,7 +1082,10 @@ func method_level():
 		elif((num_level_hard % 100) == 76):
 			if(randi_range(0 , 100) <= 40 or price_level == 1):
 				number_enemies_on_wave -= 1
-				creatingEnemies_drone_Violet(1)
+				if(randi_range(1 , 2) == 1):
+					creatingEnemies_drone_Violet(1)
+				else:
+					creatingEnemies_meteorite(1)
 			else:
 				number_enemies_on_wave -= 1
 				if(randi_range(1 , 4) == 1):
