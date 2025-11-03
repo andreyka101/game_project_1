@@ -11,10 +11,10 @@ extends Node2D
 # var price_level = 7
 # var start_price_level = 7
 
-var num_level_hard = 100
-var num_level_text = 100
-var price_level = 100
-var start_price_level = 100
+var num_level_hard = 101
+var num_level_text = 101
+var price_level = 25
+var start_price_level = 25
 
 var end_level = false
 
@@ -143,6 +143,7 @@ func creatingEnemies_drone_Уellow(enemy_difficulty = 0):
 
 func _process(delta: float) -> void:
 	# print(len(enemies.get_children()))
+	print(price_level)
 	label_text_level.text = "level " + str(num_level_text)
 	if (galaxy_ship):
 		label_text_hp.text = "hp " + str(int(galaxy_ship.hp_player))
@@ -213,7 +214,7 @@ func _on_button_pressed() -> void:
 	elif ((num_level_hard % 100) == 39 or (num_level_hard % 100) == 41 or (num_level_hard % 100) == 45 or (num_level_hard % 100) == 47 or (num_level_hard % 100) == 62 or (num_level_hard % 100) == 66 or (num_level_hard % 100) == 74 or (num_level_hard % 100) == 83 or (num_level_hard % 100) == 86 or (num_level_hard % 100) == 90 or (num_level_hard % 100) == 94):
 			start_price_level += 5
 	elif ((num_level_hard % 100) == 0):
-			start_price_level -= 50
+			start_price_level = (num_level_hard / 100) * 25
 	price_level = start_price_level
 	method_level()
 	# print(num_level_hard,"--=--=--=--")
