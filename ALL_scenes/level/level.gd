@@ -6,15 +6,15 @@ extends Node2D
 # var price_level = 3
 # var start_price_level = 3
 
-var num_level_hard = 5
-var num_level_text = 5
-var price_level = 7
-var start_price_level = 7
+# var num_level_hard = 5
+# var num_level_text = 5
+# var price_level = 7
+# var start_price_level = 7
 
-# var num_level_hard = 100
-# var num_level_text = 100
-# var price_level = 100
-# var start_price_level = 100
+var num_level_hard = 100
+var num_level_text = 100
+var price_level = 100
+var start_price_level = 100
 
 var end_level = false
 
@@ -40,7 +40,7 @@ func _ready() -> void:
 	await get_tree().create_timer(5).timeout
 	print(Time.get_unix_time_from_system())
 	# print(start_price_level / 50)
-	# print(1 / 1,"-+-++--++-")
+	print(23 / 100,"-+-++--++-")
 	label_dps.text = "DPS = " + str(round(((1 / galaxy_ship.time_timer) * galaxy_ship.damage) * 10 * 100) / 100.0)
 	# label_dps.text = "DPS = " str((1 / galaxy_ship.time_timer) * galaxy_ship.damage)
 	# method_level()
@@ -161,16 +161,29 @@ func _process(delta: float) -> void:
 		galaxy_ship.hp_player = galaxy_ship.hp_start_player
 		$ParallaxBackground_var_1.speed = 3
 		audio_stream_player_2d.playing = true
-	elif (len(enemies.get_children()) <= 1 and price_level != 0 and ((num_level_hard % 100) >= 1 and (num_level_hard % 100) < 23)):
+	elif (len(enemies.get_children()) <= 1 and price_level != 0 and ((num_level_hard % 100) >= 1 and (num_level_hard % 100) < 23) and (num_level_hard / 100) == 0):
 		method_level()
-	elif (len(enemies.get_children()) <= 2 and price_level != 0 and ((num_level_hard % 100) >= 23 and (num_level_hard % 100) < 36)):
+	elif (len(enemies.get_children()) <= 2 and price_level != 0 and ((num_level_hard % 100) >= 23 and (num_level_hard % 100) < 36) and (num_level_hard / 100) == 0):
 		method_level()
-	elif (len(enemies.get_children()) <= 3 and price_level != 0 and ((num_level_hard % 100) >= 36 and (num_level_hard % 100) < 50)):
+	elif (len(enemies.get_children()) <= 3 and price_level != 0 and ((num_level_hard % 100) >= 36 and (num_level_hard % 100) < 50) and (num_level_hard / 100) == 0):
 		method_level()
-	elif (len(enemies.get_children()) <= 4 and price_level != 0 and ((num_level_hard % 100) >= 50 and (num_level_hard % 100) < 74)):
+	elif (len(enemies.get_children()) <= 4 and price_level != 0 and ((num_level_hard % 100) >= 50 and (num_level_hard % 100) < 74) and (num_level_hard / 100) == 0):
 		method_level()
-	elif (len(enemies.get_children()) <= 5 and price_level != 0 and ((num_level_hard % 100) >= 74 and (num_level_hard % 100) <= 100)):
+	elif (len(enemies.get_children()) <= 5 and price_level != 0 and ((num_level_hard % 100) >= 74 and (num_level_hard % 100) <= 99) and (num_level_hard / 100) == 0):
 		method_level()
+	elif (len(enemies.get_children()) <= 5 and price_level != 0 and (num_level_hard % 100) == 0 and (num_level_hard / 100) == 1):
+		method_level()
+	# LINK - ----------------------------------------------
+	elif (len(enemies.get_children()) <= 5 and price_level != 0 and ((num_level_hard % 100) >= 1 and (num_level_hard % 100) < 23) and (num_level_hard / 100) == 1):
+		method_level()
+	# elif (len(enemies.get_children()) <= 2 and price_level != 0 and ((num_level_hard % 100) >= 23 and (num_level_hard % 100) < 36) and (num_level_hard / 100) == 0):
+	# 	method_level()
+	# elif (len(enemies.get_children()) <= 3 and price_level != 0 and ((num_level_hard % 100) >= 36 and (num_level_hard % 100) < 50) and (num_level_hard / 100) == 0):
+	# 	method_level()
+	# elif (len(enemies.get_children()) <= 4 and price_level != 0 and ((num_level_hard % 100) >= 50 and (num_level_hard % 100) < 74) and (num_level_hard / 100) == 0):
+	# 	method_level()
+	# elif (len(enemies.get_children()) <= 5 and price_level != 0 and ((num_level_hard % 100) >= 74 and (num_level_hard % 100) <= 99 or (num_level_hard % 100) == 0) and (num_level_hard / 100) == 0):
+	# 	method_level()
 
 
 func _on_button_pressed() -> void:
@@ -199,6 +212,8 @@ func _on_button_pressed() -> void:
 			start_price_level += 7
 	elif ((num_level_hard % 100) == 39 or (num_level_hard % 100) == 41 or (num_level_hard % 100) == 45 or (num_level_hard % 100) == 47 or (num_level_hard % 100) == 62 or (num_level_hard % 100) == 66 or (num_level_hard % 100) == 74 or (num_level_hard % 100) == 83 or (num_level_hard % 100) == 86 or (num_level_hard % 100) == 90 or (num_level_hard % 100) == 94):
 			start_price_level += 5
+	elif ((num_level_hard % 100) == 0):
+			start_price_level -= 50
 	price_level = start_price_level
 	method_level()
 	# print(num_level_hard,"--=--=--=--")
@@ -207,18 +222,33 @@ func _on_button_pressed() -> void:
 
 func method_level():
 	var number_enemies_on_wave
-	if ((num_level_hard % 100) >= 1 and (num_level_hard % 100) < 10):
+	if ((num_level_hard % 100) >= 1 and (num_level_hard % 100) < 10 and (num_level_hard / 100) == 0):
 		number_enemies_on_wave = 3
-	elif ((num_level_hard % 100) >= 10 and (num_level_hard % 100) < 15):
+	elif ((num_level_hard % 100) >= 10 and (num_level_hard % 100) < 15 and (num_level_hard / 100) == 0):
 		number_enemies_on_wave = 4
-	elif ((num_level_hard % 100) >= 15 and (num_level_hard % 100) < 36):
+	elif ((num_level_hard % 100) >= 15 and (num_level_hard % 100) < 36 and (num_level_hard / 100) == 0):
 		number_enemies_on_wave = randi_range(4, 5)
-	elif ((num_level_hard % 100) >= 36 and (num_level_hard % 100) < 50):
+	elif ((num_level_hard % 100) >= 36 and (num_level_hard % 100) < 50 and (num_level_hard / 100) == 0):
 		number_enemies_on_wave = randi_range(5, 7)
-	elif ((num_level_hard % 100) >= 50 and (num_level_hard % 100) < 86):
+	elif ((num_level_hard % 100) >= 50 and (num_level_hard % 100) < 86 and (num_level_hard / 100) == 0):
 		number_enemies_on_wave = randi_range(6, 9)
-	elif ((num_level_hard % 100) >= 86 and (num_level_hard % 100) <= 100):
+	elif ((num_level_hard % 100) >= 86 and (num_level_hard % 100) <= 99 or (num_level_hard % 100) == 0 and (num_level_hard / 100) == 0):
 		number_enemies_on_wave = randi_range(6, 10)
+	# LINK - --------------------
+	if ((num_level_hard % 100) >= 1 and (num_level_hard % 100) < 10 and (num_level_hard / 100) == 1):
+		number_enemies_on_wave = randi_range(5, 10)
+	elif ((num_level_hard % 100) >= 10 and (num_level_hard % 100) < 15 and (num_level_hard / 100) == 1):
+		number_enemies_on_wave = 4
+	elif ((num_level_hard % 100) >= 15 and (num_level_hard % 100) < 36 and (num_level_hard / 100) == 1):
+		number_enemies_on_wave = randi_range(4, 5)
+	elif ((num_level_hard % 100) >= 36 and (num_level_hard % 100) < 50 and (num_level_hard / 100) == 1):
+		number_enemies_on_wave = randi_range(5, 7)
+	elif ((num_level_hard % 100) >= 50 and (num_level_hard % 100) < 86 and (num_level_hard / 100) == 1):
+		number_enemies_on_wave = randi_range(6, 9)
+	elif ((num_level_hard % 100) >= 86 and (num_level_hard % 100) <= 99 or (num_level_hard % 100) == 0 and (num_level_hard / 100) == 1):
+		number_enemies_on_wave = randi_range(6, 10)
+
+	
 	# elif((num_level_hard % 100) >= 80):
 	# 	number_enemies_on_wave = randi_range(9,15)
 
@@ -290,8 +320,8 @@ func method_level():
 				number_enemies_on_wave -= 1
 				creatingEnemies_enemy_ship_Red()
 		# 13
-		elif ((num_level_hard % 100) == 25):
-			if (randi_range(0, 100) <= 40 or price_level == 1):
+		elif ((num_level_hard % 100) == 10):
+			if (randi_range(0, 100) <= 25 or price_level == 1):
 				number_enemies_on_wave -= 1
 				creatingEnemies_meteorite()
 			else:
@@ -1646,9 +1676,10 @@ func method_level():
 					creatingEnemies_drone_Уellow(1)
 		# none
 		elif ((num_level_hard % 100) == 0):
-			number_enemies_on_wave = 0
-			num_level_hard = 1
-			price_level = 1
+			# number_enemies_on_wave = 0
+			# num_level_hard = 1
+			price_level = 0
+			# number_enemies_on_wave = 0
 			creatingEnemies_drone_Violet()
 
 

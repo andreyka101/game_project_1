@@ -1,0 +1,405 @@
+[gd_scene load_steps=25 format=3 uid="uid://bdw3xl8387e4f"]
+
+[ext_resource type="Script" uid="uid://dod02wyv88h72" path="res://ALL_scenes/level/level.gd" id="1_r62w2"]
+[ext_resource type="PackedScene" uid="uid://cwalhxdtsnydh" path="res://ALL_scenes/parallaxBackground_var_1/parallax_background_var_1.tscn" id="2_33107"]
+[ext_resource type="PackedScene" uid="uid://cwrkixbbjesk6" path="res://ALL_scenes/galaxy_ship/galaxy_ship.tscn" id="2_ekf4v"]
+[ext_resource type="AudioStream" uid="uid://ct46c5a5v7cdg" path="res://audio/пик.mp3" id="4_33107"]
+[ext_resource type="Script" uid="uid://cg4ut8kvh0vyt" path="res://ALL_scenes/level/menu_button.gd" id="7_j6lan"]
+[ext_resource type="AudioStream" uid="uid://dj6ecbvgbhs1f" path="res://audio/explosions of enemies/boom_1.mp3" id="7_ubrqf"]
+[ext_resource type="Texture2D" uid="uid://dr3ugebox2y6a" path="res://photo/stop.svg" id="8_j6lan"]
+[ext_resource type="AudioStream" uid="uid://8jft41wplprp" path="res://audio/explosions of enemies/boom_2.mp3" id="8_pix0r"]
+[ext_resource type="AudioStream" uid="uid://ckbr05gsnerx5" path="res://audio/explosions of enemies/boom_3.mp3" id="9_fax4q"]
+[ext_resource type="AudioStream" uid="uid://cy3ryiox1i4gc" path="res://audio/explosions of enemies/boom_4.mp3" id="10_5meb3"]
+[ext_resource type="AudioStream" uid="uid://bnwblouwvou8s" path="res://audio/explosions of enemies/boom_5.mp3" id="11_ldmet"]
+[ext_resource type="AudioStream" uid="uid://b0hvbx7nkjtjr" path="res://audio/explosions of enemies/boom_6.mp3" id="12_u50mi"]
+[ext_resource type="AudioStream" uid="uid://ephfayl4s2mv" path="res://audio/explosions of enemies/boom_7.mp3" id="13_wyuxq"]
+[ext_resource type="AudioStream" uid="uid://db30mjp1jsfm" path="res://audio/explosions of enemies/boom_8.mp3" id="14_6edf8"]
+[ext_resource type="AudioStream" uid="uid://moicbq04es41" path="res://audio/explosions of enemies/boom_9.mp3" id="15_o2ko4"]
+[ext_resource type="AudioStream" uid="uid://b1l77q2ja1wn1" path="res://audio/explosions of enemies/boom_10.mp3" id="16_yrohq"]
+[ext_resource type="AudioStream" uid="uid://v7hh27cthb4l" path="res://audio/explosions of enemies/boom_11.mp3" id="17_acwng"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k7y63"]
+bg_color = Color(0.087, 0, 0.188, 0.707)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k7y63"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lrlx6"]
+bg_color = Color(0.710448, 0.710448, 0.710448, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o7vg8"]
+bg_color = Color(0.262397, 0.262397, 0.262397, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o7vg8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ubrqf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pix0r"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_r62w2")
+
+[node name="ParallaxBackground_var_1" parent="." instance=ExtResource("2_33107")]
+offset = Vector2(640, 611)
+scale = Vector2(8, 12)
+transform = Transform2D(8, 0, 0, 12, 640, 611)
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Galaxy_ship" parent="." instance=ExtResource("2_ekf4v")]
+position = Vector2(374, 1243)
+scale = Vector2(2.1, 2.1)
+
+[node name="Button" type="Button" parent="."]
+visible = false
+offset_left = 238.0
+offset_top = 695.0
+offset_right = 504.0
+offset_bottom = 823.0
+theme_override_font_sizes/font_size = 34
+text = "продолжить"
+
+[node name="Label_text_level" type="Label" parent="."]
+light_mask = 512
+visibility_layer = 512
+z_index = 100
+offset_left = -64.0
+offset_top = -19.0
+offset_right = 117.0
+offset_bottom = 69.0
+scale = Vector2(2, 2)
+theme_override_font_sizes/font_size = 29
+text = "level 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label_text_hp" type="Label" parent="."]
+z_index = 100
+offset_left = 443.0
+offset_top = -22.0
+offset_right = 593.0
+offset_bottom = 64.0
+scale = Vector2(2, 2)
+theme_override_colors/font_color = Color(0.737603, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 0.434235, 0.434235, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 30
+text = "hp 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Menu_button" type="Node2D" parent="."]
+script = ExtResource("7_j6lan")
+
+[node name="Settings_level" type="Node2D" parent="Menu_button"]
+visible = false
+z_index = 90
+
+[node name="Background" type="Label" parent="Menu_button/Settings_level"]
+offset_right = 720.0
+offset_bottom = 1600.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_k7y63")
+
+[node name="Control_hp" type="Control" parent="Menu_button/Settings_level"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 2.0
+offset_top = 142.0
+offset_right = 720.0
+offset_bottom = 263.0
+
+[node name="Label" type="Label" parent="Menu_button/Settings_level/Control_hp"]
+layout_mode = 0
+offset_left = 83.0
+offset_top = 12.0
+offset_right = 463.0
+offset_bottom = 108.0
+theme_override_font_sizes/font_size = 36
+text = "max hp = 500"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button_hp" type="Button" parent="Menu_button/Settings_level/Control_hp"]
+layout_mode = 0
+offset_left = 498.0
+offset_top = 12.0
+offset_right = 640.0
+offset_bottom = 108.0
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.995572, 0.995572, 0.995572, 1)
+theme_override_font_sizes/font_size = 36
+theme_override_styles/focus = SubResource("StyleBoxEmpty_k7y63")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lrlx6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_o7vg8")
+theme_override_styles/normal = SubResource("StyleBoxFlat_lrlx6")
+text = "+ 10%"
+
+[node name="Control_speed" type="Control" parent="Menu_button/Settings_level"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 292.0
+offset_right = 718.0
+offset_bottom = 413.0
+
+[node name="Label" type="Label" parent="Menu_button/Settings_level/Control_speed"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 12.0
+offset_right = 466.0
+offset_bottom = 108.0
+theme_override_font_sizes/font_size = 36
+text = "скорость = 300"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button_speed" type="Button" parent="Menu_button/Settings_level/Control_speed"]
+layout_mode = 0
+offset_left = 498.0
+offset_top = 12.0
+offset_right = 640.0
+offset_bottom = 108.0
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.995572, 0.995572, 0.995572, 1)
+theme_override_font_sizes/font_size = 36
+theme_override_styles/focus = SubResource("StyleBoxEmpty_k7y63")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lrlx6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_o7vg8")
+theme_override_styles/normal = SubResource("StyleBoxFlat_lrlx6")
+text = "+ 10%"
+
+[node name="Control_speed_bullet" type="Control" parent="Menu_button/Settings_level"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 444.0
+offset_right = 718.0
+offset_bottom = 565.0
+
+[node name="Label" type="Label" parent="Menu_button/Settings_level/Control_speed_bullet"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 12.0
+offset_right = 483.0
+offset_bottom = 108.0
+theme_override_font_sizes/font_size = 36
+text = "скорость пули = 500"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button_speed_bullet" type="Button" parent="Menu_button/Settings_level/Control_speed_bullet"]
+layout_mode = 0
+offset_left = 498.0
+offset_top = 12.0
+offset_right = 640.0
+offset_bottom = 108.0
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.995572, 0.995572, 0.995572, 1)
+theme_override_font_sizes/font_size = 36
+theme_override_styles/focus = SubResource("StyleBoxEmpty_k7y63")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lrlx6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_o7vg8")
+theme_override_styles/normal = SubResource("StyleBoxFlat_lrlx6")
+text = "+ 10%"
+
+[node name="Control_damage" type="Control" parent="Menu_button/Settings_level"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 586.0
+offset_right = 718.0
+offset_bottom = 707.0
+
+[node name="Label" type="Label" parent="Menu_button/Settings_level/Control_damage"]
+layout_mode = 0
+offset_left = 83.0
+offset_top = 12.0
+offset_right = 465.0
+offset_bottom = 108.0
+theme_override_font_sizes/font_size = 36
+text = "урон = 500"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button_damage" type="Button" parent="Menu_button/Settings_level/Control_damage"]
+layout_mode = 0
+offset_left = 498.0
+offset_top = 12.0
+offset_right = 640.0
+offset_bottom = 108.0
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.995572, 0.995572, 0.995572, 1)
+theme_override_font_sizes/font_size = 36
+theme_override_styles/focus = SubResource("StyleBoxEmpty_k7y63")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lrlx6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_o7vg8")
+theme_override_styles/normal = SubResource("StyleBoxFlat_lrlx6")
+text = "+ 10%"
+
+[node name="Сontinue" type="Button" parent="Menu_button/Settings_level"]
+offset_left = 120.0
+offset_top = 1366.0
+offset_right = 591.0
+offset_bottom = 1489.0
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 35
+theme_override_styles/focus = SubResource("StyleBoxEmpty_o7vg8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lrlx6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_o7vg8")
+theme_override_styles/normal = SubResource("StyleBoxFlat_lrlx6")
+text = "продолжить"
+
+[node name="Control_reload" type="Control" parent="Menu_button/Settings_level"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 731.0
+offset_right = 718.0
+offset_bottom = 852.0
+
+[node name="Label" type="Label" parent="Menu_button/Settings_level/Control_reload"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 12.0
+offset_right = 471.0
+offset_bottom = 108.0
+theme_override_font_sizes/font_size = 36
+text = "перезарядка = 500"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button_reload" type="Button" parent="Menu_button/Settings_level/Control_reload"]
+layout_mode = 0
+offset_left = 498.0
+offset_top = 12.0
+offset_right = 640.0
+offset_bottom = 108.0
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.995572, 0.995572, 0.995572, 1)
+theme_override_font_sizes/font_size = 36
+theme_override_styles/focus = SubResource("StyleBoxEmpty_k7y63")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lrlx6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_o7vg8")
+theme_override_styles/normal = SubResource("StyleBoxFlat_lrlx6")
+text = "- 10%"
+
+[node name="Label_enemy_level" type="Label" parent="Menu_button/Settings_level"]
+offset_left = 205.0
+offset_top = 1182.0
+offset_right = 508.0
+offset_bottom = 1243.0
+theme_override_font_sizes/font_size = 44
+text = "Enemy Level 0"
+
+[node name="Label_dps" type="Label" parent="Menu_button/Settings_level"]
+offset_left = 172.0
+offset_top = 987.0
+offset_right = 466.0
+offset_bottom = 1054.0
+theme_override_font_sizes/font_size = 42
+text = "DPS = 0"
+
+[node name="Pause" type="Button" parent="Menu_button"]
+z_index = 50
+offset_left = 23.0
+offset_top = 1512.0
+offset_right = 93.0
+offset_bottom = 1582.0
+theme_override_colors/icon_pressed_color = Color(0.622196, 0.622196, 0.622196, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ubrqf")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_pix0r")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_pix0r")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_pix0r")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_pix0r")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_pix0r")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pix0r")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_pix0r")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pix0r")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_pix0r")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pix0r")
+icon = ExtResource("8_j6lan")
+expand_icon = true
+
+[node name="Bullets_of_enemies" type="Node2D" parent="."]
+
+[node name="Player_bullets" type="Node2D" parent="."]
+
+[node name="All_audio" type="Node2D" parent="."]
+
+[node name="AudioEnd_level" type="AudioStreamPlayer2D" parent="All_audio"]
+stream = ExtResource("4_33107")
+
+[node name="Enemy_explosion_sound" type="Node2D" parent="All_audio"]
+
+[node name="AudioBoom_1" type="AudioStreamPlayer2D" parent="All_audio/Enemy_explosion_sound"]
+stream = ExtResource("7_ubrqf")
+volume_db = 7.0
+
+[node name="AudioBoom_2" type="AudioStreamPlayer2D" parent="All_audio/Enemy_explosion_sound"]
+stream = ExtResource("8_pix0r")
+volume_db = -10.0
+pitch_scale = 1.5
+
+[node name="AudioBoom_3" type="AudioStreamPlayer2D" parent="All_audio/Enemy_explosion_sound"]
+stream = ExtResource("9_fax4q")
+volume_db = 8.0
+
+[node name="AudioBoom_4" type="AudioStreamPlayer2D" parent="All_audio/Enemy_explosion_sound"]
+stream = ExtResource("10_5meb3")
+volume_db = 9.0
+
+[node name="AudioBoom_5" type="AudioStreamPlayer2D" parent="All_audio/Enemy_explosion_sound"]
+stream = ExtResource("11_ldmet")
+volume_db = 13.0
+
+[node name="AudioBoom_6" type="AudioStreamPlayer2D" parent="All_audio/Enemy_explosion_sound"]
+stream = ExtResource("12_u50mi")
+volume_db = 6.0
+
+[node name="AudioBoom_7" type="AudioStreamPlayer2D" parent="All_audio/Enemy_explosion_sound"]
+stream = ExtResource("13_wyuxq")
+
+[node name="AudioBoom_8" type="AudioStreamPlayer2D" parent="All_audio/Enemy_explosion_sound"]
+stream = ExtResource("14_6edf8")
+volume_db = 13.0
+
+[node name="AudioBoom_9" type="AudioStreamPlayer2D" parent="All_audio/Enemy_explosion_sound"]
+stream = ExtResource("15_o2ko4")
+
+[node name="AudioBoom_10" type="AudioStreamPlayer2D" parent="All_audio/Enemy_explosion_sound"]
+stream = ExtResource("16_yrohq")
+volume_db = 10.0
+
+[node name="AudioBoom_11" type="AudioStreamPlayer2D" parent="All_audio/Enemy_explosion_sound"]
+stream = ExtResource("17_acwng")
+volume_db = 10.048
+
+[node name="Enemy_hitting_sound" type="Node2D" parent="All_audio"]
+
+[node name="AudioHit_1" type="AudioStreamPlayer2D" parent="All_audio/Enemy_hitting_sound"]
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Menu_button/Settings_level/Control_hp/Button_hp" to="Menu_button" method="_on_button_hp_pressed"]
+[connection signal="pressed" from="Menu_button/Settings_level/Control_speed/Button_speed" to="Menu_button" method="_on_button_speed_pressed"]
+[connection signal="pressed" from="Menu_button/Settings_level/Control_speed_bullet/Button_speed_bullet" to="Menu_button" method="_on_button_speed_bullet_pressed"]
+[connection signal="pressed" from="Menu_button/Settings_level/Control_damage/Button_damage" to="Menu_button" method="_on_button_damage_pressed"]
+[connection signal="pressed" from="Menu_button/Settings_level/Сontinue" to="Menu_button" method="_on_сontinue_pressed"]
+[connection signal="pressed" from="Menu_button/Settings_level/Control_reload/Button_reload" to="Menu_button" method="_on_button_reload_pressed"]
+[connection signal="pressed" from="Menu_button/Pause" to="Menu_button" method="_on_pause_pressed"]
