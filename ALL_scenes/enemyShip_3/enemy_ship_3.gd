@@ -29,10 +29,15 @@ var super_enemy = false
 var mega_enemy = false
 var move_star:Vector2
 var speed_rotation_star
+var stop_time = false
+var time_appearance_enemy
+var save_time = 0
 
 
 
 func _ready() -> void:
+	time_appearance_enemy = Time.get_unix_time_from_system()
+
 	if(super_enemy):
 		enemy_level += 1
 		var num_scale_star = randf_range(0.3 , 0.5)
@@ -166,6 +171,16 @@ func _ready() -> void:
 	
 
 func _physics_process(delta: float) -> void:
+
+	if(Global.stop_game and !stop_time):
+		stop_time = true
+		save_time = Time.get_unix_time_from_system() - time_appearance_enemy
+
+	if(!Global.stop_game and stop_time):
+		stop_time = false
+		time_appearance_enemy = Time.get_unix_time_from_system() - save_time
+
+
 	if(Global.stop_game):
 		timer.paused = true
 		timer_position.paused = true
@@ -187,6 +202,7 @@ func _physics_process(delta: float) -> void:
 		var enemy_explosion_sound_scene = load("res://ALL_scenes/enemy_explosion_sound/enemy_explosion_sound.tscn")
 		var enemy_explosion_sound = enemy_explosion_sound_scene.instantiate()
 		level.add_child(enemy_explosion_sound)
+		print(Time.get_unix_time_from_system() - time_appearance_enemy)
 		self.queue_free()
 	if((position.x <= position_save.x - 15 or position.x >= position_save.x + 15) or (position.y <= position_save.y - 15 or position.y >= position_save.y + 15)) and death and !Global.stop_game:
 		self.position += self.position.direction_to(position_save) * speed_ship * delta
@@ -240,6 +256,7 @@ func _on_body_entered(body: Node2D) -> void:
 		var enemy_explosion_sound_scene = load("res://ALL_scenes/enemy_explosion_sound/enemy_explosion_sound.tscn")
 		var enemy_explosion_sound = enemy_explosion_sound_scene.instantiate()
 		level.add_child(enemy_explosion_sound)
+		print(Time.get_unix_time_from_system() - time_appearance_enemy)
 		self.queue_free()
 	for i_group in body.get_groups():
 		#print(i_group)
@@ -264,6 +281,7 @@ func _on_body_entered(body: Node2D) -> void:
 				var enemy_explosion_sound_scene = load("res://ALL_scenes/enemy_explosion_sound/enemy_explosion_sound.tscn")
 				var enemy_explosion_sound = enemy_explosion_sound_scene.instantiate()
 				level.add_child(enemy_explosion_sound)
+				print(Time.get_unix_time_from_system() - time_appearance_enemy)
 				self.queue_free()
 
 

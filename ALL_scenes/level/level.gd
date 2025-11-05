@@ -6,15 +6,15 @@ extends Node2D
 # var price_level = 3
 # var start_price_level = 3
 
-# var num_level_hard = 5
-# var num_level_text = 5
-# var price_level = 7
-# var start_price_level = 7
+var num_level_hard = 1
+var num_level_text = 1
+var price_level = 4
+var start_price_level = 4
 
-var num_level_hard = 101
-var num_level_text = 101
-var price_level = 25
-var start_price_level = 25
+# var num_level_hard = 101
+# var num_level_text = 101
+# var price_level = 25
+# var start_price_level = 25
 
 var end_level = false
 
@@ -35,23 +35,24 @@ var drone_Уellow_scene = load("res://ALL_scenes/drone_2/drone_2.tscn")
 var arr_enemies = []
 
 
+
 func _ready() -> void:
-	print(Time.get_unix_time_from_system())
-	await get_tree().create_timer(5).timeout
-	print(Time.get_unix_time_from_system())
+	# print(Time.get_unix_time_from_system())
+	# await get_tree().create_timer(5).timeout
+	# print(Time.get_unix_time_from_system())
 	# print(start_price_level / 50)
-	print(23 / 100,"-+-++--++-")
+	# print(23 / 100,"-+-++--++-")
 	label_dps.text = "DPS = " + str(round(((1 / galaxy_ship.time_timer) * galaxy_ship.damage) * 10 * 100) / 100.0)
 	# label_dps.text = "DPS = " str((1 / galaxy_ship.time_timer) * galaxy_ship.damage)
 	# method_level()
 	# await get_tree().create_timer(2).timeout
-	# for i in range(1):
+	for i in range(1):
 	# 	creatingEnemies_meteorite()
-		# creatingEnemies_enemy_ship_White(1)
-		# creatingEnemies_enemy_ship_Red(2)
-		# creatingEnemies_enemy_ship_Black(1)
-		# creatingEnemies_drone_Violet(2)
-		# creatingEnemies_drone_Уellow(2)
+		# creatingEnemies_enemy_ship_White()
+		# creatingEnemies_enemy_ship_Red()
+		# creatingEnemies_enemy_ship_Black()
+		creatingEnemies_drone_Violet()
+		creatingEnemies_drone_Уellow()
 	# for enemy in arr_enemies:
 	# 	enemies.add_child(enemy)
 
@@ -143,7 +144,7 @@ func creatingEnemies_drone_Уellow(enemy_difficulty = 0):
 
 func _process(delta: float) -> void:
 	# print(len(enemies.get_children()))
-	print(price_level)
+	# print(price_level)
 	label_text_level.text = "level " + str(num_level_text)
 	if (galaxy_ship):
 		label_text_hp.text = "hp " + str(int(galaxy_ship.hp_player))

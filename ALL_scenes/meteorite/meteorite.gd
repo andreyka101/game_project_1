@@ -26,6 +26,9 @@ var super_enemy = false
 var mega_enemy = false
 var move_star:Vector2
 var speed_rotation_star
+var stop_time = false
+var time_appearance_enemy
+var save_time = 0
 
 @onready var level = $"../.."
 
@@ -36,6 +39,7 @@ var speed_rotation_star
 
 
 func _ready() -> void:
+	time_appearance_enemy = Time.get_unix_time_from_system()
 
 	if(super_enemy):
 		enemy_level += 1
@@ -126,6 +130,15 @@ func _process(delta: float) -> void:
 	# print("damage =" , damage)
 	# print("scale =" , scale)
 	
+	if(Global.stop_game and !stop_time):
+		stop_time = true
+		save_time = Time.get_unix_time_from_system() - time_appearance_enemy
+
+	if(!Global.stop_game and stop_time):
+		stop_time = false
+		time_appearance_enemy = Time.get_unix_time_from_system() - save_time
+
+
 	# метеорит преследует игрока
 	#position += self.position.direction_to(galaxy_ship.position) * 300 * delta
 	
@@ -148,6 +161,7 @@ func _process(delta: float) -> void:
 		var enemy_explosion_sound_scene = load("res://ALL_scenes/enemy_explosion_sound/enemy_explosion_sound.tscn")
 		var enemy_explosion_sound = enemy_explosion_sound_scene.instantiate()
 		level.add_child(enemy_explosion_sound)
+		print(Time.get_unix_time_from_system() - time_appearance_enemy)
 		self.queue_free()
 	
 
@@ -161,6 +175,7 @@ func _process(delta: float) -> void:
 
 
 	if(position.y > 1700):
+		print(Time.get_unix_time_from_system() - time_appearance_enemy)
 		self.queue_free()
 
 
@@ -179,6 +194,7 @@ func _on_body_entered(body: Node2D) -> void:
 		var enemy_explosion_sound_scene = load("res://ALL_scenes/enemy_explosion_sound/enemy_explosion_sound.tscn")
 		var enemy_explosion_sound = enemy_explosion_sound_scene.instantiate()
 		level.add_child(enemy_explosion_sound)
+		print(Time.get_unix_time_from_system() - time_appearance_enemy)
 		self.queue_free()
 		
 		
@@ -206,6 +222,7 @@ func _on_body_entered(body: Node2D) -> void:
 				var enemy_explosion_sound_scene = load("res://ALL_scenes/enemy_explosion_sound/enemy_explosion_sound.tscn")
 				var enemy_explosion_sound = enemy_explosion_sound_scene.instantiate()
 				level.add_child(enemy_explosion_sound)
+				print(Time.get_unix_time_from_system() - time_appearance_enemy)
 				self.queue_free()
 		
 
