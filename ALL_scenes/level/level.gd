@@ -1,15 +1,15 @@
 extends Node2D
 
 
-# var num_level_hard = 1
-# var num_level_text = 1
-# var price_level = 3
-# var start_price_level = 3
-
 var num_level_hard = 1
 var num_level_text = 1
-var price_level = 4
-var start_price_level = 4
+var price_level = 3
+var start_price_level = 3
+
+# var num_level_hard = 1
+# var num_level_text = 1
+# var price_level = 4
+# var start_price_level = 4
 
 # var num_level_hard = 101
 # var num_level_text = 101
@@ -51,8 +51,8 @@ func _ready() -> void:
 		# creatingEnemies_enemy_ship_White()
 		# creatingEnemies_enemy_ship_Red()
 		# creatingEnemies_enemy_ship_Black()
-		creatingEnemies_drone_Violet()
-		creatingEnemies_drone_Уellow()
+		# creatingEnemies_drone_Violet()
+		# creatingEnemies_drone_Уellow()
 	# for enemy in arr_enemies:
 	# 	enemies.add_child(enemy)
 
