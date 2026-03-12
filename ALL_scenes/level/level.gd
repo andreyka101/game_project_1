@@ -46,7 +46,7 @@ func _ready() -> void:
 	# label_dps.text = "DPS = " str((1 / galaxy_ship.time_timer) * galaxy_ship.damage)
 	# method_level()
 	# await get_tree().create_timer(2).timeout
-	for i in range(1):
+	# for i in range(1):
 	# 	creatingEnemies_meteorite()
 		# creatingEnemies_enemy_ship_White()
 		# creatingEnemies_enemy_ship_Red()
