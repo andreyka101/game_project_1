@@ -57,6 +57,8 @@ func snap_to_nearest_slot() -> void:
 		# Берем левый верхний угол слота и добавляем половину разницы размеров слота и предмета.
 		# Формула: ПозицияСлота + (РазмерСлота / 2) - (РазмерПредмета / 2)
 		var target_position = closest_slot.global_position + (closest_slot.size / 2) - (size / 2)
+
+		print("ok-",closest_slot)
 		
 		global_position = target_position
 		last_safe_position = global_position

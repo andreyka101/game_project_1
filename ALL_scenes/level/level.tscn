@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bdw3xl8387e4f"]
+[gd_scene load_steps=26 format=3 uid="uid://bdw3xl8387e4f"]
 
 [ext_resource type="Script" uid="uid://dod02wyv88h72" path="res://ALL_scenes/level/level.gd" id="1_r62w2"]
 [ext_resource type="PackedScene" uid="uid://cwalhxdtsnydh" path="res://ALL_scenes/parallaxBackground_var_1/parallax_background_var_1.tscn" id="2_33107"]
@@ -17,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://moicbq04es41" path="res://audio/explosions of enemies/boom_9.mp3" id="15_o2ko4"]
 [ext_resource type="AudioStream" uid="uid://b1l77q2ja1wn1" path="res://audio/explosions of enemies/boom_10.mp3" id="16_yrohq"]
 [ext_resource type="AudioStream" uid="uid://v7hh27cthb4l" path="res://audio/explosions of enemies/boom_11.mp3" id="17_acwng"]
+[ext_resource type="PackedScene" uid="uid://dd7kmsstd0am1" path="res://ALL_scenes/inventory_menu/inventory_menu.tscn" id="18_5meb3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k7y63"]
 bg_color = Color(0.087, 0, 0.188, 0.707)
@@ -394,6 +395,9 @@ volume_db = 10.048
 [node name="Enemy_hitting_sound" type="Node2D" parent="All_audio"]
 
 [node name="AudioHit_1" type="AudioStreamPlayer2D" parent="All_audio/Enemy_hitting_sound"]
+
+[node name="InventoryMenu" parent="." instance=ExtResource("18_5meb3")]
+visible = false
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Menu_button/Settings_level/Control_hp/Button_hp" to="Menu_button" method="_on_button_hp_pressed"]

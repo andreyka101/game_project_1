@@ -60,7 +60,7 @@ func creatingEnemies_meteorite(enemy_difficulty = 0):
 	if (price_level >= 1):
 		var meteorite: Area2D = meteorite_scene.instantiate()
 		meteorite.position = Vector2(randi_range(-100, 820), -90)
-		meteorite.enemy_level = 1
+		meteorite.enemy_level = (num_level_hard/10)+1
 		if (enemy_difficulty == 0):
 			meteorite.super_enemy = false
 		elif (enemy_difficulty == 1):
@@ -74,7 +74,7 @@ func creatingEnemies_enemy_ship_White(enemy_difficulty = 0):
 	if (price_level >= 2):
 		var enemyShip_1: Area2D = enemyShip_White_scene.instantiate()
 		enemyShip_1.position = Vector2(randi_range(0, 720), -50)
-		enemyShip_1.enemy_level = 1
+		enemyShip_1.enemy_level = (num_level_hard/10)+1
 		if (enemy_difficulty == 0):
 			enemyShip_1.super_enemy = false
 		if (enemy_difficulty == 1):
@@ -88,7 +88,7 @@ func creatingEnemies_enemy_ship_Red(enemy_difficulty = 0):
 	if (price_level >= 2):
 		var enemyShip_2: Area2D = enemyShip_Red_scene.instantiate()
 		enemyShip_2.position = Vector2(randi_range(0, 720), -50)
-		enemyShip_2.enemy_level = 1
+		enemyShip_2.enemy_level = (num_level_hard/10)+1
 		if (enemy_difficulty == 0):
 			enemyShip_2.super_enemy = false
 		if (enemy_difficulty == 1):
@@ -102,7 +102,7 @@ func creatingEnemies_enemy_ship_Black(enemy_difficulty = 0):
 	if (price_level >= 3):
 		var enemyShip_3: Area2D = enemyShip_Black_scene.instantiate()
 		enemyShip_3.position = Vector2(randi_range(0, 720), -50)
-		enemyShip_3.enemy_level = 1
+		enemyShip_3.enemy_level = (num_level_hard/10)+1
 		if (enemy_difficulty == 0):
 			enemyShip_3.super_enemy = false
 		if (enemy_difficulty == 1):
@@ -116,7 +116,7 @@ func creatingEnemies_drone_Violet(enemy_difficulty = 0):
 	if (price_level >= 1):
 		var drone_1: Area2D = drone_Violet_scene.instantiate()
 		drone_1.position = Vector2(randi_range(200, 920), -10)
-		drone_1.enemy_level = 1
+		drone_1.enemy_level = (num_level_hard/10)+1
 		if (enemy_difficulty == 0):
 			drone_1.super_enemy = false
 		if (enemy_difficulty == 1):
@@ -130,7 +130,7 @@ func creatingEnemies_drone_Уellow(enemy_difficulty = 0):
 	if (price_level >= 2):
 		var drone_2: CharacterBody2D = drone_Уellow_scene.instantiate()
 		drone_2.position = Vector2(randi_range(0, 720), -150)
-		drone_2.enemy_level = 1
+		drone_2.enemy_level = (num_level_hard/10)+1
 		if (enemy_difficulty == 0):
 			drone_2.super_enemy = false
 		if (enemy_difficulty == 1):
@@ -152,6 +152,19 @@ func _process(delta: float) -> void:
 		get_tree().change_scene_to_file("res://ALL_scenes/main_menu/main_menu.tscn")
 
 	if (len(enemies.get_children()) == 0 and !end_level and price_level == 0):
+		# end_level = true
+		# for child in bullets_of_enemies.get_children():
+		# 	child.queue_free()
+		# for child in player_bullets.get_children():
+		# 	child.queue_free()
+		# galaxy_ship.position = Vector2(360, 1050)
+		# galaxy_ship.stop = true
+		# $Button.visible = true
+		# galaxy_ship.hp_player = galaxy_ship.hp_start_player
+		# $ParallaxBackground_var_1.speed = 3
+		# audio_stream_player_2d.playing = true
+
+		$InventoryMenu.visible = true
 		end_level = true
 		for child in bullets_of_enemies.get_children():
 			child.queue_free()
@@ -159,10 +172,10 @@ func _process(delta: float) -> void:
 			child.queue_free()
 		galaxy_ship.position = Vector2(360, 1050)
 		galaxy_ship.stop = true
-		$Button.visible = true
 		galaxy_ship.hp_player = galaxy_ship.hp_start_player
 		$ParallaxBackground_var_1.speed = 3
 		audio_stream_player_2d.playing = true
+
 	elif (len(enemies.get_children()) <= 1 and price_level != 0 and ((num_level_hard % 100) >= 1 and (num_level_hard % 100) < 23) and (num_level_hard / 100) == 0):
 		method_level()
 	elif (len(enemies.get_children()) <= 2 and price_level != 0 and ((num_level_hard % 100) >= 23 and (num_level_hard % 100) < 36) and (num_level_hard / 100) == 0):
@@ -218,8 +231,6 @@ func _on_button_pressed() -> void:
 			start_price_level = (num_level_hard / 100) * 25
 	price_level = start_price_level
 	method_level()
-	# print(num_level_hard,"--=--=--=--")
-	# print(start_price_level)
 
 
 func method_level():
