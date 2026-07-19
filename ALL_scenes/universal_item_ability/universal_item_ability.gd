@@ -1,5 +1,4 @@
-extends TextureRect
-
+extends Button
 
 var is_dragging = false
 var offset = Vector2()
@@ -8,10 +7,26 @@ var last_safe_position = Vector2() # Сюда сохраняем позицию,
 # ВАЖНО: Замените этот путь на путь к вашему GridContainer в дереве сцены!
 @onready var grid = get_node("../../GridContainer") 
 @onready var inventory_menu:Control = get_parent().get_parent()
+@onready var galaxy_ship = get_node("../../../Galaxy_ship")
+
+@onready var label_level:Label = $Label
+@onready var label_price:Label = $Label2
+@onready var texture_rect: TextureRect = $TextureRect
+var num_level = 1
+var num_price = null
+var num_multiplier_price = null
+# var ability_type = null
+var ability_type = "двойной выстрел"
 
 func _ready() -> void:
 	# Запоминаем стартовую позицию предмета при запуске игры
 	last_safe_position = global_position
+
+	match ability_type:
+		"двойной выстрел":
+			num_multiplier_price = 4
+	texture_rect.texture = load("res://icon_menu_" + ability_type + ".png")
+
 
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -66,10 +81,20 @@ func snap_to_nearest_slot() -> void:
 
 		inventory_menu.cells_included_forces[closest_slot].free_space = false
 		inventory_menu.cells_included_forces[closest_slot].id_ability = str(self)
+		# Global.player_abilities.append({
+		# 	"ability_type": ability_type,
+		# 	"num_level": num_level,
+		# })
+		match ability_type:
+			"двойной выстрел":
+				galaxy_ship.hp_player += (galaxy_ship.hp_player/100) * 5
 		for cell in inventory_menu.cells_included_forces:
 			print(cell)
 			if(cell != closest_slot and inventory_menu.cells_included_forces[cell].id_ability == str(self)):
 				inventory_menu.cells_included_forces[cell].id_ability = null
 				inventory_menu.cells_included_forces[cell].free_space = true
+				match ability_type:
+					"двойной выстрел":
+						galaxy_ship.hp_player -= (galaxy_ship.hp_player/100) * 5
 	else:
 		global_position = last_safe_position

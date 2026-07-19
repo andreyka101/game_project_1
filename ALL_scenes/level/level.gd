@@ -201,14 +201,44 @@ func _process(delta: float) -> void:
 	# 	method_level()
 
 
-func _on_button_pressed() -> void:
+# func _on_button_pressed() -> void:
+# 	end_level = false
+# 	num_level_text += 1
+# 	num_level_hard += 1
+# 	galaxy_ship.stop = false
+# 	$Button.visible = false
+# 	$ParallaxBackground_var_1.speed = 15
+# 	if ((num_level_hard % 100) >= 1 and (num_level_hard % 100) < 4):
+# 		start_price_level += 2
+# 	elif ((num_level_hard % 100) == 7):
+# 			start_price_level += 3
+# 	elif ((num_level_hard % 100) == 10):
+# 			start_price_level += 3
+# 	elif ((num_level_hard % 100) == 13):
+# 			start_price_level += 3
+# 	elif ((num_level_hard % 100) == 15):
+# 			start_price_level = round(start_price_level / 1.5)
+# 	elif ((num_level_hard % 100) == 23):
+# 			start_price_level = round(start_price_level * 1.5)
+# 	elif ((num_level_hard % 100) == 26 or (num_level_hard % 100) == 28 or (num_level_hard % 100) == 30 or (num_level_hard % 100) == 34):
+# 			start_price_level += 4
+# 	elif ((num_level_hard % 100) == 36):
+# 			start_price_level += 7
+# 	elif ((num_level_hard % 100) == 39 or (num_level_hard % 100) == 41 or (num_level_hard % 100) == 45 or (num_level_hard % 100) == 47 or (num_level_hard % 100) == 62 or (num_level_hard % 100) == 66 or (num_level_hard % 100) == 74 or (num_level_hard % 100) == 83 or (num_level_hard % 100) == 86 or (num_level_hard % 100) == 90 or (num_level_hard % 100) == 94):
+# 			start_price_level += 5
+# 	elif ((num_level_hard % 100) == 0):
+# 			start_price_level = (num_level_hard / 100) * 25
+# 	price_level = start_price_level
+# 	method_level()
+
+
+func click_end_menu():
 	end_level = false
 	num_level_text += 1
 	num_level_hard += 1
 	galaxy_ship.stop = false
-	$Button.visible = false
+	$InventoryMenu.visible = false
 	$ParallaxBackground_var_1.speed = 15
-
 	if ((num_level_hard % 100) >= 1 and (num_level_hard % 100) < 4):
 		start_price_level += 2
 	elif ((num_level_hard % 100) == 7):
