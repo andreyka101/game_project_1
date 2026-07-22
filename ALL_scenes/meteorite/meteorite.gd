@@ -4,7 +4,8 @@ extends Area2D
 @onready var galaxy_ship:CharacterBody2D = $"../../Galaxy_ship"
 
 # создаём рандомные координаты x
-var save_X = randi_range(200,520)
+# var save_X = randi_range(200,520)
+var save_X = randi_range(300,780)
 
 # создаём рандомную скорость вращения 
 var save_num_rotation = randf_range(-5, 5)
@@ -43,27 +44,27 @@ func _ready() -> void:
 
 	if(super_enemy):
 		enemy_level += 1
-		var num_scale_star = randf_range(0.3 , 0.5)
+		var num_scale_star = randf_range(0.5 , 0.7)
 		super_enemy_star.scale = Vector2(num_scale_star , num_scale_star)
 		super_enemy_star.visible = true
 		if (randi_range(0, 1) == 1):
 			speed_rotation_star = randf_range(2 , 7)
 		else:
 			speed_rotation_star = randf_range(-2 , -7)
-		super_enemy_star.position = Vector2(randf_range(-25,25) , randf_range(-25,25))
-		move_star = Vector2(randf_range(-25,25) , randf_range(-25,25))
+		super_enemy_star.position = Vector2(randf_range(-37,37) , randf_range(-37,37))
+		move_star = Vector2(randf_range(-37,37) , randf_range(-37,37))
 	elif(mega_enemy):
 		enemy_level += 2
 		super_enemy_star.modulate = "ff0000"
-		var num_scale_star = randf_range(0.3 , 0.5)
+		var num_scale_star = randf_range(0.5 , 0.7)
 		super_enemy_star.scale = Vector2(num_scale_star , num_scale_star)
 		super_enemy_star.visible = true
 		if (randi_range(0, 1) == 1):
 			speed_rotation_star = randf_range(2 , 7)
 		else:
 			speed_rotation_star = randf_range(-2 , -7)
-		super_enemy_star.position = Vector2(randf_range(-25,25) , randf_range(-25,25))
-		move_star = Vector2(randf_range(-25,25) , randf_range(-25,25))
+		super_enemy_star.position = Vector2(randf_range(-37,37) , randf_range(-37,37))
+		move_star = Vector2(randf_range(-37,37) , randf_range(-37,37))
 
 	var scale_num = randf_range(1.6 , 3.0)
 	# var scale_num = 2
@@ -144,7 +145,7 @@ func _process(delta: float) -> void:
 	
 	# метеорит летит в низ на рандомные координаты по x
 	if (!Global.stop_game):
-		position += self.position.direction_to(Vector2i(save_X , 1700)) * speed * delta
+		position += self.position.direction_to(Vector2i(save_X , 2500)) * speed * delta
 		timer_star.paused = false
 	else:
 		timer_star.paused = true
@@ -174,7 +175,7 @@ func _process(delta: float) -> void:
 			super_enemy_star.rotation_degrees += 360
 
 
-	if(position.y > 1700):
+	if(position.y > 2500):
 		print(Time.get_unix_time_from_system() - time_appearance_enemy)
 		self.queue_free()
 
@@ -229,4 +230,4 @@ func _on_body_entered(body: Node2D) -> void:
 
 func _on_timer_star_timeout() -> void:
 	if(super_enemy or mega_enemy):
-		move_star = Vector2(randf_range(-25,25) , randf_range(-25,25))
+		move_star = Vector2(randf_range(-37,37) , randf_range(-37,37))

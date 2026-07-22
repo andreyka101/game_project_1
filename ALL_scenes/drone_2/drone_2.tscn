@@ -114,20 +114,20 @@ scale = Vector2(2.8, 2.8)
 script = ExtResource("1_luleb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(1.767, 1.767)
+scale = Vector2(2.6, 2.6)
 sprite_frames = SubResource("SpriteFrames_lhd6b")
 autoplay = "default"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(0.3, 0)
-scale = Vector2(0.9, 0.9)
-polygon = PackedVector2Array(1.53968, -9.52381, 5.50794, -9.52381, 13.0476, 1.98413, 9.98413, 16.6667, 4.03175, 12.6984, -2.71429, 17.0635, -5.60317, 1.98413)
+scale = Vector2(1.35, 1.35)
+polygon = PackedVector2Array(-4.19048, -5.82011, 11.418, -5.82011, 13.0476, 1.98413, 10.0952, 17.1958, 4.03175, 12.6984, -2.71429, 17.0635, -5.60317, 1.98413)
 
 [node name="Marker2D_LEFT" type="Marker2D" parent="."]
-position = Vector2(-3.21429, 21.875)
+position = Vector2(-4.28543, 35.769)
 
 [node name="Marker2D_RIGHT" type="Marker2D" parent="."]
-position = Vector2(10.3571, 21.875)
+position = Vector2(14.6427, 35.769)
 
 [node name="Timer" type="Timer" parent="."]
 
@@ -136,6 +136,7 @@ script = ExtResource("3_x442r")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 position = Vector2(5.96046e-08, 0)
+scale = Vector2(1.5, 1.5)
 polygon = PackedVector2Array(-2.85714, -10.7143, 10, -10.7143, 15.625, 1.875, 10.625, 21.25, 3.75, 14.375, -3.75, 21.25, -8.75, 1.875)
 
 [node name="Super_enemy_star" type="Sprite2D" parent="."]

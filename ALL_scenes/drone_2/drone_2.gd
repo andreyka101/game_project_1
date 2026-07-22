@@ -43,27 +43,27 @@ func _ready() -> void:
 
 	if(super_enemy):
 		enemy_level += 1
-		var num_scale_star = randf_range(0.3 , 0.5)
+		var num_scale_star = randf_range(0.5 , 0.7)
 		super_enemy_star.scale = Vector2(num_scale_star , num_scale_star)
 		super_enemy_star.visible = true
 		if (randi_range(0, 1) == 1):
 			speed_rotation_star = randf_range(2 , 7)
 		else:
 			speed_rotation_star = randf_range(-2 , -7)
-		super_enemy_star.position = Vector2(randf_range(-15,15) , randf_range(-15,25))
-		move_star = Vector2(randf_range(-15,15) , randf_range(-15,25))
+		super_enemy_star.position = Vector2(randf_range(-35,65) , randf_range(-30,85))
+		move_star = Vector2(randf_range(-35,65) , randf_range(-30,85))
 	elif(mega_enemy):
 		enemy_level += 2
 		super_enemy_star.modulate = "ff0000"
-		var num_scale_star = randf_range(0.3 , 0.5)
+		var num_scale_star = randf_range(0.5 , 0.7)
 		super_enemy_star.scale = Vector2(num_scale_star , num_scale_star)
 		super_enemy_star.visible = true
 		if (randi_range(0, 1) == 1):
 			speed_rotation_star = randf_range(2 , 7)
 		else:
 			speed_rotation_star = randf_range(-2 , -7)
-		super_enemy_star.position = Vector2(randf_range(-15,15) , randf_range(-15,25))
-		move_star = Vector2(randf_range(-15,15) , randf_range(-15,25))
+		super_enemy_star.position = Vector2(randf_range(-35,65) , randf_range(-30,85))
+		move_star = Vector2(randf_range(-35,65) , randf_range(-30,85))
 
 	# меняет время срабатывания таймера
 	#timer.wait_time = randf_range(1 , 3)
@@ -295,4 +295,4 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 func _on_timer_star_timeout() -> void:
 	if(super_enemy or mega_enemy):
-		move_star = Vector2(randf_range(-15,15) , randf_range(-15,25))
+		move_star = Vector2(randf_range(-35,65) , randf_range(-30,85))

@@ -13,7 +13,7 @@ var death = true
 @onready var super_enemy_star: Sprite2D = $Super_enemy_star
 @onready var timer_star: Timer = $Timer_star
 
-var position_save = Vector2(randi_range(10 , 710) , randi_range(40 , 1100))
+var position_save = Vector2(randi_range(20 , 1060) , randi_range(40 , 1650))
 
 var name_str = "regular ship"
 
@@ -40,7 +40,7 @@ func _ready() -> void:
 
 	if(super_enemy):
 		enemy_level += 1
-		var num_scale_star = randf_range(0.3 , 0.5)
+		var num_scale_star = randf_range(0.5 , 0.7)
 		super_enemy_star.scale = Vector2(num_scale_star , num_scale_star)
 		super_enemy_star.visible = true
 		if (randi_range(0, 1) == 1):
@@ -48,15 +48,15 @@ func _ready() -> void:
 		else:
 			speed_rotation_star = randf_range(-2 , -7)
 		if (randi_range(0, 1) == 1):
-			super_enemy_star.position = Vector2(randf_range(-20,20) , randf_range(-30,5))
-			move_star = Vector2(randf_range(-20,20) , randf_range(-30,5))
+			super_enemy_star.position = Vector2(randf_range(-30,30) , randf_range(-45,8))
+			move_star = Vector2(randf_range(-30,30) , randf_range(-45,8))
 		else:
-			super_enemy_star.position = Vector2(randf_range(-14,14) , randf_range(5,20))
-			move_star = Vector2(randf_range(-14,14) , randf_range(5,20))
+			super_enemy_star.position = Vector2(randf_range(-21,21) , randf_range(8,30))
+			move_star = Vector2(randf_range(-21,21) , randf_range(8,30))
 	elif(mega_enemy):
 		enemy_level += 2
 		super_enemy_star.modulate = "ff0000"
-		var num_scale_star = randf_range(0.3 , 0.5)
+		var num_scale_star = randf_range(0.5 , 0.7)
 		super_enemy_star.scale = Vector2(num_scale_star , num_scale_star)
 		super_enemy_star.visible = true
 		if (randi_range(0, 1) == 1):
@@ -64,11 +64,11 @@ func _ready() -> void:
 		else:
 			speed_rotation_star = randf_range(-2 , -7)
 		if (randi_range(0, 1) == 1):
-			super_enemy_star.position = Vector2(randf_range(-20,20) , randf_range(-30,5))
-			move_star = Vector2(randf_range(-20,20) , randf_range(-30,5))
+			super_enemy_star.position = Vector2(randf_range(-30,30) , randf_range(-45,8))
+			move_star = Vector2(randf_range(-30,30) , randf_range(-45,8))
 		else:
-			super_enemy_star.position = Vector2(randf_range(-14,14) , randf_range(5,20))
-			move_star = Vector2(randf_range(-14,14) , randf_range(5,20))
+			super_enemy_star.position = Vector2(randf_range(-21,21) , randf_range(8,30))
+			move_star = Vector2(randf_range(-21,21) , randf_range(8,30))
 
 	if(enemy_level >= 1 and enemy_level < 5):
 		timer_num = [3,4.5]
@@ -283,7 +283,7 @@ func _on_body_entered(body: Node2D) -> void:
 # раз в какое-то время корабль меняет своё направление
 func _on_timer_position_timeout() -> void:
 	if (!Global.stop_game):
-		position_save = Vector2(randi_range(10 , 710) , randi_range(40 , 1100))
+		position_save = Vector2(randi_range(20 , 1060) , randi_range(40 , 1650))
 		# меняем время срабатывания этого таймера
 	timer_position.wait_time = randf_range(timer_position_num[0] , timer_position_num[1])
 
@@ -291,6 +291,6 @@ func _on_timer_position_timeout() -> void:
 func _on_timer_star_timeout() -> void:
 	if(super_enemy or mega_enemy):
 		if (randi_range(0, 1) == 1):
-			move_star = Vector2(randf_range(-20,20) , randf_range(-30,5))
+			move_star = Vector2(randf_range(-30,30) , randf_range(-45,8))
 		else:
-			move_star = Vector2(randf_range(-14,14) , randf_range(5,20))
+			move_star = Vector2(randf_range(-21,21) , randf_range(8,30))

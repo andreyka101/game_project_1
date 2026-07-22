@@ -57,15 +57,16 @@ scale = Vector2(2.6, 2.6)
 script = ExtResource("1_vxri1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(1.767, 1.767)
+scale = Vector2(2.65, 2.65)
 sprite_frames = SubResource("SpriteFrames_ea2jt")
 autoplay = "default"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2(1.5, 1.5)
 polygon = PackedVector2Array(0, 23, 16, -14, -16, -14)
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(0, 24.375)
+position = Vector2(0, 35.769)
 
 [node name="Marker2D_LEFT" type="Marker2D" parent="."]
 position = Vector2(-200, 1500)

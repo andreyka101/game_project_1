@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bk44h7aiav5kq" path="res://photo/super enemy star.png" id="11_2mnoa"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6csh7"]
-radius = 25.02
+radius = 37.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ixgqu"]
 animations = [{
@@ -82,13 +82,14 @@ script = ExtResource("1_b5gxj")
 shape = SubResource("CircleShape2D_6csh7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_ixgqu")
-animation = &"meteor 2"
+animation = &"meteor 5"
 
 [node name="Super_enemy_star" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(-25, -25)
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.4, 0.4)
 texture = ExtResource("11_2mnoa")
 
 [node name="Timer_star" type="Timer" parent="."]

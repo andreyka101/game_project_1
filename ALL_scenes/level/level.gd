@@ -13,8 +13,8 @@ var start_price_level = 3
 
 # var num_level_hard = 101
 # var num_level_text = 101
-# var price_level = 25
-# var start_price_level = 25
+# var price_level = 200
+# var start_price_level = 200
 
 var end_level = false
 
@@ -22,7 +22,7 @@ var end_level = false
 @onready var bullets_of_enemies: Node2D = $Bullets_of_enemies
 @onready var player_bullets: Node2D = $Player_bullets
 @onready var label_text_level: Label = $Label_text_level
-@onready var label_text_hp: Label = $Label_text_hp
+@onready var HP_ship_battery:AnimatedSprite2D = $HP_ship_battery
 @onready var label_dps: Label = $Menu_button/Settings_level/Label_dps
 @onready var galaxy_ship: CharacterBody2D = $Galaxy_ship
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $All_audio/AudioEnd_level
@@ -49,17 +49,17 @@ func _ready() -> void:
 	# for i in range(1):
 	# 	creatingEnemies_meteorite()
 		# creatingEnemies_enemy_ship_White()
-		# creatingEnemies_enemy_ship_Red()
+		# creatingEnemies_enemy_ship_Red(1)
 		# creatingEnemies_enemy_ship_Black()
 		# creatingEnemies_drone_Violet()
-		# creatingEnemies_drone_Уellow()
+		# creatingEnemies_drone_Уellow(1)
 	# for enemy in arr_enemies:
 	# 	enemies.add_child(enemy)
 
 func creatingEnemies_meteorite(enemy_difficulty = 0):
 	if (price_level >= 1):
 		var meteorite: Area2D = meteorite_scene.instantiate()
-		meteorite.position = Vector2(randi_range(-100, 820), -90)
+		meteorite.position = Vector2(randi_range(-100, 1180), -90)
 		meteorite.enemy_level = (num_level_hard/10)+1
 		if (enemy_difficulty == 0):
 			meteorite.super_enemy = false
@@ -73,7 +73,7 @@ func creatingEnemies_meteorite(enemy_difficulty = 0):
 func creatingEnemies_enemy_ship_White(enemy_difficulty = 0):
 	if (price_level >= 2):
 		var enemyShip_1: Area2D = enemyShip_White_scene.instantiate()
-		enemyShip_1.position = Vector2(randi_range(0, 720), -50)
+		enemyShip_1.position = Vector2(randi_range(0, 1080), -50)
 		enemyShip_1.enemy_level = (num_level_hard/10)+1
 		if (enemy_difficulty == 0):
 			enemyShip_1.super_enemy = false
@@ -87,7 +87,7 @@ func creatingEnemies_enemy_ship_White(enemy_difficulty = 0):
 func creatingEnemies_enemy_ship_Red(enemy_difficulty = 0):
 	if (price_level >= 2):
 		var enemyShip_2: Area2D = enemyShip_Red_scene.instantiate()
-		enemyShip_2.position = Vector2(randi_range(0, 720), -50)
+		enemyShip_2.position = Vector2(randi_range(0, 1080), -50)
 		enemyShip_2.enemy_level = (num_level_hard/10)+1
 		if (enemy_difficulty == 0):
 			enemyShip_2.super_enemy = false
@@ -101,7 +101,7 @@ func creatingEnemies_enemy_ship_Red(enemy_difficulty = 0):
 func creatingEnemies_enemy_ship_Black(enemy_difficulty = 0):
 	if (price_level >= 3):
 		var enemyShip_3: Area2D = enemyShip_Black_scene.instantiate()
-		enemyShip_3.position = Vector2(randi_range(0, 720), -50)
+		enemyShip_3.position = Vector2(randi_range(0, 1080), -50)
 		enemyShip_3.enemy_level = (num_level_hard/10)+1
 		if (enemy_difficulty == 0):
 			enemyShip_3.super_enemy = false
@@ -115,7 +115,7 @@ func creatingEnemies_enemy_ship_Black(enemy_difficulty = 0):
 func creatingEnemies_drone_Violet(enemy_difficulty = 0):
 	if (price_level >= 1):
 		var drone_1: Area2D = drone_Violet_scene.instantiate()
-		drone_1.position = Vector2(randi_range(200, 920), -10)
+		drone_1.position = Vector2(randi_range(-200, 1280), -10)
 		drone_1.enemy_level = (num_level_hard/10)+1
 		if (enemy_difficulty == 0):
 			drone_1.super_enemy = false
@@ -129,7 +129,7 @@ func creatingEnemies_drone_Violet(enemy_difficulty = 0):
 func creatingEnemies_drone_Уellow(enemy_difficulty = 0):
 	if (price_level >= 2):
 		var drone_2: CharacterBody2D = drone_Уellow_scene.instantiate()
-		drone_2.position = Vector2(randi_range(0, 720), -150)
+		drone_2.position = Vector2(randi_range(0, 1080), -150)
 		drone_2.enemy_level = (num_level_hard/10)+1
 		if (enemy_difficulty == 0):
 			drone_2.super_enemy = false
@@ -147,7 +147,24 @@ func _process(delta: float) -> void:
 	# print(price_level)
 	label_text_level.text = "level " + str(num_level_text)
 	if (galaxy_ship):
-		label_text_hp.text = "hp " + str(int(galaxy_ship.hp_player))
+		if((galaxy_ship.hp_start_player/100) * 90 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 80 < galaxy_ship.hp_player):
+			HP_ship_battery.play("hp_90%")
+		if((galaxy_ship.hp_start_player/100) * 80 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 70 < galaxy_ship.hp_player):
+			HP_ship_battery.play("hp_80%")
+		if((galaxy_ship.hp_start_player/100) * 70 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 60 < galaxy_ship.hp_player):
+			HP_ship_battery.play("hp_70%")
+		if((galaxy_ship.hp_start_player/100) * 60 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 50 < galaxy_ship.hp_player):
+			HP_ship_battery.play("hp_60%")
+		if((galaxy_ship.hp_start_player/100) * 50 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 40 < galaxy_ship.hp_player):
+			HP_ship_battery.play("hp_50%")
+		if((galaxy_ship.hp_start_player/100) * 40 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 30 < galaxy_ship.hp_player):
+			HP_ship_battery.play("hp_40%")
+		if((galaxy_ship.hp_start_player/100) * 30 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 20 < galaxy_ship.hp_player):
+			HP_ship_battery.play("hp_30%")
+		if((galaxy_ship.hp_start_player/100) * 20 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 10 < galaxy_ship.hp_player):
+			HP_ship_battery.play("hp_20%")
+		if((galaxy_ship.hp_start_player/100) * 10 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 0 < galaxy_ship.hp_player):
+			HP_ship_battery.play("hp_10%")
 	else:
 		get_tree().change_scene_to_file("res://ALL_scenes/main_menu/main_menu.tscn")
 

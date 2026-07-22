@@ -33,7 +33,7 @@ func _ready() -> void:
 
 	if(super_enemy):
 		enemy_level += 1
-		var num_scale_star = randf_range(0.3 , 0.5)
+		var num_scale_star = randf_range(0.5 , 0.7)
 		super_enemy_star.scale = Vector2(num_scale_star , num_scale_star)
 		super_enemy_star.visible = true
 		if (randi_range(0, 1) == 1):
@@ -41,12 +41,12 @@ func _ready() -> void:
 		else:
 			speed_rotation_star = randf_range(-2 , -7)
 
-		move_star = Vector2(randf_range(-15,15) , randf_range(-15,15))
-		super_enemy_star.position = Vector2(randf_range(-15,15) , randf_range(-15,15))
+		move_star = Vector2(randf_range(-42,42) , randf_range(-42,42))
+		super_enemy_star.position = Vector2(randf_range(-42,42) , randf_range(-42,42))
 	elif(mega_enemy):
 		enemy_level += 2
 		super_enemy_star.modulate = "ff0000"
-		var num_scale_star = randf_range(0.3 , 0.5)
+		var num_scale_star = randf_range(0.5 , 0.7)
 		super_enemy_star.scale = Vector2(num_scale_star , num_scale_star)
 		super_enemy_star.visible = true
 		if (randi_range(0, 1) == 1):
@@ -54,8 +54,8 @@ func _ready() -> void:
 		else:
 			speed_rotation_star = randf_range(-2 , -7)
 
-		move_star = Vector2(randf_range(-15,15) , randf_range(-15,15))
-		super_enemy_star.position = Vector2(randf_range(-15,15) , randf_range(-15,15))
+		move_star = Vector2(randf_range(-42,42) , randf_range(-42,42))
+		super_enemy_star.position = Vector2(randf_range(-42,42) , randf_range(-42,42))
 
 
 	# задаём направление для вращения головы дрона
@@ -274,4 +274,4 @@ func _on_boom_body_exited(body: Node2D) -> void:
 
 func _on_timer_star_timeout() -> void:
 	if(super_enemy or mega_enemy):
-		move_star = Vector2(randf_range(-15,15) , randf_range(-15,15))
+		move_star = Vector2(randf_range(-42,42) , randf_range(-42,42))

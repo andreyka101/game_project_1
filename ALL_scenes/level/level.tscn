@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bdw3xl8387e4f"]
+[gd_scene load_steps=38 format=3 uid="uid://bdw3xl8387e4f"]
 
 [ext_resource type="Script" uid="uid://dod02wyv88h72" path="res://ALL_scenes/level/level.gd" id="1_r62w2"]
 [ext_resource type="PackedScene" uid="uid://cwalhxdtsnydh" path="res://ALL_scenes/parallaxBackground_var_1/parallax_background_var_1.tscn" id="2_33107"]
@@ -18,6 +18,17 @@
 [ext_resource type="AudioStream" uid="uid://b1l77q2ja1wn1" path="res://audio/explosions of enemies/boom_10.mp3" id="16_yrohq"]
 [ext_resource type="AudioStream" uid="uid://v7hh27cthb4l" path="res://audio/explosions of enemies/boom_11.mp3" id="17_acwng"]
 [ext_resource type="PackedScene" uid="uid://dd7kmsstd0am1" path="res://ALL_scenes/inventory_menu/inventory_menu.tscn" id="18_5meb3"]
+[ext_resource type="Texture2D" uid="uid://budyqalyoekbb" path="res://photo/HP_ship_battery/HP_ship_battery12.png" id="19_ht6gd"]
+[ext_resource type="Texture2D" uid="uid://b1tghawoe5b5u" path="res://photo/HP_ship_battery/HP_ship_battery3.png" id="19_ldmet"]
+[ext_resource type="Texture2D" uid="uid://rgni22k7i74h" path="res://photo/HP_ship_battery/HP_ship_battery13.png" id="20_xthww"]
+[ext_resource type="Texture2D" uid="uid://dxl4j88v3egjq" path="res://photo/HP_ship_battery/HP_ship_battery11.png" id="22_tbm0f"]
+[ext_resource type="Texture2D" uid="uid://dmsijde3ofdku" path="res://photo/HP_ship_battery/HP_ship_battery10.png" id="23_alisq"]
+[ext_resource type="Texture2D" uid="uid://bu182au5l6lvx" path="res://photo/HP_ship_battery/HP_ship_battery9.png" id="24_ox0ky"]
+[ext_resource type="Texture2D" uid="uid://bil5cm10lbtds" path="res://photo/HP_ship_battery/HP_ship_battery8.png" id="25_pttu0"]
+[ext_resource type="Texture2D" uid="uid://2sfvysdfqbh3" path="res://photo/HP_ship_battery/HP_ship_battery7.png" id="26_2ujep"]
+[ext_resource type="Texture2D" uid="uid://crnvnvciv5bf1" path="res://photo/HP_ship_battery/HP_ship_battery6.png" id="27_i75sn"]
+[ext_resource type="Texture2D" uid="uid://defj4cmxlypi4" path="res://photo/HP_ship_battery/HP_ship_battery5.png" id="28_2ygkb"]
+[ext_resource type="Texture2D" uid="uid://ghwomm2nl08k" path="res://photo/HP_ship_battery/HP_ship_battery4.png" id="29_4c4ly"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k7y63"]
 bg_color = Color(0.087, 0, 0.188, 0.707)
@@ -44,6 +55,92 @@ corner_radius_bottom_left = 30
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pix0r"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u50mi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_ht6gd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_xthww")
+}],
+"loop": true,
+"name": &"hp_10%",
+"speed": 1.1
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_ldmet")
+}],
+"loop": true,
+"name": &"hp_100%",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("22_tbm0f")
+}],
+"loop": true,
+"name": &"hp_20%",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_alisq")
+}],
+"loop": true,
+"name": &"hp_30%",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("24_ox0ky")
+}],
+"loop": true,
+"name": &"hp_40%",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("25_pttu0")
+}],
+"loop": true,
+"name": &"hp_50%",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("26_2ujep")
+}],
+"loop": true,
+"name": &"hp_60%",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("27_i75sn")
+}],
+"loop": true,
+"name": &"hp_70%",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("28_2ygkb")
+}],
+"loop": true,
+"name": &"hp_80%",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("29_4c4ly")
+}],
+"loop": true,
+"name": &"hp_90%",
+"speed": 5.0
+}]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_r62w2")
@@ -72,22 +169,22 @@ text = "продолжить"
 light_mask = 512
 visibility_layer = 512
 z_index = 100
-offset_left = -64.0
-offset_top = -19.0
-offset_right = 117.0
-offset_bottom = 69.0
+offset_left = 46.0
+offset_top = 2237.0
+offset_right = 227.0
+offset_bottom = 2325.0
 scale = Vector2(2, 2)
-theme_override_font_sizes/font_size = 29
+theme_override_font_sizes/font_size = 33
 text = "level 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label_text_hp" type="Label" parent="."]
 z_index = 100
-offset_left = 443.0
-offset_top = -22.0
-offset_right = 593.0
-offset_bottom = 64.0
+offset_left = 787.0
+offset_top = 17.0
+offset_right = 937.0
+offset_bottom = 103.0
 scale = Vector2(2, 2)
 theme_override_colors/font_color = Color(0.737603, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 0.434235, 0.434235, 1)
@@ -319,10 +416,10 @@ text = "DPS = 0"
 
 [node name="Pause" type="Button" parent="Menu_button"]
 z_index = 50
-offset_left = 23.0
-offset_top = 1512.0
-offset_right = 93.0
-offset_bottom = 1582.0
+offset_left = 22.0
+offset_top = 2280.0
+offset_right = 113.0
+offset_bottom = 2371.0
 theme_override_colors/icon_pressed_color = Color(0.622196, 0.622196, 0.622196, 1)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_ubrqf")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_pix0r")
@@ -398,6 +495,14 @@ volume_db = 10.048
 
 [node name="InventoryMenu" parent="." instance=ExtResource("18_5meb3")]
 visible = false
+
+[node name="HP_ship_battery" type="AnimatedSprite2D" parent="."]
+position = Vector2(141, 60)
+scale = Vector2(2.86071, 2.86071)
+sprite_frames = SubResource("SpriteFrames_u50mi")
+animation = &"hp_10%"
+autoplay = "hp_100%"
+frame_progress = 0.363684
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Menu_button/Settings_level/Control_hp/Button_hp" to="Menu_button" method="_on_button_hp_pressed"]

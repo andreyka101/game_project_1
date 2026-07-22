@@ -39,10 +39,12 @@ script = ExtResource("1_3yspx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -0.5)
+scale = Vector2(1.5, 1.5)
 shape = SubResource("RectangleShape2D_aoing")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 modulate = Color(1, 0.532883, 0.532883, 1)
+scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_q2jto")
 frame_progress = 0.127599
 flip_v = true

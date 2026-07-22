@@ -169,7 +169,7 @@ animations = [{
 radius = 11.2673
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jdim8"]
-radius = 41.5402
+radius = 43.8529
 
 [node name="Drone_1" type="Area2D" groups=["all_enemy"]]
 scale = Vector2(2.6, 2.6)
@@ -178,26 +178,25 @@ script = ExtResource("1_jdim8")
 [node name="AnimatedSprite2D_fire" type="AnimatedSprite2D" parent="."]
 position = Vector2(0.625, -1.25)
 rotation = -1.5708
-scale = Vector2(1.767, 1.767)
+scale = Vector2(2.6, 2.6)
 sprite_frames = SubResource("SpriteFrames_uxqsf")
 autoplay = "default"
 
 [node name="AnimatedSprite2D_head" type="AnimatedSprite2D" parent="." groups=["all_enemy"]]
-scale = Vector2(1.767, 1.767)
+scale = Vector2(2.6, 2.6)
 sprite_frames = SubResource("SpriteFrames_ijy8y")
-animation = &"explosion"
 autoplay = "default"
-frame = 6
-frame_progress = 1.0
 offset = Vector2(-2, -4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.5, 1.5)
 shape = SubResource("CircleShape2D_1u84v")
 
 [node name="Boom" type="Area2D" parent="."]
 script = ExtResource("4_k61ij")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boom"]
+scale = Vector2(1.5, 1.5)
 shape = SubResource("CircleShape2D_jdim8")
 debug_color = Color(0.7, 0, 0.278464, 0.42)
 
