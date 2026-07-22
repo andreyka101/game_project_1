@@ -1,12 +1,210 @@
-[gd_scene load_steps=7 format=3 uid="uid://dd7kmsstd0am1"]
+[gd_scene load_steps=45 format=3 uid="uid://dd7kmsstd0am1"]
 
 [ext_resource type="Script" uid="uid://t7cdjolf4ssx" path="res://ALL_scenes/inventory_menu/inventory_menu.gd" id="1_doitq"]
 [ext_resource type="Texture2D" uid="uid://cvg5fbm0ffp6b" path="res://icon_menu_двойной выстрел.png" id="1_usr0h"]
 [ext_resource type="Script" uid="uid://c71phce34vqq2" path="res://ALL_scenes/inventory_menu/texture_rect.gd" id="2_viouy"]
 [ext_resource type="Texture2D" uid="uid://deymmnyhvi70i" path="res://icon_menu_скорость пули.png" id="3_viouy"]
 [ext_resource type="PackedScene" uid="uid://qholyg7vlpbw" path="res://ALL_scenes/universal_item_ability/universal_item_ability.tscn" id="5_sfd42"]
+[ext_resource type="Texture2D" uid="uid://d4b67mcqip268" path="res://photo/spacecraft/spacecraft1.png" id="6_d858p"]
+[ext_resource type="Texture2D" uid="uid://ct7ioacphtv7m" path="res://photo/spacecraft/spacecraft2.png" id="7_mnfl7"]
+[ext_resource type="Texture2D" uid="uid://dosew3q23ou1a" path="res://photo/spacecraft/spacecraft3.png" id="8_ulo2k"]
+[ext_resource type="Texture2D" uid="uid://d35cw22aep1a5" path="res://photo/spacecraft/spacecraft4.png" id="9_wykoc"]
+[ext_resource type="Texture2D" uid="uid://brq0kvvdvhlcd" path="res://photo/spacecraft/spacecraft13.png" id="10_ikcmn"]
+[ext_resource type="Texture2D" uid="uid://bbe4w4gw1iecw" path="res://photo/spacecraft/spacecraft14.png" id="11_p4ox8"]
+[ext_resource type="Texture2D" uid="uid://61v4641k26eg" path="res://photo/spacecraft/spacecraft15.png" id="12_45li5"]
+[ext_resource type="Texture2D" uid="uid://c7c84e6ffemxd" path="res://photo/spacecraft/spacecraft16.png" id="13_7afg4"]
+[ext_resource type="Texture2D" uid="uid://1cnhlbqitnkd" path="res://photo/spacecraft/spacecraft9.png" id="14_o0b5u"]
+[ext_resource type="Texture2D" uid="uid://cbmls75aly163" path="res://photo/spacecraft/spacecraft10.png" id="15_mjxgj"]
+[ext_resource type="Texture2D" uid="uid://8qytmcmgy35d" path="res://photo/spacecraft/spacecraft11.png" id="16_hxutq"]
+[ext_resource type="Texture2D" uid="uid://q1t16akyuwrd" path="res://photo/spacecraft/spacecraft12.png" id="17_pxis7"]
+[ext_resource type="Texture2D" uid="uid://cddj7s0phn00x" path="res://photo/spacecraft/spacecraft5.png" id="18_0e11b"]
+[ext_resource type="Texture2D" uid="uid://bpeenfcspasp0" path="res://photo/spacecraft/spacecraft6.png" id="19_q1w2q"]
+[ext_resource type="Texture2D" uid="uid://cxftef5lbo7ar" path="res://photo/spacecraft/spacecraft7.png" id="20_oodho"]
+[ext_resource type="Texture2D" uid="uid://bdr4btoyyfbpn" path="res://photo/spacecraft/spacecraft8.png" id="21_og252"]
+[ext_resource type="Texture2D" uid="uid://dws6i502jyglo" path="res://photo/spacecraft/spacecraft17.png" id="22_808sq"]
+[ext_resource type="Texture2D" uid="uid://bts03wtg78veu" path="res://photo/spacecraft/spacecraft18.png" id="23_dut78"]
+[ext_resource type="Texture2D" uid="uid://bbnrlr0oyhj7e" path="res://photo/spacecraft/spacecraft19.png" id="24_o1alw"]
+[ext_resource type="Texture2D" uid="uid://c10ar1uhl33i3" path="res://photo/spacecraft/spacecraft20.png" id="25_y806f"]
+[ext_resource type="Texture2D" uid="uid://diivhyfib0iii" path="res://photo/spacecraft/spacecraft21.png" id="26_t36jx"]
+[ext_resource type="Texture2D" uid="uid://psx0njy3hohe" path="res://photo/spacecraft/spacecraft22.png" id="27_2s8io"]
+[ext_resource type="Texture2D" uid="uid://dktohuokrq5c0" path="res://photo/spacecraft/spacecraft23.png" id="28_341nu"]
+[ext_resource type="Texture2D" uid="uid://cxuh0vgm3mf3j" path="res://photo/spacecraft/spacecraft24.png" id="29_5rl2j"]
+[ext_resource type="Texture2D" uid="uid://b16niy8qxdsay" path="res://photo/spacecraft/spacecraft25.png" id="30_eo0ev"]
+[ext_resource type="Texture2D" uid="uid://c6bcvhkdiba33" path="res://photo/spacecraft/spacecraft26.png" id="31_euyb7"]
+[ext_resource type="Texture2D" uid="uid://by1ycobk4ka8r" path="res://photo/spacecraft/spacecraft27.png" id="32_dixvb"]
+[ext_resource type="Texture2D" uid="uid://ci50yeydi0al1" path="res://photo/spacecraft/spacecraft28.png" id="33_n82c8"]
+[ext_resource type="Texture2D" uid="uid://dcpd080gfmk6v" path="res://photo/spacecraft/spacecraft29.png" id="34_07s3m"]
+[ext_resource type="Texture2D" uid="uid://ds751h74xjpr1" path="res://photo/icon_money.png" id="34_mnfl7"]
+[ext_resource type="Texture2D" uid="uid://cl546psffk6m8" path="res://photo/spacecraft/spacecraft30.png" id="35_kpjwb"]
+[ext_resource type="Texture2D" uid="uid://b1fd4s5ljpnxu" path="res://photo/spacecraft/spacecraft31.png" id="36_xjujy"]
+[ext_resource type="Texture2D" uid="uid://dfbrn07uf3k8o" path="res://photo/spacecraft/spacecraft32.png" id="37_wde5g"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d858p"]
+bg_color = Color(0.027451, 0, 0.286275, 1)
+corner_radius_top_left = 150
+corner_radius_top_right = 150
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 150
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pd6mj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_d858p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_mnfl7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ulo2k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_wykoc")
+}],
+"loop": true,
+"name": &"100-75%",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_ikcmn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_p4ox8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_45li5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_7afg4")
+}],
+"loop": true,
+"name": &"25-0%",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_o0b5u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_mjxgj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_hxutq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_pxis7")
+}],
+"loop": true,
+"name": &"50-25%",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_0e11b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_q1w2q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_oodho")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_og252")
+}],
+"loop": true,
+"name": &"75-50%",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("22_808sq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_dut78")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_o1alw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_y806f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_t36jx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_2s8io")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_341nu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_5rl2j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_eo0ev")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_euyb7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_dixvb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_n82c8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_07s3m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_kpjwb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_xjujy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_wde5g")
+}],
+"loop": false,
+"name": &"explosion",
+"speed": 15.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ulo2k"]
+bg_color = Color(1, 0.913725, 0.14902, 1)
+corner_radius_top_left = 45
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 45
+expand_margin_left = 5.0
+expand_margin_right = 4.0
+anti_aliasing = false
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wykoc"]
+content_margin_left = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mnfl7"]
+bg_color = Color(0.168627, 0.172549, 0.345098, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+expand_margin_left = 30.0
+expand_margin_top = 30.0
+expand_margin_right = 30.0
+expand_margin_bottom = 30.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sfd42"]
+bg_color = Color(0.321569, 0.329412, 0.533333, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
 
 [node name="InventoryMenu" type="Control"]
 layout_mode = 3
@@ -21,71 +219,213 @@ script = ExtResource("1_doitq")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
-offset_right = 732.0
-offset_bottom = 1615.0
-color = Color(0, 0, 0, 0.34902)
+offset_right = 1080.0
+offset_bottom = 2400.0
+color = Color(0.321569, 0.329412, 0.533333, 1)
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="SkinShip_PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 0
-offset_left = 34.0
-offset_top = 677.0
-offset_right = 698.0
-offset_bottom = 1041.0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 275.0
+offset_bottom = 275.0
+pivot_offset = Vector2(125, 125)
+theme_override_styles/panel = SubResource("StyleBoxFlat_d858p")
+
+[node name="SkinShip_AnimatedSprite2D" type="AnimatedSprite2D" parent="SkinShip_PanelContainer"]
+position = Vector2(125, 127.2)
+rotation = -0.575959
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_pd6mj")
+animation = &"100-75%"
+autoplay = "100-75%"
+
+[node name="Coin_HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 423.0
+offset_right = 1057.0
+offset_bottom = 144.0
+
+[node name="Coin_Panel" type="PanelContainer" parent="Coin_HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_ulo2k")
+
+[node name="Coin_CenterContainer" type="VFlowContainer" parent="Coin_HBoxContainer/Coin_Panel"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Coin_TextureRect" type="TextureRect" parent="Coin_HBoxContainer/Coin_Panel/Coin_CenterContainer"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+texture = ExtResource("34_mnfl7")
+expand_mode = 1
+flip_v = true
+
+[node name="Coin_Label" type="Label" parent="Coin_HBoxContainer/Coin_Panel/Coin_CenterContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 67
+theme_override_styles/normal = SubResource("StyleBoxEmpty_wykoc")
+text = "50 coin"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LevelText_Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 284.0
+offset_right = 270.0
+offset_bottom = 375.0
+theme_override_font_sizes/font_size = 66
+text = "Level 1"
+
+[node name="PlayerStatistics_VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 340.0
+offset_top = 130.0
+offset_right = 723.0
+offset_bottom = 384.0
+
+[node name="ShipSpeed_Label" type="Label" parent="PlayerStatistics_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 31
+text = "скорость корабля - 300"
+
+[node name="BulletSpeed_Label" type="Label" parent="PlayerStatistics_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "скорость пули - 300"
+
+[node name="ShipProtection_Label" type="Label" parent="PlayerStatistics_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "защита корабля - 300"
+
+[node name="BulletForce_Label" type="Label" parent="PlayerStatistics_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "сила пули - 300"
+
+[node name="Reloading_Label" type="Label" parent="PlayerStatistics_VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "перезарядка - 300"
+
+[node name="HP_ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 409.0
+offset_right = 1040.0
+offset_bottom = 476.0
+theme_override_font_sizes/font_size = 30
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 375.0
+offset_top = 2104.0
+offset_right = 659.0
+offset_bottom = 2207.0
+text = "продолжить"
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_top = 1145.0
+offset_right = 1080.0
+offset_bottom = 1962.0
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mnfl7")
+
+[node name="GridContainer" type="GridContainer" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
 theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 8
 columns = 4
 
-[node name="Slot1" type="Panel" parent="GridContainer"]
-custom_minimum_size = Vector2(160, 178)
+[node name="Slot1" type="Panel" parent="CenterContainer/PanelContainer/GridContainer"]
+custom_minimum_size = Vector2(240, 267)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
 
-[node name="Slot2" type="Panel" parent="GridContainer"]
-custom_minimum_size = Vector2(160, 178)
+[node name="Slot2" type="Panel" parent="CenterContainer/PanelContainer/GridContainer"]
+custom_minimum_size = Vector2(240, 267)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
 
-[node name="Slot3" type="Panel" parent="GridContainer"]
-custom_minimum_size = Vector2(160, 178)
+[node name="Slot3" type="Panel" parent="CenterContainer/PanelContainer/GridContainer"]
+custom_minimum_size = Vector2(240, 267)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
 
-[node name="Slot4" type="Panel" parent="GridContainer"]
-custom_minimum_size = Vector2(160, 178)
+[node name="Slot4" type="Panel" parent="CenterContainer/PanelContainer/GridContainer"]
+custom_minimum_size = Vector2(240, 267)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
 
-[node name="Slot5" type="Panel" parent="GridContainer"]
-custom_minimum_size = Vector2(160, 178)
+[node name="Slot5" type="Panel" parent="CenterContainer/PanelContainer/GridContainer"]
+custom_minimum_size = Vector2(240, 267)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
 
-[node name="Slot6" type="Panel" parent="GridContainer"]
-custom_minimum_size = Vector2(160, 178)
+[node name="Slot6" type="Panel" parent="CenterContainer/PanelContainer/GridContainer"]
+custom_minimum_size = Vector2(240, 267)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
 
-[node name="Slot7" type="Panel" parent="GridContainer"]
-custom_minimum_size = Vector2(160, 178)
+[node name="Slot7" type="Panel" parent="CenterContainer/PanelContainer/GridContainer"]
+custom_minimum_size = Vector2(240, 267)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
 
-[node name="Slot8" type="Panel" parent="GridContainer"]
-custom_minimum_size = Vector2(160, 178)
+[node name="Slot8" type="Panel" parent="CenterContainer/PanelContainer/GridContainer"]
+custom_minimum_size = Vector2(240, 267)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
+
+[node name="Slot9" type="Panel" parent="CenterContainer/PanelContainer/GridContainer"]
+custom_minimum_size = Vector2(240, 267)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
+
+[node name="Slot10" type="Panel" parent="CenterContainer/PanelContainer/GridContainer"]
+custom_minimum_size = Vector2(240, 267)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
+
+[node name="Slot11" type="Panel" parent="CenterContainer/PanelContainer/GridContainer"]
+custom_minimum_size = Vector2(240, 267)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
+
+[node name="Slot12" type="Panel" parent="CenterContainer/PanelContainer/GridContainer"]
+custom_minimum_size = Vector2(240, 267)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -93,49 +433,26 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
 
 [node name="ItemsContainer" type="Control" parent="."]
 anchors_preset = 0
-offset_left = 194.0
-offset_top = 105.0
-offset_right = 234.0
-offset_bottom = 145.0
 
 [node name="TextureRect" type="TextureRect" parent="ItemsContainer"]
 layout_mode = 0
-offset_left = -96.0
-offset_top = 11.0
-offset_right = -31.0
-offset_bottom = 76.0
+offset_left = 157.0
+offset_top = 717.0
+offset_right = 222.0
+offset_bottom = 782.0
 texture = ExtResource("1_usr0h")
 script = ExtResource("2_viouy")
 
 [node name="TextureRect2" type="TextureRect" parent="ItemsContainer"]
 layout_mode = 0
-offset_left = 178.0
-offset_top = -11.0
-offset_right = 243.0
-offset_bottom = 54.0
+offset_left = 658.0
+offset_top = 849.0
+offset_right = 723.0
+offset_bottom = 914.0
 texture = ExtResource("3_viouy")
 script = ExtResource("2_viouy")
 
 [node name="Button" parent="ItemsContainer" instance=ExtResource("5_sfd42")]
 layout_mode = 0
-offset_left = -48.0
-offset_top = 157.0
-offset_right = 92.0
-offset_bottom = 315.0
-
-[node name="ProgressBar" type="ProgressBar" parent="."]
-layout_mode = 0
-offset_left = 99.0
-offset_top = 561.0
-offset_right = 568.0
-offset_bottom = 617.0
-
-[node name="Button" type="Button" parent="."]
-layout_mode = 0
-offset_left = 212.0
-offset_top = 1198.0
-offset_right = 496.0
-offset_bottom = 1334.0
-text = "продолжить"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

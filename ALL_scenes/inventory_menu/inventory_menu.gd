@@ -1,14 +1,15 @@
 extends Control
 
 @onready var level: Node2D = get_parent() as Node2D
-@onready var grid: GridContainer = get_node("GridContainer")
+@onready var grid: GridContainer = get_node("CenterContainer/PanelContainer/GridContainer")
+# @onready var grid: GridContainer = $"../../CenterContainer/PanelContainer/GridContainer"
 @onready var galaxy_ship = get_node("../Galaxy_ship")
 var cells_included_forces = {}
 
 func _ready() -> void:
 	for slot in grid.get_children():
-		# print(slot)
-		# print(slot.name)
+		print(slot)
+		print(slot.name)
 		cells_included_forces[slot] = {
 			"free_space": true,
 			"id_ability": null,

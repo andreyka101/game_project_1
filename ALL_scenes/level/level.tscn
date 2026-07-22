@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bdw3xl8387e4f"]
+[gd_scene load_steps=41 format=3 uid="uid://bdw3xl8387e4f"]
 
 [ext_resource type="Script" uid="uid://dod02wyv88h72" path="res://ALL_scenes/level/level.gd" id="1_r62w2"]
 [ext_resource type="PackedScene" uid="uid://cwalhxdtsnydh" path="res://ALL_scenes/parallaxBackground_var_1/parallax_background_var_1.tscn" id="2_33107"]
@@ -153,13 +153,16 @@ expand_margin_left = 5.0
 expand_margin_right = 4.0
 anti_aliasing = false
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xthww"]
+content_margin_left = 8.0
+
 [node name="Level" type="Node2D"]
 script = ExtResource("1_r62w2")
 
 [node name="ParallaxBackground_var_1" parent="." instance=ExtResource("2_33107")]
-offset = Vector2(640, 611)
-scale = Vector2(8, 12)
-transform = Transform2D(8, 0, 0, 12, 640, 611)
+offset = Vector2(640, 879)
+scale = Vector2(10, 15)
+transform = Transform2D(10, 0, 0, 15, 640, 879)
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -489,9 +492,6 @@ volume_db = 10.048
 
 [node name="AudioHit_1" type="AudioStreamPlayer2D" parent="All_audio/Enemy_hitting_sound"]
 
-[node name="InventoryMenu" parent="." instance=ExtResource("18_5meb3")]
-visible = false
-
 [node name="HP_ship_battery" type="AnimatedSprite2D" parent="."]
 position = Vector2(147, 74)
 scale = Vector2(2.86071, 2.86071)
@@ -500,32 +500,41 @@ animation = &"hp_10%"
 autoplay = "hp_100%"
 frame_progress = 0.363684
 
-[node name="Panel" type="PanelContainer" parent="."]
-offset_left = 874.0
-offset_top = 25.0
-offset_right = 1045.0
-offset_bottom = 117.0
+[node name="Coin_HBoxContainer" type="HBoxContainer" parent="."]
+offset_left = 423.0
+offset_right = 1057.0
+offset_bottom = 144.0
+
+[node name="Coin_Panel" type="PanelContainer" parent="Coin_HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_tbm0f")
 
-[node name="CenterContainer" type="VFlowContainer" parent="Panel"]
+[node name="Coin_CenterContainer" type="VFlowContainer" parent="Coin_HBoxContainer/Coin_Panel"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="Panel/CenterContainer"]
+[node name="Coin_TextureRect" type="TextureRect" parent="Coin_HBoxContainer/Coin_Panel/Coin_CenterContainer"]
 custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 texture = ExtResource("30_xthww")
 expand_mode = 1
 flip_v = true
 
-[node name="Label" type="Label" parent="Panel/CenterContainer"]
+[node name="Coin_Label" type="Label" parent="Coin_HBoxContainer/Coin_Panel/Coin_CenterContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 67
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xthww")
 text = "50"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="InventoryMenu" parent="." instance=ExtResource("18_5meb3")]
+visible = false
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Menu_button/Settings_level/Control_hp/Button_hp" to="Menu_button" method="_on_button_hp_pressed"]

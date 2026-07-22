@@ -26,6 +26,7 @@ var end_level = false
 @onready var label_dps: Label = $Menu_button/Settings_level/Label_dps
 @onready var galaxy_ship: CharacterBody2D = $Galaxy_ship
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $All_audio/AudioEnd_level
+@onready var coin_text: Label = $Coin_HBoxContainer/Coin_Panel/Coin_CenterContainer/Coin_Label
 var meteorite_scene = load("res://ALL_scenes/meteorite/meteorite.tscn")
 var enemyShip_White_scene = load("res://ALL_scenes/enemyShip_1/enemy_ship_1.tscn")
 var enemyShip_Red_scene = load("res://ALL_scenes/enemyShip_2/enemy_ship_2.tscn")
@@ -167,6 +168,9 @@ func _process(delta: float) -> void:
 			HP_ship_battery.play("hp_10%")
 	else:
 		get_tree().change_scene_to_file("res://ALL_scenes/main_menu/main_menu.tscn")
+
+	coin_text.text = str(Global.coin_player)
+
 
 	if (len(enemies.get_children()) == 0 and !end_level and price_level == 0):
 		# end_level = true

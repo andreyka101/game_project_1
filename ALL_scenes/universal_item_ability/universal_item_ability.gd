@@ -5,7 +5,7 @@ var offset = Vector2()
 var last_safe_position = Vector2() # Сюда сохраняем позицию, чтобы вернуть предмет при промахе
 
 # ВАЖНО: Замените этот путь на путь к вашему GridContainer в дереве сцены!
-@onready var grid = get_node("../../GridContainer") 
+@onready var grid = get_node("../../CenterContainer/PanelContainer/GridContainer") 
 @onready var inventory_menu:Control = get_parent().get_parent()
 @onready var galaxy_ship = get_node("../../../Galaxy_ship")
 
@@ -85,16 +85,18 @@ func snap_to_nearest_slot() -> void:
 		# 	"ability_type": ability_type,
 		# 	"num_level": num_level,
 		# })
-		match ability_type:
-			"двойной выстрел":
-				galaxy_ship.hp_player += (galaxy_ship.hp_player/100) * 5
+
+		
+		# match ability_type:
+		# 	"двойной выстрел":
+		# 		galaxy_ship.hp_player += (galaxy_ship.hp_player/100) * 5
 		for cell in inventory_menu.cells_included_forces:
 			print(cell)
 			if(cell != closest_slot and inventory_menu.cells_included_forces[cell].id_ability == str(self)):
 				inventory_menu.cells_included_forces[cell].id_ability = null
 				inventory_menu.cells_included_forces[cell].free_space = true
-				match ability_type:
-					"двойной выстрел":
-						galaxy_ship.hp_player -= (galaxy_ship.hp_player/100) * 5
+				# match ability_type:
+				# 	"двойной выстрел":
+				# 		galaxy_ship.hp_player -= (galaxy_ship.hp_player/100) * 5
 	else:
 		global_position = last_safe_position

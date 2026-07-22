@@ -2,6 +2,7 @@ extends Node
 
 
 var stop_game = false
+var coin_player = 0
 
 
 
