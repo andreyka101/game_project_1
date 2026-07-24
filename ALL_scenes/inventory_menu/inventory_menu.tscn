@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://dd7kmsstd0am1"]
+[gd_scene load_steps=46 format=3 uid="uid://dd7kmsstd0am1"]
 
 [ext_resource type="Script" uid="uid://t7cdjolf4ssx" path="res://ALL_scenes/inventory_menu/inventory_menu.gd" id="1_doitq"]
 [ext_resource type="Texture2D" uid="uid://cvg5fbm0ffp6b" path="res://icon_menu_двойной выстрел.png" id="1_usr0h"]
@@ -206,6 +206,9 @@ corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mnfl7"]
+content_margin_top = 12.0
+
 [node name="InventoryMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -325,134 +328,199 @@ theme_override_font_sizes/font_size = 30
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 375.0
-offset_top = 2104.0
-offset_right = 659.0
-offset_bottom = 2207.0
+offset_left = 525.0
+offset_top = 2232.0
+offset_right = 809.0
+offset_bottom = 2335.0
 text = "продолжить"
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="InventoryСells_CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 0
-offset_top = 1145.0
+offset_top = 1221.0
 offset_right = 1080.0
-offset_bottom = 1962.0
+offset_bottom = 2038.0
 
-[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+[node name="InventoryСells_PanelContainer" type="PanelContainer" parent="InventoryСells_CenterContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_mnfl7")
 
-[node name="GridContainer" type="GridContainer" parent="CenterContainer/PanelContainer"]
+[node name="InventoryСells_GridContainer" type="GridContainer" parent="InventoryСells_CenterContainer/InventoryСells_PanelContainer"]
 layout_mode = 2
 theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 8
 columns = 4
 
-[node name="Slot1" type="Panel" parent="CenterContainer/PanelContainer/GridContainer"]
+[node name="Slot1" type="Panel" parent="InventoryСells_CenterContainer/InventoryСells_PanelContainer/InventoryСells_GridContainer"]
 custom_minimum_size = Vector2(240, 267)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
 
-[node name="Slot2" type="Panel" parent="CenterContainer/PanelContainer/GridContainer"]
+[node name="Slot2" type="Panel" parent="InventoryСells_CenterContainer/InventoryСells_PanelContainer/InventoryСells_GridContainer"]
 custom_minimum_size = Vector2(240, 267)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
 
-[node name="Slot3" type="Panel" parent="CenterContainer/PanelContainer/GridContainer"]
+[node name="Slot3" type="Panel" parent="InventoryСells_CenterContainer/InventoryСells_PanelContainer/InventoryСells_GridContainer"]
 custom_minimum_size = Vector2(240, 267)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
 
-[node name="Slot4" type="Panel" parent="CenterContainer/PanelContainer/GridContainer"]
+[node name="Slot4" type="Panel" parent="InventoryСells_CenterContainer/InventoryСells_PanelContainer/InventoryСells_GridContainer"]
 custom_minimum_size = Vector2(240, 267)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
 
-[node name="Slot5" type="Panel" parent="CenterContainer/PanelContainer/GridContainer"]
+[node name="Slot5" type="Panel" parent="InventoryСells_CenterContainer/InventoryСells_PanelContainer/InventoryСells_GridContainer"]
 custom_minimum_size = Vector2(240, 267)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
 
-[node name="Slot6" type="Panel" parent="CenterContainer/PanelContainer/GridContainer"]
+[node name="Slot6" type="Panel" parent="InventoryСells_CenterContainer/InventoryСells_PanelContainer/InventoryСells_GridContainer"]
 custom_minimum_size = Vector2(240, 267)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
 
-[node name="Slot7" type="Panel" parent="CenterContainer/PanelContainer/GridContainer"]
+[node name="Slot7" type="Panel" parent="InventoryСells_CenterContainer/InventoryСells_PanelContainer/InventoryСells_GridContainer"]
 custom_minimum_size = Vector2(240, 267)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
 
-[node name="Slot8" type="Panel" parent="CenterContainer/PanelContainer/GridContainer"]
+[node name="Slot8" type="Panel" parent="InventoryСells_CenterContainer/InventoryСells_PanelContainer/InventoryСells_GridContainer"]
 custom_minimum_size = Vector2(240, 267)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
 
-[node name="Slot9" type="Panel" parent="CenterContainer/PanelContainer/GridContainer"]
+[node name="Slot9" type="Panel" parent="InventoryСells_CenterContainer/InventoryСells_PanelContainer/InventoryСells_GridContainer"]
 custom_minimum_size = Vector2(240, 267)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
 
-[node name="Slot10" type="Panel" parent="CenterContainer/PanelContainer/GridContainer"]
+[node name="Slot10" type="Panel" parent="InventoryСells_CenterContainer/InventoryСells_PanelContainer/InventoryСells_GridContainer"]
 custom_minimum_size = Vector2(240, 267)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
 
-[node name="Slot11" type="Panel" parent="CenterContainer/PanelContainer/GridContainer"]
+[node name="Slot11" type="Panel" parent="InventoryСells_CenterContainer/InventoryСells_PanelContainer/InventoryСells_GridContainer"]
 custom_minimum_size = Vector2(240, 267)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
 
-[node name="Slot12" type="Panel" parent="CenterContainer/PanelContainer/GridContainer"]
+[node name="Slot12" type="Panel" parent="InventoryСells_CenterContainer/InventoryСells_PanelContainer/InventoryСells_GridContainer"]
 custom_minimum_size = Vector2(240, 267)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
+
+[node name="ShopItem_CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_top = 583.0
+offset_right = 1080.0
+offset_bottom = 924.0
+
+[node name="ShopItem_PanelContainer" type="PanelContainer" parent="ShopItem_CenterContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mnfl7")
+
+[node name="ShopItem_GridContainer" type="GridContainer" parent="ShopItem_CenterContainer/ShopItem_PanelContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 3
+
+[node name="Slot1" type="Panel" parent="ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer"]
+custom_minimum_size = Vector2(240, 267)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
+
+[node name="Slot2" type="Panel" parent="ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer"]
+custom_minimum_size = Vector2(240, 267)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
+
+[node name="Slot3" type="Panel" parent="ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer"]
+custom_minimum_size = Vector2(240, 267)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
+
+[node name="Label" type="Label" parent="ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 39
+theme_override_styles/normal = SubResource("StyleBoxEmpty_mnfl7")
+text = "скорость"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 39
+theme_override_styles/normal = SubResource("StyleBoxEmpty_mnfl7")
+text = "защита"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 39
+theme_override_styles/normal = SubResource("StyleBoxEmpty_mnfl7")
+text = "сила"
+horizontal_alignment = 1
 
 [node name="ItemsContainer" type="Control" parent="."]
 anchors_preset = 0
 
 [node name="TextureRect" type="TextureRect" parent="ItemsContainer"]
+visible = false
 layout_mode = 0
-offset_left = 157.0
-offset_top = 717.0
-offset_right = 222.0
-offset_bottom = 782.0
+offset_left = 679.0
+offset_top = 277.0
+offset_right = 744.0
+offset_bottom = 342.0
 texture = ExtResource("1_usr0h")
 script = ExtResource("2_viouy")
 
 [node name="TextureRect2" type="TextureRect" parent="ItemsContainer"]
+visible = false
 layout_mode = 0
-offset_left = 658.0
-offset_top = 849.0
-offset_right = 723.0
-offset_bottom = 914.0
+offset_left = 698.0
+offset_top = 407.0
+offset_right = 763.0
+offset_bottom = 472.0
 texture = ExtResource("3_viouy")
 script = ExtResource("2_viouy")
 
 [node name="Button" parent="ItemsContainer" instance=ExtResource("5_sfd42")]
+visible = false
 layout_mode = 0
+offset_left = 749.0
+offset_top = 246.0
+offset_right = 959.0
+offset_bottom = 483.0
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

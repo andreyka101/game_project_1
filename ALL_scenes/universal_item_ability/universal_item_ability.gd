@@ -5,26 +5,35 @@ var offset = Vector2()
 var last_safe_position = Vector2() # Сюда сохраняем позицию, чтобы вернуть предмет при промахе
 
 # ВАЖНО: Замените этот путь на путь к вашему GridContainer в дереве сцены!
-@onready var grid = get_node("../../CenterContainer/PanelContainer/GridContainer") 
+@onready var InventoryСells_Grid = get_node("../../InventoryСells_CenterContainer/InventoryСells_PanelContainer/InventoryСells_GridContainer") 
 @onready var inventory_menu:Control = get_parent().get_parent()
 @onready var galaxy_ship = get_node("../../../Galaxy_ship")
 
 @onready var label_level:Label = $Label
 @onready var label_price:Label = $Label2
 @onready var texture_rect: TextureRect = $TextureRect
+
+@onready var test:Panel = $"../../CenterContainer2/PanelContainer/GridContainer/Slot1"
 var num_level = 1
-var num_price = null
+var num_price = 2
 var num_multiplier_price = null
-# var ability_type = null
-var ability_type = "двойной выстрел"
+var ability_type = ""
+# var ability_type = "двойной выстрел"
+var not_purchased = true
+var name_slot_ShopItem:String = ""
 
 func _ready() -> void:
+	# await get_tree().process_frame 
+	# global_position = test.global_position + (test.size / 2) - (size / 2)
+
 	# Запоминаем стартовую позицию предмета при запуске игры
 	last_safe_position = global_position
 
 	match ability_type:
 		"двойной выстрел":
 			num_multiplier_price = 4
+		"скорость пули":
+			num_multiplier_price = 2
 	texture_rect.texture = load("res://icon_menu_" + ability_type + ".png")
 
 
@@ -48,7 +57,7 @@ func _process(_delta: float) -> void:
 		global_position = get_global_mouse_position() - offset
 
 func snap_to_nearest_slot() -> void:
-	if not grid:
+	if not InventoryСells_Grid:
 		print("Ошибка: GridContainer не найден!")
 		return
 
@@ -59,7 +68,7 @@ func snap_to_nearest_slot() -> void:
 	# радиус (например, до половины размера вашего слота)
 	var snap_threshold = 80.0 
 
-	for slot in grid.get_children():
+	for slot in InventoryСells_Grid.get_children():
 		var slot_center = slot.global_position + (slot.size / 2)
 		var item_center = global_position + (size / 2)
 		
@@ -74,6 +83,11 @@ func snap_to_nearest_slot() -> void:
 		# Формула: ПозицияСлота + (РазмерСлота / 2) - (РазмерПредмета / 2)
 		var target_position = closest_slot.global_position + (closest_slot.size / 2) - (size / 2)
 
+		if(not_purchased):
+			if(name_slot_ShopItem=="slot1"):
+				inventory_menu.free_ShopItem_Dictionary.slot1 = true
+				inventory_menu.funShopItem()
+
 		print("ok-",closest_slot)
 		
 		global_position = target_position
@@ -81,10 +95,37 @@ func snap_to_nearest_slot() -> void:
 
 		inventory_menu.cells_included_forces[closest_slot].free_space = false
 		inventory_menu.cells_included_forces[closest_slot].id_ability = str(self)
-		# Global.player_abilities.append({
-		# 	"ability_type": ability_type,
-		# 	"num_level": num_level,
-		# })
+
+		
+		# match ability_type:
+		# 	"двойной выстрел":
+		# 		galaxy_ship.hp_player += (galaxy_ship.hp_player/100) * 5
+		for cell in inventory_menu.cells_included_forces:
+			print(cell)
+			if(cell != closest_slot and inventory_menu.cells_included_forces[cell].id_ability == str(self)):
+				inventory_menu.cells_included_forces[cell].id_ability = null
+				inventory_menu.cells_included_forces[cell].free_space = true
+				# match ability_type:
+				# 	"двойной выстрел":
+				# 		galaxy_ship.hp_player -= (galaxy_ship.hp_player/100) * 5
+	elif closest_slot and min_distance < snap_threshold and !inventory_menu.cells_included_forces[closest_slot].free_space:
+		# РАСЧЕТ ЦЕНТРИРОВАНИЯ:
+		# Берем левый верхний угол слота и добавляем половину разницы размеров слота и предмета.
+		# Формула: ПозицияСлота + (РазмерСлота / 2) - (РазмерПредмета / 2)
+		var target_position = closest_slot.global_position + (closest_slot.size / 2) - (size / 2)
+
+		if(not_purchased):
+			if(name_slot_ShopItem=="slot1"):
+				inventory_menu.free_ShopItem_Dictionary.slot1 = true
+				inventory_menu.funShopItem()
+
+		print("not not ok-",closest_slot)
+		
+		global_position = target_position
+		last_safe_position = global_position
+
+		inventory_menu.cells_included_forces[closest_slot].free_space = false
+		inventory_menu.cells_included_forces[closest_slot].id_ability = str(self)
 
 		
 		# match ability_type:
