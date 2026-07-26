@@ -51,7 +51,6 @@ offset_top = 192.0
 offset_right = 146.0
 offset_bottom = 228.0
 theme_override_colors/font_color = Color(1, 0.956863, 0.352941, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 26
 text = "00 coin"
@@ -66,3 +65,7 @@ offset_bottom = 44.0
 theme_override_colors/font_color = Color(0.501961, 0.286275, 0.133333, 1)
 theme_override_font_sizes/font_size = 23
 text = "level 0"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true

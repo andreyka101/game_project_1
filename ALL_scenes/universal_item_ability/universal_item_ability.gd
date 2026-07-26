@@ -12,11 +12,13 @@ var last_safe_position = Vector2() # Сюда сохраняем позицию,
 @onready var label_level:Label = $Label
 @onready var label_price:Label = $Label2
 @onready var texture_rect: TextureRect = $TextureRect
+@onready var timer: Timer = $Timer
 
-@onready var test:Panel = $"../../CenterContainer2/PanelContainer/GridContainer/Slot1"
+@onready var ItemsContainer:Control = get_parent()
+# @onready var test:Panel = $"../../CenterContainer2/PanelContainer/GridContainer/Slot1"
 var num_level = 1
 var num_price = 2
-var num_multiplier_price = null
+var num_multiplier_price = 0
 var ability_type = ""
 # var ability_type = "двойной выстрел"
 var not_purchased = true
@@ -28,7 +30,35 @@ func _ready() -> void:
 
 	# Запоминаем стартовую позицию предмета при запуске игры
 	last_safe_position = global_position
+	fun_transformation_item()
+# 	# Подключаем сигналы мыши/нажатия кнопки к функциям
+# 	button_down.connect(_on_button_down)
+# 	button_up.connect(_on_button_up)
+# 	timer.timeout.connect(_on_timer_timeout)
 
+
+# # Вызывается в момент, когда игрок ТОЛЬКО НАЖАЛ и держит кнопку
+# func _on_button_down() -> void:
+# 	timer.start() # Запускаем отсчет времени
+
+# # Вызывается, если игрок ОТПУСТИЛ кнопку
+# func _on_button_up() -> void:
+# 	# Если таймер еще тикает, значит зажатие было слишком коротким
+# 	if not timer.is_stopped():
+# 		timer.stop() # Сбрасываем таймер
+# 		print("Нажатие слишком короткое!")
+
+# # Вызывается АВТОМАТИЧЕСКИ, если кнопка удерживалась достаточно долго
+# func _on_timer_timeout() -> void:
+# 	_execute_action()
+
+# # Место для вашего действия
+# func _execute_action() -> void:
+# 	print("Действие выполнено после короткого зажатия!")
+# 	# Сюда пишите ваш код (переход на другой уровень, удаление предмета и т.д.)
+
+
+func fun_transformation_item():
 	match ability_type:
 		"двойной выстрел":
 			num_multiplier_price = 4
@@ -87,6 +117,7 @@ func snap_to_nearest_slot() -> void:
 			if(name_slot_ShopItem=="slot1"):
 				inventory_menu.free_ShopItem_Dictionary.slot1 = true
 				inventory_menu.funShopItem()
+				not_purchased = false
 
 		print("ok-",closest_slot)
 		
@@ -95,6 +126,7 @@ func snap_to_nearest_slot() -> void:
 
 		inventory_menu.cells_included_forces[closest_slot].free_space = false
 		inventory_menu.cells_included_forces[closest_slot].id_ability = str(self)
+		inventory_menu.cells_included_forces[closest_slot].name_ability = ability_type
 
 		
 		# match ability_type:
@@ -104,40 +136,46 @@ func snap_to_nearest_slot() -> void:
 			print(cell)
 			if(cell != closest_slot and inventory_menu.cells_included_forces[cell].id_ability == str(self)):
 				inventory_menu.cells_included_forces[cell].id_ability = null
+				inventory_menu.cells_included_forces[cell].name_ability = null
 				inventory_menu.cells_included_forces[cell].free_space = true
 				# match ability_type:
 				# 	"двойной выстрел":
 				# 		galaxy_ship.hp_player -= (galaxy_ship.hp_player/100) * 5
 	elif closest_slot and min_distance < snap_threshold and !inventory_menu.cells_included_forces[closest_slot].free_space:
-		# РАСЧЕТ ЦЕНТРИРОВАНИЯ:
-		# Берем левый верхний угол слота и добавляем половину разницы размеров слота и предмета.
-		# Формула: ПозицияСлота + (РазмерСлота / 2) - (РазмерПредмета / 2)
-		var target_position = closest_slot.global_position + (closest_slot.size / 2) - (size / 2)
+		# print("not not ok-",closest_slot)
+		var beginning_merging_item = false
 
-		if(not_purchased):
+		match ability_type:
+			"двойной выстрел":
+				match inventory_menu.cells_included_forces[closest_slot].name_ability:
+					"двойной выстрел":
+						ability_type = "скорость пули"
+						beginning_merging_item = true
+		
+		if(beginning_merging_item):
 			if(name_slot_ShopItem=="slot1"):
 				inventory_menu.free_ShopItem_Dictionary.slot1 = true
 				inventory_menu.funShopItem()
+				not_purchased = false
+			name_slot_ShopItem = ""
+			not_purchased = false
+			var target_position = closest_slot.global_position + (closest_slot.size / 2) - (size / 2)
+			if(not_purchased):
+				if(name_slot_ShopItem=="slot1"):
+					inventory_menu.free_ShopItem_Dictionary.slot1 = true
+					inventory_menu.funShopItem()
+			fun_transformation_item()
+			var del_item = ItemsContainer.get_node(inventory_menu.cells_included_forces[closest_slot].id_ability.split(":")[0])
+			print(inventory_menu.cells_included_forces[closest_slot].id_ability.split(":")[0])
+			if(del_item):
+				del_item.queue_free()
+			inventory_menu.cells_included_forces[closest_slot].id_ability = null
+			inventory_menu.cells_included_forces[closest_slot].name_ability = null
+			inventory_menu.cells_included_forces[closest_slot].free_space = true
+			global_position = target_position
+			last_safe_position = global_position
+		else:
+			global_position = last_safe_position
 
-		print("not not ok-",closest_slot)
-		
-		global_position = target_position
-		last_safe_position = global_position
-
-		inventory_menu.cells_included_forces[closest_slot].free_space = false
-		inventory_menu.cells_included_forces[closest_slot].id_ability = str(self)
-
-		
-		# match ability_type:
-		# 	"двойной выстрел":
-		# 		galaxy_ship.hp_player += (galaxy_ship.hp_player/100) * 5
-		for cell in inventory_menu.cells_included_forces:
-			print(cell)
-			if(cell != closest_slot and inventory_menu.cells_included_forces[cell].id_ability == str(self)):
-				inventory_menu.cells_included_forces[cell].id_ability = null
-				inventory_menu.cells_included_forces[cell].free_space = true
-				# match ability_type:
-				# 	"двойной выстрел":
-				# 		galaxy_ship.hp_player -= (galaxy_ship.hp_player/100) * 5
 	else:
 		global_position = last_safe_position

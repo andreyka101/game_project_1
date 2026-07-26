@@ -5,6 +5,7 @@ extends Control
 # @onready var inventoryСells_Grid: GridContainer = $"../../CenterContainer/PanelContainer/GridContainer"
 @onready var galaxy_ship = get_node("../Galaxy_ship")
 var cells_included_forces = {}
+var start_game = true
 
 
 @onready var itemsContainer = $"ItemsContainer"
@@ -23,15 +24,25 @@ func _ready() -> void:
 		cells_included_forces[slot] = {
 			"free_space": true,
 			"id_ability": null,
-			
+			"name_ability": null,
 		}
 	print(cells_included_forces)
 
 	await get_tree().process_frame 
-	funShopItem()
+	funStartGame_ShopItem()
 
 
 
+func funStartGame_ShopItem() -> void:
+	await get_tree().process_frame 
+	print("new item1")
+	var save_item_class = load("res://ALL_scenes/universal_item_ability/universal_item_ability.tscn")
+	var new_item:Button = save_item_class.instantiate()
+	new_item.global_position = shopItem_Slot1.global_position + (shopItem_Slot1.size / 2) - (new_item.size / 2)
+	new_item.name_slot_ShopItem = "slot1"
+	free_ShopItem_Dictionary.slot1 = false
+	new_item.ability_type = "двойной выстрел"
+	itemsContainer.add_child(new_item)
 func funShopItem() -> void:
 	if(free_ShopItem_Dictionary.slot1):
 		print("new item1")
