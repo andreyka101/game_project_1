@@ -31,31 +31,31 @@ func _ready() -> void:
 	# Запоминаем стартовую позицию предмета при запуске игры
 	last_safe_position = global_position
 	fun_transformation_item()
-# 	# Подключаем сигналы мыши/нажатия кнопки к функциям
-# 	button_down.connect(_on_button_down)
-# 	button_up.connect(_on_button_up)
-# 	timer.timeout.connect(_on_timer_timeout)
+	# Подключаем сигналы мыши/нажатия кнопки к функциям
+	button_down.connect(_on_button_down)
+	button_up.connect(_on_button_up)
+	timer.timeout.connect(_on_timer_timeout)
 
 
-# # Вызывается в момент, когда игрок ТОЛЬКО НАЖАЛ и держит кнопку
-# func _on_button_down() -> void:
-# 	timer.start() # Запускаем отсчет времени
+# Вызывается в момент, когда игрок ТОЛЬКО НАЖАЛ и держит кнопку
+func _on_button_down() -> void:
+	timer.start() # Запускаем отсчет времени
 
-# # Вызывается, если игрок ОТПУСТИЛ кнопку
-# func _on_button_up() -> void:
-# 	# Если таймер еще тикает, значит зажатие было слишком коротким
-# 	if not timer.is_stopped():
-# 		timer.stop() # Сбрасываем таймер
-# 		print("Нажатие слишком короткое!")
+# Вызывается, если игрок ОТПУСТИЛ кнопку
+func _on_button_up() -> void:
+	# Если таймер еще тикает, значит зажатие было слишком коротким
+	if not timer.is_stopped():
+		timer.stop() # Сбрасываем таймер
+		print("Нажатие слишком короткое!")
 
-# # Вызывается АВТОМАТИЧЕСКИ, если кнопка удерживалась достаточно долго
-# func _on_timer_timeout() -> void:
-# 	_execute_action()
+# Вызывается АВТОМАТИЧЕСКИ, если кнопка удерживалась достаточно долго
+func _on_timer_timeout() -> void:
+	_execute_action()
 
-# # Место для вашего действия
-# func _execute_action() -> void:
-# 	print("Действие выполнено после короткого зажатия!")
-# 	# Сюда пишите ваш код (переход на другой уровень, удаление предмета и т.д.)
+# Место для вашего действия
+func _execute_action() -> void:
+	print("Действие выполнено после короткого зажатия!")
+	# Сюда пишите ваш код (переход на другой уровень, удаление предмета и т.д.)
 
 
 func fun_transformation_item():
@@ -133,7 +133,7 @@ func snap_to_nearest_slot() -> void:
 		# 	"двойной выстрел":
 		# 		galaxy_ship.hp_player += (galaxy_ship.hp_player/100) * 5
 		for cell in inventory_menu.cells_included_forces:
-			print(cell)
+			# print(cell)
 			if(cell != closest_slot and inventory_menu.cells_included_forces[cell].id_ability == str(self)):
 				inventory_menu.cells_included_forces[cell].id_ability = null
 				inventory_menu.cells_included_forces[cell].name_ability = null
@@ -145,12 +145,13 @@ func snap_to_nearest_slot() -> void:
 		# print("not not ok-",closest_slot)
 		var beginning_merging_item = false
 
-		match ability_type:
-			"двойной выстрел":
-				match inventory_menu.cells_included_forces[closest_slot].name_ability:
-					"двойной выстрел":
-						ability_type = "скорость пули"
-						beginning_merging_item = true
+		if(inventory_menu.cells_included_forces[closest_slot].id_ability != str(self)):
+			match ability_type:
+				"двойной выстрел":
+					match inventory_menu.cells_included_forces[closest_slot].name_ability:
+						"двойной выстрел":
+							ability_type = "скорость пули"
+							beginning_merging_item = true
 		
 		if(beginning_merging_item):
 			if(name_slot_ShopItem=="slot1"):
@@ -166,6 +167,7 @@ func snap_to_nearest_slot() -> void:
 					inventory_menu.funShopItem()
 			fun_transformation_item()
 			var del_item = ItemsContainer.get_node(inventory_menu.cells_included_forces[closest_slot].id_ability.split(":")[0])
+			print('inventory_menu.cells_included_forces[closest_slot].id_ability.split(":")[0]')
 			print(inventory_menu.cells_included_forces[closest_slot].id_ability.split(":")[0])
 			if(del_item):
 				del_item.queue_free()
