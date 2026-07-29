@@ -14,6 +14,7 @@ var last_safe_position = Vector2() # Сюда сохраняем позицию,
 @onready var texture_rect: TextureRect = $TextureRect
 @onready var timer: Timer = $Timer
 
+@onready var inventoryMenu: Control = $"../../"
 @onready var ItemsContainer:Control = get_parent()
 # @onready var test:Panel = $"../../CenterContainer2/PanelContainer/GridContainer/Slot1"
 var num_level = 1
@@ -54,7 +55,15 @@ func _on_timer_timeout() -> void:
 
 # Место для вашего действия
 func _execute_action() -> void:
-	print("Действие выполнено после короткого зажатия!")
+	for slot in InventoryСells_Grid.get_children():
+		var slot_center = slot.global_position + (slot.size / 2)
+		var item_center = global_position + (size / 2)
+		if(item_center.distance_to(slot_center) < 10):
+			print("Действие выполнено после короткого зажатия!")
+			var save_item_description_class = load("res://ALL_scenes/universal_item_description/universal_item_description.tscn")
+			var new_item_description:Control = save_item_description_class.instantiate()
+			# new_item.global_position = shopItem_Slot1.global_position + (shopItem_Slot1.size / 2) - (new_item.size / 2)
+			inventoryMenu.add_child(new_item_description)
 	# Сюда пишите ваш код (переход на другой уровень, удаление предмета и т.д.)
 
 
@@ -152,19 +161,26 @@ func snap_to_nearest_slot() -> void:
 						"двойной выстрел":
 							ability_type = "скорость пули"
 							beginning_merging_item = true
+
+		for cell in inventory_menu.cells_included_forces:
+			# print(cell)
+			if(cell != closest_slot and inventory_menu.cells_included_forces[cell].id_ability == str(self)):
+				inventory_menu.cells_included_forces[cell].id_ability = null
+				inventory_menu.cells_included_forces[cell].name_ability = null
+				inventory_menu.cells_included_forces[cell].free_space = true
 		
 		if(beginning_merging_item):
 			if(name_slot_ShopItem=="slot1"):
-				inventory_menu.free_ShopItem_Dictionary.slot1 = true
-				inventory_menu.funShopItem()
-				not_purchased = false
+				# inventory_menu.free_ShopItem_Dictionary.slot1 = true
+				# inventory_menu.funShopItem()
+				if(not_purchased):
+					if(name_slot_ShopItem=="slot1"):
+						inventory_menu.free_ShopItem_Dictionary.slot1 = true
+						inventory_menu.funShopItem()
+					not_purchased = false
 			name_slot_ShopItem = ""
 			not_purchased = false
 			var target_position = closest_slot.global_position + (closest_slot.size / 2) - (size / 2)
-			if(not_purchased):
-				if(name_slot_ShopItem=="slot1"):
-					inventory_menu.free_ShopItem_Dictionary.slot1 = true
-					inventory_menu.funShopItem()
 			fun_transformation_item()
 			var del_item = ItemsContainer.get_node(inventory_menu.cells_included_forces[closest_slot].id_ability.split(":")[0])
 			print('inventory_menu.cells_included_forces[closest_slot].id_ability.split(":")[0]')
