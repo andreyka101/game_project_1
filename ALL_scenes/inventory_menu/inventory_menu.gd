@@ -6,7 +6,8 @@ extends Control
 @onready var galaxy_ship = get_node("../Galaxy_ship")
 var cells_included_forces = {}
 var start_game = true
-
+@onready var coin_label: Label = $Coin_HBoxContainer/Coin_Panel/Coin_CenterContainer/Coin_Label
+@onready var shopCoin_Slot1 = $"ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer/Label_coin1"
 
 @onready var itemsContainer = $"ItemsContainer"
 @onready var shopItem_Slot1 = $"ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer/Slot1"
@@ -45,6 +46,8 @@ func funStartGame_ShopItem() -> void:
 	itemsContainer.add_child(new_item)
 func funShopItem() -> void:
 	if(free_ShopItem_Dictionary.slot1):
+		Global.coin_player -= Global.cost_items_in_store.coin_slot1
+		Global.cost_items_in_store.coin_slot1 += 3
 		print("new item1")
 		var save_item_class = load("res://ALL_scenes/universal_item_ability/universal_item_ability.tscn")
 		var new_item:Button = save_item_class.instantiate()
@@ -61,3 +64,8 @@ func _on_button_pressed() -> void:
 	# 		"двойной выстрел":
 	# 			galaxy_ship.hp_player += (galaxy_ship.hp_player/100) * 5
 	level.click_end_menu()
+
+
+func _process(_delta: float) -> void:
+	coin_label.text = str(Global.coin_player) + " coin"
+	shopCoin_Slot1.text = str(Global.cost_items_in_store.coin_slot1) + " coin"

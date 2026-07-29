@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://dd7kmsstd0am1"]
+[gd_scene load_steps=48 format=3 uid="uid://dd7kmsstd0am1"]
 
 [ext_resource type="Script" uid="uid://t7cdjolf4ssx" path="res://ALL_scenes/inventory_menu/inventory_menu.gd" id="1_doitq"]
 [ext_resource type="Texture2D" uid="uid://cvg5fbm0ffp6b" path="res://icon_menu_двойной выстрел.png" id="1_usr0h"]
@@ -38,6 +38,7 @@
 [ext_resource type="Texture2D" uid="uid://cl546psffk6m8" path="res://photo/spacecraft/spacecraft30.png" id="35_kpjwb"]
 [ext_resource type="Texture2D" uid="uid://b1fd4s5ljpnxu" path="res://photo/spacecraft/spacecraft31.png" id="36_xjujy"]
 [ext_resource type="Texture2D" uid="uid://dfbrn07uf3k8o" path="res://photo/spacecraft/spacecraft32.png" id="37_wde5g"]
+[ext_resource type="PackedScene" uid="uid://saxmc03rdw7" path="res://ALL_scenes/universal_item_description/universal_item_description.tscn" id="39_ulo2k"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d858p"]
 bg_color = Color(0.027451, 0, 0.286275, 1)
@@ -194,6 +195,9 @@ expand_margin_top = 30.0
 expand_margin_right = 30.0
 expand_margin_bottom = 30.0
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mnfl7"]
+content_margin_bottom = 19.0
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sfd42"]
 bg_color = Color(0.321569, 0.329412, 0.533333, 1)
 border_width_left = 5
@@ -206,8 +210,8 @@ corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mnfl7"]
-content_margin_top = 12.0
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ulo2k"]
+content_margin_top = 9.0
 
 [node name="InventoryMenu" type="Control"]
 layout_mode = 3
@@ -222,8 +226,10 @@ script = ExtResource("1_doitq")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
-offset_right = 1080.0
-offset_bottom = 2400.0
+offset_left = -9.0
+offset_top = 3.0
+offset_right = 1071.0
+offset_bottom = 2403.0
 color = Color(0.321569, 0.329412, 0.533333, 1)
 
 [node name="SkinShip_PanelContainer" type="PanelContainer" parent="."]
@@ -273,7 +279,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 67
 theme_override_styles/normal = SubResource("StyleBoxEmpty_wykoc")
-text = "50 coin"
+text = "0 coin"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -333,6 +339,86 @@ offset_top = 2232.0
 offset_right = 809.0
 offset_bottom = 2335.0
 text = "продолжить"
+
+[node name="ShopItem_CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_top = 583.0
+offset_right = 1080.0
+offset_bottom = 924.0
+
+[node name="ShopItem_PanelContainer" type="PanelContainer" parent="ShopItem_CenterContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mnfl7")
+
+[node name="ShopItem_GridContainer" type="GridContainer" parent="ShopItem_CenterContainer/ShopItem_PanelContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 3
+
+[node name="Label" type="Label" parent="ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 39
+theme_override_styles/normal = SubResource("StyleBoxEmpty_mnfl7")
+text = "скорость"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 39
+theme_override_styles/normal = SubResource("StyleBoxEmpty_mnfl7")
+text = "защита"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 39
+theme_override_styles/normal = SubResource("StyleBoxEmpty_mnfl7")
+text = "сила"
+horizontal_alignment = 1
+
+[node name="Slot1" type="Panel" parent="ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer"]
+custom_minimum_size = Vector2(240, 267)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
+
+[node name="Slot2" type="Panel" parent="ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer"]
+custom_minimum_size = Vector2(240, 267)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
+
+[node name="Slot3" type="Panel" parent="ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer"]
+custom_minimum_size = Vector2(240, 267)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
+
+[node name="Label_coin1" type="Label" parent="ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 43
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ulo2k")
+text = "6 coin"
+horizontal_alignment = 1
+
+[node name="Label_coin2" type="Label" parent="ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 43
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ulo2k")
+text = "6 coin"
+horizontal_alignment = 1
+
+[node name="Label_coin3" type="Label" parent="ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 43
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ulo2k")
+text = "6 coin"
+horizontal_alignment = 1
 
 [node name="InventoryСells_CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 0
@@ -434,64 +520,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
 
-[node name="ShopItem_CenterContainer" type="CenterContainer" parent="."]
-layout_mode = 0
-offset_top = 583.0
-offset_right = 1080.0
-offset_bottom = 924.0
-
-[node name="ShopItem_PanelContainer" type="PanelContainer" parent="ShopItem_CenterContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_mnfl7")
-
-[node name="ShopItem_GridContainer" type="GridContainer" parent="ShopItem_CenterContainer/ShopItem_PanelContainer"]
-layout_mode = 2
-theme_override_constants/h_separation = 8
-theme_override_constants/v_separation = 8
-columns = 3
-
-[node name="Slot1" type="Panel" parent="ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer"]
-custom_minimum_size = Vector2(240, 267)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
-
-[node name="Slot2" type="Panel" parent="ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer"]
-custom_minimum_size = Vector2(240, 267)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
-
-[node name="Slot3" type="Panel" parent="ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer"]
-custom_minimum_size = Vector2(240, 267)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
-
-[node name="Label" type="Label" parent="ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 39
-theme_override_styles/normal = SubResource("StyleBoxEmpty_mnfl7")
-text = "скорость"
-horizontal_alignment = 1
-
-[node name="Label2" type="Label" parent="ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 39
-theme_override_styles/normal = SubResource("StyleBoxEmpty_mnfl7")
-text = "защита"
-horizontal_alignment = 1
-
-[node name="Label3" type="Label" parent="ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 39
-theme_override_styles/normal = SubResource("StyleBoxEmpty_mnfl7")
-text = "сила"
-horizontal_alignment = 1
-
 [node name="ItemsContainer" type="Control" parent="."]
 anchors_preset = 0
 
@@ -522,5 +550,10 @@ offset_left = 749.0
 offset_top = 246.0
 offset_right = 959.0
 offset_bottom = 483.0
+
+[node name="universal_item_description" parent="." instance=ExtResource("39_ulo2k")]
+visible = false
+z_index = 1000
+layout_mode = 1
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

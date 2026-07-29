@@ -14,7 +14,7 @@ var last_safe_position = Vector2() # Сюда сохраняем позицию,
 @onready var texture_rect: TextureRect = $TextureRect
 @onready var timer: Timer = $Timer
 
-@onready var inventoryMenu: Control = $"../../"
+@onready var universal_item_description: Control = $"../../universal_item_description"
 @onready var ItemsContainer:Control = get_parent()
 # @onready var test:Panel = $"../../CenterContainer2/PanelContainer/GridContainer/Slot1"
 var num_level = 1
@@ -60,11 +60,7 @@ func _execute_action() -> void:
 		var item_center = global_position + (size / 2)
 		if(item_center.distance_to(slot_center) < 10):
 			print("Действие выполнено после короткого зажатия!")
-			var save_item_description_class = load("res://ALL_scenes/universal_item_description/universal_item_description.tscn")
-			var new_item_description:Control = save_item_description_class.instantiate()
-			# new_item.global_position = shopItem_Slot1.global_position + (shopItem_Slot1.size / 2) - (new_item.size / 2)
-			inventoryMenu.add_child(new_item_description)
-	# Сюда пишите ваш код (переход на другой уровень, удаление предмета и т.д.)
+			universal_item_description.visible = true
 
 
 func fun_transformation_item():
@@ -127,6 +123,7 @@ func snap_to_nearest_slot() -> void:
 				inventory_menu.free_ShopItem_Dictionary.slot1 = true
 				inventory_menu.funShopItem()
 				not_purchased = false
+				# Global.coin_player -= Global.cost_items_in_store.coin_slot1
 
 		print("ok-",closest_slot)
 		

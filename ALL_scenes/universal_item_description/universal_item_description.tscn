@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://saxmc03rdw7"]
+[gd_scene load_steps=17 format=3 uid="uid://saxmc03rdw7"]
 
 [ext_resource type="Texture2D" uid="uid://32b8so0vatll" path="res://photo/крест.svg" id="1_j7033"]
+[ext_resource type="Script" uid="uid://b1g3jhykanvau" path="res://ALL_scenes/universal_item_description/universal_item_description.gd" id="1_vfytp"]
 [ext_resource type="Texture2D" uid="uid://deymmnyhvi70i" path="res://icon_menu_скорость пули.png" id="2_n6pvs"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n6pvs"]
@@ -56,12 +57,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_vfytp")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
 offset_right = 1080.0
 offset_bottom = 2400.0
-color = Color(0.82, 0.64411, 0.00819999, 0.054902)
+color = Color(0.82, 0.64411, 0.00819999, 0.203922)
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 0
@@ -83,7 +85,7 @@ theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 65
 text = "двойной тест"
 
-[node name="Button" type="Button" parent="."]
+[node name="Button_close" type="Button" parent="."]
 layout_mode = 0
 offset_left = 896.0
 offset_top = 100.0
@@ -148,7 +150,7 @@ scroll_active = false
 horizontal_alignment = 1
 text_direction = 3
 
-[node name="Button2" type="Button" parent="."]
+[node name="Button_buy" type="Button" parent="."]
 layout_mode = 0
 offset_left = 350.0
 offset_top = 1117.0
@@ -160,3 +162,6 @@ theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 46
 theme_override_styles/normal = SubResource("StyleBoxFlat_vfytp")
 text = "30 coin"
+
+[connection signal="pressed" from="Button_close" to="." method="_on_button_close_pressed"]
+[connection signal="pressed" from="Button_buy" to="." method="_on_button_buy_pressed"]
