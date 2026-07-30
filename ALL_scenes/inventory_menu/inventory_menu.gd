@@ -11,6 +11,7 @@ var start_game = true
 
 @onready var itemsContainer = $"ItemsContainer"
 @onready var shopItem_Slot1 = $"ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer/Slot1"
+@onready var none_coid_plug1 = $"ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer/Slot1/none_coid_plug1"
 var free_ShopItem_Dictionary = {
 	"slot1": true,
 	"slot2": true,
@@ -19,6 +20,7 @@ var free_ShopItem_Dictionary = {
 # var save_item_class = load("res://ALL_scenes/universal_item_ability/universal_item_ability.tscn")
 
 func _ready() -> void:
+	await get_tree().process_frame 
 	for slot in inventoryСells_Grid.get_children():
 		print(slot)
 		print(slot.name)
@@ -28,8 +30,6 @@ func _ready() -> void:
 			"name_ability": null,
 		}
 	print(cells_included_forces)
-
-	await get_tree().process_frame 
 	funStartGame_ShopItem()
 
 
@@ -48,6 +48,14 @@ func funShopItem() -> void:
 	if(free_ShopItem_Dictionary.slot1):
 		Global.coin_player -= Global.cost_items_in_store.coin_slot1
 		Global.cost_items_in_store.coin_slot1 += 3
+		coin_label.text = str(Global.coin_player) + " coin"
+		shopCoin_Slot1.text = str(Global.cost_items_in_store.coin_slot1) + " coin"
+		if(Global.cost_items_in_store.coin_slot1 > Global.coin_player):
+			shopCoin_Slot1.add_theme_color_override("font_color", Color("#FF2B2B"))
+			none_coid_plug1.visible = true
+		else:
+			shopCoin_Slot1.add_theme_color_override("font_color", Color("#ffffff"))
+			none_coid_plug1.visible = false
 		print("new item1")
 		var save_item_class = load("res://ALL_scenes/universal_item_ability/universal_item_ability.tscn")
 		var new_item:Button = save_item_class.instantiate()
@@ -66,6 +74,6 @@ func _on_button_pressed() -> void:
 	level.click_end_menu()
 
 
-func _process(_delta: float) -> void:
-	coin_label.text = str(Global.coin_player) + " coin"
-	shopCoin_Slot1.text = str(Global.cost_items_in_store.coin_slot1) + " coin"
+# func _process(_delta: float) -> void:
+# 	coin_label.text = str(Global.coin_player) + " coin"
+# 	shopCoin_Slot1.text = str(Global.cost_items_in_store.coin_slot1) + " coin"

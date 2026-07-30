@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://dd7kmsstd0am1"]
+[gd_scene load_steps=49 format=3 uid="uid://dd7kmsstd0am1"]
 
 [ext_resource type="Script" uid="uid://t7cdjolf4ssx" path="res://ALL_scenes/inventory_menu/inventory_menu.gd" id="1_doitq"]
 [ext_resource type="Texture2D" uid="uid://cvg5fbm0ffp6b" path="res://icon_menu_двойной выстрел.png" id="1_usr0h"]
@@ -210,6 +210,13 @@ corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wykoc"]
+bg_color = Color(0, 0, 0, 0.462745)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ulo2k"]
 content_margin_top = 9.0
 
@@ -384,6 +391,17 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
+
+[node name="none_coid_plug1" type="Panel" parent="ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer/Slot1"]
+visible = false
+z_index = 100
+custom_minimum_size = Vector2(240, 267)
+layout_mode = 0
+offset_right = 240.0
+offset_bottom = 267.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_wykoc")
 
 [node name="Slot2" type="Panel" parent="ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer"]
 custom_minimum_size = Vector2(240, 267)

@@ -73,17 +73,18 @@ offset_right = 1021.0
 offset_bottom = 1254.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_n6pvs")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label_ability_type" type="Label" parent="."]
 layout_mode = 0
-offset_left = 301.0
+offset_left = 172.0
 offset_top = 94.0
-offset_right = 743.0
+offset_right = 895.0
 offset_bottom = 184.0
 theme_override_colors/font_color = Color(0.819608, 0.643137, 0.00784314, 1)
 theme_override_colors/font_outline_color = Color(0.819608, 0.643137, 0.00784314, 1)
 theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 65
 text = "двойной тест"
+horizontal_alignment = 1
 
 [node name="Button_close" type="Button" parent="."]
 layout_mode = 0
@@ -113,7 +114,7 @@ offset_right = 546.0
 offset_bottom = 672.0
 texture = ExtResource("2_n6pvs")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="RichTextLabel_level_progress_list" type="RichTextLabel" parent="."]
 layout_mode = 0
 offset_left = 643.0
 offset_top = 207.0
@@ -135,7 +136,7 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+[node name="RichTextLabel_ability_description" type="RichTextLabel" parent="."]
 layout_mode = 0
 offset_left = 141.0
 offset_top = 737.0

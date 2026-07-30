@@ -21,17 +21,17 @@ var num_level = 1
 var num_price = 2
 var num_multiplier_price = 0
 var ability_type = ""
-# var ability_type = "двойной выстрел"
+var ability_description = ""
 var not_purchased = true
 var name_slot_ShopItem:String = ""
 
 func _ready() -> void:
-	# await get_tree().process_frame 
-	# global_position = test.global_position + (test.size / 2) - (size / 2)
+	fun_transformation_item()
+	label_level.text = "level " + str(num_level)
+	label_price.text = str(num_price) + " coin"
 
 	# Запоминаем стартовую позицию предмета при запуске игры
 	last_safe_position = global_position
-	fun_transformation_item()
 	# Подключаем сигналы мыши/нажатия кнопки к функциям
 	button_down.connect(_on_button_down)
 	button_up.connect(_on_button_up)
@@ -60,15 +60,22 @@ func _execute_action() -> void:
 		var item_center = global_position + (size / 2)
 		if(item_center.distance_to(slot_center) < 10):
 			print("Действие выполнено после короткого зажатия!")
+			universal_item_description.num_level = num_level
+			universal_item_description.num_price = num_price
+			universal_item_description.num_multiplier_price = num_multiplier_price
+			universal_item_description.ability_type = ability_type
+			universal_item_description.ability_description = ability_description
 			universal_item_description.visible = true
-
+			universal_item_description.start_des()
 
 func fun_transformation_item():
 	match ability_type:
 		"двойной выстрел":
 			num_multiplier_price = 4
+			ability_description = "text text text 1 1 1 t1x1e1t"
 		"скорость пули":
 			num_multiplier_price = 2
+			ability_description = "text text text 1 1 1 t1x1e1t X"
 	texture_rect.texture = load("res://icon_menu_" + ability_type + ".png")
 
 
@@ -87,8 +94,10 @@ func _gui_input(event: InputEvent) -> void:
 				snap_to_nearest_slot()
 
 func _process(_delta: float) -> void:
-	if is_dragging:
+	if is_dragging and Global.cost_items_in_store.coin_slot1 <= Global.coin_player:
 		# Передвигаем вслед за мышкой
+		global_position = get_global_mouse_position() - offset
+	elif(is_dragging and !not_purchased):
 		global_position = get_global_mouse_position() - offset
 
 func snap_to_nearest_slot() -> void:
