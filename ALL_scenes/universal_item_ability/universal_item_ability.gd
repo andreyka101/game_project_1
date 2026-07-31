@@ -17,13 +17,14 @@ var last_safe_position = Vector2() # Сюда сохраняем позицию,
 @onready var universal_item_description: Control = $"../../universal_item_description"
 @onready var ItemsContainer:Control = get_parent()
 # @onready var test:Panel = $"../../CenterContainer2/PanelContainer/GridContainer/Slot1"
-var num_level = 1
+var num_level = 10
 var num_price = 2
 var num_multiplier_price = 0
 var ability_type = ""
 var ability_description = ""
 var not_purchased = true
 var name_slot_ShopItem:String = ""
+var list_abilities_relative_level = []
 
 func _ready() -> void:
 	fun_transformation_item()
@@ -65,17 +66,20 @@ func _execute_action() -> void:
 			universal_item_description.num_multiplier_price = num_multiplier_price
 			universal_item_description.ability_type = ability_type
 			universal_item_description.ability_description = ability_description
+			universal_item_description.list_abilities_relative_level = list_abilities_relative_level
 			universal_item_description.visible = true
 			universal_item_description.start_des()
 
 func fun_transformation_item():
 	match ability_type:
 		"двойной выстрел":
+			num_multiplier_price = 2
+			ability_description = "[color=#997800]выпускается 2 пули парой, урон каждой пули уменьшается на 35%, шанс сробатывания[/color] [color=#804922]{info}[/color]"
+			list_abilities_relative_level = ["0.5%","2%","4%","6%","8%","10%","12.5%","15%","17.5%","20%",]
+		"скорость пули":
 			num_multiplier_price = 4
 			ability_description = "text text text 1 1 1 t1x1e1t"
-		"скорость пули":
-			num_multiplier_price = 2
-			ability_description = "text text text 1 1 1 t1x1e1t X"
+			list_abilities_relative_level = [2,4,8,12,16,20,25,30,35,40]
 	texture_rect.texture = load("res://icon_menu_" + ability_type + ".png")
 
 

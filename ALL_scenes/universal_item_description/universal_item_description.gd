@@ -5,6 +5,7 @@ var num_price = 0
 var num_multiplier_price = 0
 var ability_type = ""
 var ability_description = ""
+var list_abilities_relative_level =[]
 
 @onready var label_ability_type: Label = $Label_ability_type
 @onready var texture_rect: TextureRect = $TextureRect
@@ -18,40 +19,34 @@ func start_des() -> void:
 	texture_rect.texture = load("res://icon_menu_" + ability_type + ".png")
 	button_buy.text = str(num_price) + " coin"
 	# rich_text_label_ability_description.text = ability_description
-	match num_level:
-		1:
-			rich_text_label_level_progress_list.text = "[color=#804922]● level 1 - 0.5%[/color]
-[color=#E56205]● level 2 - 2%[/color]
-[color=#E56205]● level 3 - 4%[/color]
-[color=#E56205]● level 4 - 6%[/color]
-[color=#E56205]● level 5 - 8%[/color]
-[color=#E56205]● level 6 - 10%[/color]
-[color=#E56205]● level 7 - 12.5%[/color]
-[color=#E56205]● level 8 - 15%[/color]
-[color=#E56205]● level 9 - 17.5%[/color]
-[color=#E56205]● level 10 - 20%[/color]"
-		2:
-			rich_text_label_level_progress_list.text = "[color=#DACA8B]● level 1 - 0.5%[/color]
-[color=#804922]● level 2 - 2%[/color]
-[color=#E56205]● level 3 - 4%[/color]
-[color=#E56205]● level 4 - 6%[/color]
-[color=#E56205]● level 5 - 8%[/color]
-[color=#E56205]● level 6 - 10%[/color]
-[color=#E56205]● level 7 - 12.5%[/color]
-[color=#E56205]● level 8 - 15%[/color]
-[color=#E56205]● level 9 - 17.5%[/color]
-[color=#E56205]● level 10 - 20%[/color]"
-		3:
-			rich_text_label_level_progress_list.text = "[color=#DACA8B]● level 1 - 0.5%[/color]
-[color=#DACA8B]● level 2 - 2%[/color]
-[color=#804922]● level 3 - 4%[/color]
-[color=#E56205]● level 4 - 6%[/color]
-[color=#E56205]● level 5 - 8%[/color]
-[color=#E56205]● level 6 - 10%[/color]
-[color=#E56205]● level 7 - 12.5%[/color]
-[color=#E56205]● level 8 - 15%[/color]
-[color=#E56205]● level 9 - 17.5%[/color]
-[color=#E56205]● level 10 - 20%[/color]"
+	# rich_text_label_level_progress_list.text
+	var pass_level = true
+	var progress_text = ""
+	for ability_num in list_abilities_relative_level.size():
+		print(ability_num)
+		var color = ""
+		if(ability_num + 1 == num_level):
+			color = "#804922"
+			pass_level = false
+			rich_text_label_ability_description.text = ability_description.format({"info": list_abilities_relative_level[ability_num],})
+		elif(pass_level):
+			color = "#DACA8B"
+		else:
+			color = "#E56205"
+		progress_text += "[color={color}]● level {ability_num} - {list}[/color]\n".format({"color": color,"ability_num": ability_num + 1,"list": list_abilities_relative_level[ability_num],})
+	print(progress_text)
+	rich_text_label_level_progress_list.text = progress_text
+# 		3:
+# 			rich_text_label_level_progress_list.text = "[color=#DACA8B]● level 1 - 0.5%[/color]
+# [color=#DACA8B]● level 2 - 2%[/color]
+# [color=#804922]● level 3 - 4%[/color]
+# [color=#E56205]● level 4 - 6%[/color]
+# [color=#E56205]● level 5 - 8%[/color]
+# [color=#E56205]● level 6 - 10%[/color]
+# [color=#E56205]● level 7 - 12.5%[/color]
+# [color=#E56205]● level 8 - 15%[/color]
+# [color=#E56205]● level 9 - 17.5%[/color]
+# [color=#E56205]● level 10 - 20%[/color]"
 
 func _on_button_close_pressed() -> void:
 	visible = false
