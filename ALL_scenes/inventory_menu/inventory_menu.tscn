@@ -319,7 +319,7 @@ text = "скорость пули - 300"
 [node name="ShipProtection_Label" type="Label" parent="PlayerStatistics_VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "защита корабля - 300"
+text = "защита корабля - 100"
 
 [node name="BulletForce_Label" type="Label" parent="PlayerStatistics_VBoxContainer"]
 layout_mode = 2
@@ -504,34 +504,6 @@ size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
 
 [node name="Slot8" type="Panel" parent="InventoryСells_CenterContainer/InventoryСells_PanelContainer/InventoryСells_GridContainer"]
-custom_minimum_size = Vector2(240, 267)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
-
-[node name="Slot9" type="Panel" parent="InventoryСells_CenterContainer/InventoryСells_PanelContainer/InventoryСells_GridContainer"]
-custom_minimum_size = Vector2(240, 267)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
-
-[node name="Slot10" type="Panel" parent="InventoryСells_CenterContainer/InventoryСells_PanelContainer/InventoryСells_GridContainer"]
-custom_minimum_size = Vector2(240, 267)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
-
-[node name="Slot11" type="Panel" parent="InventoryСells_CenterContainer/InventoryСells_PanelContainer/InventoryСells_GridContainer"]
-custom_minimum_size = Vector2(240, 267)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
-
-[node name="Slot12" type="Panel" parent="InventoryСells_CenterContainer/InventoryСells_PanelContainer/InventoryСells_GridContainer"]
 custom_minimum_size = Vector2(240, 267)
 layout_mode = 2
 size_flags_horizontal = 4

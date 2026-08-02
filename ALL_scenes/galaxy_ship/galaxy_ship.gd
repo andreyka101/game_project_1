@@ -11,6 +11,7 @@ var not_death = true
 # @onready var audio:AudioStreamPlayer2D = $AudioStreamPlayer2D
 var hp_player = 300
 var hp_start_player = 300
+var hp_startStart_player = 300
 # 250
 var stop = false
 var speed_ship = 200

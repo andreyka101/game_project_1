@@ -18,6 +18,7 @@ var free_ShopItem_Dictionary = {
 	"slot3": true,
 }
 # var save_item_class = load("res://ALL_scenes/universal_item_ability/universal_item_ability.tscn")
+@onready var ship_protection_label: Label = $PlayerStatistics_VBoxContainer/ShipProtection_Label
 
 func _ready() -> void:
 	await get_tree().process_frame 
@@ -30,7 +31,7 @@ func _ready() -> void:
 			"name_ability": null,
 		}
 	print(cells_included_forces)
-	funStartGame_ShopItem()
+	# funStartGame_ShopItem()
 
 
 
@@ -42,12 +43,12 @@ func funStartGame_ShopItem() -> void:
 	new_item.global_position = shopItem_Slot1.global_position + (shopItem_Slot1.size / 2) - (new_item.size / 2)
 	new_item.name_slot_ShopItem = "slot1"
 	free_ShopItem_Dictionary.slot1 = false
-	new_item.ability_type = "двойной выстрел"
+	new_item.ability_type = "защита"
 	itemsContainer.add_child(new_item)
 func funShopItem() -> void:
 	if(free_ShopItem_Dictionary.slot1):
 		Global.coin_player -= Global.cost_items_in_store.coin_slot1
-		Global.cost_items_in_store.coin_slot1 += 3
+		Global.cost_items_in_store.coin_slot1 = int(1.5 * Global.cost_items_in_store.coin_slot1)
 		coin_label.text = str(Global.coin_player) + " coin"
 		shopCoin_Slot1.text = str(Global.cost_items_in_store.coin_slot1) + " coin"
 		if(Global.cost_items_in_store.coin_slot1 > Global.coin_player):
@@ -62,7 +63,7 @@ func funShopItem() -> void:
 		new_item.global_position = shopItem_Slot1.global_position + (shopItem_Slot1.size / 2) - (new_item.size / 2)
 		new_item.name_slot_ShopItem = "slot1"
 		free_ShopItem_Dictionary.slot1 = false
-		new_item.ability_type = "двойной выстрел"
+		new_item.ability_type = "защита"
 		itemsContainer.add_child(new_item)
 
 func _on_button_pressed() -> void:
@@ -74,6 +75,7 @@ func _on_button_pressed() -> void:
 	level.click_end_menu()
 
 
-# func _process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 # 	coin_label.text = str(Global.coin_player) + " coin"
 # 	shopCoin_Slot1.text = str(Global.cost_items_in_store.coin_slot1) + " coin"
+	ship_protection_label.text = "защита корабля - " + str(int(galaxy_ship.hp_start_player))

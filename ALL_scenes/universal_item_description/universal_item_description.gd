@@ -4,8 +4,13 @@ var num_level = 0
 var num_price = 0
 var num_multiplier_price = 0
 var ability_type = ""
+var ability_id = ""
 var ability_description = ""
-var list_abilities_relative_level =[]
+var list_abilities_relative_level_str =[]
+var list_abilities_relative_level_int =[]
+
+@onready var galaxy_ship = get_node("../../Galaxy_ship")
+@onready var itemsContainer = get_node("../ItemsContainer")
 
 @onready var label_ability_type: Label = $Label_ability_type
 @onready var texture_rect: TextureRect = $TextureRect
@@ -16,24 +21,24 @@ var list_abilities_relative_level =[]
 
 func start_des() -> void:
 	label_ability_type.text = ability_type
-	texture_rect.texture = load("res://icon_menu_" + ability_type + ".png")
+	texture_rect.texture = load("res://photo/item_ability/icon_menu_" + ability_type + ".png")
 	button_buy.text = str(num_price) + " coin"
 	# rich_text_label_ability_description.text = ability_description
 	# rich_text_label_level_progress_list.text
 	var pass_level = true
 	var progress_text = ""
-	for ability_num in list_abilities_relative_level.size():
+	for ability_num in list_abilities_relative_level_str.size():
 		print(ability_num)
 		var color = ""
 		if(ability_num + 1 == num_level):
 			color = "#804922"
 			pass_level = false
-			rich_text_label_ability_description.text = ability_description.format({"info": list_abilities_relative_level[ability_num],})
+			rich_text_label_ability_description.text = ability_description.format({"info": list_abilities_relative_level_str[ability_num],})
 		elif(pass_level):
 			color = "#DACA8B"
 		else:
 			color = "#E56205"
-		progress_text += "[color={color}]● level {ability_num} - {list}[/color]\n".format({"color": color,"ability_num": ability_num + 1,"list": list_abilities_relative_level[ability_num],})
+		progress_text += "[color={color}]● level {ability_num} - {list}[/color]\n".format({"color": color,"ability_num": ability_num + 1,"list": list_abilities_relative_level_str[ability_num],})
 	print(progress_text)
 	rich_text_label_level_progress_list.text = progress_text
 # 		3:
@@ -53,4 +58,31 @@ func _on_button_close_pressed() -> void:
 
 
 func _on_button_buy_pressed() -> void:
-	pass # Replace with function body.
+	num_level += 1
+	galaxy_ship.hp_start_player -= (galaxy_ship.hp_startStart_player/100) * list_abilities_relative_level_int[num_level-2]
+	galaxy_ship.hp_start_player += (galaxy_ship.hp_startStart_player/100) * list_abilities_relative_level_int[num_level-1]
+
+	var pass_level = true
+	var progress_text = ""
+	for ability_num in list_abilities_relative_level_str.size():
+		print(ability_num)
+		var color = ""
+		if(ability_num + 1 == num_level):
+			color = "#804922"
+			pass_level = false
+			rich_text_label_ability_description.text = ability_description.format({"info": list_abilities_relative_level_str[ability_num],})
+		elif(pass_level):
+			color = "#DACA8B"
+		else:
+			color = "#E56205"
+		progress_text += "[color={color}]● level {ability_num} - {list}[/color]\n".format({"color": color,"ability_num": ability_num + 1,"list": list_abilities_relative_level_str[ability_num],})
+	print(progress_text)
+	rich_text_label_level_progress_list.text = progress_text
+
+	for item in itemsContainer.get_children():
+		print(ability_id)
+		print(item)
+		if(ability_id == str(item)):
+			print("---good---")
+			item.num_level = num_level
+			item.update_text()
