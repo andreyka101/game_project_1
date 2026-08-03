@@ -15,9 +15,12 @@ var hp_startStart_player = 300
 # 250
 var stop = false
 var speed_ship = 200
-var speed_bullet = 400
-var damage = 50
-var time_timer = 1.2
+# var speed_bullet = 400
+# var damage = 50
+# var time_timer = 1.2
+var speed_bullet = 2400
+var damage = 500
+var time_timer = 0.2
 
 var acceleration = 500.0
 var current_speed = 0.0

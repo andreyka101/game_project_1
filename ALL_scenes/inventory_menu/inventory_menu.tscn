@@ -1,10 +1,6 @@
-[gd_scene load_steps=49 format=3 uid="uid://dd7kmsstd0am1"]
+[gd_scene load_steps=45 format=3 uid="uid://dd7kmsstd0am1"]
 
 [ext_resource type="Script" uid="uid://t7cdjolf4ssx" path="res://ALL_scenes/inventory_menu/inventory_menu.gd" id="1_doitq"]
-[ext_resource type="Texture2D" uid="uid://cvg5fbm0ffp6b" path="res://icon_menu_двойной выстрел.png" id="1_usr0h"]
-[ext_resource type="Script" uid="uid://c71phce34vqq2" path="res://ALL_scenes/inventory_menu/texture_rect.gd" id="2_viouy"]
-[ext_resource type="Texture2D" uid="uid://deymmnyhvi70i" path="res://icon_menu_скорость пули.png" id="3_viouy"]
-[ext_resource type="PackedScene" uid="uid://qholyg7vlpbw" path="res://ALL_scenes/universal_item_ability/universal_item_ability.tscn" id="5_sfd42"]
 [ext_resource type="Texture2D" uid="uid://d4b67mcqip268" path="res://photo/spacecraft/spacecraft1.png" id="6_d858p"]
 [ext_resource type="Texture2D" uid="uid://ct7ioacphtv7m" path="res://photo/spacecraft/spacecraft2.png" id="7_mnfl7"]
 [ext_resource type="Texture2D" uid="uid://dosew3q23ou1a" path="res://photo/spacecraft/spacecraft3.png" id="8_ulo2k"]
@@ -35,10 +31,10 @@
 [ext_resource type="Texture2D" uid="uid://ci50yeydi0al1" path="res://photo/spacecraft/spacecraft28.png" id="33_n82c8"]
 [ext_resource type="Texture2D" uid="uid://dcpd080gfmk6v" path="res://photo/spacecraft/spacecraft29.png" id="34_07s3m"]
 [ext_resource type="Texture2D" uid="uid://ds751h74xjpr1" path="res://photo/icon_money.png" id="34_mnfl7"]
+[ext_resource type="PackedScene" uid="uid://b4h0a0g5kow1o" path="res://ALL_scenes/upgrade_menu/upgrade_menu.tscn" id="35_hmh7r"]
 [ext_resource type="Texture2D" uid="uid://cl546psffk6m8" path="res://photo/spacecraft/spacecraft30.png" id="35_kpjwb"]
 [ext_resource type="Texture2D" uid="uid://b1fd4s5ljpnxu" path="res://photo/spacecraft/spacecraft31.png" id="36_xjujy"]
 [ext_resource type="Texture2D" uid="uid://dfbrn07uf3k8o" path="res://photo/spacecraft/spacecraft32.png" id="37_wde5g"]
-[ext_resource type="PackedScene" uid="uid://saxmc03rdw7" path="res://ALL_scenes/universal_item_description/universal_item_description.tscn" id="39_ulo2k"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d858p"]
 bg_color = Color(0.027451, 0, 0.286275, 1)
@@ -513,37 +509,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
 [node name="ItemsContainer" type="Control" parent="."]
 anchors_preset = 0
 
-[node name="TextureRect" type="TextureRect" parent="ItemsContainer"]
-visible = false
-layout_mode = 0
-offset_left = 679.0
-offset_top = 277.0
-offset_right = 744.0
-offset_bottom = 342.0
-texture = ExtResource("1_usr0h")
-script = ExtResource("2_viouy")
-
-[node name="TextureRect2" type="TextureRect" parent="ItemsContainer"]
-visible = false
-layout_mode = 0
-offset_left = 698.0
-offset_top = 407.0
-offset_right = 763.0
-offset_bottom = 472.0
-texture = ExtResource("3_viouy")
-script = ExtResource("2_viouy")
-
-[node name="Button" parent="ItemsContainer" instance=ExtResource("5_sfd42")]
-visible = false
-layout_mode = 0
-offset_left = 749.0
-offset_top = 246.0
-offset_right = 959.0
-offset_bottom = 483.0
-
-[node name="universal_item_description" parent="." instance=ExtResource("39_ulo2k")]
-visible = false
-z_index = 1000
+[node name="Upgrade menu" parent="." instance=ExtResource("35_hmh7r")]
 layout_mode = 1
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

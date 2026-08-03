@@ -52,18 +52,12 @@ corner_radius_bottom_left = 25
 
 [node name="universal_item_description" type="Control"]
 layout_mode = 3
-anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -1101.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vfytp")
-
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 0
-offset_right = 1080.0
-offset_bottom = 2400.0
-color = Color(0.82, 0.64411, 0.00819999, 0.203922)
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 0
@@ -118,8 +112,8 @@ texture = ExtResource("2_n6pvs")
 layout_mode = 0
 offset_left = 643.0
 offset_top = 207.0
-offset_right = 895.0
-offset_bottom = 667.0
+offset_right = 910.0
+offset_bottom = 697.0
 theme_override_font_sizes/normal_font_size = 35
 bbcode_enabled = true
 text = "[color=#DACA8B]● level 1 - 0.5%[/color]

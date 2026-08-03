@@ -14,11 +14,12 @@ var last_safe_position = Vector2() # Сюда сохраняем позицию,
 @onready var texture_rect: TextureRect = $TextureRect
 @onready var timer: Timer = $Timer
 
-@onready var universal_item_description: Control = $"../../universal_item_description"
+@onready var universal_item_description: Control = $"../../Upgrade menu/universal_item_description"
+@onready var upgrade_menu: Control = $"../../Upgrade menu"
 @onready var ItemsContainer:Control = get_parent()
 # @onready var test:Panel = $"../../CenterContainer2/PanelContainer/GridContainer/Slot1"
 var num_level = 1
-var num_price = 2
+var num_price = [2,5,10,15,25,35,50,75,100]
 var num_multiplier_price = 0
 var ability_type = ""
 var ability_description = ""
@@ -30,7 +31,7 @@ var list_abilities_relative_level_int = []
 func _ready() -> void:
 	fun_transformation_item()
 	label_level.text = "level " + str(num_level)
-	label_price.text = str(num_price) + " coin"
+	label_price.text = str(num_price[num_level - 1]) + " coin"
 
 	# Запоминаем стартовую позицию предмета при запуске игры
 	last_safe_position = global_position
@@ -63,14 +64,13 @@ func _execute_action() -> void:
 		if(item_center.distance_to(slot_center) < 10):
 			print("Действие выполнено после короткого зажатия!")
 			universal_item_description.num_level = num_level
-			universal_item_description.num_price = num_price
 			universal_item_description.num_multiplier_price = num_multiplier_price
 			universal_item_description.ability_type = ability_type
 			universal_item_description.ability_id = str(self)
 			universal_item_description.ability_description = ability_description
 			universal_item_description.list_abilities_relative_level_str = list_abilities_relative_level_str
 			universal_item_description.list_abilities_relative_level_int = list_abilities_relative_level_int
-			universal_item_description.visible = true
+			upgrade_menu.visible = true
 			universal_item_description.start_des()
 
 func fun_transformation_item():
@@ -174,14 +174,14 @@ func snap_to_nearest_slot() -> void:
 						"двойной выстрел":
 							ability_type = "скорость пули"
 							beginning_merging_item = true
-
+			
 		for cell in inventory_menu.cells_included_forces:
 			# print(cell)
 			if(cell != closest_slot and inventory_menu.cells_included_forces[cell].id_ability == str(self)):
 				inventory_menu.cells_included_forces[cell].id_ability = null
 				inventory_menu.cells_included_forces[cell].name_ability = null
 				inventory_menu.cells_included_forces[cell].free_space = true
-		
+
 		if(beginning_merging_item):
 			if(name_slot_ShopItem=="slot1"):
 				# inventory_menu.free_ShopItem_Dictionary.slot1 = true
@@ -214,6 +214,10 @@ func snap_to_nearest_slot() -> void:
 
 func update_text() -> void:
 	label_level.text = "level " + str(num_level)
+	if(num_level < 10):
+		label_price.text = str(num_price[num_level - 1]) + " coin"
+	else:
+		label_price.text = "full"
 
 func fun_force_increase_decrease() -> void:
 	# galaxy_ship.hp_start_player += (galaxy_ship.hp_player/100) * 5
