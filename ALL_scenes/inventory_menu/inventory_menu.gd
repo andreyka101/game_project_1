@@ -8,10 +8,16 @@ var cells_included_forces = {}
 var start_game = true
 @onready var coin_label: Label = $Coin_HBoxContainer/Coin_Panel/Coin_CenterContainer/Coin_Label
 @onready var shopCoin_Slot1 = $"ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer/Label_coin1"
+@onready var shopCoin_Slot2 = $"ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer/Label_coin2"
+@onready var shopCoin_Slot3 = $"ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer/Label_coin3"
 
 @onready var itemsContainer = $"ItemsContainer"
 @onready var shopItem_Slot1 = $"ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer/Slot1"
 @onready var none_coid_plug1 = $"ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer/Slot1/none_coid_plug1"
+@onready var shopItem_Slot2 = $"ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer/Slot2"
+@onready var none_coid_plug2 = $"ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer/Slot2/none_coid_plug1"
+@onready var shopItem_Slot3 = $"ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer/Slot3"
+@onready var none_coid_plug3 = $"ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer/Slot3/none_coid_plug1"
 var free_ShopItem_Dictionary = {
 	"slot1": true,
 	"slot2": true,
@@ -19,6 +25,10 @@ var free_ShopItem_Dictionary = {
 }
 # var save_item_class = load("res://ALL_scenes/universal_item_ability/universal_item_ability.tscn")
 @onready var ship_protection_label: Label = $PlayerStatistics_VBoxContainer/ShipProtection_Label
+@onready var ship_speed_label: Label = $PlayerStatistics_VBoxContainer/ShipSpeed_Label
+@onready var bullet_speed_label: Label = $PlayerStatistics_VBoxContainer/BulletSpeed_Label
+@onready var bullet_force_label: Label = $PlayerStatistics_VBoxContainer/BulletForce_Label
+@onready var reloading_label: Label = $PlayerStatistics_VBoxContainer/Reloading_Label
 
 func _ready() -> void:
 	await get_tree().process_frame 
@@ -37,13 +47,21 @@ func _ready() -> void:
 
 func funStartGame_ShopItem() -> void:
 	await get_tree().process_frame 
-	print("new item1")
 	var save_item_class = load("res://ALL_scenes/universal_item_ability/universal_item_ability.tscn")
+	print("new item1")
 	var new_item:Button = save_item_class.instantiate()
 	new_item.global_position = shopItem_Slot1.global_position + (shopItem_Slot1.size / 2) - (new_item.size / 2)
 	new_item.name_slot_ShopItem = "slot1"
 	free_ShopItem_Dictionary.slot1 = false
 	new_item.ability_type = "защита"
+	itemsContainer.add_child(new_item)
+
+	print("new item2")
+	new_item = save_item_class.instantiate()
+	new_item.global_position = shopItem_Slot2.global_position + (shopItem_Slot2.size / 2) - (new_item.size / 2)
+	new_item.name_slot_ShopItem = "slot2"
+	free_ShopItem_Dictionary.slot2 = false
+	new_item.ability_type = "сила"
 	itemsContainer.add_child(new_item)
 func funShopItem() -> void:
 	if(free_ShopItem_Dictionary.slot1):
@@ -51,12 +69,6 @@ func funShopItem() -> void:
 		Global.cost_items_in_store.coin_slot1 = int(1.5 * Global.cost_items_in_store.coin_slot1)
 		coin_label.text = str(Global.coin_player) + " coin"
 		shopCoin_Slot1.text = str(Global.cost_items_in_store.coin_slot1) + " coin"
-		if(Global.cost_items_in_store.coin_slot1 > Global.coin_player):
-			shopCoin_Slot1.add_theme_color_override("font_color", Color("#FF2B2B"))
-			none_coid_plug1.visible = true
-		else:
-			shopCoin_Slot1.add_theme_color_override("font_color", Color("#ffffff"))
-			none_coid_plug1.visible = false
 		print("new item1")
 		var save_item_class = load("res://ALL_scenes/universal_item_ability/universal_item_ability.tscn")
 		var new_item:Button = save_item_class.instantiate()
@@ -64,6 +76,20 @@ func funShopItem() -> void:
 		new_item.name_slot_ShopItem = "slot1"
 		free_ShopItem_Dictionary.slot1 = false
 		new_item.ability_type = "защита"
+		itemsContainer.add_child(new_item)
+
+	if(free_ShopItem_Dictionary.slot2):
+		Global.coin_player -= Global.cost_items_in_store.coin_slot2
+		Global.cost_items_in_store.coin_slot2 = int(1.5 * Global.cost_items_in_store.coin_slot2)
+		coin_label.text = str(Global.coin_player) + " coin"
+		shopCoin_Slot2.text = str(Global.cost_items_in_store.coin_slot2) + " coin"
+		print("new item1")
+		var save_item_class = load("res://ALL_scenes/universal_item_ability/universal_item_ability.tscn")
+		var new_item:Button = save_item_class.instantiate()
+		new_item.global_position = shopItem_Slot2.global_position + (shopItem_Slot2.size / 2) - (new_item.size / 2)
+		new_item.name_slot_ShopItem = "slot2"
+		free_ShopItem_Dictionary.slot2 = false
+		new_item.ability_type = "сила"
 		itemsContainer.add_child(new_item)
 
 func _on_button_pressed() -> void:
@@ -79,3 +105,13 @@ func _process(_delta: float) -> void:
 # 	coin_label.text = str(Global.coin_player) + " coin"
 # 	shopCoin_Slot1.text = str(Global.cost_items_in_store.coin_slot1) + " coin"
 	ship_protection_label.text = "защита корабля - " + str(int(galaxy_ship.hp_start_player))
+	ship_speed_label.text = "скорость корабля - " + str(int(galaxy_ship.speed_ship))
+	bullet_speed_label.text = "скорость пули - " + str(int(galaxy_ship.speed_bullet))
+	bullet_force_label.text = "сила пули - " + str(int(galaxy_ship.damage))
+	reloading_label.text = "перезарядка - " + str(int(galaxy_ship.time_timer * 100))
+	if(Global.cost_items_in_store.coin_slot1 > Global.coin_player):
+		shopCoin_Slot1.add_theme_color_override("font_color", Color("#FF2B2B"))
+		none_coid_plug1.visible = true
+	else:
+		shopCoin_Slot1.add_theme_color_override("font_color", Color("#ffffff"))
+		none_coid_plug1.visible = false

@@ -2,7 +2,7 @@ extends Node
 
 
 var stop_game = false
-var coin_player = 60
+var coin_player = 600
 var cost_items_in_store = {
 	"coin_slot1": 6,
 	"coin_slot2": 6,

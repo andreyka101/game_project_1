@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://saxmc03rdw7" path="res://ALL_scenes/universal_item_description/universal_item_description.tscn" id="1_kn05k"]
 
 [node name="Upgrade menu" type="Control"]
+z_index = 200
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,11 +15,9 @@ grow_vertical = 2
 layout_mode = 0
 offset_right = 1080.0
 offset_bottom = 2400.0
+color = Color(1, 0.956863, 0.8, 0.270588)
 
 [node name="universal_item_description" parent="." instance=ExtResource("1_kn05k")]
-layout_mode = 1
-anchors_preset = 15
-offset_left = -1.0
-offset_top = 6.0
-offset_right = -1.0
-offset_bottom = -1095.0
+anchors_preset = 0
+offset_top = 120.0
+offset_bottom = 120.0

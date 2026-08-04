@@ -9,8 +9,9 @@ var ability_description = ""
 var list_abilities_relative_level_str =[]
 var list_abilities_relative_level_int =[]
 
-@onready var galaxy_ship = get_node("../../Galaxy_ship")
-@onready var itemsContainer = get_node("../ItemsContainer")
+@onready var galaxy_ship = get_node("../../../Galaxy_ship")
+@onready var itemsContainer = get_node("../../ItemsContainer")
+@onready var inventoryMenu = get_parent().get_parent()
 @onready var upgrade_menu = get_parent()
 
 @onready var label_ability_type: Label = $Label_ability_type
@@ -60,11 +61,20 @@ func _on_button_close_pressed() -> void:
 
 
 func _on_button_buy_pressed() -> void:
-	if(num_level < 10):
+	if(num_level < 10 and num_price[num_level - 1] <= Global.coin_player):
 		Global.coin_player -= num_price[num_level - 1]
+		inventoryMenu.coin_label.text = str(Global.coin_player) + " coin"
 		num_level += 1
-		galaxy_ship.hp_start_player -= (galaxy_ship.hp_startStart_player/100) * list_abilities_relative_level_int[num_level-2]
-		galaxy_ship.hp_start_player += (galaxy_ship.hp_startStart_player/100) * list_abilities_relative_level_int[num_level-1]
+
+		match ability_type:
+			"защита":
+				galaxy_ship.hp_start_player -= round((galaxy_ship.hp_startStart_player/100.0) * list_abilities_relative_level_int[num_level - 2] * 100) / 100.0
+				galaxy_ship.hp_start_player += round((galaxy_ship.hp_startStart_player/100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0
+				galaxy_ship.hp_player -= round((galaxy_ship.hp_startStart_player/100.0) * list_abilities_relative_level_int[num_level - 2] * 100) / 100.0
+				galaxy_ship.hp_player += round((galaxy_ship.hp_startStart_player/100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0
+			"сила":
+				galaxy_ship.damage -= round((galaxy_ship.damage_Start/100.0) * list_abilities_relative_level_int[num_level - 2] * 100) / 100.0
+				galaxy_ship.damage += round((galaxy_ship.damage_Start/100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0
 		
 		if(num_level < 10):
 			button_buy.text = str(num_price[num_level - 1]) + " coin"
@@ -95,3 +105,17 @@ func _on_button_buy_pressed() -> void:
 				print("---good---")
 				item.num_level = num_level
 				item.update_text()
+		if(num_level < 10):
+			if(num_price[num_level - 1] > Global.coin_player):
+				button_buy.add_theme_color_override("font_color", Color("#FF2B2B"))
+			else:
+				button_buy.add_theme_color_override("font_color", Color("#FFFFFF"))
+		else:
+			button_buy.add_theme_color_override("font_color", Color("#FFFFFF"))
+
+
+# func _process(_delta: float) -> void:
+# 	if(num_price[num_level - 1] > Global.coin_player):
+# 		button_buy.add_theme_color_override("font_color", Color("#FF2B2B"))
+# 	else:
+# 		button_buy.add_theme_color_override("font_color", Color("#FFFFFF"))

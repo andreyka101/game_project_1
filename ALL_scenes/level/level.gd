@@ -186,7 +186,9 @@ func _process(delta: float) -> void:
 		# audio_stream_player_2d.playing = true
 
 		$InventoryMenu.visible = true
-		$InventoryMenu.funStartGame_ShopItem()
+		$InventoryMenu.coin_label.text = str(Global.coin_player) + " coin"
+		if(num_level_text == 1):
+			$InventoryMenu.funStartGame_ShopItem()
 		end_level = true
 		for child in bullets_of_enemies.get_children():
 			child.queue_free()

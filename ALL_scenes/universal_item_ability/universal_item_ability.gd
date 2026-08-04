@@ -80,8 +80,13 @@ func fun_transformation_item():
 			ability_description = "[color=#997800]увеличивает hp на[/color] [color=#804922]{info}[/color]"
 			list_abilities_relative_level_str = ["5%","10%","17%","35%","50%","75%","110%","150%","200%","350%",]
 			list_abilities_relative_level_int = [5,10,17,35,50,75,110,150,200,350,]
+		"сила":
+			num_multiplier_price = 1
+			ability_description = "[color=#997800]увеличивает урон пули на[/color] [color=#804922]{info}[/color]"
+			list_abilities_relative_level_str = ["5%","10%","17%","35%","50%","75%","110%","150%","200%","350%",]
+			list_abilities_relative_level_int = [5,10,17,35,50,75,110,150,200,350,]
 	texture_rect.texture = load("res://photo/item_ability/icon_menu_" + ability_type + ".png")
-	print("res://photo/item_ability/icon_menu_" + ability_type + ".png")
+	# print("res://photo/item_ability/icon_menu_" + ability_type + ".png")
 # photo/item_ability/icon_menu_защита.png
 
 
@@ -140,9 +145,13 @@ func snap_to_nearest_slot() -> void:
 				inventory_menu.free_ShopItem_Dictionary.slot1 = true
 				inventory_menu.funShopItem()
 				not_purchased = false
+			if(name_slot_ShopItem=="slot2"):
+				inventory_menu.free_ShopItem_Dictionary.slot2 = true
+				inventory_menu.funShopItem()
+				not_purchased = false
 				# Global.coin_player -= Global.cost_items_in_store.coin_slot1
 
-		print("ok-",closest_slot)
+		# print("ok-",closest_slot)
 		
 		global_position = target_position
 		last_safe_position = global_position
@@ -191,13 +200,19 @@ func snap_to_nearest_slot() -> void:
 						inventory_menu.free_ShopItem_Dictionary.slot1 = true
 						inventory_menu.funShopItem()
 					not_purchased = false
+			if(name_slot_ShopItem=="slot2"):
+				if(not_purchased):
+					if(name_slot_ShopItem=="slot2"):
+						inventory_menu.free_ShopItem_Dictionary.slot2 = true
+						inventory_menu.funShopItem()
+					not_purchased = false
 			name_slot_ShopItem = ""
 			not_purchased = false
 			var target_position = closest_slot.global_position + (closest_slot.size / 2) - (size / 2)
 			fun_transformation_item()
 			var del_item = ItemsContainer.get_node(inventory_menu.cells_included_forces[closest_slot].id_ability.split(":")[0])
-			print('inventory_menu.cells_included_forces[closest_slot].id_ability.split(":")[0]')
-			print(inventory_menu.cells_included_forces[closest_slot].id_ability.split(":")[0])
+			# print('inventory_menu.cells_included_forces[closest_slot].id_ability.split(":")[0]')
+			# print(inventory_menu.cells_included_forces[closest_slot].id_ability.split(":")[0])
 			if(del_item):
 				del_item.queue_free()
 			inventory_menu.cells_included_forces[closest_slot].id_ability = null
@@ -216,9 +231,25 @@ func update_text() -> void:
 	label_level.text = "level " + str(num_level)
 	if(num_level < 10):
 		label_price.text = str(num_price[num_level - 1]) + " coin"
+		if(num_price[num_level - 1] > Global.coin_player):
+			label_price.add_theme_color_override("font_color", Color("#FF2B2B"))
+		else:
+			label_price.add_theme_color_override("font_color", Color("#997800"))
 	else:
 		label_price.text = "full"
+		label_price.add_theme_color_override("font_color", Color("#997800"))
 
 func fun_force_increase_decrease() -> void:
-	# galaxy_ship.hp_start_player += (galaxy_ship.hp_player/100) * 5
-	galaxy_ship.hp_start_player += (galaxy_ship.hp_startStart_player/100) * list_abilities_relative_level_int[0]
+	match ability_type:
+		"защита":
+			galaxy_ship.hp_start_player += round((galaxy_ship.hp_startStart_player/100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0
+			galaxy_ship.hp_player += round((galaxy_ship.hp_startStart_player/100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0
+			# galaxy_ship.hp_start_player += (galaxy_ship.hp_startStart_player/100) * list_abilities_relative_level_int[num_level - 1]
+			# galaxy_ship.hp_player += (galaxy_ship.hp_startStart_player/100) * list_abilities_relative_level_int[num_level - 1]
+		"сила":
+			galaxy_ship.damage += round((galaxy_ship.damage_Start/100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0
+			# galaxy_ship.damage += (galaxy_ship.damage_Start/100) * list_abilities_relative_level_int[num_level - 1]
+	if(num_price[num_level - 1] > Global.coin_player):
+		label_price.add_theme_color_override("font_color", Color("#FF2B2B"))
+	else:
+		label_price.add_theme_color_override("font_color", Color("#997800"))
