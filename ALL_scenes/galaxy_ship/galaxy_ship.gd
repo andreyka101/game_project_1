@@ -14,7 +14,9 @@ var hp_start_player = 300
 var hp_startStart_player = 300
 # 250
 var stop = false
+var speed_ship_Start = 200
 var speed_ship = 200
+var speed_bullet_Start = 400
 var speed_bullet = 400
 var damage_Start = 50
 var damage = 50

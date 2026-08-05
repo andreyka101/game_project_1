@@ -27,11 +27,15 @@ var not_purchased = true
 var name_slot_ShopItem:String = ""
 var list_abilities_relative_level_str = []
 var list_abilities_relative_level_int = []
+var list_items_merge = ["сила","скорость"]
 
 func _ready() -> void:
+	add_merge_rule("скорость", "сила", "скорость пули")
+	add_merge_rule("огонь", "вода", "пар")
+
 	fun_transformation_item()
 	label_level.text = "level " + str(num_level)
-	label_price.text = str(num_price[num_level - 1]) + " coin"
+	label_price.text = str(num_price[num_level - 1] * num_multiplier_price) + " coin"
 
 	# Запоминаем стартовую позицию предмета при запуске игры
 	last_safe_position = global_position
@@ -73,6 +77,9 @@ func _execute_action() -> void:
 			upgrade_menu.visible = true
 			universal_item_description.start_des()
 
+func fun_changing_text():
+	# label_level.text = "level " + str(num_level)
+	label_price.text = str(num_price[num_level - 1] * num_multiplier_price) + " coin"
 func fun_transformation_item():
 	match ability_type:
 		"защита":
@@ -83,6 +90,16 @@ func fun_transformation_item():
 		"сила":
 			num_multiplier_price = 1
 			ability_description = "[color=#997800]увеличивает урон пули на[/color] [color=#804922]{info}[/color]"
+			list_abilities_relative_level_str = ["5%","10%","17%","35%","50%","75%","110%","150%","200%","350%",]
+			list_abilities_relative_level_int = [5,10,17,35,50,75,110,150,200,350,]
+		"скорость":
+			num_multiplier_price = 1
+			ability_description = "[color=#997800]увеличивает скорость коробля на[/color] [color=#804922]{info}[/color]"
+			list_abilities_relative_level_str = ["5%","10%","17%","35%","50%","75%","110%","150%","200%","350%",]
+			list_abilities_relative_level_int = [5,10,17,35,50,75,110,150,200,350,]
+		"скорость пули":
+			num_multiplier_price = 2
+			ability_description = "[color=#997800]увеличивает скорость пули на[/color] [color=#804922]{info}[/color]"
 			list_abilities_relative_level_str = ["5%","10%","17%","35%","50%","75%","110%","150%","200%","350%",]
 			list_abilities_relative_level_int = [5,10,17,35,50,75,110,150,200,350,]
 	texture_rect.texture = load("res://photo/item_ability/icon_menu_" + ability_type + ".png")
@@ -149,7 +166,10 @@ func snap_to_nearest_slot() -> void:
 				inventory_menu.free_ShopItem_Dictionary.slot2 = true
 				inventory_menu.funShopItem()
 				not_purchased = false
-				# Global.coin_player -= Global.cost_items_in_store.coin_slot1
+			if(name_slot_ShopItem=="slot3"):
+				inventory_menu.free_ShopItem_Dictionary.slot3 = true
+				inventory_menu.funShopItem()
+				not_purchased = false
 
 		# print("ok-",closest_slot)
 		
@@ -177,12 +197,26 @@ func snap_to_nearest_slot() -> void:
 		var beginning_merging_item = false
 
 		if(inventory_menu.cells_included_forces[closest_slot].id_ability != str(self)):
-			match ability_type:
-				"двойной выстрел":
-					match inventory_menu.cells_included_forces[closest_slot].name_ability:
-						"двойной выстрел":
-							ability_type = "скорость пули"
-							beginning_merging_item = true
+			# var first_pass = true
+			# match ability_type:
+			# 	"скорость":
+			# 		match inventory_menu.cells_included_forces[closest_slot].name_ability:
+			# 			"сила":
+			# 				ability_type = "скорость пули"
+			# 				beginning_merging_item = true
+			# 				first_pass = false
+			# if(first_pass):
+			# 	match ability_type:
+			# 		"сила":
+			# 			match inventory_menu.cells_included_forces[closest_slot].name_ability:
+			# 				"скорость":
+			# 					ability_type = "скорость пули"
+			# 					beginning_merging_item = true
+			var result = find_merge_result(ability_type, inventory_menu.cells_included_forces[closest_slot].name_ability)
+			if not result.is_empty():
+				ability_type = result
+				beginning_merging_item = true
+
 			
 		for cell in inventory_menu.cells_included_forces:
 			# print(cell)
@@ -206,10 +240,18 @@ func snap_to_nearest_slot() -> void:
 						inventory_menu.free_ShopItem_Dictionary.slot2 = true
 						inventory_menu.funShopItem()
 					not_purchased = false
+			if(name_slot_ShopItem=="slot3"):
+				if(not_purchased):
+					if(name_slot_ShopItem=="slot3"):
+						inventory_menu.free_ShopItem_Dictionary.slot3 = true
+						inventory_menu.funShopItem()
+					not_purchased = false
 			name_slot_ShopItem = ""
 			not_purchased = false
 			var target_position = closest_slot.global_position + (closest_slot.size / 2) - (size / 2)
 			fun_transformation_item()
+			fun_changing_text()
+			fun_force_increase_decrease()
 			var del_item = ItemsContainer.get_node(inventory_menu.cells_included_forces[closest_slot].id_ability.split(":")[0])
 			# print('inventory_menu.cells_included_forces[closest_slot].id_ability.split(":")[0]')
 			# print(inventory_menu.cells_included_forces[closest_slot].id_ability.split(":")[0])
@@ -226,12 +268,36 @@ func snap_to_nearest_slot() -> void:
 	else:
 		global_position = last_safe_position
 
+# Класс для правил слияния
+class MergeRule:
+	var ability1: String
+	var ability2: String
+	var result: String
+	
+	func _init(a1: String, a2: String, res: String):
+		ability1 = a1
+		ability2 = a2
+		result = res
+
+# Создаём список правил
+var merge_rules = []
+
+func add_merge_rule(ability1: String, ability2: String, result: String):
+	merge_rules.append(MergeRule.new(ability1, ability2, result))
+
+func find_merge_result(ability_a: String, ability_b: String) -> String:
+	for rule in merge_rules:
+		# Проверяем обе комбинации
+		if (rule.ability1 == ability_a and rule.ability2 == ability_b) or \
+		   (rule.ability1 == ability_b and rule.ability2 == ability_a):
+			return rule.result
+	return ""  # Нет результата
 
 func update_text() -> void:
 	label_level.text = "level " + str(num_level)
 	if(num_level < 10):
-		label_price.text = str(num_price[num_level - 1]) + " coin"
-		if(num_price[num_level - 1] > Global.coin_player):
+		label_price.text = str(num_price[num_level - 1] * num_multiplier_price) + " coin"
+		if(num_price[num_level - 1] * num_multiplier_price > Global.coin_player):
 			label_price.add_theme_color_override("font_color", Color("#FF2B2B"))
 		else:
 			label_price.add_theme_color_override("font_color", Color("#997800"))
@@ -239,17 +305,18 @@ func update_text() -> void:
 		label_price.text = "full"
 		label_price.add_theme_color_override("font_color", Color("#997800"))
 
-func fun_force_increase_decrease() -> void:
+func fun_force_increase_decrease(minus = 1) -> void:
 	match ability_type:
 		"защита":
-			galaxy_ship.hp_start_player += round((galaxy_ship.hp_startStart_player/100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0
-			galaxy_ship.hp_player += round((galaxy_ship.hp_startStart_player/100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0
-			# galaxy_ship.hp_start_player += (galaxy_ship.hp_startStart_player/100) * list_abilities_relative_level_int[num_level - 1]
-			# galaxy_ship.hp_player += (galaxy_ship.hp_startStart_player/100) * list_abilities_relative_level_int[num_level - 1]
+			galaxy_ship.hp_start_player += (round((galaxy_ship.hp_startStart_player/100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0) * minus
+			galaxy_ship.hp_player += (round((galaxy_ship.hp_startStart_player/100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0) * minus
 		"сила":
-			galaxy_ship.damage += round((galaxy_ship.damage_Start/100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0
-			# galaxy_ship.damage += (galaxy_ship.damage_Start/100) * list_abilities_relative_level_int[num_level - 1]
-	if(num_price[num_level - 1] > Global.coin_player):
+			galaxy_ship.damage += (round((galaxy_ship.damage_Start/100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0) * minus
+		"скорость":
+			galaxy_ship.speed_ship += (round((galaxy_ship.speed_ship_Start/100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0) * minus
+		"скорость пули":
+			galaxy_ship.speed_bullet += (round((galaxy_ship.speed_bullet_Start/100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0) * minus
+	if(num_price[num_level - 1] * num_multiplier_price > Global.coin_player):
 		label_price.add_theme_color_override("font_color", Color("#FF2B2B"))
 	else:
 		label_price.add_theme_color_override("font_color", Color("#997800"))

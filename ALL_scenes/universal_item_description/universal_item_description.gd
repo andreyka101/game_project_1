@@ -24,7 +24,8 @@ var list_abilities_relative_level_int =[]
 func start_des() -> void:
 	label_ability_type.text = ability_type
 	texture_rect.texture = load("res://photo/item_ability/icon_menu_" + ability_type + ".png")
-	button_buy.text = str(num_price) + " coin"
+	# button_buy.text = str(num_price) + " coin"
+
 	# rich_text_label_ability_description.text = ability_description
 	# rich_text_label_level_progress_list.text
 	var pass_level = true
@@ -43,7 +44,10 @@ func start_des() -> void:
 		progress_text += "[color={color}]● level {ability_num} - {list}[/color]\n".format({"color": color,"ability_num": ability_num + 1,"list": list_abilities_relative_level_str[ability_num],})
 	print(progress_text)
 	rich_text_label_level_progress_list.text = progress_text
-	button_buy.text = str(num_price[num_level - 1]) + " coin"
+	if(num_level < 10):
+			button_buy.text = str(num_price[num_level - 1] * num_multiplier_price) + " coin"
+	else:
+		button_buy.text = "full"
 # 		3:
 # 			rich_text_label_level_progress_list.text = "[color=#DACA8B]● level 1 - 0.5%[/color]
 # [color=#DACA8B]● level 2 - 2%[/color]
@@ -61,8 +65,8 @@ func _on_button_close_pressed() -> void:
 
 
 func _on_button_buy_pressed() -> void:
-	if(num_level < 10 and num_price[num_level - 1] <= Global.coin_player):
-		Global.coin_player -= num_price[num_level - 1]
+	if(num_level < 10 and num_price[num_level - 1] * num_multiplier_price <= Global.coin_player):
+		Global.coin_player -= num_price[num_level - 1] * num_multiplier_price
 		inventoryMenu.coin_label.text = str(Global.coin_player) + " coin"
 		num_level += 1
 
@@ -75,9 +79,15 @@ func _on_button_buy_pressed() -> void:
 			"сила":
 				galaxy_ship.damage -= round((galaxy_ship.damage_Start/100.0) * list_abilities_relative_level_int[num_level - 2] * 100) / 100.0
 				galaxy_ship.damage += round((galaxy_ship.damage_Start/100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0
+			"скорость":
+				galaxy_ship.speed_ship -= round((galaxy_ship.speed_ship_Start/100.0) * list_abilities_relative_level_int[num_level - 2] * 100) / 100.0
+				galaxy_ship.speed_ship += round((galaxy_ship.speed_ship_Start/100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0
+			"скорость пули":
+				galaxy_ship.speed_bullet -= (round((galaxy_ship.speed_bullet_Start/100.0) * list_abilities_relative_level_int[num_level - 2] * 100) / 100.0)
+				galaxy_ship.speed_bullet += (round((galaxy_ship.speed_bullet_Start/100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0)
 		
 		if(num_level < 10):
-			button_buy.text = str(num_price[num_level - 1]) + " coin"
+			button_buy.text = str(num_price[num_level - 1] * num_multiplier_price) + " coin"
 		else:
 			button_buy.text = "full"
 
@@ -106,7 +116,7 @@ func _on_button_buy_pressed() -> void:
 				item.num_level = num_level
 				item.update_text()
 		if(num_level < 10):
-			if(num_price[num_level - 1] > Global.coin_player):
+			if(num_price[num_level - 1] * num_multiplier_price > Global.coin_player):
 				button_buy.add_theme_color_override("font_color", Color("#FF2B2B"))
 			else:
 				button_buy.add_theme_color_override("font_color", Color("#FFFFFF"))

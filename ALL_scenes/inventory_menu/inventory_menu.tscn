@@ -405,12 +405,32 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
 
+[node name="none_coid_plug2" type="Panel" parent="ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer/Slot2"]
+visible = false
+z_index = 100
+custom_minimum_size = Vector2(240, 267)
+offset_right = 240.0
+offset_bottom = 267.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_wykoc")
+
 [node name="Slot3" type="Panel" parent="ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer"]
 custom_minimum_size = Vector2(240, 267)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
+
+[node name="none_coid_plug3" type="Panel" parent="ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer/Slot3"]
+visible = false
+z_index = 100
+custom_minimum_size = Vector2(240, 267)
+offset_right = 240.0
+offset_bottom = 267.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_wykoc")
 
 [node name="Label_coin1" type="Label" parent="ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer"]
 layout_mode = 2
