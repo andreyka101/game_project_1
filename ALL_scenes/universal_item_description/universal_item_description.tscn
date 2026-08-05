@@ -52,6 +52,7 @@ corner_radius_bottom_left = 25
 
 [node name="universal_item_description" type="Control"]
 layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_vfytp")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]

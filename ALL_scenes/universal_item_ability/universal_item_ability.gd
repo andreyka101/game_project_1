@@ -5,29 +5,29 @@ var offset = Vector2()
 var last_safe_position = Vector2() # Сюда сохраняем позицию, чтобы вернуть предмет при промахе
 
 # ВАЖНО: Замените этот путь на путь к вашему GridContainer в дереве сцены!
-@onready var InventoryСells_Grid = get_node("../../InventoryСells_CenterContainer/InventoryСells_PanelContainer/InventoryСells_GridContainer") 
-@onready var inventory_menu:Control = get_parent().get_parent()
+@onready var InventoryСells_Grid = get_node("../../InventoryСells_CenterContainer/InventoryСells_PanelContainer/InventoryСells_GridContainer")
+@onready var inventory_menu: Control = get_parent().get_parent()
 @onready var galaxy_ship = get_node("../../../Galaxy_ship")
 
-@onready var label_level:Label = $Label
-@onready var label_price:Label = $Label2
+@onready var label_level: Label = $Label
+@onready var label_price: Label = $Label2
 @onready var texture_rect: TextureRect = $TextureRect
 @onready var timer: Timer = $Timer
 
 @onready var universal_item_description: Control = $"../../Upgrade menu/universal_item_description"
 @onready var upgrade_menu: Control = $"../../Upgrade menu"
-@onready var ItemsContainer:Control = get_parent()
+@onready var ItemsContainer: Control = get_parent()
 # @onready var test:Panel = $"../../CenterContainer2/PanelContainer/GridContainer/Slot1"
 var num_level = 1
-var num_price = [2,5,10,15,25,35,50,75,100]
+var num_price = [2, 5, 10, 15, 25, 35, 50, 75, 100]
 var num_multiplier_price = 0
 var ability_type = ""
 var ability_description = ""
 var not_purchased = true
-var name_slot_ShopItem:String = ""
+var name_slot_ShopItem: String = ""
 var list_abilities_relative_level_str = []
 var list_abilities_relative_level_int = []
-var list_items_merge = ["сила","скорость"]
+var list_items_merge = ["сила", "скорость"]
 
 func _ready() -> void:
 	add_merge_rule("скорость", "сила", "скорость пули")
@@ -65,12 +65,12 @@ func _execute_action() -> void:
 	for slot in InventoryСells_Grid.get_children():
 		var slot_center = slot.global_position + (slot.size / 2)
 		var item_center = global_position + (size / 2)
-		if(item_center.distance_to(slot_center) < 10):
+		if (item_center.distance_to(slot_center) < 10):
 			print("Действие выполнено после короткого зажатия!")
 			universal_item_description.num_level = num_level
 			universal_item_description.num_multiplier_price = num_multiplier_price
 			universal_item_description.ability_type = ability_type
-			universal_item_description.ability_id = str(self)
+			universal_item_description.ability_id = str(self )
 			universal_item_description.ability_description = ability_description
 			universal_item_description.list_abilities_relative_level_str = list_abilities_relative_level_str
 			universal_item_description.list_abilities_relative_level_int = list_abilities_relative_level_int
@@ -78,34 +78,33 @@ func _execute_action() -> void:
 			universal_item_description.start_des()
 
 func fun_changing_text():
-	# label_level.text = "level " + str(num_level)
+	label_level.text = "level " + str(num_level)
 	label_price.text = str(num_price[num_level - 1] * num_multiplier_price) + " coin"
 func fun_transformation_item():
 	match ability_type:
 		"защита":
 			num_multiplier_price = 1
 			ability_description = "[color=#997800]увеличивает hp на[/color] [color=#804922]{info}[/color]"
-			list_abilities_relative_level_str = ["5%","10%","17%","35%","50%","75%","110%","150%","200%","350%",]
-			list_abilities_relative_level_int = [5,10,17,35,50,75,110,150,200,350,]
+			list_abilities_relative_level_str = ["5%", "10%", "17%", "35%", "50%", "75%", "110%", "150%", "200%", "350%", ]
+			list_abilities_relative_level_int = [5, 10, 17, 35, 50, 75, 110, 150, 200, 350, ]
 		"сила":
 			num_multiplier_price = 1
 			ability_description = "[color=#997800]увеличивает урон пули на[/color] [color=#804922]{info}[/color]"
-			list_abilities_relative_level_str = ["5%","10%","17%","35%","50%","75%","110%","150%","200%","350%",]
-			list_abilities_relative_level_int = [5,10,17,35,50,75,110,150,200,350,]
+			list_abilities_relative_level_str = ["5%", "10%", "17%", "35%", "50%", "75%", "110%", "150%", "200%", "350%", ]
+			list_abilities_relative_level_int = [5, 10, 17, 35, 50, 75, 110, 150, 200, 350, ]
 		"скорость":
 			num_multiplier_price = 1
 			ability_description = "[color=#997800]увеличивает скорость коробля на[/color] [color=#804922]{info}[/color]"
-			list_abilities_relative_level_str = ["5%","10%","17%","35%","50%","75%","110%","150%","200%","350%",]
-			list_abilities_relative_level_int = [5,10,17,35,50,75,110,150,200,350,]
+			list_abilities_relative_level_str = ["5%", "10%", "17%", "35%", "50%", "75%", "110%", "150%", "200%", "350%", ]
+			list_abilities_relative_level_int = [5, 10, 17, 35, 50, 75, 110, 150, 200, 350, ]
 		"скорость пули":
 			num_multiplier_price = 2
 			ability_description = "[color=#997800]увеличивает скорость пули на[/color] [color=#804922]{info}[/color]"
-			list_abilities_relative_level_str = ["5%","10%","17%","35%","50%","75%","110%","150%","200%","350%",]
-			list_abilities_relative_level_int = [5,10,17,35,50,75,110,150,200,350,]
+			list_abilities_relative_level_str = ["5%", "10%", "17%", "35%", "50%", "75%", "110%", "150%", "200%", "350%", ]
+			list_abilities_relative_level_int = [5, 10, 17, 35, 50, 75, 110, 150, 200, 350, ]
 	texture_rect.texture = load("res://photo/item_ability/icon_menu_" + ability_type + ".png")
 	# print("res://photo/item_ability/icon_menu_" + ability_type + ".png")
 # photo/item_ability/icon_menu_защита.png
-
 
 
 func _gui_input(event: InputEvent) -> void:
@@ -126,7 +125,7 @@ func _process(_delta: float) -> void:
 	if is_dragging and Global.cost_items_in_store.coin_slot1 <= Global.coin_player:
 		# Передвигаем вслед за мышкой
 		global_position = get_global_mouse_position() - offset
-	elif(is_dragging and !not_purchased):
+	elif (is_dragging and !not_purchased):
 		global_position = get_global_mouse_position() - offset
 
 func snap_to_nearest_slot() -> void:
@@ -139,7 +138,7 @@ func snap_to_nearest_slot() -> void:
 	
 	# Порог примагничивания. Раз ячейка больше, можно увеличить 
 	# радиус (например, до половины размера вашего слота)
-	var snap_threshold = 80.0 
+	var snap_threshold = 80.0
 
 	for slot in InventoryСells_Grid.get_children():
 		var slot_center = slot.global_position + (slot.size / 2)
@@ -156,17 +155,17 @@ func snap_to_nearest_slot() -> void:
 		# Формула: ПозицияСлота + (РазмерСлота / 2) - (РазмерПредмета / 2)
 		var target_position = closest_slot.global_position + (closest_slot.size / 2) - (size / 2)
 
-		if(not_purchased):
+		if (not_purchased):
 			fun_force_increase_decrease()
-			if(name_slot_ShopItem=="slot1"):
+			if (name_slot_ShopItem == "slot1"):
 				inventory_menu.free_ShopItem_Dictionary.slot1 = true
 				inventory_menu.funShopItem()
 				not_purchased = false
-			if(name_slot_ShopItem=="slot2"):
+			if (name_slot_ShopItem == "slot2"):
 				inventory_menu.free_ShopItem_Dictionary.slot2 = true
 				inventory_menu.funShopItem()
 				not_purchased = false
-			if(name_slot_ShopItem=="slot3"):
+			if (name_slot_ShopItem == "slot3"):
 				inventory_menu.free_ShopItem_Dictionary.slot3 = true
 				inventory_menu.funShopItem()
 				not_purchased = false
@@ -177,7 +176,7 @@ func snap_to_nearest_slot() -> void:
 		last_safe_position = global_position
 
 		inventory_menu.cells_included_forces[closest_slot].free_space = false
-		inventory_menu.cells_included_forces[closest_slot].id_ability = str(self)
+		inventory_menu.cells_included_forces[closest_slot].id_ability = str(self )
 		inventory_menu.cells_included_forces[closest_slot].name_ability = ability_type
 
 		# match ability_type:
@@ -185,7 +184,7 @@ func snap_to_nearest_slot() -> void:
 		# 		galaxy_ship.hp_player += (galaxy_ship.hp_player/100) * 5
 		for cell in inventory_menu.cells_included_forces:
 			# print(cell)
-			if(cell != closest_slot and inventory_menu.cells_included_forces[cell].id_ability == str(self)):
+			if (cell != closest_slot and inventory_menu.cells_included_forces[cell].id_ability == str(self )):
 				inventory_menu.cells_included_forces[cell].id_ability = null
 				inventory_menu.cells_included_forces[cell].name_ability = null
 				inventory_menu.cells_included_forces[cell].free_space = true
@@ -196,7 +195,7 @@ func snap_to_nearest_slot() -> void:
 		# print("not not ok-",closest_slot)
 		var beginning_merging_item = false
 
-		if(inventory_menu.cells_included_forces[closest_slot].id_ability != str(self)):
+		if (inventory_menu.cells_included_forces[closest_slot].id_ability != str(self )):
 			# var first_pass = true
 			# match ability_type:
 			# 	"скорость":
@@ -213,6 +212,13 @@ func snap_to_nearest_slot() -> void:
 			# 					ability_type = "скорость пули"
 			# 					beginning_merging_item = true
 			var result = find_merge_result(ability_type, inventory_menu.cells_included_forces[closest_slot].name_ability)
+			print("if(!not_purchased):")
+			if (!not_purchased):
+				print("if(!not_purchased): yes")
+				print(ability_type)
+				print(galaxy_ship.speed_ship)
+				fun_force_increase_decrease(-1)
+				print(galaxy_ship.speed_ship)
 			if not result.is_empty():
 				ability_type = result
 				beginning_merging_item = true
@@ -220,42 +226,42 @@ func snap_to_nearest_slot() -> void:
 			
 		for cell in inventory_menu.cells_included_forces:
 			# print(cell)
-			if(cell != closest_slot and inventory_menu.cells_included_forces[cell].id_ability == str(self)):
+			if (cell != closest_slot and inventory_menu.cells_included_forces[cell].id_ability == str(self )):
 				inventory_menu.cells_included_forces[cell].id_ability = null
 				inventory_menu.cells_included_forces[cell].name_ability = null
 				inventory_menu.cells_included_forces[cell].free_space = true
-
-		if(beginning_merging_item):
-			if(name_slot_ShopItem=="slot1"):
+		if (beginning_merging_item):
+			if (name_slot_ShopItem == "slot1"):
 				# inventory_menu.free_ShopItem_Dictionary.slot1 = true
 				# inventory_menu.funShopItem()
-				if(not_purchased):
-					if(name_slot_ShopItem=="slot1"):
+				if (not_purchased):
+					if (name_slot_ShopItem == "slot1"):
 						inventory_menu.free_ShopItem_Dictionary.slot1 = true
 						inventory_menu.funShopItem()
 					not_purchased = false
-			if(name_slot_ShopItem=="slot2"):
-				if(not_purchased):
-					if(name_slot_ShopItem=="slot2"):
+			if (name_slot_ShopItem == "slot2"):
+				if (not_purchased):
+					if (name_slot_ShopItem == "slot2"):
 						inventory_menu.free_ShopItem_Dictionary.slot2 = true
 						inventory_menu.funShopItem()
 					not_purchased = false
-			if(name_slot_ShopItem=="slot3"):
-				if(not_purchased):
-					if(name_slot_ShopItem=="slot3"):
+			if (name_slot_ShopItem == "slot3"):
+				if (not_purchased):
+					if (name_slot_ShopItem == "slot3"):
 						inventory_menu.free_ShopItem_Dictionary.slot3 = true
 						inventory_menu.funShopItem()
 					not_purchased = false
 			name_slot_ShopItem = ""
 			not_purchased = false
 			var target_position = closest_slot.global_position + (closest_slot.size / 2) - (size / 2)
-			fun_transformation_item()
-			fun_changing_text()
-			fun_force_increase_decrease()
 			var del_item = ItemsContainer.get_node(inventory_menu.cells_included_forces[closest_slot].id_ability.split(":")[0])
-			# print('inventory_menu.cells_included_forces[closest_slot].id_ability.split(":")[0]')
-			# print(inventory_menu.cells_included_forces[closest_slot].id_ability.split(":")[0])
-			if(del_item):
+			if (del_item):
+				num_level = int((num_level + del_item.num_level) / 2)
+				fun_transformation_item()
+				fun_changing_text()
+				fun_force_increase_decrease()
+				# print("del_item.num_level  " , del_item.num_level)
+				del_item.fun_force_increase_decrease(-1)
 				del_item.queue_free()
 			inventory_menu.cells_included_forces[closest_slot].id_ability = null
 			inventory_menu.cells_included_forces[closest_slot].name_ability = null
@@ -291,13 +297,13 @@ func find_merge_result(ability_a: String, ability_b: String) -> String:
 		if (rule.ability1 == ability_a and rule.ability2 == ability_b) or \
 		   (rule.ability1 == ability_b and rule.ability2 == ability_a):
 			return rule.result
-	return ""  # Нет результата
+	return "" # Нет результата
 
 func update_text() -> void:
 	label_level.text = "level " + str(num_level)
-	if(num_level < 10):
+	if (num_level < 10):
 		label_price.text = str(num_price[num_level - 1] * num_multiplier_price) + " coin"
-		if(num_price[num_level - 1] * num_multiplier_price > Global.coin_player):
+		if (num_price[num_level - 1] * num_multiplier_price > Global.coin_player):
 			label_price.add_theme_color_override("font_color", Color("#FF2B2B"))
 		else:
 			label_price.add_theme_color_override("font_color", Color("#997800"))
@@ -308,15 +314,19 @@ func update_text() -> void:
 func fun_force_increase_decrease(minus = 1) -> void:
 	match ability_type:
 		"защита":
-			galaxy_ship.hp_start_player += (round((galaxy_ship.hp_startStart_player/100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0) * minus
-			galaxy_ship.hp_player += (round((galaxy_ship.hp_startStart_player/100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0) * minus
+			galaxy_ship.hp_start_player += (round((galaxy_ship.hp_startStart_player / 100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0) * minus
+			galaxy_ship.hp_player += (round((galaxy_ship.hp_startStart_player / 100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0) * minus
 		"сила":
-			galaxy_ship.damage += (round((galaxy_ship.damage_Start/100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0) * minus
+			galaxy_ship.damage += (round((galaxy_ship.damage_Start / 100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0) * minus
 		"скорость":
-			galaxy_ship.speed_ship += (round((galaxy_ship.speed_ship_Start/100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0) * minus
+			print((round((galaxy_ship.speed_ship_Start / 100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0) * minus)
+			galaxy_ship.speed_ship += (round((galaxy_ship.speed_ship_Start / 100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0) * minus
 		"скорость пули":
-			galaxy_ship.speed_bullet += (round((galaxy_ship.speed_bullet_Start/100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0) * minus
-	if(num_price[num_level - 1] * num_multiplier_price > Global.coin_player):
-		label_price.add_theme_color_override("font_color", Color("#FF2B2B"))
+			galaxy_ship.speed_bullet += (round((galaxy_ship.speed_bullet_Start / 100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0) * minus
+	if (num_level < 10):
+		if (num_price[num_level - 1] * num_multiplier_price > Global.coin_player):
+			label_price.add_theme_color_override("font_color", Color("#FF2B2B"))
+		else:
+			label_price.add_theme_color_override("font_color", Color("#997800"))
 	else:
 		label_price.add_theme_color_override("font_color", Color("#997800"))
