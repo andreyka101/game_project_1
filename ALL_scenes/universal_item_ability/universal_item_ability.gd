@@ -7,6 +7,7 @@ var last_safe_position = Vector2() # Сюда сохраняем позицию,
 # ВАЖНО: Замените этот путь на путь к вашему GridContainer в дереве сцены!
 @onready var InventoryСells_Grid = get_node("../../InventoryСells_CenterContainer/InventoryСells_PanelContainer/InventoryСells_GridContainer")
 @onready var inventory_menu: Control = get_parent().get_parent()
+@onready var level = get_parent().get_parent().get_parent()
 @onready var galaxy_ship = get_node("../../../Galaxy_ship")
 
 @onready var label_level: Label = $Label
@@ -106,8 +107,7 @@ func fun_transformation_item():
 			num_multiplier_price = 2
 			ability_description = "[color=#997800]востановление брони раз в[/color] [color=#804922]{info}[/color] [color=#997800]сек на 5 едениц[/color]"
 			list_abilities_relative_level_str = ["180 сек", "170 сек", "160 сек", "150 сек", "140 сек", "130 сек", "120 сек", "110 сек", "100 сек", "90 сек", ]
-			# list_abilities_relative_level_int = [180, 170, 160, 150, 140, 130, 120, 110, 100, 90]
-			list_abilities_relative_level_int = [2, 170, 160, 150, 140, 130, 120, 110, 100, 90]
+			list_abilities_relative_level_int = [180, 170, 160, 150, 140, 130, 120, 110, 100, 90]
 	texture_rect.texture = load("res://photo/item_ability/icon_menu_" + ability_type + ".png")
 	# print("res://photo/item_ability/icon_menu_" + ability_type + ".png")
 # photo/item_ability/icon_menu_защита.png
@@ -331,6 +331,8 @@ func fun_force_increase_decrease(minus = 1) -> void:
 			galaxy_ship.speed_bullet += (round((galaxy_ship.speed_bullet_Start / 100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0) * minus
 		"живая броня":
 			galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[num_level - 1]}
+			level.hp_ship_battery_passiveсharging.visible = true
+			level.HP_ship_battery.visible = false
 	if (num_level < 10):
 		if (num_price[num_level - 1] * num_multiplier_price > Global.coin_player):
 			label_price.add_theme_color_override("font_color", Color("#FF2B2B"))

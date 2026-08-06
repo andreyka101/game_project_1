@@ -1,0 +1,158 @@
+[gd_scene load_steps=17 format=3 uid="uid://saxmc03rdw7"]
+
+[ext_resource type="Script" uid="uid://b1g3jhykanvau" path="res://ALL_scenes/universal_item_description/universal_item_description.gd" id="1_hvfwe"]
+[ext_resource type="Texture2D" uid="uid://32b8so0vatll" path="res://photo/крест.svg" id="2_7h1qe"]
+[ext_resource type="Texture2D" uid="uid://deymmnyhvi70i" path="res://icon_menu_скорость пули.png" id="3_ffb5l"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n6pvs"]
+bg_color = Color(1, 0.956863, 0.8, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.819608, 0.643137, 0.00784314, 1)
+corner_radius_top_left = 70
+corner_radius_top_right = 70
+corner_radius_bottom_right = 70
+corner_radius_bottom_left = 70
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vfytp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1odna"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jlfqn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qcsj1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4c5a8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oo4dw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tv30s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_17qow"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yrtlf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wsd0i"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_14ks1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vfytp"]
+bg_color = Color(1, 0.945855, 0.750121, 1)
+border_width_left = 7
+border_width_top = 7
+border_width_right = 7
+border_width_bottom = 7
+border_color = Color(0.819608, 0.643137, 0.00784314, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[node name="universal_item_description" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_hvfwe")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 49.0
+offset_right = 1021.0
+offset_bottom = 1254.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_n6pvs")
+
+[node name="Label_ability_type" type="Label" parent="."]
+layout_mode = 0
+offset_left = 172.0
+offset_top = 94.0
+offset_right = 895.0
+offset_bottom = 184.0
+theme_override_colors/font_color = Color(0.819608, 0.643137, 0.00784314, 1)
+theme_override_colors/font_outline_color = Color(0.819608, 0.643137, 0.00784314, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 65
+text = "двойной тест"
+horizontal_alignment = 1
+
+[node name="Button_close" type="Button" parent="."]
+layout_mode = 0
+offset_left = 896.0
+offset_top = 100.0
+offset_right = 976.0
+offset_bottom = 180.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vfytp")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_1odna")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jlfqn")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_qcsj1")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_4c5a8")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_oo4dw")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_tv30s")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_17qow")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_yrtlf")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_wsd0i")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_14ks1")
+icon = ExtResource("2_7h1qe")
+expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 234.0
+offset_right = 546.0
+offset_bottom = 672.0
+texture = ExtResource("3_ffb5l")
+
+[node name="RichTextLabel_level_progress_list" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 643.0
+offset_top = 207.0
+offset_right = 910.0
+offset_bottom = 697.0
+theme_override_font_sizes/normal_font_size = 35
+bbcode_enabled = true
+text = "[color=#DACA8B]● level 1 - 0.5%[/color]
+[color=#DACA8B]● level 2 - 2%[/color]
+[color=#804922]● level 3 - 4%[/color]
+[color=#E56205]● level 4 - 6%[/color]
+[color=#E56205]● level 5 - 8%[/color]
+[color=#E56205]● level 6 - 10%[/color]
+[color=#E56205]● level 7 - 12.5%[/color]
+[color=#E56205]● level 8 - 15%[/color]
+[color=#E56205]● level 9 - 17.5%[/color]
+[color=#E56205]● level 10 - 20%[/color]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="RichTextLabel_ability_description" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 141.0
+offset_top = 737.0
+offset_right = 940.0
+offset_bottom = 899.0
+theme_override_font_sizes/normal_font_size = 39
+bbcode_enabled = true
+text = "[color=#997800]выпускается 2 пули парой, урон каждой пули уменьшается на 35%, шанс сробатывания[/color] [color=#804922]4%[/color]
+"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+text_direction = 3
+
+[node name="Button_buy" type="Button" parent="."]
+layout_mode = 0
+offset_left = 350.0
+offset_top = 1117.0
+offset_right = 698.0
+offset_bottom = 1208.0
+theme_override_colors/font_outline_color = Color(0.6, 0.470588, 0, 1)
+theme_override_colors/font_color = Color(0.6, 0.470588, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 46
+theme_override_styles/normal = SubResource("StyleBoxFlat_vfytp")
+text = "30 coin"
+
+[connection signal="pressed" from="Button_close" to="." method="_on_button_close_pressed"]
+[connection signal="pressed" from="Button_buy" to="." method="_on_button_buy_pressed"]

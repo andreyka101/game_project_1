@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bdw3xl8387e4f"]
+[gd_scene load_steps=52 format=3 uid="uid://bdw3xl8387e4f"]
 
 [ext_resource type="Script" uid="uid://dod02wyv88h72" path="res://ALL_scenes/level/level.gd" id="1_r62w2"]
 [ext_resource type="PackedScene" uid="uid://cwalhxdtsnydh" path="res://ALL_scenes/parallaxBackground_var_1/parallax_background_var_1.tscn" id="2_33107"]
@@ -30,7 +30,16 @@
 [ext_resource type="Texture2D" uid="uid://crnvnvciv5bf1" path="res://photo/HP_ship_battery/HP_ship_battery6.png" id="27_i75sn"]
 [ext_resource type="Texture2D" uid="uid://defj4cmxlypi4" path="res://photo/HP_ship_battery/HP_ship_battery5.png" id="28_2ygkb"]
 [ext_resource type="Texture2D" uid="uid://ghwomm2nl08k" path="res://photo/HP_ship_battery/HP_ship_battery4.png" id="29_4c4ly"]
+[ext_resource type="Texture2D" uid="uid://bl5jaqd6krckd" path="res://photo/HP_ship_battery/HP_ship_battery_passiveCharging3.png" id="30_i0ip4"]
 [ext_resource type="Texture2D" uid="uid://ds751h74xjpr1" path="res://photo/icon_money.png" id="30_xthww"]
+[ext_resource type="Texture2D" uid="uid://b8k5lv6pitn4o" path="res://photo/HP_ship_battery/HP_ship_battery_passiveCharging11.png" id="31_65whr"]
+[ext_resource type="Texture2D" uid="uid://q2pset7rmncl" path="res://photo/HP_ship_battery/HP_ship_battery_passiveCharging10.png" id="32_wqlra"]
+[ext_resource type="Texture2D" uid="uid://cojatdtikqvx7" path="res://photo/HP_ship_battery/HP_ship_battery_passiveCharging9.png" id="33_yo3g6"]
+[ext_resource type="Texture2D" uid="uid://cpww54lqterqd" path="res://photo/HP_ship_battery/HP_ship_battery_passiveCharging8.png" id="34_425x0"]
+[ext_resource type="Texture2D" uid="uid://tttsqptd2hrb" path="res://photo/HP_ship_battery/HP_ship_battery_passiveCharging7.png" id="35_701fe"]
+[ext_resource type="Texture2D" uid="uid://bdvp3xbgjmqeo" path="res://photo/HP_ship_battery/HP_ship_battery_passiveCharging6.png" id="36_md6yh"]
+[ext_resource type="Texture2D" uid="uid://ckm2kvo28sfvm" path="res://photo/HP_ship_battery/HP_ship_battery_passiveCharging5.png" id="37_jv74p"]
+[ext_resource type="Texture2D" uid="uid://damu6rrmqjudh" path="res://photo/HP_ship_battery/HP_ship_battery_passiveCharging4.png" id="38_00dbo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k7y63"]
 bg_color = Color(0.087, 0, 0.188, 0.707)
@@ -60,6 +69,14 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_u50mi"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_xthww")
+}],
+"loop": true,
+"name": &"hp_0%",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("19_ht6gd")
@@ -148,6 +165,14 @@ animations = [{
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("20_xthww")
+}],
+"loop": true,
+"name": &"hp_0%",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("19_ht6gd")
 }, {
 "duration": 1.0,
@@ -155,6 +180,113 @@ animations = [{
 }],
 "loop": true,
 "name": &"hp_10%",
+"speed": 1.1
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("30_i0ip4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_ldmet")
+}],
+"loop": true,
+"name": &"hp_100%",
+"speed": 1.1
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_ldmet")
+}],
+"loop": true,
+"name": &"hp_100%_full",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("31_65whr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_tbm0f")
+}],
+"loop": true,
+"name": &"hp_20%",
+"speed": 1.1
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_alisq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_wqlra")
+}],
+"loop": true,
+"name": &"hp_30%",
+"speed": 1.1
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("33_yo3g6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_ox0ky")
+}],
+"loop": true,
+"name": &"hp_40%",
+"speed": 1.1
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("25_pttu0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_425x0")
+}],
+"loop": true,
+"name": &"hp_50%",
+"speed": 1.1
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("35_701fe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_2ujep")
+}],
+"loop": true,
+"name": &"hp_60%",
+"speed": 1.1
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("27_i75sn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_md6yh")
+}],
+"loop": true,
+"name": &"hp_70%",
+"speed": 1.1
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("37_jv74p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_2ygkb")
+}],
+"loop": true,
+"name": &"hp_80%",
+"speed": 1.1
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("29_4c4ly")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_00dbo")
+}],
+"loop": true,
+"name": &"hp_90%",
 "speed": 1.1
 }]
 
@@ -508,19 +640,19 @@ volume_db = 10.048
 [node name="AudioHit_1" type="AudioStreamPlayer2D" parent="All_audio/Enemy_hitting_sound"]
 
 [node name="HP_ship_battery" type="AnimatedSprite2D" parent="."]
-visible = false
 position = Vector2(147, 74)
 scale = Vector2(2.86071, 2.86071)
 sprite_frames = SubResource("SpriteFrames_u50mi")
-animation = &"hp_10%"
+animation = &"hp_0%"
 autoplay = "hp_100%"
-frame_progress = 0.186206
 
 [node name="HP_ship_battery_passiveСharging" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(147, 74)
 scale = Vector2(2.861, 2.861)
 sprite_frames = SubResource("SpriteFrames_tbm0f")
-animation = &"hp_10%"
+animation = &"hp_100%_full"
+autoplay = "hp_100%_full"
 
 [node name="Coin_HBoxContainer" type="HBoxContainer" parent="."]
 offset_left = 423.0

@@ -39,10 +39,12 @@ script = ExtResource("1_mg27r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
+scale = Vector2(1.5, 1.5)
 shape = SubResource("RectangleShape2D_mg27r")
 debug_color = Color(0.788384, 0.379197, 0.540462, 0.42)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["group_bullet"]]
+scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_di48f")
 autoplay = "default"
 frame_progress = 0.34819
