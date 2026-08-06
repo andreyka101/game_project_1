@@ -148,23 +148,26 @@ func _process(delta: float) -> void:
 	# print(price_level)
 	label_text_level.text = "level " + str(num_level_text)
 	if (galaxy_ship):
-		if((galaxy_ship.hp_start_player/100) * 90 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 80 < galaxy_ship.hp_player):
+		# HP_ship_battery_passiveСharging
+		if((galaxy_ship.hp_start_player/100) * 100 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 90 < galaxy_ship.hp_player):
+			HP_ship_battery.play("hp_100%")
+		elif((galaxy_ship.hp_start_player/100) * 90 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 80 < galaxy_ship.hp_player):
 			HP_ship_battery.play("hp_90%")
-		if((galaxy_ship.hp_start_player/100) * 80 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 70 < galaxy_ship.hp_player):
+		elif((galaxy_ship.hp_start_player/100) * 80 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 70 < galaxy_ship.hp_player):
 			HP_ship_battery.play("hp_80%")
-		if((galaxy_ship.hp_start_player/100) * 70 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 60 < galaxy_ship.hp_player):
+		elif((galaxy_ship.hp_start_player/100) * 70 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 60 < galaxy_ship.hp_player):
 			HP_ship_battery.play("hp_70%")
-		if((galaxy_ship.hp_start_player/100) * 60 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 50 < galaxy_ship.hp_player):
+		elif((galaxy_ship.hp_start_player/100) * 60 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 50 < galaxy_ship.hp_player):
 			HP_ship_battery.play("hp_60%")
-		if((galaxy_ship.hp_start_player/100) * 50 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 40 < galaxy_ship.hp_player):
+		elif((galaxy_ship.hp_start_player/100) * 50 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 40 < galaxy_ship.hp_player):
 			HP_ship_battery.play("hp_50%")
-		if((galaxy_ship.hp_start_player/100) * 40 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 30 < galaxy_ship.hp_player):
+		elif((galaxy_ship.hp_start_player/100) * 40 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 30 < galaxy_ship.hp_player):
 			HP_ship_battery.play("hp_40%")
-		if((galaxy_ship.hp_start_player/100) * 30 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 20 < galaxy_ship.hp_player):
+		elif((galaxy_ship.hp_start_player/100) * 30 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 20 < galaxy_ship.hp_player):
 			HP_ship_battery.play("hp_30%")
-		if((galaxy_ship.hp_start_player/100) * 20 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 10 < galaxy_ship.hp_player):
+		elif((galaxy_ship.hp_start_player/100) * 20 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 10 < galaxy_ship.hp_player):
 			HP_ship_battery.play("hp_20%")
-		if((galaxy_ship.hp_start_player/100) * 10 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 0 < galaxy_ship.hp_player):
+		elif((galaxy_ship.hp_start_player/100) * 10 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 0 < galaxy_ship.hp_player):
 			HP_ship_battery.play("hp_10%")
 	else:
 		get_tree().change_scene_to_file("res://ALL_scenes/main_menu/main_menu.tscn")
@@ -196,7 +199,8 @@ func _process(delta: float) -> void:
 			child.queue_free()
 		galaxy_ship.position = Vector2(360, 1050)
 		galaxy_ship.stop = true
-		galaxy_ship.hp_player = galaxy_ship.hp_start_player
+		galaxy_ship.fun_end_current_level()
+		# galaxy_ship.hp_player = galaxy_ship.hp_start_player
 		$ParallaxBackground_var_1.speed = 3
 		audio_stream_player_2d.playing = true
 
@@ -261,6 +265,7 @@ func click_end_menu():
 	num_level_text += 1
 	num_level_hard += 1
 	galaxy_ship.stop = false
+	galaxy_ship.fun_start_next_level()
 	$InventoryMenu.visible = false
 	$ParallaxBackground_var_1.speed = 15
 	if ((num_level_hard % 100) >= 1 and (num_level_hard % 100) < 4):

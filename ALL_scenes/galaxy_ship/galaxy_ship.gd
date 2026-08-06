@@ -2,9 +2,9 @@ extends CharacterBody2D
 
 
 @onready var level = $".."
-@onready var marker:Marker2D = $"./Marker2D"
-var attack_bool:bool = false
-@onready var sprite:AnimatedSprite2D = $AnimatedSprite2D
+@onready var marker: Marker2D = $"./Marker2D"
+var attack_bool: bool = false
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 var not_death = true
 @onready var timer: Timer = $Timer
 @onready var player_bullets: Node2D = $"../Player_bullets"
@@ -27,29 +27,38 @@ var current_speed = 0.0
 var target_speed = 0.0
 
 
+var ability_k1_livingArmor = {"run": false, "num": 0}
+@onready var timer_ability_k_1_living_armor: Timer = $Timer_ability_k1_livingArmor
+
+func fun_start_next_level() -> void:
+	if(ability_k1_livingArmor.run):
+		print("ability_k1_livingArmor.run")
+		timer_ability_k_1_living_armor.start(ability_k1_livingArmor.num)
+
+func fun_end_current_level() -> void:
+	if(ability_k1_livingArmor.run):
+		print("ability_k1_livingArmor.run.stop() ")
+		timer_ability_k_1_living_armor.stop() 
+
 
 func _ready() -> void:
 	timer.wait_time = time_timer
 
 
-
-
-func  _physics_process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	#print(hp_player)
-	
-	
 	# меняем анимацию исходя от процента hp
 	if (!Global.stop_game):
-		if((hp_start_player/100) * 100 >= hp_player and (hp_start_player/100) * 75 < hp_player and not_death):
+		if ((hp_start_player / 100) * 100 >= hp_player and (hp_start_player / 100) * 75 < hp_player and not_death):
 			#print(hp_player)
 			sprite.play("100-75%")
-		elif((hp_start_player/100) * 75 >= hp_player and (hp_start_player/100) * 50 < hp_player and not_death):
+		elif ((hp_start_player / 100) * 75 >= hp_player and (hp_start_player / 100) * 50 < hp_player and not_death):
 			#print(hp_player)
 			sprite.play("75-50%")
-		elif((hp_start_player/100) * 50 >= hp_player and (hp_start_player/100) * 25 < hp_player and not_death):
+		elif ((hp_start_player / 100) * 50 >= hp_player and (hp_start_player / 100) * 25 < hp_player and not_death):
 			#print(hp_player)
 			sprite.play("50-25%")
-		elif((hp_start_player/100) * 25 >= hp_player and (hp_start_player/100) * 0 < hp_player and not_death):
+		elif ((hp_start_player / 100) * 25 >= hp_player and (hp_start_player / 100) * 0 < hp_player and not_death):
 			#print(hp_player)
 			sprite.play("25-0%")
 	else:
@@ -57,7 +66,7 @@ func  _physics_process(delta: float) -> void:
 	
 
 	# если hp у корабля меньше или равен нулю то
-	if(hp_player <= 0 and not_death):
+	if (hp_player <= 0 and not_death):
 		hp_player = 0
 		not_death = false
 		# корабль взрывается 
@@ -68,7 +77,6 @@ func  _physics_process(delta: float) -> void:
 		#get_tree().change_scene_to_file("res://ALL_scenes/menu/menu.tscn")
 		
 		
-
 	# get_global_mouse_position() - получаем координаты мыши относительно глобальной сцены (level.gd)
 
 	# корабль движется за мышкой
@@ -84,17 +92,14 @@ func  _physics_process(delta: float) -> void:
 	# position.direction_to(x) - вычисляет плавное движение к точке x
 
 
-
-
-
 	# движение корабля 
-	if((position.x <= get_global_mouse_position().x - 15 or position.x >= get_global_mouse_position().x + 15) or (position.y <= get_global_mouse_position().y - 15 or position.y >= get_global_mouse_position().y + 15)) and not_death and !stop and !Global.stop_game:
-
+	if ((position.x <= get_global_mouse_position().x - 15 or position.x >= get_global_mouse_position().x + 15) or (position.y <= get_global_mouse_position().y - 15 or position.y >= get_global_mouse_position().y + 15)) and not_death and !stop and !Global.stop_game:
 		# self.global_position +=  self.position.direction_to(get_global_mouse_position())  * 300 * 5 * delta
-		self.velocity =  self.position.direction_to(get_global_mouse_position())  * speed_ship
+		self.velocity = self.position.direction_to(get_global_mouse_position()) * speed_ship
 		
 	else:
-		velocity = Vector2(0,0)
+		velocity = Vector2(0, 0)
+
 
 
 	# target_speed =  self.position.direction_to(get_global_mouse_position()) * speed_ship
@@ -103,7 +108,6 @@ func  _physics_process(delta: float) -> void:
 	# print(position.lerp(get_global_mouse_position(), speed_ship))
 
 	move_and_slide()
-
 
 
 	# if((position.x <= get_global_mouse_position().x - 15 or position.x >= get_global_mouse_position().x + 15) and not_death and !stop):
@@ -135,29 +139,27 @@ func _process(delta: float):
 		#attack_bool = true
 	#if(Input.is_action_just_released("attack")):
 		#attack_bool = false
-	if(stop):
+	if (stop):
 		self.visible = false
 	else:
 		self.visible = true
 	attack_bool = true
 
-	if(hp_player < 0):
+	if (hp_player < 0):
 		hp_player = 0
 	
-	if(Global.stop_game):
+	if (Global.stop_game):
 		timer.paused = true
 	else:
 		timer.paused = false
 
 
-
 # сигнал узла timer срабатывает раз в какое-то время
 func _on_timer_timeout() -> void:
-
-	if(attack_bool and not_death and !stop):
+	if (attack_bool and not_death and !stop):
 		var bullet_scene = load("res://ALL_scenes/bullet/bullet.tscn")
-		var bullet:CharacterBody2D = bullet_scene.instantiate()
-		bullet.global_position  = marker.global_position 
+		var bullet: CharacterBody2D = bullet_scene.instantiate()
+		bullet.global_position = marker.global_position
 		bullet.speed = speed_bullet
 		bullet.damage_bullet = damage
 
@@ -170,7 +172,14 @@ func _on_timer_timeout() -> void:
 		player_bullets.add_child(bullet)
 
 
-
-
-
-		
+func _on_timer_ability_k_1_living_armor_timeout() -> void:
+	if(hp_start_player > hp_player):
+		print("timer run")
+		print(hp_player)
+		hp_player += 5
+		if(hp_start_player <= hp_player):
+			hp_player = hp_start_player
+		var tween = create_tween()
+		tween.tween_property(sprite, "modulate", Color("#74FF78"), 0.7)
+		# await get_tree().create_timer(0.1).timeout
+		tween.tween_property(sprite, "modulate", Color("#FFFFFF"), 0.2)

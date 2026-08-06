@@ -31,7 +31,7 @@ var list_items_merge = ["сила", "скорость"]
 
 func _ready() -> void:
 	add_merge_rule("скорость", "сила", "скорость пули")
-	add_merge_rule("огонь", "вода", "пар")
+	add_merge_rule("защита", "скорость", "живая броня")
 
 	fun_transformation_item()
 	label_level.text = "level " + str(num_level)
@@ -86,22 +86,28 @@ func fun_transformation_item():
 			num_multiplier_price = 1
 			ability_description = "[color=#997800]увеличивает hp на[/color] [color=#804922]{info}[/color]"
 			list_abilities_relative_level_str = ["5%", "10%", "17%", "35%", "50%", "75%", "110%", "150%", "200%", "350%", ]
-			list_abilities_relative_level_int = [5, 10, 17, 35, 50, 75, 110, 150, 200, 350, ]
+			list_abilities_relative_level_int = [5, 10, 17, 35, 50, 75, 110, 150, 200, 350]
 		"сила":
 			num_multiplier_price = 1
 			ability_description = "[color=#997800]увеличивает урон пули на[/color] [color=#804922]{info}[/color]"
 			list_abilities_relative_level_str = ["5%", "10%", "17%", "35%", "50%", "75%", "110%", "150%", "200%", "350%", ]
-			list_abilities_relative_level_int = [5, 10, 17, 35, 50, 75, 110, 150, 200, 350, ]
+			list_abilities_relative_level_int = [5, 10, 17, 35, 50, 75, 110, 150, 200, 350]
 		"скорость":
 			num_multiplier_price = 1
 			ability_description = "[color=#997800]увеличивает скорость коробля на[/color] [color=#804922]{info}[/color]"
 			list_abilities_relative_level_str = ["5%", "10%", "17%", "35%", "50%", "75%", "110%", "150%", "200%", "350%", ]
-			list_abilities_relative_level_int = [5, 10, 17, 35, 50, 75, 110, 150, 200, 350, ]
+			list_abilities_relative_level_int = [5, 10, 17, 35, 50, 75, 110, 150, 200, 350]
 		"скорость пули":
 			num_multiplier_price = 2
 			ability_description = "[color=#997800]увеличивает скорость пули на[/color] [color=#804922]{info}[/color]"
 			list_abilities_relative_level_str = ["5%", "10%", "17%", "35%", "50%", "75%", "110%", "150%", "200%", "350%", ]
-			list_abilities_relative_level_int = [5, 10, 17, 35, 50, 75, 110, 150, 200, 350, ]
+			list_abilities_relative_level_int = [5, 10, 17, 35, 50, 75, 110, 150, 200, 350]
+		"живая броня":
+			num_multiplier_price = 2
+			ability_description = "[color=#997800]востановление брони раз в[/color] [color=#804922]{info}[/color] [color=#997800]сек на 5 едениц[/color]"
+			list_abilities_relative_level_str = ["180 сек", "170 сек", "160 сек", "150 сек", "140 сек", "130 сек", "120 сек", "110 сек", "100 сек", "90 сек", ]
+			# list_abilities_relative_level_int = [180, 170, 160, 150, 140, 130, 120, 110, 100, 90]
+			list_abilities_relative_level_int = [2, 170, 160, 150, 140, 130, 120, 110, 100, 90]
 	texture_rect.texture = load("res://photo/item_ability/icon_menu_" + ability_type + ".png")
 	# print("res://photo/item_ability/icon_menu_" + ability_type + ".png")
 # photo/item_ability/icon_menu_защита.png
@@ -323,6 +329,8 @@ func fun_force_increase_decrease(minus = 1) -> void:
 			galaxy_ship.speed_ship += (round((galaxy_ship.speed_ship_Start / 100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0) * minus
 		"скорость пули":
 			galaxy_ship.speed_bullet += (round((galaxy_ship.speed_bullet_Start / 100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0) * minus
+		"живая броня":
+			galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[num_level - 1]}
 	if (num_level < 10):
 		if (num_price[num_level - 1] * num_multiplier_price > Global.coin_player):
 			label_price.add_theme_color_override("font_color", Color("#FF2B2B"))

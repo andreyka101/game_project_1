@@ -85,6 +85,8 @@ func _on_button_buy_pressed() -> void:
 			"скорость пули":
 				galaxy_ship.speed_bullet -= (round((galaxy_ship.speed_bullet_Start/100.0) * list_abilities_relative_level_int[num_level - 2] * 100) / 100.0)
 				galaxy_ship.speed_bullet += (round((galaxy_ship.speed_bullet_Start/100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0)
+			"живая броня":
+				galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[num_level - 1]}
 		
 		if(num_level < 10):
 			button_buy.text = str(num_price[num_level - 1] * num_multiplier_price) + " coin"
