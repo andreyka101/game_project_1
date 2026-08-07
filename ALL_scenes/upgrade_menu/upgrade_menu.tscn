@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b4h0a0g5kow1o"]
 
-[ext_resource type="PackedScene" uid="uid://saxmc03rdw7" path="res://photo/universal_item_description.tscn" id="1_kn05k"]
+[ext_resource type="PackedScene" uid="uid://dff0bocwvqn80" path="res://ALL_scenes/universal_item_description/universal_item_description.tscn" id="1_kn05k"]
 
 [node name="Upgrade menu" type="Control"]
 z_index = 200
