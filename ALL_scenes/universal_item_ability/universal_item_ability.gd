@@ -156,11 +156,8 @@ func snap_to_nearest_slot() -> void:
 			closest_slot = slot
 
 	if closest_slot and min_distance < snap_threshold and inventory_menu.cells_included_forces[closest_slot].free_space:
-		# РАСЧЕТ ЦЕНТРИРОВАНИЯ:
-		# Берем левый верхний угол слота и добавляем половину разницы размеров слота и предмета.
-		# Формула: ПозицияСлота + (РазмерСлота / 2) - (РазмерПредмета / 2)
-		var target_position = closest_slot.global_position + (closest_slot.size / 2) - (size / 2)
 
+		var target_position = closest_slot.global_position + (closest_slot.size / 2) - (size / 2)
 		if (not_purchased):
 			fun_force_increase_decrease()
 			if (name_slot_ShopItem == "slot1"):
@@ -175,71 +172,36 @@ func snap_to_nearest_slot() -> void:
 				inventory_menu.free_ShopItem_Dictionary.slot3 = true
 				inventory_menu.funShopItem()
 				not_purchased = false
-
-		# print("ok-",closest_slot)
-		
 		global_position = target_position
 		last_safe_position = global_position
-
 		inventory_menu.cells_included_forces[closest_slot].free_space = false
 		inventory_menu.cells_included_forces[closest_slot].id_ability = str(self )
 		inventory_menu.cells_included_forces[closest_slot].name_ability = ability_type
-
-		# match ability_type:
-		# 	"двойной выстрел":
-		# 		galaxy_ship.hp_player += (galaxy_ship.hp_player/100) * 5
 		for cell in inventory_menu.cells_included_forces:
-			# print(cell)
 			if (cell != closest_slot and inventory_menu.cells_included_forces[cell].id_ability == str(self )):
 				inventory_menu.cells_included_forces[cell].id_ability = null
 				inventory_menu.cells_included_forces[cell].name_ability = null
 				inventory_menu.cells_included_forces[cell].free_space = true
-				# match ability_type:
-				# 	"двойной выстрел":
-				# 		galaxy_ship.hp_player -= (galaxy_ship.hp_player/100) * 5
 	elif closest_slot and min_distance < snap_threshold and !inventory_menu.cells_included_forces[closest_slot].free_space:
-		# print("not not ok-",closest_slot)
-		var beginning_merging_item = false
 
-		if (inventory_menu.cells_included_forces[closest_slot].id_ability != str(self )):
-			# var first_pass = true
-			# match ability_type:
-			# 	"скорость":
-			# 		match inventory_menu.cells_included_forces[closest_slot].name_ability:
-			# 			"сила":
-			# 				ability_type = "скорость пули"
-			# 				beginning_merging_item = true
-			# 				first_pass = false
-			# if(first_pass):
-			# 	match ability_type:
-			# 		"сила":
-			# 			match inventory_menu.cells_included_forces[closest_slot].name_ability:
-			# 				"скорость":
-			# 					ability_type = "скорость пули"
-			# 					beginning_merging_item = true
+		print("start a-a test_1")
+
+		var beginning_merging_item = false
+		if (inventory_menu.cells_included_forces[closest_slot].id_ability != str(self)):
 			var result = find_merge_result(ability_type, inventory_menu.cells_included_forces[closest_slot].name_ability)
-			print("if(!not_purchased):")
 			if (!not_purchased):
-				print("if(!not_purchased): yes")
-				print(ability_type)
-				print(galaxy_ship.speed_ship)
 				fun_force_increase_decrease(-1)
-				print(galaxy_ship.speed_ship)
 			if not result.is_empty():
 				ability_type = result
 				beginning_merging_item = true
-
-			
-		for cell in inventory_menu.cells_included_forces:
-			# print(cell)
-			if (cell != closest_slot and inventory_menu.cells_included_forces[cell].id_ability == str(self )):
-				inventory_menu.cells_included_forces[cell].id_ability = null
-				inventory_menu.cells_included_forces[cell].name_ability = null
-				inventory_menu.cells_included_forces[cell].free_space = true
 		if (beginning_merging_item):
+			print("start a-a test_2")
+			for cell in inventory_menu.cells_included_forces:
+				if (cell != closest_slot and inventory_menu.cells_included_forces[cell].id_ability == str(self )):
+					inventory_menu.cells_included_forces[cell].id_ability = null
+					inventory_menu.cells_included_forces[cell].name_ability = null
+					inventory_menu.cells_included_forces[cell].free_space = true
 			if (name_slot_ShopItem == "slot1"):
-				# inventory_menu.free_ShopItem_Dictionary.slot1 = true
-				# inventory_menu.funShopItem()
 				if (not_purchased):
 					if (name_slot_ShopItem == "slot1"):
 						inventory_menu.free_ShopItem_Dictionary.slot1 = true
@@ -266,7 +228,6 @@ func snap_to_nearest_slot() -> void:
 				fun_transformation_item()
 				fun_changing_text()
 				fun_force_increase_decrease()
-				# print("del_item.num_level  " , del_item.num_level)
 				del_item.fun_force_increase_decrease(-1)
 				del_item.queue_free()
 			inventory_menu.cells_included_forces[closest_slot].id_ability = null
@@ -325,7 +286,7 @@ func fun_force_increase_decrease(minus = 1) -> void:
 		"сила":
 			galaxy_ship.damage += (round((galaxy_ship.damage_Start / 100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0) * minus
 		"скорость":
-			print((round((galaxy_ship.speed_ship_Start / 100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0) * minus)
+			# print((round((galaxy_ship.speed_ship_Start / 100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0) * minus)
 			galaxy_ship.speed_ship += (round((galaxy_ship.speed_ship_Start / 100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0) * minus
 		"скорость пули":
 			galaxy_ship.speed_bullet += (round((galaxy_ship.speed_bullet_Start / 100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0) * minus

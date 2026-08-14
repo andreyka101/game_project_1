@@ -9,18 +9,32 @@ var not_death = true
 @onready var timer: Timer = $Timer
 @onready var player_bullets: Node2D = $"../Player_bullets"
 # @onready var audio:AudioStreamPlayer2D = $AudioStreamPlayer2D
-var hp_player = 300
-var hp_start_player = 300
-var hp_startStart_player = 300
+
+# var hp_player = 300
+# var hp_start_player = 300
+# var hp_startStart_player = 300
+# # 250
+# var stop = false
+# var speed_ship_Start = 200
+# var speed_ship = 200
+# var speed_bullet_Start = 400
+# var speed_bullet = 400
+# var damage_Start = 50
+# var damage = 50
+# var time_timer = 1.2
+
+var hp_player = 3000
+var hp_start_player = 3000
+var hp_startStart_player = 3000
 # 250
 var stop = false
-var speed_ship_Start = 200
-var speed_ship = 200
-var speed_bullet_Start = 400
-var speed_bullet = 400
-var damage_Start = 50
-var damage = 50
-var time_timer = 1.2
+var speed_ship_Start = 2000
+var speed_ship = 2000
+var speed_bullet_Start = 2400
+var speed_bullet = 2400
+var damage_Start = 500
+var damage = 500
+var time_timer = 0.2
 
 var acceleration = 500.0
 var current_speed = 0.0
