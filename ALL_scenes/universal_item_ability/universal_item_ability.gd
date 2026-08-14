@@ -66,7 +66,7 @@ func _execute_action() -> void:
 	for slot in InventoryСells_Grid.get_children():
 		var slot_center = slot.global_position + (slot.size / 2)
 		var item_center = global_position + (size / 2)
-		if (item_center.distance_to(slot_center) < 10):
+		if (item_center.distance_to(slot_center) < 30):
 			print("Действие выполнено после короткого зажатия!")
 			universal_item_description.num_level = num_level
 			universal_item_description.num_multiplier_price = num_multiplier_price
@@ -106,8 +106,10 @@ func fun_transformation_item():
 		"живая броня":
 			num_multiplier_price = 2
 			ability_description = "[color=#997800]востановление брони раз в[/color] [color=#804922]{info}[/color] [color=#997800]сек на 5 едениц[/color]"
-			list_abilities_relative_level_str = ["180 сек", "170 сек", "160 сек", "150 сек", "140 сек", "130 сек", "120 сек", "110 сек", "100 сек", "90 сек", ]
-			list_abilities_relative_level_int = [180, 170, 160, 150, 140, 130, 120, 110, 100, 90]
+			# list_abilities_relative_level_str = ["180 сек", "170 сек", "160 сек", "150 сек", "140 сек", "130 сек", "120 сек", "110 сек", "100 сек", "90 сек", ]
+			list_abilities_relative_level_str = ["100 сек", "90 сек", "80 сек", "70 сек", "60 сек", "50 сек", "40 сек", "30 сек", "20 сек", "10 сек", ]
+			# list_abilities_relative_level_int = [180, 170, 160, 150, 140, 130, 120, 110, 100, 90]
+			list_abilities_relative_level_int = [100, 90, 80, 70, 60, 50, 40, 30, 20, 10]
 	texture_rect.texture = load("res://photo/item_ability/icon_menu_" + ability_type + ".png")
 	# print("res://photo/item_ability/icon_menu_" + ability_type + ".png")
 # photo/item_ability/icon_menu_защита.png
@@ -156,8 +158,11 @@ func snap_to_nearest_slot() -> void:
 			closest_slot = slot
 
 	if closest_slot and min_distance < snap_threshold and inventory_menu.cells_included_forces[closest_slot].free_space:
-
 		var target_position = closest_slot.global_position + (closest_slot.size / 2) - (size / 2)
+		print("start a-n test_1")
+		print(inventory_menu.cells_included_forces)
+		print(str(self))
+		print(ability_type)
 		if (not_purchased):
 			fun_force_increase_decrease()
 			if (name_slot_ShopItem == "slot1"):
@@ -182,12 +187,14 @@ func snap_to_nearest_slot() -> void:
 				inventory_menu.cells_included_forces[cell].id_ability = null
 				inventory_menu.cells_included_forces[cell].name_ability = null
 				inventory_menu.cells_included_forces[cell].free_space = true
+		print("start a-n test_2")
+		print(inventory_menu.cells_included_forces)
 	elif closest_slot and min_distance < snap_threshold and !inventory_menu.cells_included_forces[closest_slot].free_space:
-
 		print("start a-a test_1")
+		print(inventory_menu.cells_included_forces)
 
 		var beginning_merging_item = false
-		if (inventory_menu.cells_included_forces[closest_slot].id_ability != str(self)):
+		if (inventory_menu.cells_included_forces[closest_slot].id_ability != str(self )):
 			var result = find_merge_result(ability_type, inventory_menu.cells_included_forces[closest_slot].name_ability)
 			if (!not_purchased):
 				fun_force_increase_decrease(-1)
@@ -230,11 +237,11 @@ func snap_to_nearest_slot() -> void:
 				fun_force_increase_decrease()
 				del_item.fun_force_increase_decrease(-1)
 				del_item.queue_free()
-			inventory_menu.cells_included_forces[closest_slot].id_ability = null
-			inventory_menu.cells_included_forces[closest_slot].name_ability = null
-			inventory_menu.cells_included_forces[closest_slot].free_space = true
+			inventory_menu.cells_included_forces[closest_slot].name_ability = ability_type
+			inventory_menu.cells_included_forces[closest_slot].id_ability = str(self )
 			global_position = target_position
 			last_safe_position = global_position
+			print(inventory_menu.cells_included_forces)
 		else:
 			global_position = last_safe_position
 
