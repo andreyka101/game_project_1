@@ -8,7 +8,7 @@ var cost_items_in_store = {
 	"coin_slot2": 6,
 	"coin_slot3": 6,
 }
-
+# gbb
 
 
 # Глобальный словарь для хранения состояния всех ячеек
