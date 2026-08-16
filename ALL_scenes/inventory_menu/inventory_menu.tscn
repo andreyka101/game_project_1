@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://dd7kmsstd0am1"]
+[gd_scene load_steps=46 format=3 uid="uid://dd7kmsstd0am1"]
 
 [ext_resource type="Script" uid="uid://t7cdjolf4ssx" path="res://ALL_scenes/inventory_menu/inventory_menu.gd" id="1_doitq"]
 [ext_resource type="Texture2D" uid="uid://d4b67mcqip268" path="res://photo/spacecraft/spacecraft1.png" id="6_d858p"]
@@ -33,6 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://ds751h74xjpr1" path="res://photo/icon_money.png" id="34_mnfl7"]
 [ext_resource type="PackedScene" uid="uid://b4h0a0g5kow1o" path="res://ALL_scenes/upgrade_menu/upgrade_menu.tscn" id="35_hmh7r"]
 [ext_resource type="Texture2D" uid="uid://cl546psffk6m8" path="res://photo/spacecraft/spacecraft30.png" id="35_kpjwb"]
+[ext_resource type="Texture2D" uid="uid://bsrj0v56jye3e" path="res://photo/t6wq57lpwz78_64.png" id="36_8u2xf"]
 [ext_resource type="Texture2D" uid="uid://b1fd4s5ljpnxu" path="res://photo/spacecraft/spacecraft31.png" id="36_xjujy"]
 [ext_resource type="Texture2D" uid="uid://dfbrn07uf3k8o" path="res://photo/spacecraft/spacecraft32.png" id="37_wde5g"]
 
@@ -344,9 +345,9 @@ text = "продолжить"
 
 [node name="ShopItem_CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 0
-offset_top = 583.0
+offset_top = 966.0
 offset_right = 1080.0
-offset_bottom = 924.0
+offset_bottom = 1307.0
 
 [node name="ShopItem_PanelContainer" type="PanelContainer" parent="ShopItem_CenterContainer"]
 layout_mode = 2
@@ -457,9 +458,9 @@ horizontal_alignment = 1
 
 [node name="InventoryСells_CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 0
-offset_top = 1221.0
+offset_top = 1396.0
 offset_right = 1080.0
-offset_bottom = 2038.0
+offset_bottom = 2213.0
 
 [node name="InventoryСells_PanelContainer" type="PanelContainer" parent="InventoryСells_CenterContainer"]
 layout_mode = 2
@@ -534,4 +535,18 @@ anchors_preset = 0
 visible = false
 layout_mode = 1
 
+[node name="HealingButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 87.0
+offset_top = 520.0
+offset_right = 815.0
+offset_bottom = 759.0
+theme_override_font_sizes/font_size = 56
+text = "+ 25% HP
+
+10 coin"
+icon = ExtResource("36_8u2xf")
+expand_icon = true
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="HealingButton" to="." method="_on_healing_button_pressed"]

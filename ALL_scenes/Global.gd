@@ -9,8 +9,6 @@ var cost_items_in_store = {
 	"coin_slot3": 6,
 }
 
-# gththt
-
 
 # Глобальный словарь для хранения состояния всех ячеек
 var player_abilities: = []
