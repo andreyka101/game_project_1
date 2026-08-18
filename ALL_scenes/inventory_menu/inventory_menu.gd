@@ -43,6 +43,7 @@ func _ready() -> void:
 			"free_space": true,
 			"id_ability": null,
 			"name_ability": null,
+			"level_ability": null,
 		}
 	print(cells_included_forces)
 	# funStartGame_ShopItem()
@@ -136,8 +137,8 @@ func _process(_delta: float) -> void:
 	reloading_label.text = "перезарядка - " + str(int(galaxy_ship.time_timer * 100))
 	hp_progress_bar.value = int(galaxy_ship.hp_player * 100 / galaxy_ship.hp_start_player)
 	healing_button.text = "+ 25% HP\n\n" + str((level.num_level_hard / 10 + 1) * 5) + " coin"
-	print("ttt")
-	print(1+1/2)
+	# print("ttt")
+	# print(1+1/2)
 	# print("ggg")
 	# print(12/10)
 	# print("=-=")

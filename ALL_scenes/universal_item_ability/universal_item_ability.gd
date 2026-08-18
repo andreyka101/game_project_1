@@ -160,9 +160,9 @@ func snap_to_nearest_slot() -> void:
 	if closest_slot and min_distance < snap_threshold and inventory_menu.cells_included_forces[closest_slot].free_space:
 		var target_position = closest_slot.global_position + (closest_slot.size / 2) - (size / 2)
 		print("start a-n test_1")
-		print(inventory_menu.cells_included_forces)
-		print(str(self))
-		print(ability_type)
+		# print(inventory_menu.cells_included_forces)
+		# print(str(self))
+		# print(ability_type)
 		if (not_purchased):
 			fun_force_increase_decrease()
 			if (name_slot_ShopItem == "slot1"):
@@ -182,10 +182,12 @@ func snap_to_nearest_slot() -> void:
 		inventory_menu.cells_included_forces[closest_slot].free_space = false
 		inventory_menu.cells_included_forces[closest_slot].id_ability = str(self )
 		inventory_menu.cells_included_forces[closest_slot].name_ability = ability_type
+		inventory_menu.cells_included_forces[closest_slot].level_ability = num_level
 		for cell in inventory_menu.cells_included_forces:
 			if (cell != closest_slot and inventory_menu.cells_included_forces[cell].id_ability == str(self )):
 				inventory_menu.cells_included_forces[cell].id_ability = null
 				inventory_menu.cells_included_forces[cell].name_ability = null
+				inventory_menu.cells_included_forces[cell].level_ability = null
 				inventory_menu.cells_included_forces[cell].free_space = true
 		print("start a-n test_2")
 		print(inventory_menu.cells_included_forces)
@@ -207,6 +209,7 @@ func snap_to_nearest_slot() -> void:
 				if (cell != closest_slot and inventory_menu.cells_included_forces[cell].id_ability == str(self )):
 					inventory_menu.cells_included_forces[cell].id_ability = null
 					inventory_menu.cells_included_forces[cell].name_ability = null
+					inventory_menu.cells_included_forces[cell].level_ability = null
 					inventory_menu.cells_included_forces[cell].free_space = true
 			if (name_slot_ShopItem == "slot1"):
 				if (not_purchased):
@@ -234,11 +237,12 @@ func snap_to_nearest_slot() -> void:
 				num_level = int((num_level + del_item.num_level) / 2)
 				fun_transformation_item()
 				fun_changing_text()
-				fun_force_increase_decrease()
 				del_item.fun_force_increase_decrease(-1)
 				del_item.queue_free()
 			inventory_menu.cells_included_forces[closest_slot].name_ability = ability_type
 			inventory_menu.cells_included_forces[closest_slot].id_ability = str(self )
+			inventory_menu.cells_included_forces[closest_slot].level_ability = num_level
+			fun_force_increase_decrease()
 			global_position = target_position
 			last_safe_position = global_position
 			print(inventory_menu.cells_included_forces)
@@ -274,6 +278,10 @@ func find_merge_result(ability_a: String, ability_b: String) -> String:
 	return "" # Нет результата
 
 func update_text() -> void:
+	for cell in inventory_menu.cells_included_forces:
+		if (inventory_menu.cells_included_forces[cell].id_ability == str(self )):
+			inventory_menu.cells_included_forces[cell].level_ability = num_level
+
 	label_level.text = "level " + str(num_level)
 	if (num_level < 10):
 		label_price.text = str(num_price[num_level - 1] * num_multiplier_price) + " coin"
@@ -298,7 +306,26 @@ func fun_force_increase_decrease(minus = 1) -> void:
 		"скорость пули":
 			galaxy_ship.speed_bullet += (round((galaxy_ship.speed_bullet_Start / 100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0) * minus
 		"живая броня":
-			galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[num_level - 1]}
+			var num_this_type = 0
+			var num_average_value = 0
+			print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+			for cell in inventory_menu.cells_included_forces:
+				print("************")
+				print(inventory_menu.cells_included_forces[cell].name_ability)
+				if(inventory_menu.cells_included_forces[cell].name_ability == "живая броня"):
+					num_this_type +=1
+					num_average_value += inventory_menu.cells_included_forces[cell].level_ability
+			if(num_this_type == 1):
+				galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[num_level - 1]}
+			else:
+				print("============")
+				print(num_average_value)
+				print(num_this_type)
+				print("==")
+				print(num_average_value / num_this_type)
+				print(int(num_average_value / num_this_type))
+				galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[num_level - 1]}
+			# galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[num_level - 1]}
 			level.hp_ship_battery_passiveсharging.visible = true
 			level.HP_ship_battery.visible = false
 	if (num_level < 10):
