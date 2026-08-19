@@ -71,7 +71,7 @@ func _execute_action() -> void:
 			universal_item_description.num_level = num_level
 			universal_item_description.num_multiplier_price = num_multiplier_price
 			universal_item_description.ability_type = ability_type
-			universal_item_description.ability_id = str(self )
+			universal_item_description.ability_id = str(self)
 			universal_item_description.ability_description = ability_description
 			universal_item_description.list_abilities_relative_level_str = list_abilities_relative_level_str
 			universal_item_description.list_abilities_relative_level_int = list_abilities_relative_level_int
@@ -316,7 +316,7 @@ func fun_force_increase_decrease(minus = 1) -> void:
 					num_this_type +=1
 					num_average_value += inventory_menu.cells_included_forces[cell].level_ability
 			if(num_this_type == 1):
-				galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[num_level - 1]}
+				galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[num_level - 1], "plus_hp": 5}
 			else:
 				print("============")
 				print(num_average_value)
@@ -324,7 +324,7 @@ func fun_force_increase_decrease(minus = 1) -> void:
 				print("==")
 				print(num_average_value / num_this_type)
 				print(int(num_average_value / num_this_type))
-				galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[num_level - 1]}
+				galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[int(num_average_value / num_this_type) - 1], "plus_hp": num_this_type * 5}
 			# galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[num_level - 1]}
 			level.hp_ship_battery_passiveсharging.visible = true
 			level.HP_ship_battery.visible = false

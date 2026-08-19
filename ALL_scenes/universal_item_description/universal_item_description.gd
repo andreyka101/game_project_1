@@ -1,13 +1,13 @@
 extends Control
 
 var num_level = 0
-var num_price = [2,5,10,15,25,35,50,75,100]
+var num_price = [2, 5, 10, 15, 25, 35, 50, 75, 100]
 var num_multiplier_price = 0
 var ability_type = ""
 var ability_id = ""
 var ability_description = ""
-var list_abilities_relative_level_str =[]
-var list_abilities_relative_level_int =[]
+var list_abilities_relative_level_str = []
+var list_abilities_relative_level_int = []
 
 @onready var galaxy_ship = get_node("../../../Galaxy_ship")
 @onready var itemsContainer = get_node("../../ItemsContainer")
@@ -33,18 +33,18 @@ func start_des() -> void:
 	for ability_num in list_abilities_relative_level_str.size():
 		print(ability_num)
 		var color = ""
-		if(ability_num + 1 == num_level):
+		if (ability_num + 1 == num_level):
 			color = "#804922"
 			pass_level = false
-			rich_text_label_ability_description.text = ability_description.format({"info": list_abilities_relative_level_str[ability_num],})
-		elif(pass_level):
+			rich_text_label_ability_description.text = ability_description.format({"info": list_abilities_relative_level_str[ability_num], })
+		elif (pass_level):
 			color = "#DACA8B"
 		else:
 			color = "#E56205"
-		progress_text += "[color={color}]● level {ability_num} - {list}[/color]\n".format({"color": color,"ability_num": ability_num + 1,"list": list_abilities_relative_level_str[ability_num],})
+		progress_text += "[color={color}]● level {ability_num} - {list}[/color]\n".format({"color": color, "ability_num": ability_num + 1, "list": list_abilities_relative_level_str[ability_num], })
 	print(progress_text)
 	rich_text_label_level_progress_list.text = progress_text
-	if(num_level < 10):
+	if (num_level < 10):
 			button_buy.text = str(num_price[num_level - 1] * num_multiplier_price) + " coin"
 	else:
 		button_buy.text = "full"
@@ -65,30 +65,52 @@ func _on_button_close_pressed() -> void:
 
 
 func _on_button_buy_pressed() -> void:
-	if(num_level < 10 and num_price[num_level - 1] * num_multiplier_price <= Global.coin_player):
+	if (num_level < 10 and num_price[num_level - 1] * num_multiplier_price <= Global.coin_player):
 		Global.coin_player -= num_price[num_level - 1] * num_multiplier_price
 		inventoryMenu.coin_label.text = str(Global.coin_player) + " coin"
 		num_level += 1
 
 		match ability_type:
 			"защита":
-				galaxy_ship.hp_start_player -= round((galaxy_ship.hp_startStart_player/100.0) * list_abilities_relative_level_int[num_level - 2] * 100) / 100.0
-				galaxy_ship.hp_start_player += round((galaxy_ship.hp_startStart_player/100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0
-				galaxy_ship.hp_player -= round((galaxy_ship.hp_startStart_player/100.0) * list_abilities_relative_level_int[num_level - 2] * 100) / 100.0
-				galaxy_ship.hp_player += round((galaxy_ship.hp_startStart_player/100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0
+				galaxy_ship.hp_start_player -= round((galaxy_ship.hp_startStart_player / 100.0) * list_abilities_relative_level_int[num_level - 2] * 100) / 100.0
+				galaxy_ship.hp_start_player += round((galaxy_ship.hp_startStart_player / 100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0
+				galaxy_ship.hp_player -= round((galaxy_ship.hp_startStart_player / 100.0) * list_abilities_relative_level_int[num_level - 2] * 100) / 100.0
+				galaxy_ship.hp_player += round((galaxy_ship.hp_startStart_player / 100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0
 			"сила":
-				galaxy_ship.damage -= round((galaxy_ship.damage_Start/100.0) * list_abilities_relative_level_int[num_level - 2] * 100) / 100.0
-				galaxy_ship.damage += round((galaxy_ship.damage_Start/100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0
+				galaxy_ship.damage -= round((galaxy_ship.damage_Start / 100.0) * list_abilities_relative_level_int[num_level - 2] * 100) / 100.0
+				galaxy_ship.damage += round((galaxy_ship.damage_Start / 100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0
 			"скорость":
-				galaxy_ship.speed_ship -= round((galaxy_ship.speed_ship_Start/100.0) * list_abilities_relative_level_int[num_level - 2] * 100) / 100.0
-				galaxy_ship.speed_ship += round((galaxy_ship.speed_ship_Start/100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0
+				galaxy_ship.speed_ship -= round((galaxy_ship.speed_ship_Start / 100.0) * list_abilities_relative_level_int[num_level - 2] * 100) / 100.0
+				galaxy_ship.speed_ship += round((galaxy_ship.speed_ship_Start / 100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0
 			"скорость пули":
-				galaxy_ship.speed_bullet -= (round((galaxy_ship.speed_bullet_Start/100.0) * list_abilities_relative_level_int[num_level - 2] * 100) / 100.0)
-				galaxy_ship.speed_bullet += (round((galaxy_ship.speed_bullet_Start/100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0)
+				galaxy_ship.speed_bullet -= (round((galaxy_ship.speed_bullet_Start / 100.0) * list_abilities_relative_level_int[num_level - 2] * 100) / 100.0)
+				galaxy_ship.speed_bullet += (round((galaxy_ship.speed_bullet_Start / 100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0)
 			"живая броня":
-				galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[num_level - 1]}
+				var num_this_type = 0
+				var num_average_value = 0
+				print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+				for cell in inventoryMenu.cells_included_forces:
+					print("************")
+					print(inventoryMenu.cells_included_forces[cell].name_ability)
+					if (inventoryMenu.cells_included_forces[cell].id_ability == ability_id):
+						inventoryMenu.cells_included_forces[cell].level_ability = num_level
+					if (inventoryMenu.cells_included_forces[cell].name_ability == "живая броня"):
+						num_this_type += 1
+						num_average_value += inventoryMenu.cells_included_forces[cell].level_ability
+
+				if (num_this_type == 1):
+					galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[num_level - 1], "plus_hp": 5}
+				else:
+					print("============")
+					print(num_average_value)
+					print(num_this_type)
+					print("==")
+					print(num_average_value / num_this_type)
+					print(int(num_average_value / num_this_type))
+					galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[int(num_average_value / num_this_type) - 1], "plus_hp": num_this_type * 5}
+				# galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[num_level - 1]}
 		
-		if(num_level < 10):
+		if (num_level < 10):
 			button_buy.text = str(num_price[num_level - 1] * num_multiplier_price) + " coin"
 		else:
 			button_buy.text = "full"
@@ -98,27 +120,27 @@ func _on_button_buy_pressed() -> void:
 		for ability_num in list_abilities_relative_level_str.size():
 			print(ability_num)
 			var color = ""
-			if(ability_num + 1 == num_level):
+			if (ability_num + 1 == num_level):
 				color = "#804922"
 				pass_level = false
-				rich_text_label_ability_description.text = ability_description.format({"info": list_abilities_relative_level_str[ability_num],})
-			elif(pass_level):
+				rich_text_label_ability_description.text = ability_description.format({"info": list_abilities_relative_level_str[ability_num], })
+			elif (pass_level):
 				color = "#DACA8B"
 			else:
 				color = "#E56205"
-			progress_text += "[color={color}]● level {ability_num} - {list}[/color]\n".format({"color": color,"ability_num": ability_num + 1,"list": list_abilities_relative_level_str[ability_num],})
+			progress_text += "[color={color}]● level {ability_num} - {list}[/color]\n".format({"color": color, "ability_num": ability_num + 1, "list": list_abilities_relative_level_str[ability_num], })
 		print(progress_text)
 		rich_text_label_level_progress_list.text = progress_text
 
 		for item in itemsContainer.get_children():
 			print(ability_id)
 			print(item)
-			if(ability_id == str(item)):
+			if (ability_id == str(item)):
 				print("---good---")
 				item.num_level = num_level
 				item.update_text()
-		if(num_level < 10):
-			if(num_price[num_level - 1] * num_multiplier_price > Global.coin_player):
+		if (num_level < 10):
+			if (num_price[num_level - 1] * num_multiplier_price > Global.coin_player):
 				button_buy.add_theme_color_override("font_color", Color("#FF2B2B"))
 			else:
 				button_buy.add_theme_color_override("font_color", Color("#FFFFFF"))

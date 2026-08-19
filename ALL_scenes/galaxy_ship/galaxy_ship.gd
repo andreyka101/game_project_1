@@ -41,7 +41,7 @@ var time_timer = 1.2
 # var target_speed = 0.0
 
 
-var ability_k1_livingArmor = {"run": false, "num": 0}
+var ability_k1_livingArmor = {"run": false, "num": 0, "plus_hp":0}
 @onready var timer_ability_k_1_living_armor: Timer = $Timer_ability_k1_livingArmor
 
 func fun_start_next_level() -> void:
@@ -166,6 +166,7 @@ func _process(delta: float):
 		timer.paused = true
 	else:
 		timer.paused = false
+	print(ability_k1_livingArmor)
 
 
 # сигнал узла timer срабатывает раз в какое-то время
@@ -190,7 +191,9 @@ func _on_timer_ability_k_1_living_armor_timeout() -> void:
 	if(hp_start_player > hp_player):
 		print("timer run")
 		print(hp_player)
-		hp_player += 5
+		print("+")
+		print(ability_k1_livingArmor)
+		hp_player += ability_k1_livingArmor.plus_hp
 		if(hp_start_player <= hp_player):
 			hp_player = hp_start_player
 		var tween = create_tween()
