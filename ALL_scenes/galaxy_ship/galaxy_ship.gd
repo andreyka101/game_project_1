@@ -166,7 +166,7 @@ func _process(delta: float):
 		timer.paused = true
 	else:
 		timer.paused = false
-	print(ability_k1_livingArmor)
+	# print(ability_k1_livingArmor)
 
 
 # сигнал узла timer срабатывает раз в какое-то время

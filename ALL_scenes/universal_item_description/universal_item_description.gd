@@ -88,27 +88,19 @@ func _on_button_buy_pressed() -> void:
 			"живая броня":
 				var num_this_type = 0
 				var num_average_value = 0
-				print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
 				for cell in inventoryMenu.cells_included_forces:
-					print("************")
-					print(inventoryMenu.cells_included_forces[cell].name_ability)
 					if (inventoryMenu.cells_included_forces[cell].id_ability == ability_id):
 						inventoryMenu.cells_included_forces[cell].level_ability = num_level
 					if (inventoryMenu.cells_included_forces[cell].name_ability == "живая броня"):
 						num_this_type += 1
 						num_average_value += inventoryMenu.cells_included_forces[cell].level_ability
-
 				if (num_this_type == 1):
 					galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[num_level - 1], "plus_hp": 5}
 				else:
-					print("============")
-					print(num_average_value)
-					print(num_this_type)
-					print("==")
-					print(num_average_value / num_this_type)
-					print(int(num_average_value / num_this_type))
 					galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[int(num_average_value / num_this_type) - 1], "plus_hp": num_this_type * 5}
 				# galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[num_level - 1]}
+			"хороший выстрел":
+				Global.playerAbilityLaunch_k2_GuterSchuss = {"run": true, "num": list_abilities_relative_level_int[num_level - 1]}
 		
 		if (num_level < 10):
 			button_buy.text = str(num_price[num_level - 1] * num_multiplier_price) + " coin"

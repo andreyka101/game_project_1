@@ -10,6 +10,11 @@ var cost_items_in_store = {
 }
 
 
+
+var playerAbilityLaunch_k2_GuterSchuss = {"run": false, "num": 0}
+
+
+
 # Глобальный словарь для хранения состояния всех ячеек
 var player_abilities: = []
 

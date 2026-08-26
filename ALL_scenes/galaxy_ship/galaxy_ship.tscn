@@ -160,6 +160,8 @@ animations = [{
 }]
 
 [node name="Galaxy_ship" type="CharacterBody2D"]
+z_index = 5
+collision_mask = 2
 script = ExtResource("1_qmcd2")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]

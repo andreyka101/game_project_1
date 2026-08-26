@@ -31,8 +31,10 @@ var list_abilities_relative_level_int = []
 var list_items_merge = ["сила", "скорость"]
 
 func _ready() -> void:
+	# add_merge_rule(1, 1, 2)
 	add_merge_rule("скорость", "сила", "скорость пули")
 	add_merge_rule("защита", "скорость", "живая броня")
+	add_merge_rule("защита", "сила", "хороший выстрел")
 
 	fun_transformation_item()
 	label_level.text = "level " + str(num_level)
@@ -71,7 +73,7 @@ func _execute_action() -> void:
 			universal_item_description.num_level = num_level
 			universal_item_description.num_multiplier_price = num_multiplier_price
 			universal_item_description.ability_type = ability_type
-			universal_item_description.ability_id = str(self)
+			universal_item_description.ability_id = str(self )
 			universal_item_description.ability_description = ability_description
 			universal_item_description.list_abilities_relative_level_str = list_abilities_relative_level_str
 			universal_item_description.list_abilities_relative_level_int = list_abilities_relative_level_int
@@ -95,7 +97,7 @@ func fun_transformation_item():
 			list_abilities_relative_level_int = [5, 10, 17, 35, 50, 75, 110, 150, 200, 350]
 		"скорость":
 			num_multiplier_price = 1
-			ability_description = "[color=#997800]увеличивает скорость коробля на[/color] [color=#804922]{info}[/color]"
+			ability_description = "[color=#997800]увеличивает скорость корабля на[/color] [color=#804922]{info}[/color]"
 			list_abilities_relative_level_str = ["5%", "10%", "17%", "35%", "50%", "75%", "110%", "150%", "200%", "350%", ]
 			list_abilities_relative_level_int = [5, 10, 17, 35, 50, 75, 110, 150, 200, 350]
 		"скорость пули":
@@ -105,11 +107,15 @@ func fun_transformation_item():
 			list_abilities_relative_level_int = [5, 10, 17, 35, 50, 75, 110, 150, 200, 350]
 		"живая броня":
 			num_multiplier_price = 2
-			ability_description = "[color=#997800]востановление брони раз в[/color] [color=#804922]{info}[/color] [color=#997800]сек на 5 едениц[/color]"
-			# list_abilities_relative_level_str = ["180 сек", "170 сек", "160 сек", "150 сек", "140 сек", "130 сек", "120 сек", "110 сек", "100 сек", "90 сек", ]
+			ability_description = "[color=#997800]восстановление брони раз в[/color] [color=#804922]{info}[/color] [color=#997800]сек на 5 единиц[/color]"
 			list_abilities_relative_level_str = ["100 сек", "90 сек", "80 сек", "70 сек", "60 сек", "50 сек", "40 сек", "30 сек", "20 сек", "10 сек", ]
-			# list_abilities_relative_level_int = [180, 170, 160, 150, 140, 130, 120, 110, 100, 90]
 			list_abilities_relative_level_int = [100, 90, 80, 70, 60, 50, 40, 30, 20, 10]
+		"хороший выстрел":
+			num_multiplier_price = 2
+			ability_description = "[color=#997800]50% шанс восстановить броню за убийство врага на[/color] [color=#804922]{info}[/color]"
+			ability_description = "[color=#997800]востановление брони раз в[/color] [color=#804922]{info}[/color] [color=#997800]сек на 5 едениц[/color]"
+			list_abilities_relative_level_str = ["0.1%", "0.2%", "0.3%", "0.5%", "0.7%", "1%", "1.2%", "1.5%", "1.7%", "2%"]
+			list_abilities_relative_level_int = [0.1, 0.2, 0.3, 0.5, 0.7, 1, 1.2, 1.5, 1.7, 2]
 	texture_rect.texture = load("res://photo/item_ability/icon_menu_" + ability_type + ".png")
 	# print("res://photo/item_ability/icon_menu_" + ability_type + ".png")
 # photo/item_ability/icon_menu_защита.png
@@ -245,7 +251,7 @@ func snap_to_nearest_slot() -> void:
 			fun_force_increase_decrease()
 			global_position = target_position
 			last_safe_position = global_position
-			print(inventory_menu.cells_included_forces)
+			# print(inventory_menu.cells_included_forces)
 		else:
 			global_position = last_safe_position
 
@@ -308,26 +314,19 @@ func fun_force_increase_decrease(minus = 1) -> void:
 		"живая броня":
 			var num_this_type = 0
 			var num_average_value = 0
-			print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
 			for cell in inventory_menu.cells_included_forces:
-				print("************")
-				print(inventory_menu.cells_included_forces[cell].name_ability)
-				if(inventory_menu.cells_included_forces[cell].name_ability == "живая броня"):
-					num_this_type +=1
+				if (inventory_menu.cells_included_forces[cell].name_ability == "живая броня"):
+					num_this_type += 1
 					num_average_value += inventory_menu.cells_included_forces[cell].level_ability
-			if(num_this_type == 1):
+			if (num_this_type == 1):
 				galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[num_level - 1], "plus_hp": 5}
 			else:
-				print("============")
-				print(num_average_value)
-				print(num_this_type)
-				print("==")
-				print(num_average_value / num_this_type)
-				print(int(num_average_value / num_this_type))
 				galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[int(num_average_value / num_this_type) - 1], "plus_hp": num_this_type * 5}
-			# galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[num_level - 1]}
 			level.hp_ship_battery_passiveсharging.visible = true
 			level.HP_ship_battery.visible = false
+		"хороший выстрел":
+			Global.playerAbilityLaunch_k2_GuterSchuss = {"run": true, "num": list_abilities_relative_level_int[num_level - 1]}
+			
 	if (num_level < 10):
 		if (num_price[num_level - 1] * num_multiplier_price > Global.coin_player):
 			label_price.add_theme_color_override("font_color", Color("#FF2B2B"))
