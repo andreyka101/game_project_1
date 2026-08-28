@@ -289,7 +289,12 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 				var enemy_explosion_sound_scene = load("res://ALL_scenes/enemy_explosion_sound/enemy_explosion_sound.tscn")
 				var enemy_explosion_sound = enemy_explosion_sound_scene.instantiate()
 				level.add_child(enemy_explosion_sound)
-				print(Time.get_unix_time_from_system() - time_appearance_enemy)
+				# print(Time.get_unix_time_from_system() - time_appearance_enemy)
+				if(Global.playerAbilityLaunch_k2_GuterSchuss.run):
+					if(randi_range(0 , 3) == 1):
+						galaxy_ship.hp_player += (round(galaxy_ship.hp_start_player / 100.0) * Global.playerAbilityLaunch_k2_GuterSchuss.num)
+						if(galaxy_ship.hp_player > galaxy_ship.hp_start_player):
+							galaxy_ship.hp_player = galaxy_ship.hp_start_player
 				self.queue_free()
 
 

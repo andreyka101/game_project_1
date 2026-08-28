@@ -112,8 +112,7 @@ func fun_transformation_item():
 			list_abilities_relative_level_int = [100, 90, 80, 70, 60, 50, 40, 30, 20, 10]
 		"хороший выстрел":
 			num_multiplier_price = 2
-			ability_description = "[color=#997800]50% шанс восстановить броню за убийство врага на[/color] [color=#804922]{info}[/color]"
-			ability_description = "[color=#997800]востановление брони раз в[/color] [color=#804922]{info}[/color] [color=#997800]сек на 5 едениц[/color]"
+			ability_description = "[color=#997800]25% шанс восстановить броню за убийство врага на[/color] [color=#804922]{info}[/color]"
 			list_abilities_relative_level_str = ["0.1%", "0.2%", "0.3%", "0.5%", "0.7%", "1%", "1.2%", "1.5%", "1.7%", "2%"]
 			list_abilities_relative_level_int = [0.1, 0.2, 0.3, 0.5, 0.7, 1, 1.2, 1.5, 1.7, 2]
 	texture_rect.texture = load("res://photo/item_ability/icon_menu_" + ability_type + ".png")
@@ -325,7 +324,17 @@ func fun_force_increase_decrease(minus = 1) -> void:
 			level.hp_ship_battery_passiveсharging.visible = true
 			level.HP_ship_battery.visible = false
 		"хороший выстрел":
-			Global.playerAbilityLaunch_k2_GuterSchuss = {"run": true, "num": list_abilities_relative_level_int[num_level - 1]}
+			var num_this_type = 0
+			var num_average_value = 0
+			for cell in inventory_menu.cells_included_forces:
+				if (inventory_menu.cells_included_forces[cell].name_ability == "хороший выстрел"):
+					num_this_type += 1
+					num_average_value += inventory_menu.cells_included_forces[cell].level_ability
+			if (num_this_type == 1):
+				Global.playerAbilityLaunch_k2_GuterSchuss = {"run": true, "num": list_abilities_relative_level_int[num_level - 1]}
+			else:
+				Global.playerAbilityLaunch_k2_GuterSchuss = {"run": true, "num": list_abilities_relative_level_int[int(num_average_value / num_this_type) - 1] * num_this_type}
+			# Global.playerAbilityLaunch_k2_GuterSchuss = {"run": true, "num": list_abilities_relative_level_int[num_level - 1]}
 			
 	if (num_level < 10):
 		if (num_price[num_level - 1] * num_multiplier_price > Global.coin_player):

@@ -225,17 +225,10 @@ func _on_body_entered(body: Node2D) -> void:
 				level.add_child(enemy_explosion_sound)
 				# print(Time.get_unix_time_from_system() - time_appearance_enemy)
 				if(Global.playerAbilityLaunch_k2_GuterSchuss.run):
-					print("=-==-==-==-==-==-==-==-==-==-==-==-==-=")
-					print(round(galaxy_ship.hp_start_player / 100.0) * 2)
-					print("=-==-=")
-					print(randi_range(0 , 1))
-					print(randi_range(0 , 1))
-					print(randi_range(0 , 1))
-					print(randi_range(0 , 1))
-					print(randi_range(0 , 1))
-					# if(randi_range(0 , 1) == 1):
-					# 	galaxy_ship.hp_player += 
-				
+					if(randi_range(0 , 3) == 1):
+						galaxy_ship.hp_player += (round(galaxy_ship.hp_start_player / 100.0) * Global.playerAbilityLaunch_k2_GuterSchuss.num)
+						if(galaxy_ship.hp_player > galaxy_ship.hp_start_player):
+							galaxy_ship.hp_player = galaxy_ship.hp_start_player
 				self.queue_free()
 		
 

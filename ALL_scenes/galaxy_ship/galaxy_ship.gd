@@ -60,7 +60,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	#print(hp_player)
+	print("hp_player - ", hp_player)
 	# меняем анимацию исходя от процента hp
 	if (!Global.stop_game):
 		if ((hp_start_player / 100) * 100 >= hp_player and (hp_start_player / 100) * 75 < hp_player and not_death):
