@@ -235,6 +235,7 @@ func _on_body_entered(body: Node2D) -> void:
 				if(Global.playerAbilityLaunch_k2_GuterSchuss.run):
 					if(randi_range(0 , 3) == 1):
 						galaxy_ship.hp_player += (round(galaxy_ship.hp_start_player / 100.0) * Global.playerAbilityLaunch_k2_GuterSchuss.num)
+						galaxy_ship.universal_indicator_HP_recovery_enemies()
 						if(galaxy_ship.hp_player > galaxy_ship.hp_start_player):
 							galaxy_ship.hp_player = galaxy_ship.hp_start_player
 				self.queue_free()

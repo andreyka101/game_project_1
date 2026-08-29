@@ -60,7 +60,8 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	print("hp_player - ", hp_player)
+	# print("hp_player - ", hp_player)
+	# print(ability_k1_livingArmor)
 	# меняем анимацию исходя от процента hp
 	if (!Global.stop_game):
 		if ((hp_start_player / 100) * 100 >= hp_player and (hp_start_player / 100) * 75 < hp_player and not_death):
@@ -200,3 +201,8 @@ func _on_timer_ability_k_1_living_armor_timeout() -> void:
 		tween.tween_property(sprite, "modulate", Color("#74FF78"), 0.7)
 		# await get_tree().create_timer(0.1).timeout
 		tween.tween_property(sprite, "modulate", Color("#FFFFFF"), 0.2)
+
+func universal_indicator_HP_recovery_enemies():
+	var tween = create_tween()
+	tween.tween_property(sprite, "modulate", Color("#ff70e7"), 0.7)
+	tween.tween_property(sprite, "modulate", Color("#FFFFFF"), 0.2)

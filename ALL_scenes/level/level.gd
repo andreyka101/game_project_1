@@ -36,6 +36,8 @@ var drone_Violet_scene = load("res://ALL_scenes/drone_1/drone_1.tscn")
 var drone_Уellow_scene = load("res://ALL_scenes/drone_2/drone_2.tscn")
 var arr_enemies = []
 
+var playerAbilityLaunch_k3_Сoin = 0
+
 
 
 func _ready() -> void:
@@ -145,6 +147,12 @@ func creatingEnemies_drone_Уellow(enemy_difficulty = 0):
 
 
 func _process(delta: float) -> void:
+	print("=+=+=+=+=+=+=+=+=+=+=+=+=+=")
+	print(snapped(Global.coin_player + num_level_text + ((num_level_text / 100.0) * playerAbilityLaunch_k3_Сoin),0.01))
+	print(round(num_level_text / 100.0) * playerAbilityLaunch_k3_Сoin)
+	print(num_level_text / 100.0)
+	print("k3_Сoin")
+	
 	# print(len(enemies.get_children()))
 	# print(price_level)
 	label_text_level.text = "level " + str(num_level_text)
@@ -216,7 +224,7 @@ func _process(delta: float) -> void:
 		# $ParallaxBackground_var_1.speed = 3
 		# audio_stream_player_2d.playing = true
 
-		Global.coin_player += num_level_text
+		Global.coin_player = snapped(Global.coin_player + num_level_text + ((num_level_text / 100.0) * playerAbilityLaunch_k3_Сoin),0.01)
 
 		$InventoryMenu.visible = true
 		$InventoryMenu.coin_label.text = str(Global.coin_player) + " coin"

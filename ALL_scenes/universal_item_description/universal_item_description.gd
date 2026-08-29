@@ -12,6 +12,7 @@ var list_abilities_relative_level_int = []
 @onready var galaxy_ship = get_node("../../../Galaxy_ship")
 @onready var itemsContainer = get_node("../../ItemsContainer")
 @onready var inventoryMenu = get_parent().get_parent()
+@onready var level = get_parent().get_parent().get_parent()
 @onready var upgrade_menu = get_parent()
 
 @onready var label_ability_type: Label = $Label_ability_type
@@ -110,6 +111,9 @@ func _on_button_buy_pressed() -> void:
 					Global.playerAbilityLaunch_k2_GuterSchuss = {"run": true, "num": list_abilities_relative_level_int[num_level - 1]}
 				else:
 					Global.playerAbilityLaunch_k2_GuterSchuss = {"run": true, "num": list_abilities_relative_level_int[int(num_average_value / num_this_type) - 1] * num_this_type}
+			"монета":
+				level.playerAbilityLaunch_k3_Сoin -= list_abilities_relative_level_int[num_level - 2]
+				level.playerAbilityLaunch_k3_Сoin += list_abilities_relative_level_int[num_level - 1]
 		
 		if (num_level < 10):
 			button_buy.text = str(num_price[num_level - 1] * num_multiplier_price) + " coin"

@@ -35,6 +35,9 @@ func _ready() -> void:
 	add_merge_rule("скорость", "сила", "скорость пули")
 	add_merge_rule("защита", "скорость", "живая броня")
 	add_merge_rule("защита", "сила", "хороший выстрел")
+	add_merge_rule("скорость пули", "защита", "монета")
+	add_merge_rule("живая броня", "сила", "монета")
+	add_merge_rule("хороший выстрел", "скорость", "монета")
 
 	fun_transformation_item()
 	label_level.text = "level " + str(num_level)
@@ -115,6 +118,11 @@ func fun_transformation_item():
 			ability_description = "[color=#997800]25% шанс восстановить броню за убийство врага на[/color] [color=#804922]{info}[/color]"
 			list_abilities_relative_level_str = ["0.1%", "0.2%", "0.3%", "0.5%", "0.7%", "1%", "1.2%", "1.5%", "1.7%", "2%"]
 			list_abilities_relative_level_int = [0.1, 0.2, 0.3, 0.5, 0.7, 1, 1.2, 1.5, 1.7, 2]
+		"монета":
+			num_multiplier_price = 3
+			ability_description = "[color=#997800]увеличивает ваподаемые монеты за уровень на[/color] [color=#804922]{info}[/color]"
+			list_abilities_relative_level_str = ["10%", "20%", "30%", "45%", "75%", "100%", "150%", "250%", "350%", "500%", ]
+			list_abilities_relative_level_int = [10, 20, 30, 45, 75, 100, 150, 250, 350, 500]
 	texture_rect.texture = load("res://photo/item_ability/icon_menu_" + ability_type + ".png")
 	# print("res://photo/item_ability/icon_menu_" + ability_type + ".png")
 # photo/item_ability/icon_menu_защита.png
@@ -311,30 +319,57 @@ func fun_force_increase_decrease(minus = 1) -> void:
 		"скорость пули":
 			galaxy_ship.speed_bullet += (round((galaxy_ship.speed_bullet_Start / 100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0) * minus
 		"живая броня":
-			var num_this_type = 0
-			var num_average_value = 0
-			for cell in inventory_menu.cells_included_forces:
-				if (inventory_menu.cells_included_forces[cell].name_ability == "живая броня"):
-					num_this_type += 1
-					num_average_value += inventory_menu.cells_included_forces[cell].level_ability
-			if (num_this_type == 1):
-				galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[num_level - 1], "plus_hp": 5}
+			if (minus == 1):
+				var num_this_type = 0
+				var num_average_value = 0
+				for cell in inventory_menu.cells_included_forces:
+					if (inventory_menu.cells_included_forces[cell].name_ability == "живая броня"):
+						num_this_type += 1
+						num_average_value += inventory_menu.cells_included_forces[cell].level_ability
+				if (num_this_type == 1):
+					galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[num_level - 1], "plus_hp": 5}
+				else:
+					galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[int(num_average_value / num_this_type) - 1], "plus_hp": num_this_type * 5}
+				level.hp_ship_battery_passiveсharging.visible = true
+				level.HP_ship_battery.visible = false
 			else:
-				galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[int(num_average_value / num_this_type) - 1], "plus_hp": num_this_type * 5}
-			level.hp_ship_battery_passiveсharging.visible = true
-			level.HP_ship_battery.visible = false
+				var num_this_type = 0
+				var num_average_value = 0
+				for cell in inventory_menu.cells_included_forces:
+					if (inventory_menu.cells_included_forces[cell].name_ability == "живая броня" and inventory_menu.cells_included_forces[cell].id_ability != str(self )):
+						num_this_type += 1
+						num_average_value += inventory_menu.cells_included_forces[cell].level_ability
+				if (num_this_type == 0):
+					galaxy_ship.ability_k1_livingArmor = {"run": false, "num": 0, "plus_hp": 0}
+				else:
+					galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[int(num_average_value / num_this_type) - 1], "plus_hp": num_this_type * 5}
+				level.hp_ship_battery_passiveсharging.visible = false
+				level.HP_ship_battery.visible = true
 		"хороший выстрел":
-			var num_this_type = 0
-			var num_average_value = 0
-			for cell in inventory_menu.cells_included_forces:
-				if (inventory_menu.cells_included_forces[cell].name_ability == "хороший выстрел"):
-					num_this_type += 1
-					num_average_value += inventory_menu.cells_included_forces[cell].level_ability
-			if (num_this_type == 1):
-				Global.playerAbilityLaunch_k2_GuterSchuss = {"run": true, "num": list_abilities_relative_level_int[num_level - 1]}
+			if (minus == 1):
+				var num_this_type = 0
+				var num_average_value = 0
+				for cell in inventory_menu.cells_included_forces:
+					if (inventory_menu.cells_included_forces[cell].name_ability == "хороший выстрел"):
+						num_this_type += 1
+						num_average_value += inventory_menu.cells_included_forces[cell].level_ability
+				if (num_this_type == 1):
+					Global.playerAbilityLaunch_k2_GuterSchuss = {"run": true, "num": list_abilities_relative_level_int[num_level - 1]}
+				else:
+					Global.playerAbilityLaunch_k2_GuterSchuss = {"run": true, "num": list_abilities_relative_level_int[int(num_average_value / num_this_type) - 1] * num_this_type}
 			else:
-				Global.playerAbilityLaunch_k2_GuterSchuss = {"run": true, "num": list_abilities_relative_level_int[int(num_average_value / num_this_type) - 1] * num_this_type}
-			# Global.playerAbilityLaunch_k2_GuterSchuss = {"run": true, "num": list_abilities_relative_level_int[num_level - 1]}
+				var num_this_type = 0
+				var num_average_value = 0
+				for cell in inventory_menu.cells_included_forces:
+					if (inventory_menu.cells_included_forces[cell].name_ability == "хороший выстрел" and inventory_menu.cells_included_forces[cell].id_ability != str(self )):
+						num_this_type += 1
+						num_average_value += inventory_menu.cells_included_forces[cell].level_ability
+				if (num_this_type == 0):
+					Global.playerAbilityLaunch_k2_GuterSchuss = {"run": false, "num": 0}
+				else:
+					Global.playerAbilityLaunch_k2_GuterSchuss = {"run": true, "num": list_abilities_relative_level_int[int(num_average_value / num_this_type) - 1] * num_this_type}
+		"монета":
+			level.playerAbilityLaunch_k3_Сoin += list_abilities_relative_level_int[num_level - 1] * minus
 			
 	if (num_level < 10):
 		if (num_price[num_level - 1] * num_multiplier_price > Global.coin_player):
@@ -343,3 +378,143 @@ func fun_force_increase_decrease(minus = 1) -> void:
 			label_price.add_theme_color_override("font_color", Color("#997800"))
 	else:
 		label_price.add_theme_color_override("font_color", Color("#997800"))
+
+
+
+
+
+# Для вашей игры отлично подойдет линейное распределение, при котором стартовое значение (1.2) равномерно уменьшается до 0.04 на максимальном уровне (200%).
+# Ниже приведена готовая таблица значений для каждого уровня, округленная до удобных в геймдизайне 2–3 знаков после запятой.
+# ## Таблица значений по уровням
+
+# | Уровень | Процент в интерфейсе | Значение в коде |
+# |---|---|---|
+# | Уровень 0 | 0% | 1.2 |
+# | Уровень 1 | 1% | 1.194 |
+# | Уровень 2 | 3% | 1.183 |
+# | Уровень 3 | 5% | 1.171 |
+# | Уровень 4 | 10% | 1.142 |
+# | Уровень 5 | 25% | 1.055 |
+# | Уровень 6 | 50% | 0.91 |
+# | Уровень 7 | 75% | 0.765 |
+# | Уровень 8 | 100% | 0.62 |
+# | Уровень 9 | 150% | 0.33 |
+# | Уровень 10 | 200% | 0.04 |
+
+# ## Формула для кода
+# Если вам нужно будет динамически рассчитывать это значение в кодовой базе игры, используйте следующую формулу:
+# Значение = 1.2 - (1.16 * (Процент / 200))
+# Если этот шаг уменьшения кажется вам слишком резким на последних уровнях, я могу:
+# Рассчитать по экспоненциальной (нелинейной) формуле, чтобы значение падало плавнееИзменить количество знаков после запятой для округления
+
+# # Let's understand the formula used.# lvl 0 = 1.2# lvl 10 (200% decrease) = 0.04# The initial decrease to 0.4 for 200% was an example, but the user explicitly gave:# уровень-0: 1.2# уровень-10: 0.04 (соответствует 200%)# Let's see how 1.2 becomes 0.04 with 200%.# If decrease by P% means: value = 1.2 / (1 + P%/100% * something) or a linear scale or exponential?# Let's look at the mapping:# 0% -> 1.2# 200% -> 0.04# Difference in value is 1.16. # Alternatively, maybe it's divided by something? 1.2 / 30 = 0.04. 1 + 200%/something?# Let's assume a linear relationship between the percentage and the final value, or maybe a direct formula.# Wait, let's find a formula where 0% -> 1.2 and 200% -> 0.04.# If it's linear: Value = 1.2 - (1.2 - 0.04) * (P / 200) = 1.2 - 1.16 * (P / 200)# Let's test this linear formula for all levels.
+# levels = {
+#     0: 0,
+#     1: 1,
+#     2: 3,
+#     3: 5,
+#     4: 10,
+#     5: 25,
+#     6: 50,
+#     7: 75,
+#     8: 100,
+#     9: 150,
+#     10: 200
+# }
+# linear_results = {}for lvl, p in levels.items():
+#     val = 1.2 - 1.16 * (p / 200)
+#     linear_results[lvl] = round(val, 4)
+
+# print("Linear approach:")
+# print(linear_results)
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Чтобы растянуть прогрессию до 60 уровней, нам нужно понимать, как именно проценты будут распределяться по этим уровням.
+# Давайте разберем два самых удобных варианта для геймдизайна: равномерный (линейный) шаг и нелинейный (плавный), когда в начале уровни дают маленький бонус, а на высоких уровнях — более ощутимый.
+# Ниже представлены оба варианта. Базовая формула для расчета значения в коде:
+# Значение = 1.2 - (1.16 * (Текущий_Процент / 200))
+# ------------------------------
+# ## Вариант 1. Линейный (Равномерный шаг)
+# Каждый уровень процент в интерфейсе увеличивается ровно на 3.33%, а значение в коде уменьшается ровно на ~0.0193 за уровень.
+# 📋 Развернуть таблицу для Варианта 1 (Уровни 0–60)
+
+# | Уровень | Процент в игре | Значение в коде |
+# |---|---|---|
+# | 0 | 0% | 1.20 |
+# | 1 | 3.3% | 1.18 |
+# | 2 | 6.7% | 1.16 |
+# | 3 | 10.0% | 1.14 |
+# | 4 | 13.3% | 1.12 |
+# | 5 | 16.7% | 1.10 |
+# | 6 | 20.0% | 1.08 |
+# | 7 | 23.3% | 1.06 |
+# | 8 | 26.7% | 1.05 |
+# | 9 | 30.0% | 1.03 |
+# | 10 | 33.3% | 1.01 |
+# | 11 | 36.7% | 0.99 |
+# | 12 | 40.0% | 0.97 |
+# | 13 | 43.3% | 0.95 |
+# | 14 | 46.7% | 0.93 |
+# | 15 | 50.0% | 0.91 |
+# | 16 | 53.3% | 0.89 |
+# | 17 | 56.7% | 0.87 |
+# | 18 | 60.0% | 0.85 |
+# | 19 | 63.3% | 0.83 |
+# | 20 | 66.7% | 0.81 |
+# | 21 | 70.0% | 0.79 |
+# | 22 | 73.3% | 0.78 |
+# | 23 | 76.7% | 0.76 |
+# | 24 | 80.0% | 0.74 |
+# | 25 | 83.3% | 0.72 |
+# | 26 | 86.7% | 0.70 |
+# | 27 | 90.0% | 0.68 |
+# | 28 | 93.3% | 0.66 |
+# | 29 | 96.7% | 0.64 |
+# | 30 | 100.0% | 0.62 |
+# | 31 | 103.3% | 0.60 |
+# | 32 | 106.7% | 0.58 |
+# | 33 | 110.0% | 0.56 |
+# | 34 | 113.3% | 0.54 |
+# | 35 | 116.7% | 0.52 |
+# | 36 | 120.0% | 0.50 |
+# | 37 | 123.3% | 0.49 |
+# | 38 | 126.7% | 0.47 |
+# | 39 | 130.0% | 0.45 |
+# | 40 | 133.3% | 0.43 |
+# | 41 | 136.7% | 0.41 |
+# | 42 | 140.0% | 0.39 |
+# | 43 | 143.3% | 0.37 |
+# | 44 | 146.7% | 0.35 |
+# | 45 | 150.0% | 0.33 |
+# | 46 | 153.3% | 0.31 |
+# | 47 | 156.7% | 0.29 |
+# | 48 | 160.0% | 0.27 |
+# | 49 | 163.3% | 0.25 |
+# | 50 | 166.7% | 0.23 |
+# | 51 | 170.0% | 0.21 |
+# | 52 | 173.3% | 0.20 |
+# | 53 | 176.7% | 0.18 |
+# | 54 | 180.0% | 0.16 |
+# | 55 | 183.3% | 0.14 |
+# | 56 | 186.7% | 0.12 |
+# | 57 | 190.0% | 0.10 |
+# | 58 | 193.3% | 0.08 |
+# | 59 | 196.7% | 0.06 |
+# | 60 | 200.0% | 0.04 |
+
+
+# (Примечание: при экспоненте кап в 200% достигается уже на 43 уровне, а дальше идет плато, чтобы игроки не ушли в минус).
+# Если вам нужен другой формат данных для импорта в игровой движок, я могу:
+# Сгенерировать JSON-файл со всеми 60 уровнямиНаписать код на C# (для Unity) или C++ (для Unreal) для автоматического расчета
+
