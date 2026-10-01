@@ -110,19 +110,19 @@ func fun_transformation_item():
 			list_abilities_relative_level_int = [5, 10, 17, 35, 50, 75, 110, 150, 200, 350]
 		"живая броня":
 			num_multiplier_price = 2
-			ability_description = "[color=#997800]восстановление брони раз в[/color] [color=#804922]{info}[/color] [color=#997800]сек на 5 единиц[/color]"
+			ability_description = "[color=#997800]восстановление брони раз в[/color] [color=#804922]{info}[/color] [color=#997800]сек на 1%[/color]"
 			list_abilities_relative_level_str = ["100 сек", "90 сек", "80 сек", "70 сек", "60 сек", "50 сек", "40 сек", "30 сек", "20 сек", "10 сек", ]
 			list_abilities_relative_level_int = [100, 90, 80, 70, 60, 50, 40, 30, 20, 10]
 		"хороший выстрел":
 			num_multiplier_price = 2
 			ability_description = "[color=#997800]25% шанс восстановить броню за убийство врага на[/color] [color=#804922]{info}[/color]"
-			list_abilities_relative_level_str = ["0.1%", "0.2%", "0.3%", "0.5%", "0.7%", "1%", "1.2%", "1.5%", "1.7%", "2%"]
-			list_abilities_relative_level_int = [0.1, 0.2, 0.3, 0.5, 0.7, 1, 1.2, 1.5, 1.7, 2]
+			list_abilities_relative_level_str = ["0.05%", "0.1%", "0.15%", "0.2%", "0.3%", "0.4%", "0.5%", "0.6%", "0.8%", "1%", ]
+			list_abilities_relative_level_int = [0.05, 0.1, 0.15, 0.2, 0.3, 0.4, 0.5, 0.6, 0.8, 1]
 		"монета":
 			num_multiplier_price = 3
 			ability_description = "[color=#997800]увеличивает ваподаемые монеты за уровень на[/color] [color=#804922]{info}[/color]"
-			list_abilities_relative_level_str = ["10%", "20%", "30%", "45%", "75%", "100%", "150%", "250%", "350%", "500%", ]
-			list_abilities_relative_level_int = [10, 20, 30, 45, 75, 100, 150, 250, 350, 500]
+			list_abilities_relative_level_str = ["5%", "10%", "17%", "35%", "50%", "75%", "110%", "150%", "200%", "350%", ]
+			list_abilities_relative_level_int = [5, 10, 17, 35, 50, 75, 110, 150, 200, 350]
 	texture_rect.texture = load("res://photo/item_ability/icon_menu_" + ability_type + ".png")
 	# print("res://photo/item_ability/icon_menu_" + ability_type + ".png")
 # photo/item_ability/icon_menu_защита.png
@@ -327,9 +327,9 @@ func fun_force_increase_decrease(minus = 1) -> void:
 						num_this_type += 1
 						num_average_value += inventory_menu.cells_included_forces[cell].level_ability
 				if (num_this_type == 1):
-					galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[num_level - 1], "plus_hp": 5}
+					galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[num_level - 1], "plus_hp": 1}
 				else:
-					galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[int(num_average_value / num_this_type) - 1], "plus_hp": num_this_type * 5}
+					galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[int(num_average_value / num_this_type) - 1], "plus_hp": num_this_type * 1}
 				level.hp_ship_battery_passiveсharging.visible = true
 				level.HP_ship_battery.visible = false
 			else:
@@ -342,7 +342,7 @@ func fun_force_increase_decrease(minus = 1) -> void:
 				if (num_this_type == 0):
 					galaxy_ship.ability_k1_livingArmor = {"run": false, "num": 0, "plus_hp": 0}
 				else:
-					galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[int(num_average_value / num_this_type) - 1], "plus_hp": num_this_type * 5}
+					galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[int(num_average_value / num_this_type) - 1], "plus_hp": num_this_type * 1}
 				level.hp_ship_battery_passiveсharging.visible = false
 				level.HP_ship_battery.visible = true
 		"хороший выстрел":
@@ -378,9 +378,6 @@ func fun_force_increase_decrease(minus = 1) -> void:
 			label_price.add_theme_color_override("font_color", Color("#997800"))
 	else:
 		label_price.add_theme_color_override("font_color", Color("#997800"))
-
-
-
 
 
 # Для вашей игры отлично подойдет линейное распределение, при котором стартовое значение (1.2) равномерно уменьшается до 0.04 на максимальном уровне (200%).
@@ -427,17 +424,6 @@ func fun_force_increase_decrease(minus = 1) -> void:
 
 # print("Linear approach:")
 # print(linear_results)
-
-
-
-
-
-
-
-
-
-
-
 
 
 # Чтобы растянуть прогрессию до 60 уровней, нам нужно понимать, как именно проценты будут распределяться по этим уровням.

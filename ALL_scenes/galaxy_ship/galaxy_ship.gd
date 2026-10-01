@@ -194,7 +194,7 @@ func _on_timer_ability_k_1_living_armor_timeout() -> void:
 		print(hp_player)
 		print("+")
 		print(ability_k1_livingArmor)
-		hp_player += ability_k1_livingArmor.plus_hp
+		hp_player += (hp_start_player/100) * ability_k1_livingArmor.plus_hp
 		if(hp_start_player <= hp_player):
 			hp_player = hp_start_player
 		var tween = create_tween()
