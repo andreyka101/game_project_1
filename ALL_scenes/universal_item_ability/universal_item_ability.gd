@@ -38,6 +38,8 @@ func _ready() -> void:
 	add_merge_rule("скорость пули", "защита", "монета")
 	add_merge_rule("живая броня", "сила", "монета")
 	add_merge_rule("хороший выстрел", "скорость", "монета")
+	
+	add_merge_rule("хороший выстрел", "скорость", "монета")
 
 	fun_transformation_item()
 	label_level.text = "level " + str(num_level)

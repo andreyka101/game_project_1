@@ -10,7 +10,7 @@ var not_death = true
 @onready var player_bullets: Node2D = $"../Player_bullets"
 # @onready var audio:AudioStreamPlayer2D = $AudioStreamPlayer2D
 
-var hp_player = 300
+var hp_player = 400
 var hp_start_player = 300
 var hp_startStart_player = 300
 # 250
