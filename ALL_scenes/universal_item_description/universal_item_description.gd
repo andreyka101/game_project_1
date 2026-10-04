@@ -32,7 +32,7 @@ func start_des() -> void:
 	var pass_level = true
 	var progress_text = ""
 	for ability_num in list_abilities_relative_level_str.size():
-		print(ability_num)
+		# print(ability_num)
 		var color = ""
 		if (ability_num + 1 == num_level):
 			color = "#804922"
@@ -43,7 +43,7 @@ func start_des() -> void:
 		else:
 			color = "#E56205"
 		progress_text += "[color={color}]● level {ability_num} - {list}[/color]\n".format({"color": color, "ability_num": ability_num + 1, "list": list_abilities_relative_level_str[ability_num], })
-	print(progress_text)
+	# print(progress_text)
 	rich_text_label_level_progress_list.text = progress_text
 	if (num_level < 10):
 			button_buy.text = str(num_price[num_level - 1] * num_multiplier_price) + " coin"
@@ -114,6 +114,18 @@ func _on_button_buy_pressed() -> void:
 			"монета":
 				level.playerAbilityLaunch_k3_Сoin -= list_abilities_relative_level_int[num_level - 2]
 				level.playerAbilityLaunch_k3_Сoin += list_abilities_relative_level_int[num_level - 1]
+			"второй выстрел":
+				var num_this_type = 0
+				var num_average_value = 0
+				for cell in inventoryMenu.cells_included_forces:
+					if (inventoryMenu.cells_included_forces[cell].name_ability == "второй выстрел"):
+						num_this_type += 1
+						num_average_value += inventoryMenu.cells_included_forces[cell].level_ability
+				print(list_abilities_relative_level_int[int(num_average_value / num_this_type)] * num_this_type)
+				if (num_this_type == 1):
+					Global.playerAbilityLaunch_k4_AdditionalShot = {"run": 2, "chance": list_abilities_relative_level_int[num_level - 1]}
+				else:
+					Global.playerAbilityLaunch_k4_AdditionalShot = {"run": 2, "chance": list_abilities_relative_level_int[int(num_average_value / num_this_type) - 1] * num_this_type}
 		
 		if (num_level < 10):
 			button_buy.text = str(num_price[num_level - 1] * num_multiplier_price) + " coin"
@@ -123,7 +135,7 @@ func _on_button_buy_pressed() -> void:
 		var pass_level = true
 		var progress_text = ""
 		for ability_num in list_abilities_relative_level_str.size():
-			print(ability_num)
+			# print(ability_num)
 			var color = ""
 			if (ability_num + 1 == num_level):
 				color = "#804922"
@@ -134,14 +146,14 @@ func _on_button_buy_pressed() -> void:
 			else:
 				color = "#E56205"
 			progress_text += "[color={color}]● level {ability_num} - {list}[/color]\n".format({"color": color, "ability_num": ability_num + 1, "list": list_abilities_relative_level_str[ability_num], })
-		print(progress_text)
+		# print(progress_text)
 		rich_text_label_level_progress_list.text = progress_text
 
 		for item in itemsContainer.get_children():
-			print(ability_id)
-			print(item)
+			# print(ability_id)
+			# print(item)
 			if (ability_id == str(item)):
-				print("---good---")
+				# print("---good---")
 				item.num_level = num_level
 				item.update_text()
 		if (num_level < 10):

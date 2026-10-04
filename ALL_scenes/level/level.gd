@@ -22,7 +22,7 @@ var end_level = false
 @onready var bullets_of_enemies: Node2D = $Bullets_of_enemies
 @onready var player_bullets: Node2D = $Player_bullets
 @onready var label_text_level: Label = $Label_text_level
-@onready var HP_ship_battery:AnimatedSprite2D = $HP_ship_battery
+@onready var HP_ship_battery: AnimatedSprite2D = $HP_ship_battery
 @onready var hp_ship_battery_passiveсharging: AnimatedSprite2D = $HP_ship_battery_passiveСharging
 @onready var label_dps: Label = $Menu_button/Settings_level/Label_dps
 @onready var galaxy_ship: CharacterBody2D = $Galaxy_ship
@@ -37,7 +37,6 @@ var drone_Уellow_scene = load("res://ALL_scenes/drone_2/drone_2.tscn")
 var arr_enemies = []
 
 var playerAbilityLaunch_k3_Сoin = 0
-
 
 
 func _ready() -> void:
@@ -64,7 +63,7 @@ func creatingEnemies_meteorite(enemy_difficulty = 0):
 	if (price_level >= 1):
 		var meteorite: Area2D = meteorite_scene.instantiate()
 		meteorite.position = Vector2(randi_range(-100, 1180), -90)
-		meteorite.enemy_level = (num_level_hard/10)+1
+		meteorite.enemy_level = (num_level_hard / 10) + 1
 		if (enemy_difficulty == 0):
 			meteorite.super_enemy = false
 		elif (enemy_difficulty == 1):
@@ -78,7 +77,7 @@ func creatingEnemies_enemy_ship_White(enemy_difficulty = 0):
 	if (price_level >= 2):
 		var enemyShip_1: Area2D = enemyShip_White_scene.instantiate()
 		enemyShip_1.position = Vector2(randi_range(0, 1080), -50)
-		enemyShip_1.enemy_level = (num_level_hard/10)+1
+		enemyShip_1.enemy_level = (num_level_hard / 10) + 1
 		if (enemy_difficulty == 0):
 			enemyShip_1.super_enemy = false
 		if (enemy_difficulty == 1):
@@ -92,7 +91,7 @@ func creatingEnemies_enemy_ship_Red(enemy_difficulty = 0):
 	if (price_level >= 2):
 		var enemyShip_2: Area2D = enemyShip_Red_scene.instantiate()
 		enemyShip_2.position = Vector2(randi_range(0, 1080), -50)
-		enemyShip_2.enemy_level = (num_level_hard/10)+1
+		enemyShip_2.enemy_level = (num_level_hard / 10) + 1
 		if (enemy_difficulty == 0):
 			enemyShip_2.super_enemy = false
 		if (enemy_difficulty == 1):
@@ -106,7 +105,7 @@ func creatingEnemies_enemy_ship_Black(enemy_difficulty = 0):
 	if (price_level >= 3):
 		var enemyShip_3: Area2D = enemyShip_Black_scene.instantiate()
 		enemyShip_3.position = Vector2(randi_range(0, 1080), -50)
-		enemyShip_3.enemy_level = (num_level_hard/10)+1
+		enemyShip_3.enemy_level = (num_level_hard / 10) + 1
 		if (enemy_difficulty == 0):
 			enemyShip_3.super_enemy = false
 		if (enemy_difficulty == 1):
@@ -120,7 +119,7 @@ func creatingEnemies_drone_Violet(enemy_difficulty = 0):
 	if (price_level >= 1):
 		var drone_1: Area2D = drone_Violet_scene.instantiate()
 		drone_1.position = Vector2(randi_range(-200, 1280), -10)
-		drone_1.enemy_level = (num_level_hard/10)+1
+		drone_1.enemy_level = (num_level_hard / 10) + 1
 		if (enemy_difficulty == 0):
 			drone_1.super_enemy = false
 		if (enemy_difficulty == 1):
@@ -134,7 +133,7 @@ func creatingEnemies_drone_Уellow(enemy_difficulty = 0):
 	if (price_level >= 2):
 		var drone_2: CharacterBody2D = drone_Уellow_scene.instantiate()
 		drone_2.position = Vector2(randi_range(0, 1080), -150)
-		drone_2.enemy_level = (num_level_hard/10)+1
+		drone_2.enemy_level = (num_level_hard / 10) + 1
 		if (enemy_difficulty == 0):
 			drone_2.super_enemy = false
 		if (enemy_difficulty == 1):
@@ -147,63 +146,62 @@ func creatingEnemies_drone_Уellow(enemy_difficulty = 0):
 
 
 func _process(delta: float) -> void:
-	print("=+=+=+=+=+=+=+=+=+=+=+=+=+=")
-	print(snapped(Global.coin_player + num_level_text + ((num_level_text / 100.0) * playerAbilityLaunch_k3_Сoin),0.01))
-	print(round(num_level_text / 100.0) * playerAbilityLaunch_k3_Сoin)
-	print(num_level_text / 100.0)
-	print("k3_Сoin")
-	
+	# print("=+=+=+=+=+=+=+=+=+=+=+=+=+=")
+	# print(snapped(Global.coin_player + num_level_text + ((num_level_text / 100.0) * playerAbilityLaunch_k3_Сoin),0.01))
+	# print(round(num_level_text / 100.0) * playerAbilityLaunch_k3_Сoin)
+	# print(num_level_text / 100.0)
+	# print("k3_Сoin")
 	# print(len(enemies.get_children()))
 	# print(price_level)
 	label_text_level.text = "level " + str(num_level_text)
 	if (galaxy_ship):
-		if(galaxy_ship.ability_k1_livingArmor.run):
-			if(galaxy_ship.hp_start_player == galaxy_ship.hp_player):
+		if (galaxy_ship.ability_k1_livingArmor.run):
+			if (galaxy_ship.hp_start_player == galaxy_ship.hp_player):
 				hp_ship_battery_passiveсharging.play("hp_100%_full")
-			elif((galaxy_ship.hp_start_player/100) * 100 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 90 < galaxy_ship.hp_player):
+			elif ((galaxy_ship.hp_start_player / 100) * 100 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player / 100) * 90 < galaxy_ship.hp_player):
 				hp_ship_battery_passiveсharging.play("hp_100%")
-			elif((galaxy_ship.hp_start_player/100) * 90 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 80 < galaxy_ship.hp_player):
+			elif ((galaxy_ship.hp_start_player / 100) * 90 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player / 100) * 80 < galaxy_ship.hp_player):
 				hp_ship_battery_passiveсharging.play("hp_90%")
-			elif((galaxy_ship.hp_start_player/100) * 80 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 70 < galaxy_ship.hp_player):
+			elif ((galaxy_ship.hp_start_player / 100) * 80 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player / 100) * 70 < galaxy_ship.hp_player):
 				hp_ship_battery_passiveсharging.play("hp_80%")
-			elif((galaxy_ship.hp_start_player/100) * 70 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 60 < galaxy_ship.hp_player):
+			elif ((galaxy_ship.hp_start_player / 100) * 70 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player / 100) * 60 < galaxy_ship.hp_player):
 				hp_ship_battery_passiveсharging.play("hp_70%")
-			elif((galaxy_ship.hp_start_player/100) * 60 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 50 < galaxy_ship.hp_player):
+			elif ((galaxy_ship.hp_start_player / 100) * 60 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player / 100) * 50 < galaxy_ship.hp_player):
 				hp_ship_battery_passiveсharging.play("hp_60%")
-			elif((galaxy_ship.hp_start_player/100) * 50 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 40 < galaxy_ship.hp_player):
+			elif ((galaxy_ship.hp_start_player / 100) * 50 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player / 100) * 40 < galaxy_ship.hp_player):
 				hp_ship_battery_passiveсharging.play("hp_50%")
-			elif((galaxy_ship.hp_start_player/100) * 40 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 30 < galaxy_ship.hp_player):
+			elif ((galaxy_ship.hp_start_player / 100) * 40 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player / 100) * 30 < galaxy_ship.hp_player):
 				hp_ship_battery_passiveсharging.play("hp_40%")
-			elif((galaxy_ship.hp_start_player/100) * 30 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 20 < galaxy_ship.hp_player):
+			elif ((galaxy_ship.hp_start_player / 100) * 30 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player / 100) * 20 < galaxy_ship.hp_player):
 				hp_ship_battery_passiveсharging.play("hp_30%")
-			elif((galaxy_ship.hp_start_player/100) * 20 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 10 < galaxy_ship.hp_player):
+			elif ((galaxy_ship.hp_start_player / 100) * 20 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player / 100) * 10 < galaxy_ship.hp_player):
 				hp_ship_battery_passiveсharging.play("hp_20%")
-			elif((galaxy_ship.hp_start_player/100) * 10 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 0 < galaxy_ship.hp_player):
+			elif ((galaxy_ship.hp_start_player / 100) * 10 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player / 100) * 0 < galaxy_ship.hp_player):
 				hp_ship_battery_passiveсharging.play("hp_10%")
-			elif(0 >= galaxy_ship.hp_player):
+			elif (0 >= galaxy_ship.hp_player):
 				hp_ship_battery_passiveсharging.play("hp_0%")
 		else:
-			if((galaxy_ship.hp_start_player/100) * 100 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 90 < galaxy_ship.hp_player):
+			if ((galaxy_ship.hp_start_player / 100) * 100 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player / 100) * 90 < galaxy_ship.hp_player):
 				HP_ship_battery.play("hp_100%")
-			elif((galaxy_ship.hp_start_player/100) * 90 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 80 < galaxy_ship.hp_player):
+			elif ((galaxy_ship.hp_start_player / 100) * 90 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player / 100) * 80 < galaxy_ship.hp_player):
 				HP_ship_battery.play("hp_90%")
-			elif((galaxy_ship.hp_start_player/100) * 80 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 70 < galaxy_ship.hp_player):
+			elif ((galaxy_ship.hp_start_player / 100) * 80 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player / 100) * 70 < galaxy_ship.hp_player):
 				HP_ship_battery.play("hp_80%")
-			elif((galaxy_ship.hp_start_player/100) * 70 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 60 < galaxy_ship.hp_player):
+			elif ((galaxy_ship.hp_start_player / 100) * 70 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player / 100) * 60 < galaxy_ship.hp_player):
 				HP_ship_battery.play("hp_70%")
-			elif((galaxy_ship.hp_start_player/100) * 60 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 50 < galaxy_ship.hp_player):
+			elif ((galaxy_ship.hp_start_player / 100) * 60 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player / 100) * 50 < galaxy_ship.hp_player):
 				HP_ship_battery.play("hp_60%")
-			elif((galaxy_ship.hp_start_player/100) * 50 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 40 < galaxy_ship.hp_player):
+			elif ((galaxy_ship.hp_start_player / 100) * 50 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player / 100) * 40 < galaxy_ship.hp_player):
 				HP_ship_battery.play("hp_50%")
-			elif((galaxy_ship.hp_start_player/100) * 40 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 30 < galaxy_ship.hp_player):
+			elif ((galaxy_ship.hp_start_player / 100) * 40 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player / 100) * 30 < galaxy_ship.hp_player):
 				HP_ship_battery.play("hp_40%")
-			elif((galaxy_ship.hp_start_player/100) * 30 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 20 < galaxy_ship.hp_player):
+			elif ((galaxy_ship.hp_start_player / 100) * 30 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player / 100) * 20 < galaxy_ship.hp_player):
 				HP_ship_battery.play("hp_30%")
-			elif((galaxy_ship.hp_start_player/100) * 20 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 10 < galaxy_ship.hp_player):
+			elif ((galaxy_ship.hp_start_player / 100) * 20 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player / 100) * 10 < galaxy_ship.hp_player):
 				HP_ship_battery.play("hp_20%")
-			elif((galaxy_ship.hp_start_player/100) * 10 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player/100) * 0 < galaxy_ship.hp_player):
+			elif ((galaxy_ship.hp_start_player / 100) * 10 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player / 100) * 0 < galaxy_ship.hp_player):
 				HP_ship_battery.play("hp_10%")
-			elif(0 >= galaxy_ship.hp_player):
+			elif (0 >= galaxy_ship.hp_player):
 				HP_ship_battery.play("hp_0%")
 	else:
 		get_tree().change_scene_to_file("res://ALL_scenes/main_menu/main_menu.tscn")
@@ -223,12 +221,11 @@ func _process(delta: float) -> void:
 		# galaxy_ship.hp_player = galaxy_ship.hp_start_player
 		# $ParallaxBackground_var_1.speed = 3
 		# audio_stream_player_2d.playing = true
-
-		Global.coin_player = snapped(Global.coin_player + num_level_text + ((num_level_text / 100.0) * playerAbilityLaunch_k3_Сoin),0.01)
+		Global.coin_player = snapped(Global.coin_player + num_level_text + ((num_level_text / 100.0) * playerAbilityLaunch_k3_Сoin), 0.01)
 
 		$InventoryMenu.visible = true
 		$InventoryMenu.coin_label.text = str(Global.coin_player) + " coin"
-		if(num_level_text == 1):
+		if (num_level_text == 1):
 			$InventoryMenu.funStartGame_ShopItem()
 		end_level = true
 		for child in bullets_of_enemies.get_children():

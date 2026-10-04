@@ -41,18 +41,18 @@ var time_timer = 1.2
 # var target_speed = 0.0
 
 
-var ability_k1_livingArmor = {"run": false, "num": 0, "plus_hp":0}
+var ability_k1_livingArmor = {"run": false, "num": 0, "plus_hp": 0}
 @onready var timer_ability_k_1_living_armor: Timer = $Timer_ability_k1_livingArmor
 
 func fun_start_next_level() -> void:
-	if(ability_k1_livingArmor.run):
+	if (ability_k1_livingArmor.run):
 		print("ability_k1_livingArmor.run")
 		timer_ability_k_1_living_armor.start(ability_k1_livingArmor.num)
 
 func fun_end_current_level() -> void:
-	if(ability_k1_livingArmor.run):
+	if (ability_k1_livingArmor.run):
 		print("ability_k1_livingArmor.run.stop() ")
-		timer_ability_k_1_living_armor.stop() 
+		timer_ability_k_1_living_armor.stop()
 
 
 func _ready() -> void:
@@ -116,7 +116,6 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector2(0, 0)
 
 
-
 	# target_speed =  self.position.direction_to(get_global_mouse_position()) * speed_ship
 	# self.velocity = current_speed * delta
 	# position = position.lerp(get_global_mouse_position(), speed_ship)
@@ -174,28 +173,64 @@ func _process(delta: float):
 func _on_timer_timeout() -> void:
 	if (attack_bool and not_death and !stop):
 		var bullet_scene = load("res://ALL_scenes/bullet/bullet.tscn")
-		var bullet: CharacterBody2D = bullet_scene.instantiate()
-		bullet.global_position = marker.global_position
-		bullet.speed = speed_bullet
-		bullet.damage_bullet = damage
-
-
 		var player_shot_sound_scene = load("res://ALL_scenes/player_shot_sound/player_shot_sound.tscn")
-		var player_shot_sound = player_shot_sound_scene.instantiate()
-		level.add_child(player_shot_sound)
+		
+		# ---- ВЫСТРЕЛ 1 ----
+		var bullet1: CharacterBody2D = bullet_scene.instantiate()
+		bullet1.global_position = marker.global_position
+		bullet1.speed = speed_bullet
+		bullet1.damage_bullet = damage
+		player_bullets.add_child(bullet1)
 
+		# Звук первого выстрела
+		var sound1 = player_shot_sound_scene.instantiate()
+		level.add_child(sound1)
 
-		player_bullets.add_child(bullet)
+		var chance_additional_shot = false
+		if (Global.playerAbilityLaunch_k4_AdditionalShot.run > 1 and randi_range(0, 100) <= Global.playerAbilityLaunch_k4_AdditionalShot.chance):
+			chance_additional_shot = true
+
+		if (chance_additional_shot and Global.playerAbilityLaunch_k4_AdditionalShot.run > 1):
+			# Ждем 0.1 секунды
+			await get_tree().create_timer(0.1).timeout
+
+			# ---- ВЫСТРЕЛ 2 ----
+			# Создаем абсолютно НОВЫЙ экземпляр пули для второго выстрела
+			var bullet2: CharacterBody2D = bullet_scene.instantiate()
+			bullet2.global_position = marker.global_position
+			bullet2.speed = (speed_bullet / 4) * 3
+			bullet2.damage_bullet = damage
+			player_bullets.add_child(bullet2)
+
+			# Звук второго выстрела (если нужен)
+			var sound2 = player_shot_sound_scene.instantiate()
+			level.add_child(sound2)
+
+		if (chance_additional_shot and Global.playerAbilityLaunch_k4_AdditionalShot.run == 3):
+			# Ждем 0.1 секунды
+			await get_tree().create_timer(0.1).timeout
+
+			# ---- ВЫСТРЕЛ 2 ----
+			# Создаем абсолютно НОВЫЙ экземпляр пули для второго выстрела
+			var bullet3: CharacterBody2D = bullet_scene.instantiate()
+			bullet3.global_position = marker.global_position
+			bullet3.speed = speed_bullet / 2
+			bullet3.damage_bullet = damage
+			player_bullets.add_child(bullet3)
+
+			# Звук второго выстрела (если нужен)
+			var sound3 = player_shot_sound_scene.instantiate()
+			level.add_child(sound3)
 
 
 func _on_timer_ability_k_1_living_armor_timeout() -> void:
-	if(hp_start_player > hp_player):
+	if (hp_start_player > hp_player):
 		print("timer run")
 		print(hp_player)
 		print("+")
 		print(ability_k1_livingArmor)
-		hp_player += (hp_start_player/100) * ability_k1_livingArmor.plus_hp
-		if(hp_start_player <= hp_player):
+		hp_player += (hp_start_player / 100) * ability_k1_livingArmor.plus_hp
+		if (hp_start_player <= hp_player):
 			hp_player = hp_start_player
 		var tween = create_tween()
 		tween.tween_property(sprite, "modulate", Color("#74FF78"), 0.7)

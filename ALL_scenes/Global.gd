@@ -12,6 +12,7 @@ var cost_items_in_store = {
 
 
 var playerAbilityLaunch_k2_GuterSchuss = {"run": false, "num": 0}
+var playerAbilityLaunch_k4_AdditionalShot = {"run": 1, "chance": 0}
 
 
 
