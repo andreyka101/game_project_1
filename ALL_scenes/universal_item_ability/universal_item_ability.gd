@@ -39,6 +39,8 @@ func _ready() -> void:
 	add_merge_rule("живая броня", "сила", "монета")
 	add_merge_rule("хороший выстрел", "скорость", "монета")
 	add_merge_rule("скорость", "скорость пули", "второй выстрел")
+	add_merge_rule("скорость", "второй выстрел", "третий выстрел")
+	add_merge_rule("защита", "хороший выстрел", "лучший выстрел")
 
 	fun_transformation_item()
 	label_level.text = "level " + str(num_level)
@@ -126,9 +128,19 @@ func fun_transformation_item():
 			list_abilities_relative_level_int = [5, 10, 17, 35, 50, 75, 110, 150, 200, 350]
 		"второй выстрел":
 			num_multiplier_price = 3
-			ability_description = "[color=#997800]делает второй выстрел через 0.1 сек, шанс сробатывания[/color] [color=#804922]{info}[/color][color=#997800], скорость второй пули на 25 меньше[/color]"
+			ability_description = "[color=#997800]делает второй выстрел через 0.1 сек, шанс сробатывания[/color] [color=#804922]{info}[/color][color=#997800], скорость второй пули на 25% меньше[/color]"
 			list_abilities_relative_level_str = ["0.5%", "2%", "4%", "6%", "8%", "10%", "12.5%", "15%", "17.5%", "20%", ]
 			list_abilities_relative_level_int = [0.5, 2, 4, 6, 8, 10, 12.5, 15, 17.5, 20]
+		"третий выстрел":
+			num_multiplier_price = 4
+			ability_description = "[color=#997800]делает три выстрела с задержкой 0.1 сек, шанс сробатывания[/color] [color=#804922]{info}[/color][color=#997800], у каждого последующего выстрела скорость пули будет на 25% меньше[/color]"
+			list_abilities_relative_level_str = ["0.5%", "2%", "4%", "6%", "8%", "10%", "12.5%", "15%", "17.5%", "20%", ]
+			list_abilities_relative_level_int = [0.5, 2, 4, 6, 8, 10, 12.5, 15, 17.5, 20]
+		"лучший выстрел":
+			num_multiplier_price = 3
+			ability_description = "[color=#997800]20% шанс восстановить броню за убийство врага на[/color] [color=#804922]{info}[/color] [color=#997800](работает при полном HP)[/color]"
+			list_abilities_relative_level_str = ["0.05%", "0.1%", "0.15%", "0.2%", "0.3%", "0.4%", "0.5%", "0.6%", "0.8%", "1%", ]
+			list_abilities_relative_level_int = [0.05, 0.1, 0.15, 0.2, 0.3, 0.4, 0.5, 0.6, 0.8, 1]
 	texture_rect.texture = load("res://photo/item_ability/icon_menu_" + ability_type + ".png")
 	# print("res://photo/item_ability/icon_menu_" + ability_type + ".png")
 # photo/item_ability/icon_menu_защита.png
@@ -316,7 +328,8 @@ func fun_force_increase_decrease(minus = 1) -> void:
 	match ability_type:
 		"защита":
 			galaxy_ship.hp_start_player += (round((galaxy_ship.hp_startStart_player / 100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0) * minus
-			galaxy_ship.hp_player += (round((galaxy_ship.hp_startStart_player / 100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0) * minus
+			if(galaxy_ship.hp_player <= galaxy_ship.hp_start_player):
+				galaxy_ship.hp_player += (round((galaxy_ship.hp_startStart_player / 100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0) * minus
 		"сила":
 			galaxy_ship.damage += (round((galaxy_ship.damage_Start / 100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0) * minus
 		"скорость":
@@ -358,48 +371,95 @@ func fun_force_increase_decrease(minus = 1) -> void:
 				for cell in inventory_menu.cells_included_forces:
 					if (inventory_menu.cells_included_forces[cell].name_ability == "хороший выстрел"):
 						num_this_type += 1
-						num_average_value += inventory_menu.cells_included_forces[cell].level_ability
+						num_average_value += list_abilities_relative_level_int[inventory_menu.cells_included_forces[cell].level_ability - 1]
 				if (num_this_type == 1):
-					Global.playerAbilityLaunch_k2_GuterSchuss = {"run": true, "num": list_abilities_relative_level_int[num_level - 1]}
+					Global.playerAbilityLaunch_k2_GuterSchuss = {"run": true, "num": num_average_value}
 				else:
-					Global.playerAbilityLaunch_k2_GuterSchuss = {"run": true, "num": list_abilities_relative_level_int[int(num_average_value / num_this_type) - 1] * num_this_type}
+					Global.playerAbilityLaunch_k2_GuterSchuss = {"run": true, "num": num_average_value}
 			else:
 				var num_this_type = 0
 				var num_average_value = 0
 				for cell in inventory_menu.cells_included_forces:
 					if (inventory_menu.cells_included_forces[cell].name_ability == "хороший выстрел" and inventory_menu.cells_included_forces[cell].id_ability != str(self )):
 						num_this_type += 1
-						num_average_value += inventory_menu.cells_included_forces[cell].level_ability
+						num_average_value += list_abilities_relative_level_int[inventory_menu.cells_included_forces[cell].level_ability - 1]
 				if (num_this_type == 0):
 					Global.playerAbilityLaunch_k2_GuterSchuss = {"run": false, "num": 0}
 				else:
-					Global.playerAbilityLaunch_k2_GuterSchuss = {"run": true, "num": list_abilities_relative_level_int[int(num_average_value / num_this_type) - 1] * num_this_type}
+					Global.playerAbilityLaunch_k2_GuterSchuss = {"run": true, "num": num_average_value}
 		"монета":
 			level.playerAbilityLaunch_k3_Сoin += list_abilities_relative_level_int[num_level - 1] * minus
 		"второй выстрел":
 			if (minus == 1):
-				# Global.playerAbilityLaunch_k4_AdditionalShot = {"run": 2, "chance": list_abilities_relative_level_int[num_level - 1]}
+				# Global.playerAbilityLaunch_k4_AdditionalShot_2 = {"run": 2, "chance": list_abilities_relative_level_int[num_level - 1]}
 				var num_this_type = 0
 				var num_average_value = 0
 				for cell in inventory_menu.cells_included_forces:
 					if (inventory_menu.cells_included_forces[cell].name_ability == "второй выстрел"):
 						num_this_type += 1
-						num_average_value += inventory_menu.cells_included_forces[cell].level_ability
+						num_average_value += list_abilities_relative_level_int[inventory_menu.cells_included_forces[cell].level_ability - 1]
 				if (num_this_type == 1):
-					Global.playerAbilityLaunch_k4_AdditionalShot = {"run": 2, "chance": list_abilities_relative_level_int[num_level - 1]}
+					Global.playerAbilityLaunch_k4_AdditionalShot_2 = {"run": true, "chance": num_average_value}
 				else:
-					Global.playerAbilityLaunch_k4_AdditionalShot = {"run": 2, "chance": list_abilities_relative_level_int[int(num_average_value / num_this_type) - 1] * num_this_type}
+					Global.playerAbilityLaunch_k4_AdditionalShot_2 = {"run": true, "chance": num_average_value}
 			else:
 				var num_this_type = 0
 				var num_average_value = 0
 				for cell in inventory_menu.cells_included_forces:
 					if (inventory_menu.cells_included_forces[cell].name_ability == "второй выстрел"):
 						num_this_type += 1
-						num_average_value += inventory_menu.cells_included_forces[cell].level_ability
+						num_average_value += list_abilities_relative_level_int[inventory_menu.cells_included_forces[cell].level_ability - 1]
 				if (num_this_type == 0):
-					Global.playerAbilityLaunch_k4_AdditionalShot = {"run": 1, "chance": 0}
+					Global.playerAbilityLaunch_k4_AdditionalShot_2 = {"run": false, "chance": 0}
 				else:
-					Global.playerAbilityLaunch_k4_AdditionalShot = {"run": 2, "chance": list_abilities_relative_level_int[int(num_average_value / num_this_type) - 1] * num_this_type}
+					Global.playerAbilityLaunch_k4_AdditionalShot_2 = {"run": true, "chance": num_average_value}
+		"третий выстрел":
+			if (minus == 1):
+				# Global.playerAbilityLaunch_k4_AdditionalShot_2 = {"run": 2, "chance": list_abilities_relative_level_int[num_level - 1]}
+				var num_this_type = 0
+				var num_average_value = 0
+				for cell in inventory_menu.cells_included_forces:
+					if (inventory_menu.cells_included_forces[cell].name_ability == "третий выстрел"):
+						num_this_type += 1
+						num_average_value += list_abilities_relative_level_int[inventory_menu.cells_included_forces[cell].level_ability - 1]
+				if (num_this_type == 1):
+					Global.playerAbilityLaunch_k4_AdditionalShot_3 = {"run": true, "chance": num_average_value}
+				else:
+					Global.playerAbilityLaunch_k4_AdditionalShot_3 = {"run": true, "chance": num_average_value}
+			else:
+				var num_this_type = 0
+				var num_average_value = 0
+				for cell in inventory_menu.cells_included_forces:
+					if (inventory_menu.cells_included_forces[cell].name_ability == "третий выстрел"):
+						num_this_type += 1
+						num_average_value += list_abilities_relative_level_int[inventory_menu.cells_included_forces[cell].level_ability - 1]
+				if (num_this_type == 0):
+					Global.playerAbilityLaunch_k4_AdditionalShot_3 = {"run": false, "chance": 0}
+				else:
+					Global.playerAbilityLaunch_k4_AdditionalShot_3 = {"run": true, "chance": num_average_value}
+		"лучший выстрел":
+			if (minus == 1):
+				var num_this_type = 0
+				var num_average_value = 0
+				for cell in inventory_menu.cells_included_forces:
+					if (inventory_menu.cells_included_forces[cell].name_ability == "лучший выстрел"):
+						num_this_type += 1
+						num_average_value += list_abilities_relative_level_int[inventory_menu.cells_included_forces[cell].level_ability - 1]
+				if (num_this_type == 1):
+					Global.playerAbilityLaunch_k5_BestShot = {"run": true, "num": num_average_value}
+				else:
+					Global.playerAbilityLaunch_k5_BestShot = {"run": true, "num": num_average_value}
+			else:
+				var num_this_type = 0
+				var num_average_value = 0
+				for cell in inventory_menu.cells_included_forces:
+					if (inventory_menu.cells_included_forces[cell].name_ability == "лучший выстрел" and inventory_menu.cells_included_forces[cell].id_ability != str(self )):
+						num_this_type += 1
+						num_average_value += list_abilities_relative_level_int[inventory_menu.cells_included_forces[cell].level_ability - 1]
+				if (num_this_type == 0):
+					Global.playerAbilityLaunch_k5_BestShot = {"run": false, "num": 0}
+				else:
+					Global.playerAbilityLaunch_k5_BestShot = {"run": true, "num": num_average_value}
 			
 	if (num_level < 10):
 		if (num_price[num_level - 1] * num_multiplier_price > Global.coin_player):

@@ -232,12 +232,7 @@ func _on_body_entered(body: Node2D) -> void:
 				var enemy_explosion_sound = enemy_explosion_sound_scene.instantiate()
 				level.add_child(enemy_explosion_sound)
 				# print(Time.get_unix_time_from_system() - time_appearance_enemy)
-				if(Global.playerAbilityLaunch_k2_GuterSchuss.run):
-					if(randi_range(0 , 3) == 1):
-						galaxy_ship.hp_player += (round(galaxy_ship.hp_start_player / 100.0) * Global.playerAbilityLaunch_k2_GuterSchuss.num)
-						galaxy_ship.universal_indicator_HP_recovery_enemies()
-						if(galaxy_ship.hp_player > galaxy_ship.hp_start_player):
-							galaxy_ship.hp_player = galaxy_ship.hp_start_player
+				Global.universal_function_all_enemies_death(galaxy_ship)
 				self.queue_free()
 
 

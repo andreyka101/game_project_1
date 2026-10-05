@@ -10,7 +10,7 @@ var not_death = true
 @onready var player_bullets: Node2D = $"../Player_bullets"
 # @onready var audio:AudioStreamPlayer2D = $AudioStreamPlayer2D
 
-var hp_player = 400
+var hp_player = 300
 var hp_start_player = 300
 var hp_startStart_player = 300
 # 250
@@ -185,12 +185,8 @@ func _on_timer_timeout() -> void:
 		# Звук первого выстрела
 		var sound1 = player_shot_sound_scene.instantiate()
 		level.add_child(sound1)
-		var chance_additional_shot = false
-		# print(Global.playerAbilityLaunch_k4_AdditionalShot.chance)
-		if (Global.playerAbilityLaunch_k4_AdditionalShot.run > 1 and randf_range(0, 100) <= Global.playerAbilityLaunch_k4_AdditionalShot.chance):
-			chance_additional_shot = true
 
-		if (chance_additional_shot and Global.playerAbilityLaunch_k4_AdditionalShot.run > 1):
+		if (randf_range(0, 100) <= Global.playerAbilityLaunch_k4_AdditionalShot_2.chance and Global.playerAbilityLaunch_k4_AdditionalShot_2.run):
 			# Ждем 0.1 секунды
 			await get_tree().create_timer(0.1).timeout
 
@@ -206,7 +202,7 @@ func _on_timer_timeout() -> void:
 			var sound2 = player_shot_sound_scene.instantiate()
 			level.add_child(sound2)
 
-		if (chance_additional_shot and Global.playerAbilityLaunch_k4_AdditionalShot.run == 3):
+		if (randf_range(0, 100) <= Global.playerAbilityLaunch_k4_AdditionalShot_3.chance and Global.playerAbilityLaunch_k4_AdditionalShot_3.run):
 			# Ждем 0.1 секунды
 			await get_tree().create_timer(0.1).timeout
 
@@ -214,13 +210,28 @@ func _on_timer_timeout() -> void:
 			# Создаем абсолютно НОВЫЙ экземпляр пули для второго выстрела
 			var bullet3: CharacterBody2D = bullet_scene.instantiate()
 			bullet3.global_position = marker.global_position
-			bullet3.speed = speed_bullet / 2
+			bullet3.speed = (speed_bullet / 4) * 3
 			bullet3.damage_bullet = damage
 			player_bullets.add_child(bullet3)
 
 			# Звук второго выстрела (если нужен)
 			var sound3 = player_shot_sound_scene.instantiate()
 			level.add_child(sound3)
+
+			# Ждем 0.1 секунды
+			await get_tree().create_timer(0.1).timeout
+
+			# ---- ВЫСТРЕЛ 2 ----
+			# Создаем абсолютно НОВЫЙ экземпляр пули для второго выстрела
+			var bullet4: CharacterBody2D = bullet_scene.instantiate()
+			bullet4.global_position = marker.global_position
+			bullet4.speed = speed_bullet / 2
+			bullet4.damage_bullet = damage
+			player_bullets.add_child(bullet4)
+
+			# Звук второго выстрела (если нужен)
+			var sound4 = player_shot_sound_scene.instantiate()
+			level.add_child(sound4)
 
 
 func _on_timer_ability_k_1_living_armor_timeout() -> void:

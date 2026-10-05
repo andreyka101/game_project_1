@@ -11,7 +11,7 @@ var list_abilities_relative_level_int = []
 
 @onready var galaxy_ship = get_node("../../../Galaxy_ship")
 @onready var itemsContainer = get_node("../../ItemsContainer")
-@onready var inventoryMenu = get_parent().get_parent()
+@onready var inventory_menu = get_parent().get_parent()
 @onready var level = get_parent().get_parent().get_parent()
 @onready var upgrade_menu = get_parent()
 
@@ -68,15 +68,16 @@ func _on_button_close_pressed() -> void:
 func _on_button_buy_pressed() -> void:
 	if (num_level < 10 and num_price[num_level - 1] * num_multiplier_price <= Global.coin_player):
 		Global.coin_player -= num_price[num_level - 1] * num_multiplier_price
-		inventoryMenu.coin_label.text = str(Global.coin_player) + " coin"
+		inventory_menu.coin_label.text = str(Global.coin_player) + " coin"
 		num_level += 1
 
 		match ability_type:
 			"защита":
+				if(galaxy_ship.hp_player <= galaxy_ship.hp_start_player):
+					galaxy_ship.hp_player -= round((galaxy_ship.hp_startStart_player / 100.0) * list_abilities_relative_level_int[num_level - 2] * 100) / 100.0
+					galaxy_ship.hp_player += round((galaxy_ship.hp_startStart_player / 100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0
 				galaxy_ship.hp_start_player -= round((galaxy_ship.hp_startStart_player / 100.0) * list_abilities_relative_level_int[num_level - 2] * 100) / 100.0
 				galaxy_ship.hp_start_player += round((galaxy_ship.hp_startStart_player / 100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0
-				galaxy_ship.hp_player -= round((galaxy_ship.hp_startStart_player / 100.0) * list_abilities_relative_level_int[num_level - 2] * 100) / 100.0
-				galaxy_ship.hp_player += round((galaxy_ship.hp_startStart_player / 100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0
 			"сила":
 				galaxy_ship.damage -= round((galaxy_ship.damage_Start / 100.0) * list_abilities_relative_level_int[num_level - 2] * 100) / 100.0
 				galaxy_ship.damage += round((galaxy_ship.damage_Start / 100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0
@@ -89,12 +90,12 @@ func _on_button_buy_pressed() -> void:
 			"живая броня":
 				var num_this_type = 0
 				var num_average_value = 0
-				for cell in inventoryMenu.cells_included_forces:
-					if (inventoryMenu.cells_included_forces[cell].id_ability == ability_id):
-						inventoryMenu.cells_included_forces[cell].level_ability = num_level
-					if (inventoryMenu.cells_included_forces[cell].name_ability == "живая броня"):
+				for cell in inventory_menu.cells_included_forces:
+					if (inventory_menu.cells_included_forces[cell].id_ability == ability_id):
+						inventory_menu.cells_included_forces[cell].level_ability = num_level
+					if (inventory_menu.cells_included_forces[cell].name_ability == "живая броня"):
 						num_this_type += 1
-						num_average_value += inventoryMenu.cells_included_forces[cell].level_ability
+						num_average_value += inventory_menu.cells_included_forces[cell].level_ability
 				if (num_this_type == 1):
 					galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[num_level - 1], "plus_hp": 1}
 				else:
@@ -103,17 +104,13 @@ func _on_button_buy_pressed() -> void:
 			"хороший выстрел":
 				var num_this_type = 0
 				var num_average_value = 0
-				for cell in inventoryMenu.cells_included_forces:
-					if (inventoryMenu.cells_included_forces[cell].name_ability == "хороший выстрел"):
+				for cell in inventory_menu.cells_included_forces:
+					if (inventory_menu.cells_included_forces[cell].name_ability == "хороший выстрел"):
 						num_this_type += 1
-						# num_average_value += inventoryMenu.cells_included_forces[cell].level_ability
-						# print(list_abilities_relative_level_int[inventoryMenu.cells_included_forces[cell].level_ability])
-						# print(list_abilities_relative_level_int[inventoryMenu.cells_included_forces[cell].level_ability])
-						if (inventoryMenu.cells_included_forces[cell].id_ability == ability_id):
-							num_average_value += list_abilities_relative_level_int[inventoryMenu.cells_included_forces[cell].level_ability]
+						if (inventory_menu.cells_included_forces[cell].id_ability == ability_id):
+							num_average_value += list_abilities_relative_level_int[inventory_menu.cells_included_forces[cell].level_ability]
 						else:
-							num_average_value += list_abilities_relative_level_int[inventoryMenu.cells_included_forces[cell].level_ability - 1]
-				print(num_average_value)
+							num_average_value += list_abilities_relative_level_int[inventory_menu.cells_included_forces[cell].level_ability - 1]
 				if (num_this_type == 1):
 					Global.playerAbilityLaunch_k2_GuterSchuss = {"run": true, "num": num_average_value}
 				else:
@@ -124,19 +121,45 @@ func _on_button_buy_pressed() -> void:
 			"второй выстрел":
 				var num_this_type = 0
 				var num_average_value = 0
-				for cell in inventoryMenu.cells_included_forces:
-					if (inventoryMenu.cells_included_forces[cell].name_ability == "второй выстрел"):
+				for cell in inventory_menu.cells_included_forces:
+					if (inventory_menu.cells_included_forces[cell].name_ability == "второй выстрел"):
 						num_this_type += 1
-						if (inventoryMenu.cells_included_forces[cell].id_ability == ability_id):
-							num_average_value += list_abilities_relative_level_int[inventoryMenu.cells_included_forces[cell].level_ability]
+						if (inventory_menu.cells_included_forces[cell].id_ability == ability_id):
+							num_average_value += list_abilities_relative_level_int[inventory_menu.cells_included_forces[cell].level_ability]
 						else:
-							num_average_value += list_abilities_relative_level_int[inventoryMenu.cells_included_forces[cell].level_ability - 1]
-						# print(list_abilities_relative_level_int[inventoryMenu.cells_included_forces[cell].level_ability - 1])
-				# print(list_abilities_relative_level_int[int(num_average_value / num_this_type)] * num_this_type)
+							num_average_value += list_abilities_relative_level_int[inventory_menu.cells_included_forces[cell].level_ability - 1]
 				if (num_this_type == 1):
-					Global.playerAbilityLaunch_k4_AdditionalShot = {"run": 2, "chance": num_average_value}
+					Global.playerAbilityLaunch_k4_AdditionalShot_2 = {"run": true, "chance": num_average_value}
 				else:
-					Global.playerAbilityLaunch_k4_AdditionalShot = {"run": 2, "chance": num_average_value}
+					Global.playerAbilityLaunch_k4_AdditionalShot_2 = {"run": true, "chance": num_average_value}
+			"третий выстрел":
+				var num_this_type = 0
+				var num_average_value = 0
+				for cell in inventory_menu.cells_included_forces:
+					if (inventory_menu.cells_included_forces[cell].name_ability == "третий выстрел"):
+						num_this_type += 1
+						if (inventory_menu.cells_included_forces[cell].id_ability == ability_id):
+							num_average_value += list_abilities_relative_level_int[inventory_menu.cells_included_forces[cell].level_ability]
+						else:
+							num_average_value += list_abilities_relative_level_int[inventory_menu.cells_included_forces[cell].level_ability - 1]
+				if (num_this_type == 1):
+					Global.playerAbilityLaunch_k4_AdditionalShot_3 = {"run": true, "chance": num_average_value}
+				else:
+					Global.playerAbilityLaunch_k4_AdditionalShot_3 = {"run": true, "chance": num_average_value}
+			"лучший выстрел":
+				var num_this_type = 0
+				var num_average_value = 0
+				for cell in inventory_menu.cells_included_forces:
+					if (inventory_menu.cells_included_forces[cell].name_ability == "лучший выстрел"):
+						num_this_type += 1
+						if (inventory_menu.cells_included_forces[cell].id_ability == ability_id):
+							num_average_value += list_abilities_relative_level_int[inventory_menu.cells_included_forces[cell].level_ability]
+						else:
+							num_average_value += list_abilities_relative_level_int[inventory_menu.cells_included_forces[cell].level_ability - 1]
+				if (num_this_type == 1):
+					Global.playerAbilityLaunch_k5_BestShot = {"run": true, "num": num_average_value}
+				else:
+					Global.playerAbilityLaunch_k5_BestShot = {"run": true, "num": num_average_value}
 		
 		if (num_level < 10):
 			button_buy.text = str(num_price[num_level - 1] * num_multiplier_price) + " coin"

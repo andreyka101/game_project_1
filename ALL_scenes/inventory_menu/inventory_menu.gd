@@ -163,7 +163,7 @@ func _process(_delta: float) -> void:
 
 
 func _on_healing_button_pressed() -> void:
-	if(Global.coin_player >= (level.num_level_hard / 10 + 1) * 5):
+	if(Global.coin_player >= (level.num_level_hard / 10 + 1) * 5 and galaxy_ship.hp_player < galaxy_ship.hp_start_player):
 		Global.coin_player -= (level.num_level_hard / 10 + 1) * 5
 		galaxy_ship.hp_player += (galaxy_ship.hp_start_player/100) * 25
 		coin_label.text = str(Global.coin_player) + " coin"
