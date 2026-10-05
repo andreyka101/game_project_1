@@ -185,9 +185,9 @@ func _on_timer_timeout() -> void:
 		# Звук первого выстрела
 		var sound1 = player_shot_sound_scene.instantiate()
 		level.add_child(sound1)
-
 		var chance_additional_shot = false
-		if (Global.playerAbilityLaunch_k4_AdditionalShot.run > 1 and randi_range(0, 100) <= Global.playerAbilityLaunch_k4_AdditionalShot.chance):
+		# print(Global.playerAbilityLaunch_k4_AdditionalShot.chance)
+		if (Global.playerAbilityLaunch_k4_AdditionalShot.run > 1 and randf_range(0, 100) <= Global.playerAbilityLaunch_k4_AdditionalShot.chance):
 			chance_additional_shot = true
 
 		if (chance_additional_shot and Global.playerAbilityLaunch_k4_AdditionalShot.run > 1):
