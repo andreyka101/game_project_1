@@ -160,6 +160,20 @@ func _on_button_buy_pressed() -> void:
 					Global.playerAbilityLaunch_k5_BestShot = {"run": true, "num": num_average_value}
 				else:
 					Global.playerAbilityLaunch_k5_BestShot = {"run": true, "num": num_average_value}
+			"идеальный выстрел":
+				var num_this_type = 0
+				var num_average_value = 0
+				for cell in inventory_menu.cells_included_forces:
+					if (inventory_menu.cells_included_forces[cell].name_ability == "идеальный выстрел"):
+						num_this_type += 1
+						if (inventory_menu.cells_included_forces[cell].id_ability == ability_id):
+							num_average_value += list_abilities_relative_level_int[inventory_menu.cells_included_forces[cell].level_ability]
+						else:
+							num_average_value += list_abilities_relative_level_int[inventory_menu.cells_included_forces[cell].level_ability - 1]
+				if (num_this_type == 1):
+					Global.playerAbilityLaunch_k6_PerfectShot = {"run": true, "num": num_average_value}
+				else:
+					Global.playerAbilityLaunch_k6_PerfectShot = {"run": true, "num": num_average_value}
 		
 		if (num_level < 10):
 			button_buy.text = str(num_price[num_level - 1] * num_multiplier_price) + " coin"

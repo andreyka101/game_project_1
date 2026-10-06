@@ -41,6 +41,7 @@ func _ready() -> void:
 	add_merge_rule("скорость", "скорость пули", "второй выстрел")
 	add_merge_rule("скорость", "второй выстрел", "третий выстрел")
 	add_merge_rule("защита", "хороший выстрел", "лучший выстрел")
+	add_merge_rule("сила", "хороший выстрел", "идеальный выстрел")
 
 	fun_transformation_item()
 	label_level.text = "level " + str(num_level)
@@ -141,6 +142,11 @@ func fun_transformation_item():
 			ability_description = "[color=#997800]20% шанс восстановить броню за убийство врага на[/color] [color=#804922]{info}[/color] [color=#997800](работает при полном HP)[/color]"
 			list_abilities_relative_level_str = ["0.05%", "0.1%", "0.15%", "0.2%", "0.3%", "0.4%", "0.5%", "0.6%", "0.8%", "1%", ]
 			list_abilities_relative_level_int = [0.05, 0.1, 0.15, 0.2, 0.3, 0.4, 0.5, 0.6, 0.8, 1]
+		"идеальный выстрел":
+			num_multiplier_price = 3
+			ability_description = "[color=#997800]20% шанс востонавить броню и увеличить урон за убийство врага[/color] [color=#804922]{info}[/color]"
+			list_abilities_relative_level_str = ["0.05%", "0.07%", "0.1%", "0.12%", "0.15%", "0.2%", "0.25%", "0.3%", "0.4%", "0.5%", ]
+			list_abilities_relative_level_int = [0.05, 0.07, 0.1, 0.12, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5 ]
 	texture_rect.texture = load("res://photo/item_ability/icon_menu_" + ability_type + ".png")
 	# print("res://photo/item_ability/icon_menu_" + ability_type + ".png")
 # photo/item_ability/icon_menu_защита.png
@@ -327,9 +333,9 @@ func update_text() -> void:
 func fun_force_increase_decrease(minus = 1) -> void:
 	match ability_type:
 		"защита":
-			galaxy_ship.hp_start_player += (round((galaxy_ship.hp_startStart_player / 100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0) * minus
 			if(galaxy_ship.hp_player <= galaxy_ship.hp_start_player):
 				galaxy_ship.hp_player += (round((galaxy_ship.hp_startStart_player / 100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0) * minus
+			galaxy_ship.hp_start_player += (round((galaxy_ship.hp_startStart_player / 100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0) * minus
 		"сила":
 			galaxy_ship.damage += (round((galaxy_ship.damage_Start / 100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0) * minus
 		"скорость":
@@ -460,6 +466,29 @@ func fun_force_increase_decrease(minus = 1) -> void:
 					Global.playerAbilityLaunch_k5_BestShot = {"run": false, "num": 0}
 				else:
 					Global.playerAbilityLaunch_k5_BestShot = {"run": true, "num": num_average_value}
+		"идеальный выстрел":
+			if (minus == 1):
+				var num_this_type = 0
+				var num_average_value = 0
+				for cell in inventory_menu.cells_included_forces:
+					if (inventory_menu.cells_included_forces[cell].name_ability == "идеальный выстрел"):
+						num_this_type += 1
+						num_average_value += list_abilities_relative_level_int[inventory_menu.cells_included_forces[cell].level_ability - 1]
+				if (num_this_type == 1):
+					Global.playerAbilityLaunch_k6_PerfectShot = {"run": true, "num": num_average_value}
+				else:
+					Global.playerAbilityLaunch_k6_PerfectShot = {"run": true, "num": num_average_value}
+			else:
+				var num_this_type = 0
+				var num_average_value = 0
+				for cell in inventory_menu.cells_included_forces:
+					if (inventory_menu.cells_included_forces[cell].name_ability == "идеальный выстрел" and inventory_menu.cells_included_forces[cell].id_ability != str(self )):
+						num_this_type += 1
+						num_average_value += list_abilities_relative_level_int[inventory_menu.cells_included_forces[cell].level_ability - 1]
+				if (num_this_type == 0):
+					Global.playerAbilityLaunch_k6_PerfectShot = {"run": false, "num": 0}
+				else:
+					Global.playerAbilityLaunch_k6_PerfectShot = {"run": true, "num": num_average_value}
 			
 	if (num_level < 10):
 		if (num_price[num_level - 1] * num_multiplier_price > Global.coin_player):

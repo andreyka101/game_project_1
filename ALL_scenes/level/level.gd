@@ -156,7 +156,9 @@ func _process(delta: float) -> void:
 	label_text_level.text = "level " + str(num_level_text)
 	if (galaxy_ship):
 		if (galaxy_ship.ability_k1_livingArmor.run):
-			if (galaxy_ship.hp_start_player == galaxy_ship.hp_player):
+			if ((galaxy_ship.hp_start_player / 100) * 100 < galaxy_ship.hp_player):
+				hp_ship_battery_passiveсharging.play("hp_big")
+			elif (galaxy_ship.hp_start_player == galaxy_ship.hp_player):
 				hp_ship_battery_passiveсharging.play("hp_100%_full")
 			elif ((galaxy_ship.hp_start_player / 100) * 100 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player / 100) * 90 < galaxy_ship.hp_player):
 				hp_ship_battery_passiveсharging.play("hp_100%")
@@ -181,7 +183,9 @@ func _process(delta: float) -> void:
 			elif (0 >= galaxy_ship.hp_player):
 				hp_ship_battery_passiveсharging.play("hp_0%")
 		else:
-			if ((galaxy_ship.hp_start_player / 100) * 100 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player / 100) * 90 < galaxy_ship.hp_player):
+			if ((galaxy_ship.hp_start_player / 100) * 100 < galaxy_ship.hp_player):
+				HP_ship_battery.play("hp_big")
+			elif ((galaxy_ship.hp_start_player / 100) * 100 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player / 100) * 90 < galaxy_ship.hp_player):
 				HP_ship_battery.play("hp_100%")
 			elif ((galaxy_ship.hp_start_player / 100) * 90 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player / 100) * 80 < galaxy_ship.hp_player):
 				HP_ship_battery.play("hp_90%")

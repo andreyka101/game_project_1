@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://bdw3xl8387e4f"]
+[gd_scene load_steps=53 format=3 uid="uid://bdw3xl8387e4f"]
 
 [ext_resource type="Script" uid="uid://dod02wyv88h72" path="res://ALL_scenes/level/level.gd" id="1_r62w2"]
 [ext_resource type="PackedScene" uid="uid://cwalhxdtsnydh" path="res://ALL_scenes/parallaxBackground_var_1/parallax_background_var_1.tscn" id="2_33107"]
@@ -30,6 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://crnvnvciv5bf1" path="res://photo/HP_ship_battery/HP_ship_battery6.png" id="27_i75sn"]
 [ext_resource type="Texture2D" uid="uid://defj4cmxlypi4" path="res://photo/HP_ship_battery/HP_ship_battery5.png" id="28_2ygkb"]
 [ext_resource type="Texture2D" uid="uid://ghwomm2nl08k" path="res://photo/HP_ship_battery/HP_ship_battery4.png" id="29_4c4ly"]
+[ext_resource type="Texture2D" uid="uid://cvyovtbedsy7h" path="res://photo/HP_ship_battery/HP_ship_battery_BIG.png" id="29_65whr"]
 [ext_resource type="Texture2D" uid="uid://bl5jaqd6krckd" path="res://photo/HP_ship_battery/HP_ship_battery_passiveCharging3.png" id="30_i0ip4"]
 [ext_resource type="Texture2D" uid="uid://ds751h74xjpr1" path="res://photo/icon_money.png" id="30_xthww"]
 [ext_resource type="Texture2D" uid="uid://b8k5lv6pitn4o" path="res://photo/HP_ship_battery/HP_ship_battery_passiveCharging11.png" id="31_65whr"]
@@ -158,6 +159,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"hp_90%",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("29_65whr")
+}],
+"loop": true,
+"name": &"hp_big",
 "speed": 5.0
 }]
 
@@ -288,6 +297,14 @@ animations = [{
 "loop": true,
 "name": &"hp_90%",
 "speed": 1.1
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("29_65whr")
+}],
+"loop": true,
+"name": &"hp_big",
+"speed": 5.0
 }]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tbm0f"]
@@ -643,7 +660,7 @@ volume_db = 10.048
 position = Vector2(147, 74)
 scale = Vector2(2.86071, 2.86071)
 sprite_frames = SubResource("SpriteFrames_u50mi")
-animation = &"hp_0%"
+animation = &"hp_big"
 autoplay = "hp_100%"
 
 [node name="HP_ship_battery_passiveСharging" type="AnimatedSprite2D" parent="."]
@@ -651,7 +668,7 @@ visible = false
 position = Vector2(147, 74)
 scale = Vector2(2.861, 2.861)
 sprite_frames = SubResource("SpriteFrames_tbm0f")
-animation = &"hp_100%_full"
+animation = &"hp_big"
 autoplay = "hp_100%_full"
 
 [node name="Coin_HBoxContainer" type="HBoxContainer" parent="."]
