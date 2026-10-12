@@ -189,5 +189,14 @@ volume_db = 6.531
 
 [node name="Timer_ability_k1_livingArmor" type="Timer" parent="."]
 
+[node name="Label" type="Label" parent="."]
+offset_left = -12.0
+offset_top = -36.0
+offset_right = 28.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 43
+text = "2"
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Timer_ability_k1_livingArmor" to="." method="_on_timer_ability_k_1_living_armor_timeout"]
