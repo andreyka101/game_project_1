@@ -114,9 +114,9 @@ func fun_transformation_item():
 			list_abilities_relative_level_int = [5, 10, 17, 35, 50, 75, 110, 150, 200, 350]
 		"живая броня":
 			num_multiplier_price = 2
-			ability_description = "[color=#997800]восстановление брони раз в[/color] [color=#804922]{info}[/color] [color=#997800]сек на 1%[/color]"
-			list_abilities_relative_level_str = ["100 сек", "90 сек", "80 сек", "70 сек", "60 сек", "50 сек", "40 сек", "30 сек", "20 сек", "10 сек", ]
-			list_abilities_relative_level_int = [100, 90, 80, 70, 60, 50, 40, 30, 20, 10]
+			ability_description = "[color=#997800]востановление брони раз в 10 сек на[/color] [color=#804922]{info}[/color]"
+			list_abilities_relative_level_str = ["0.01%", "0.03%", "0.05%", "0.07%", "0.1%", "0.15%", "0.2%", "0.25%", "0.35%", "0.5%", ]
+			list_abilities_relative_level_int = [0.01, 0.03, 0.05, 0.07, 0.1, 0.15, 0.2, 0.25, 0.35, 0.5, ]
 		"хороший выстрел":
 			num_multiplier_price = 2
 			ability_description = "[color=#997800]25% шанс восстановить броню за убийство врага на[/color] [color=#804922]{info}[/color]"
@@ -350,24 +350,24 @@ func fun_force_increase_decrease(minus = 1) -> void:
 				for cell in inventory_menu.cells_included_forces:
 					if (inventory_menu.cells_included_forces[cell].name_ability == "живая броня"):
 						num_this_type += 1
-						num_average_value += inventory_menu.cells_included_forces[cell].level_ability
+						num_average_value += list_abilities_relative_level_int[inventory_menu.cells_included_forces[cell].level_ability - 1]
 				if (num_this_type == 1):
-					galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[num_level - 1], "plus_hp": 1}
+					galaxy_ship.ability_k1_livingArmor = {"run": true, "plus_hp": num_average_value} 
 				else:
-					galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[int(num_average_value / num_this_type) - 1], "plus_hp": num_this_type * 1}
+					galaxy_ship.ability_k1_livingArmor = {"run": true, "plus_hp": num_average_value}
 				level.hp_ship_battery_passiveсharging.visible = true
 				level.HP_ship_battery.visible = false
 			else:
 				var num_this_type = 0
 				var num_average_value = 0
 				for cell in inventory_menu.cells_included_forces:
-					if (inventory_menu.cells_included_forces[cell].name_ability == "живая броня" and inventory_menu.cells_included_forces[cell].id_ability != str(self )):
+					if (inventory_menu.cells_included_forces[cell].name_ability == "живая броня"):
 						num_this_type += 1
-						num_average_value += inventory_menu.cells_included_forces[cell].level_ability
+						num_average_value += list_abilities_relative_level_int[inventory_menu.cells_included_forces[cell].level_ability - 1]
 				if (num_this_type == 0):
-					galaxy_ship.ability_k1_livingArmor = {"run": false, "num": 0, "plus_hp": 0}
+					galaxy_ship.ability_k1_livingArmor = {"run": false, "num": 0,}
 				else:
-					galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[int(num_average_value / num_this_type) - 1], "plus_hp": num_this_type * 1}
+					galaxy_ship.ability_k1_livingArmor = {"run": true, "plus_hp": num_average_value}
 				level.hp_ship_battery_passiveсharging.visible = false
 				level.HP_ship_battery.visible = true
 		"хороший выстрел":

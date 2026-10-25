@@ -331,7 +331,7 @@ transform = Transform2D(10, 0, 0, 15, 640, 879)
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Galaxy_ship" parent="." instance=ExtResource("2_ekf4v")]
-position = Vector2(374, 1243)
+position = Vector2(513, 1696)
 scale = Vector2(2.1, 2.1)
 
 [node name="Button" type="Button" parent="."]

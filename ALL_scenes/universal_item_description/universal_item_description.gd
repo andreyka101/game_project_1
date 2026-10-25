@@ -87,6 +87,19 @@ func _on_button_buy_pressed() -> void:
 			"скорость пули":
 				galaxy_ship.speed_bullet -= (round((galaxy_ship.speed_bullet_Start / 100.0) * list_abilities_relative_level_int[num_level - 2] * 100) / 100.0)
 				galaxy_ship.speed_bullet += (round((galaxy_ship.speed_bullet_Start / 100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0)
+			# "живая броня":
+			# 	var num_this_type = 0
+			# 	var num_average_value = 0
+			# 	for cell in inventory_menu.cells_included_forces:
+			# 		if (inventory_menu.cells_included_forces[cell].id_ability == ability_id):
+			# 			inventory_menu.cells_included_forces[cell].level_ability = num_level
+			# 		if (inventory_menu.cells_included_forces[cell].name_ability == "живая броня"):
+			# 			num_this_type += 1
+			# 			num_average_value += inventory_menu.cells_included_forces[cell].level_ability
+			# 	if (num_this_type == 1):
+			# 		galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[num_level - 1], "plus_hp": 1}
+			# 	else:
+			# 		galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[int(num_average_value / num_this_type) - 1], "plus_hp": num_this_type * 1}
 			"живая броня":
 				var num_this_type = 0
 				var num_average_value = 0
@@ -100,7 +113,6 @@ func _on_button_buy_pressed() -> void:
 					galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[num_level - 1], "plus_hp": 1}
 				else:
 					galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[int(num_average_value / num_this_type) - 1], "plus_hp": num_this_type * 1}
-				# galaxy_ship.ability_k1_livingArmor = {"run": true, "num": list_abilities_relative_level_int[num_level - 1]}
 			"хороший выстрел":
 				var num_this_type = 0
 				var num_average_value = 0

@@ -44,14 +44,14 @@ var time_text = 0
 # var target_speed = 0.0
 
 
-var ability_k1_livingArmor = {"run": false, "num": 0, "plus_hp": 0}
+var ability_k1_livingArmor = {"run": false, "plus_hp": 0}
 @onready var timer_ability_k_1_living_armor: Timer = $Timer_ability_k1_livingArmor
 
 func fun_start_next_level() -> void:
 	time_text = 0
 	if (ability_k1_livingArmor.run):
 		print("ability_k1_livingArmor.run")
-		timer_ability_k_1_living_armor.start(ability_k1_livingArmor.num)
+		timer_ability_k_1_living_armor.start(10)
 
 func fun_end_current_level() -> void:
 	if (ability_k1_livingArmor.run):
