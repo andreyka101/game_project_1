@@ -15,6 +15,7 @@ func _on_pause_pressed() -> void:
 	# print(enemies.type)
 	pause.visible = false
 	settings_level.visible = true
+	galaxy_ship.fun_end_current_level()
 	Global.stop_game = true
 	parallaxBackground.speed = 0
 	label_hp.text = "max hp = " + str(galaxy_ship.hp_start_player)
@@ -35,6 +36,7 @@ func _on_pause_pressed() -> void:
 func _on_сontinue_pressed() -> void:
 	pause.visible = true
 	settings_level.visible = false
+	galaxy_ship.fun_start_next_level()
 	Global.stop_game = false
 	parallaxBackground.speed = 15
 	for child in enemies.get_children():

@@ -44,6 +44,7 @@ var time_text = 0
 # var target_speed = 0.0
 
 
+
 var ability_k1_livingArmor = {"run": false, "plus_hp": 0}
 @onready var timer_ability_k_1_living_armor: Timer = $Timer_ability_k1_livingArmor
 
@@ -243,11 +244,14 @@ func _on_timer_timeout() -> void:
 func _on_timer_ability_k_1_living_armor_timeout() -> void:
 	if (hp_start_player > hp_player):
 		print("timer run")
-		print(hp_player)
+		print("hp_player T - ", hp_player)
 		print("+")
 		print(ability_k1_livingArmor)
+		print(ability_k1_livingArmor.plus_hp)
+		print((hp_start_player / 100) * ability_k1_livingArmor.plus_hp)
 		hp_player += (hp_start_player / 100) * ability_k1_livingArmor.plus_hp
-		if (hp_start_player <= hp_player):
+		print("hp_player T - ", hp_player)
+		if (hp_start_player < hp_player):
 			hp_player = hp_start_player
 		var tween = create_tween()
 		tween.tween_property(sprite, "modulate", Color("#74FF78"), 0.7)
