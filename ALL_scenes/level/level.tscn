@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://bdw3xl8387e4f"]
+[gd_scene load_steps=65 format=3 uid="uid://bdw3xl8387e4f"]
 
 [ext_resource type="Script" uid="uid://dod02wyv88h72" path="res://ALL_scenes/level/level.gd" id="1_r62w2"]
 [ext_resource type="PackedScene" uid="uid://cwalhxdtsnydh" path="res://ALL_scenes/parallaxBackground_var_1/parallax_background_var_1.tscn" id="2_33107"]
@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://budyqalyoekbb" path="res://photo/HP_ship_battery/HP_ship_battery12.png" id="19_ht6gd"]
 [ext_resource type="Texture2D" uid="uid://b1tghawoe5b5u" path="res://photo/HP_ship_battery/HP_ship_battery3.png" id="19_ldmet"]
 [ext_resource type="Texture2D" uid="uid://cveb1dm2nltur" path="res://photo/HP_ship_battery/HP_ship_battery_passiveCharging12.png" id="19_tbm0f"]
+[ext_resource type="Texture2D" uid="uid://cr88mqw4okple" path="res://photo/HP_ship_battery/sprite/HP_ship_battery_mini1.png" id="20_wqlra"]
 [ext_resource type="Texture2D" uid="uid://rgni22k7i74h" path="res://photo/HP_ship_battery/HP_ship_battery13.png" id="20_xthww"]
 [ext_resource type="Texture2D" uid="uid://dxl4j88v3egjq" path="res://photo/HP_ship_battery/HP_ship_battery11.png" id="22_tbm0f"]
 [ext_resource type="Texture2D" uid="uid://dmsijde3ofdku" path="res://photo/HP_ship_battery/HP_ship_battery10.png" id="23_alisq"]
@@ -41,6 +42,16 @@
 [ext_resource type="Texture2D" uid="uid://bdvp3xbgjmqeo" path="res://photo/HP_ship_battery/HP_ship_battery_passiveCharging6.png" id="36_md6yh"]
 [ext_resource type="Texture2D" uid="uid://ckm2kvo28sfvm" path="res://photo/HP_ship_battery/HP_ship_battery_passiveCharging5.png" id="37_jv74p"]
 [ext_resource type="Texture2D" uid="uid://damu6rrmqjudh" path="res://photo/HP_ship_battery/HP_ship_battery_passiveCharging4.png" id="38_00dbo"]
+[ext_resource type="Texture2D" uid="uid://di45b71vmedvl" path="res://photo/HP_ship_battery/sprite/HP_ship_battery_mini11.png" id="40_fqbw2"]
+[ext_resource type="Texture2D" uid="uid://btujmkiuvnpqf" path="res://photo/HP_ship_battery/sprite/HP_ship_battery_mini10.png" id="41_cmpsx"]
+[ext_resource type="Texture2D" uid="uid://bi1hc0ldqdiyw" path="res://photo/HP_ship_battery/sprite/HP_ship_battery_mini2.png" id="41_yo3g6"]
+[ext_resource type="Texture2D" uid="uid://bag1y1br7ptej" path="res://photo/HP_ship_battery/sprite/HP_ship_battery_mini9.png" id="43_lyjko"]
+[ext_resource type="Texture2D" uid="uid://q6lihofefe7t" path="res://photo/HP_ship_battery/sprite/HP_ship_battery_mini8.png" id="44_2knj4"]
+[ext_resource type="Texture2D" uid="uid://cei52q618hyh5" path="res://photo/HP_ship_battery/sprite/HP_ship_battery_mini7.png" id="45_wvu8l"]
+[ext_resource type="Texture2D" uid="uid://cdx17fa7otgr" path="res://photo/HP_ship_battery/sprite/HP_ship_battery_mini6.png" id="46_2obrl"]
+[ext_resource type="Texture2D" uid="uid://dq5whxg47fstn" path="res://photo/HP_ship_battery/sprite/HP_ship_battery_mini5.png" id="47_eg68l"]
+[ext_resource type="Texture2D" uid="uid://cgwd45qgacanc" path="res://photo/HP_ship_battery/sprite/HP_ship_battery_mini4.png" id="48_mg5sa"]
+[ext_resource type="Texture2D" uid="uid://cms6wcwp1agcx" path="res://photo/HP_ship_battery/sprite/HP_ship_battery_mini3.png" id="49_ijkla"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k7y63"]
 bg_color = Color(0.087, 0, 0.188, 0.707)
@@ -304,6 +315,97 @@ animations = [{
 }],
 "loop": true,
 "name": &"hp_big",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wqlra"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("40_fqbw2")
+}],
+"loop": true,
+"name": &"hp_0%",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("41_cmpsx")
+}],
+"loop": true,
+"name": &"hp_10%",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_wqlra")
+}],
+"loop": true,
+"name": &"hp_100%",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("43_lyjko")
+}],
+"loop": true,
+"name": &"hp_20%",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("44_2knj4")
+}],
+"loop": true,
+"name": &"hp_30%",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("45_wvu8l")
+}],
+"loop": true,
+"name": &"hp_40%",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("46_2obrl")
+}],
+"loop": true,
+"name": &"hp_50%",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("47_eg68l")
+}],
+"loop": true,
+"name": &"hp_60%",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("48_mg5sa")
+}],
+"loop": true,
+"name": &"hp_70%",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("49_ijkla")
+}],
+"loop": true,
+"name": &"hp_80%",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("41_yo3g6")
+}],
+"loop": true,
+"name": &"hp_90%",
 "speed": 5.0
 }]
 
@@ -660,7 +762,7 @@ volume_db = 10.048
 position = Vector2(147, 74)
 scale = Vector2(2.86071, 2.86071)
 sprite_frames = SubResource("SpriteFrames_u50mi")
-animation = &"hp_big"
+animation = &"hp_0%"
 autoplay = "hp_100%"
 
 [node name="HP_ship_battery_passiveСharging" type="AnimatedSprite2D" parent="."]
@@ -668,8 +770,16 @@ visible = false
 position = Vector2(147, 74)
 scale = Vector2(2.861, 2.861)
 sprite_frames = SubResource("SpriteFrames_tbm0f")
-animation = &"hp_big"
+animation = &"hp_0%"
 autoplay = "hp_100%_full"
+
+[node name="PowerArmor_ship_battery" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(178.332, 184.966)
+scale = Vector2(3.88764, 3.88764)
+sprite_frames = SubResource("SpriteFrames_wqlra")
+animation = &"hp_0%"
+autoplay = "hp_100%"
 
 [node name="Coin_HBoxContainer" type="HBoxContainer" parent="."]
 offset_left = 423.0

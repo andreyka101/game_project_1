@@ -21,6 +21,7 @@ var speed_bullet_Start = 400
 var speed_bullet = 400
 var damage_Start = 50
 var damage = 50
+var powerArmor_player = {"run": false, "hp":0, "percentHP":0, "plus_hp": 0}
 # var time_timer = 1.2
 var time_timer = 1
 var time_text = 0
@@ -46,6 +47,7 @@ var time_text = 0
 
 
 var ability_k1_livingArmor = {"run": false, "plus_hp": 0}
+var ability_k7_powerArmor = {"run": false, "plus_hp": 0}
 @onready var timer_ability_k_1_living_armor: Timer = $Timer_ability_k1_livingArmor
 
 func fun_start_next_level() -> void:
