@@ -55,11 +55,17 @@ func fun_start_next_level() -> void:
 	if (ability_k1_livingArmor.run):
 		print("ability_k1_livingArmor.run")
 		timer_ability_k_1_living_armor.start(10)
+	if (powerArmor_player.run):
+		print("powerArmor_player.run")
+		timer_ability_k_1_living_armor.start(7)
 
 func fun_end_current_level() -> void:
 	if (ability_k1_livingArmor.run):
 		print("ability_k1_livingArmor.run.stop() ")
 		timer_ability_k_1_living_armor.stop()
+	if (powerArmor_player.run):
+		print("powerArmor_player.run.stop() ")
+		powerArmor_player.stop()
 
 
 func _ready() -> void:
@@ -257,6 +263,19 @@ func _on_timer_ability_k_1_living_armor_timeout() -> void:
 			hp_player = hp_start_player
 		var tween = create_tween()
 		tween.tween_property(sprite, "modulate", Color("#74FF78"), 0.7)
+		# await get_tree().create_timer(0.1).timeout
+		tween.tween_property(sprite, "modulate", Color("#FFFFFF"), 0.2)
+
+func _on_timer_ability_powerArmor_timeout() -> void:
+	if (round((hp_start_player / 100.0) * powerArmor_player.percentHP) > powerArmor_player.hp):
+		print("timer run")
+		print("hp power - ", powerArmor_player.hp)
+		print("+")
+		powerArmor_player.hp += (hp_start_player / 100.0) * powerArmor_player.plus_hp
+		if (round((hp_start_player / 100.0) * powerArmor_player.percentHP) < powerArmor_player.hp):
+			powerArmor_player.hp = round((hp_start_player / 100.0) * powerArmor_player.percentHP)
+		var tween = create_tween()
+		tween.tween_property(sprite, "modulate", Color("#74b7ff"), 0.7)
 		# await get_tree().create_timer(0.1).timeout
 		tween.tween_property(sprite, "modulate", Color("#FFFFFF"), 0.2)
 
