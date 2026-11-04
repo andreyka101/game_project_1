@@ -198,5 +198,8 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 43
 text = "2"
 
+[node name="Timer_ability_PowerArmor" type="Timer" parent="."]
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Timer_ability_k1_livingArmor" to="." method="_on_timer_ability_k_1_living_armor_timeout"]
+[connection signal="timeout" from="Timer_ability_PowerArmor" to="." method="_on_timer_ability_powerArmor_timeout"]

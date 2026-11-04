@@ -208,28 +208,28 @@ func _process(delta: float) -> void:
 				HP_ship_battery.play("hp_10%")
 			elif (0 >= galaxy_ship.hp_player):
 				HP_ship_battery.play("hp_0%")
-		if (galaxy_ship.ability_k7_powerArmor.run):
-			if ((galaxy_ship.hp_start_player / 100) * 100 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player / 100) * 90 < galaxy_ship.hp_player):
+		if (galaxy_ship.powerArmor_player.run):
+			if ((galaxy_ship.powerArmor_player.hp_start / 100) * 100 >= galaxy_ship.powerArmor_player.hp and (galaxy_ship.powerArmor_player.hp_start / 100) * 90 < galaxy_ship.powerArmor_player.hp):
 				power_armor_ship_battery.play("hp_100%")
-			elif ((galaxy_ship.hp_start_player / 100) * 90 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player / 100) * 80 < galaxy_ship.hp_player):
+			elif ((galaxy_ship.powerArmor_player.hp_start / 100) * 90 >= galaxy_ship.powerArmor_player.hp and (galaxy_ship.powerArmor_player.hp_start / 100) * 80 < galaxy_ship.powerArmor_player.hp):
 				power_armor_ship_battery.play("hp_90%")
-			elif ((galaxy_ship.hp_start_player / 100) * 80 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player / 100) * 70 < galaxy_ship.hp_player):
+			elif ((galaxy_ship.powerArmor_player.hp_start / 100) * 80 >= galaxy_ship.powerArmor_player.hp and (galaxy_ship.powerArmor_player.hp_start / 100) * 70 < galaxy_ship.powerArmor_player.hp):
 				power_armor_ship_battery.play("hp_80%")
-			elif ((galaxy_ship.hp_start_player / 100) * 70 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player / 100) * 60 < galaxy_ship.hp_player):
+			elif ((galaxy_ship.powerArmor_player.hp_start / 100) * 70 >= galaxy_ship.powerArmor_player.hp and (galaxy_ship.powerArmor_player.hp_start / 100) * 60 < galaxy_ship.powerArmor_player.hp):
 				power_armor_ship_battery.play("hp_70%")
-			elif ((galaxy_ship.hp_start_player / 100) * 60 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player / 100) * 50 < galaxy_ship.hp_player):
+			elif ((galaxy_ship.powerArmor_player.hp_start / 100) * 60 >= galaxy_ship.powerArmor_player.hp and (galaxy_ship.powerArmor_player.hp_start / 100) * 50 < galaxy_ship.powerArmor_player.hp):
 				power_armor_ship_battery.play("hp_60%")
-			elif ((galaxy_ship.hp_start_player / 100) * 50 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player / 100) * 40 < galaxy_ship.hp_player):
+			elif ((galaxy_ship.powerArmor_player.hp_start / 100) * 50 >= galaxy_ship.powerArmor_player.hp and (galaxy_ship.powerArmor_player.hp_start / 100) * 40 < galaxy_ship.powerArmor_player.hp):
 				power_armor_ship_battery.play("hp_50%")
-			elif ((galaxy_ship.hp_start_player / 100) * 40 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player / 100) * 30 < galaxy_ship.hp_player):
+			elif ((galaxy_ship.powerArmor_player.hp_start / 100) * 40 >= galaxy_ship.powerArmor_player.hp and (galaxy_ship.powerArmor_player.hp_start / 100) * 30 < galaxy_ship.powerArmor_player.hp):
 				power_armor_ship_battery.play("hp_40%")
-			elif ((galaxy_ship.hp_start_player / 100) * 30 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player / 100) * 20 < galaxy_ship.hp_player):
+			elif ((galaxy_ship.powerArmor_player.hp_start / 100) * 30 >= galaxy_ship.powerArmor_player.hp and (galaxy_ship.powerArmor_player.hp_start / 100) * 20 < galaxy_ship.powerArmor_player.hp):
 				power_armor_ship_battery.play("hp_30%")
-			elif ((galaxy_ship.hp_start_player / 100) * 20 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player / 100) * 10 < galaxy_ship.hp_player):
+			elif ((galaxy_ship.powerArmor_player.hp_start / 100) * 20 >= galaxy_ship.powerArmor_player.hp and (galaxy_ship.powerArmor_player.hp_start / 100) * 10 < galaxy_ship.powerArmor_player.hp):
 				power_armor_ship_battery.play("hp_20%")
-			elif ((galaxy_ship.hp_start_player / 100) * 10 >= galaxy_ship.hp_player and (galaxy_ship.hp_start_player / 100) * 0 < galaxy_ship.hp_player):
+			elif ((galaxy_ship.powerArmor_player.hp_start / 100) * 10 >= galaxy_ship.powerArmor_player.hp and (galaxy_ship.powerArmor_player.hp_start / 100) * 0 < galaxy_ship.powerArmor_player.hp):
 				power_armor_ship_battery.play("hp_10%")
-			elif (0 >= galaxy_ship.hp_player):
+			elif (0 >= galaxy_ship.powerArmor_player.hp):
 				power_armor_ship_battery.play("hp_0%")
 	else:
 		get_tree().change_scene_to_file("res://ALL_scenes/main_menu/main_menu.tscn")

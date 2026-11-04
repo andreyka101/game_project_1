@@ -90,7 +90,10 @@ func _execute_action() -> void:
 
 func fun_changing_text():
 	label_level.text = "level " + str(num_level)
-	label_price.text = str(num_price[num_level - 1] * num_multiplier_price) + " coin"
+	if(num_level == 10):
+		label_price.text = "full"
+	else:
+		label_price.text = str(num_price[num_level - 1] * num_multiplier_price) + " coin"
 func fun_transformation_item():
 	match ability_type:
 		"защита":
@@ -367,9 +370,10 @@ func fun_force_increase_decrease(minus = 1) -> void:
 				var num_this_type = 0
 				var num_average_value = 0
 				for cell in inventory_menu.cells_included_forces:
-					if (inventory_menu.cells_included_forces[cell].name_ability == "живая броня"):
+					if (inventory_menu.cells_included_forces[cell].name_ability == "живая броня" and inventory_menu.cells_included_forces[cell].id_ability != str(self)):
 						num_this_type += 1
 						num_average_value += list_abilities_relative_level_int[inventory_menu.cells_included_forces[cell].level_ability - 1]
+				
 				if (num_this_type == 0):
 					galaxy_ship.ability_k1_livingArmor = {"run": false, "num": 0,}
 				else:
@@ -392,9 +396,10 @@ func fun_force_increase_decrease(minus = 1) -> void:
 				var num_this_type = 0
 				var num_average_value = 0
 				for cell in inventory_menu.cells_included_forces:
-					if (inventory_menu.cells_included_forces[cell].name_ability == "хороший выстрел" and inventory_menu.cells_included_forces[cell].id_ability != str(self )):
+					if (inventory_menu.cells_included_forces[cell].name_ability == "хороший выстрел" and inventory_menu.cells_included_forces[cell].id_ability != str(self)):
 						num_this_type += 1
 						num_average_value += list_abilities_relative_level_int[inventory_menu.cells_included_forces[cell].level_ability - 1]
+				
 				if (num_this_type == 0):
 					Global.playerAbilityLaunch_k2_GuterSchuss = {"run": false, "num": 0}
 				else:
@@ -402,6 +407,7 @@ func fun_force_increase_decrease(minus = 1) -> void:
 		"монета":
 			level.playerAbilityLaunch_k3_Сoin += list_abilities_relative_level_int[num_level - 1] * minus
 		"второй выстрел":
+			print("=== 1")
 			if (minus == 1):
 				# Global.playerAbilityLaunch_k4_AdditionalShot_2 = {"run": 2, "chance": list_abilities_relative_level_int[num_level - 1]}
 				var num_this_type = 0
@@ -418,9 +424,10 @@ func fun_force_increase_decrease(minus = 1) -> void:
 				var num_this_type = 0
 				var num_average_value = 0
 				for cell in inventory_menu.cells_included_forces:
-					if (inventory_menu.cells_included_forces[cell].name_ability == "второй выстрел"):
+					if (inventory_menu.cells_included_forces[cell].name_ability == "второй выстрел" and inventory_menu.cells_included_forces[cell].id_ability != str(self)):
 						num_this_type += 1
 						num_average_value += list_abilities_relative_level_int[inventory_menu.cells_included_forces[cell].level_ability - 1]
+				
 				if (num_this_type == 0):
 					Global.playerAbilityLaunch_k4_AdditionalShot_2 = {"run": false, "chance": 0}
 				else:
@@ -442,9 +449,10 @@ func fun_force_increase_decrease(minus = 1) -> void:
 				var num_this_type = 0
 				var num_average_value = 0
 				for cell in inventory_menu.cells_included_forces:
-					if (inventory_menu.cells_included_forces[cell].name_ability == "третий выстрел"):
+					if (inventory_menu.cells_included_forces[cell].name_ability == "третий выстрел" and inventory_menu.cells_included_forces[cell].id_ability != str(self)):
 						num_this_type += 1
 						num_average_value += list_abilities_relative_level_int[inventory_menu.cells_included_forces[cell].level_ability - 1]
+				
 				if (num_this_type == 0):
 					Global.playerAbilityLaunch_k4_AdditionalShot_3 = {"run": false, "chance": 0}
 				else:
@@ -465,9 +473,10 @@ func fun_force_increase_decrease(minus = 1) -> void:
 				var num_this_type = 0
 				var num_average_value = 0
 				for cell in inventory_menu.cells_included_forces:
-					if (inventory_menu.cells_included_forces[cell].name_ability == "лучший выстрел" and inventory_menu.cells_included_forces[cell].id_ability != str(self )):
+					if (inventory_menu.cells_included_forces[cell].name_ability == "лучший выстрел" and inventory_menu.cells_included_forces[cell].id_ability != str(self)):
 						num_this_type += 1
 						num_average_value += list_abilities_relative_level_int[inventory_menu.cells_included_forces[cell].level_ability - 1]
+				
 				if (num_this_type == 0):
 					Global.playerAbilityLaunch_k5_BestShot = {"run": false, "num": 0}
 				else:
@@ -488,9 +497,10 @@ func fun_force_increase_decrease(minus = 1) -> void:
 				var num_this_type = 0
 				var num_average_value = 0
 				for cell in inventory_menu.cells_included_forces:
-					if (inventory_menu.cells_included_forces[cell].name_ability == "идеальный выстрел" and inventory_menu.cells_included_forces[cell].id_ability != str(self )):
+					if (inventory_menu.cells_included_forces[cell].name_ability == "идеальный выстрел" and inventory_menu.cells_included_forces[cell].id_ability != str(self)):
 						num_this_type += 1
 						num_average_value += list_abilities_relative_level_int[inventory_menu.cells_included_forces[cell].level_ability - 1]
+				
 				if (num_this_type == 0):
 					Global.playerAbilityLaunch_k6_PerfectShot = {"run": false, "num": 0}
 				else:
@@ -504,27 +514,31 @@ func fun_force_increase_decrease(minus = 1) -> void:
 						num_this_type += 1
 						num_average_value += list_abilities_relative_level_int[inventory_menu.cells_included_forces[cell].level_ability - 1]
 				if (num_this_type == 1):
-					galaxy_ship.powerArmor_player = {"run": true, "hp":0, "percentHP":5 * num_this_type, "plus_hp": num_average_value}
+					galaxy_ship.powerArmor_player = {"run": true, "hp":0, "hp_start":0, "percentHP":5 * num_this_type, "plus_hp": num_average_value}
 					galaxy_ship.powerArmor_player.hp = round((galaxy_ship.hp_start_player / 100.0) * galaxy_ship.powerArmor_player.percentHP)
+					galaxy_ship.powerArmor_player.hp_start = round((galaxy_ship.hp_start_player / 100.0) * galaxy_ship.powerArmor_player.percentHP)
 				else:
-					galaxy_ship.powerArmor_player = {"run": true, "hp":0, "percentHP":5 * num_this_type, "plus_hp": num_average_value}
+					galaxy_ship.powerArmor_player = {"run": true, "hp":0, "hp_start":0, "percentHP":5 * num_this_type, "plus_hp": num_average_value}
 					galaxy_ship.powerArmor_player.hp = round((galaxy_ship.hp_start_player / 100.0) * galaxy_ship.powerArmor_player.percentHP)
-				level.hp_ship_battery_passiveсharging.visible = true
-				level.HP_ship_battery.visible = false
+					galaxy_ship.powerArmor_player.hp_start = round((galaxy_ship.hp_start_player / 100.0) * galaxy_ship.powerArmor_player.percentHP)
+				level.power_armor_ship_battery.visible = true
+				# level.HP_ship_battery.visible = false
 			else:
 				var num_this_type = 0
 				var num_average_value = 0
 				for cell in inventory_menu.cells_included_forces:
-					if (inventory_menu.cells_included_forces[cell].name_ability == "энергоброня"):
+					if (inventory_menu.cells_included_forces[cell].name_ability == "энергоброня" and inventory_menu.cells_included_forces[cell].id_ability != str(self)):
 						num_this_type += 1
 						num_average_value += list_abilities_relative_level_int[inventory_menu.cells_included_forces[cell].level_ability - 1]
+				
 				if (num_this_type == 0):
-					galaxy_ship.powerArmor_player = {"run": false, "hp":0, "percentHP":0, "plus_hp": 0}
+					galaxy_ship.powerArmor_player = {"run": false, "hp":0, "hp_start":0, "percentHP":0, "plus_hp": 0}
 				else:
-					galaxy_ship.powerArmor_player = {"run": true, "hp":0, "percentHP":5 * num_this_type, "plus_hp": num_average_value}
+					galaxy_ship.powerArmor_player = {"run": true, "hp":0, "hp_start":0, "percentHP":5 * num_this_type, "plus_hp": num_average_value}
 					galaxy_ship.powerArmor_player.hp = round((galaxy_ship.hp_start_player / 100.0) * galaxy_ship.powerArmor_player.percentHP)
-				level.hp_ship_battery_passiveсharging.visible = false
-				level.HP_ship_battery.visible = true
+					galaxy_ship.powerArmor_player.hp_start = round((galaxy_ship.hp_start_player / 100.0) * galaxy_ship.powerArmor_player.percentHP)
+				level.power_armor_ship_battery.visible = false
+				# level.HP_ship_battery.visible = true
 			
 	if (num_level < 10):
 		if (num_price[num_level - 1] * num_multiplier_price > Global.coin_player):

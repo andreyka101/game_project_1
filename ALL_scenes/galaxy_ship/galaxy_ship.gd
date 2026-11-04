@@ -21,7 +21,7 @@ var speed_bullet_Start = 400
 var speed_bullet = 400
 var damage_Start = 50
 var damage = 50
-var powerArmor_player = {"run": false, "hp":0, "percentHP":0, "plus_hp": 0}
+var powerArmor_player = {"run": false, "hp":0, "hp_start":0, "percentHP":0, "plus_hp": 0}
 # var time_timer = 1.2
 var time_timer = 1
 var time_text = 0
@@ -47,8 +47,8 @@ var time_text = 0
 
 
 var ability_k1_livingArmor = {"run": false, "plus_hp": 0}
-var ability_k7_powerArmor = {"run": false, "plus_hp": 0}
 @onready var timer_ability_k_1_living_armor: Timer = $Timer_ability_k1_livingArmor
+@onready var timer_ability_PowerArmor: Timer = $Timer_ability_PowerArmor
 
 func fun_start_next_level() -> void:
 	time_text = 0
@@ -57,7 +57,7 @@ func fun_start_next_level() -> void:
 		timer_ability_k_1_living_armor.start(10)
 	if (powerArmor_player.run):
 		print("powerArmor_player.run")
-		timer_ability_k_1_living_armor.start(7)
+		timer_ability_PowerArmor.start(7)
 
 func fun_end_current_level() -> void:
 	if (ability_k1_livingArmor.run):
@@ -65,7 +65,7 @@ func fun_end_current_level() -> void:
 		timer_ability_k_1_living_armor.stop()
 	if (powerArmor_player.run):
 		print("powerArmor_player.run.stop() ")
-		powerArmor_player.stop()
+		timer_ability_PowerArmor.stop()
 
 
 func _ready() -> void:
@@ -73,7 +73,8 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	# print("hp_player - ", hp_player)
+	print("hp_player - ", hp_player)
+	print(powerArmor_player)
 	# print(ability_k1_livingArmor)
 	# меняем анимацию исходя от процента hp
 	if (!Global.stop_game):
@@ -267,13 +268,13 @@ func _on_timer_ability_k_1_living_armor_timeout() -> void:
 		tween.tween_property(sprite, "modulate", Color("#FFFFFF"), 0.2)
 
 func _on_timer_ability_powerArmor_timeout() -> void:
-	if (round((hp_start_player / 100.0) * powerArmor_player.percentHP) > powerArmor_player.hp):
+	if (powerArmor_player.hp_start > powerArmor_player.hp):
 		print("timer run")
 		print("hp power - ", powerArmor_player.hp)
 		print("+")
 		powerArmor_player.hp += (hp_start_player / 100.0) * powerArmor_player.plus_hp
 		if (round((hp_start_player / 100.0) * powerArmor_player.percentHP) < powerArmor_player.hp):
-			powerArmor_player.hp = round((hp_start_player / 100.0) * powerArmor_player.percentHP)
+			powerArmor_player.hp = powerArmor_player.hp_start
 		var tween = create_tween()
 		tween.tween_property(sprite, "modulate", Color("#74b7ff"), 0.7)
 		# await get_tree().create_timer(0.1).timeout
