@@ -63,7 +63,7 @@ func _ready() -> void:
 func creatingEnemies_meteorite(enemy_difficulty = 0):
 	if (price_level >= 1):
 		var meteorite: Area2D = meteorite_scene.instantiate()
-		meteorite.position = Vector2(randi_range(-100, 1180), -90)
+		meteorite.position = Vector2(-6000, 0)
 		meteorite.enemy_level = (num_level_hard / 10) + 1
 		if (enemy_difficulty == 0):
 			meteorite.super_enemy = false
@@ -72,6 +72,7 @@ func creatingEnemies_meteorite(enemy_difficulty = 0):
 		elif (enemy_difficulty == 2):
 			meteorite.mega_enemy = true
 		price_level -= 1
+		# await get_tree().create_timer(randf_range(0.1, 0.5)).timeout
 		arr_enemies.append(meteorite)
 		# enemies.add_child(meteorite)
 func creatingEnemies_enemy_ship_White(enemy_difficulty = 0):
@@ -352,6 +353,7 @@ func click_end_menu():
 	elif ((num_level_hard % 100) == 0):
 			start_price_level = (num_level_hard / 100) * 25
 	price_level = start_price_level
+	# await get_tree().create_timer(0.5).timeout
 	method_level()
 
 
@@ -389,6 +391,8 @@ func method_level():
 
 	# print(start_price_level)
 	while (price_level != 0 and number_enemies_on_wave != 0):
+
+
 		# print(number_enemies_on_wave)
 		# 3
 		if ((num_level_hard % 100) == 1):
@@ -1817,7 +1821,10 @@ func method_level():
 			# number_enemies_on_wave = 0
 			creatingEnemies_drone_Violet()
 
+		# await get_tree().create_timer(randf_range(0.1, 0.5)).timeout
+
 
 	for enemy in arr_enemies:
 		enemies.add_child(enemy)
+		await get_tree().create_timer(randf_range(0.5, 4)).timeout
 	arr_enemies = []

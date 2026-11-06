@@ -194,7 +194,10 @@ func _on_button_buy_pressed() -> void:
 				for cell in inventory_menu.cells_included_forces:
 					if (inventory_menu.cells_included_forces[cell].name_ability == "энергоброня"):
 						num_this_type += 1
-						num_average_value += list_abilities_relative_level_int[inventory_menu.cells_included_forces[cell].level_ability - 1]
+						if (inventory_menu.cells_included_forces[cell].id_ability == ability_id):
+							num_average_value += list_abilities_relative_level_int[inventory_menu.cells_included_forces[cell].level_ability]
+						else:
+							num_average_value += list_abilities_relative_level_int[inventory_menu.cells_included_forces[cell].level_ability - 1]
 				if (num_this_type == 1):
 					galaxy_ship.powerArmor_player = {"run": true, "hp": 0, "hp_start": 0, "percentHP": 5 * num_this_type, "plus_hp": num_average_value}
 					galaxy_ship.powerArmor_player.hp = round((galaxy_ship.hp_start_player / 100.0) * galaxy_ship.powerArmor_player.percentHP)

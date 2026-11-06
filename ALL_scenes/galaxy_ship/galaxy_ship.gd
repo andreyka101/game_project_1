@@ -22,8 +22,8 @@ var speed_bullet = 400
 var damage_Start = 50
 var damage = 50
 var powerArmor_player = {"run": false, "hp":0, "hp_start":0, "percentHP":0, "plus_hp": 0}
-# var time_timer = 1.2
-var time_timer = 1
+var time_timer = 1.2
+# var time_timer = 1
 var time_text = 0
 @onready var ltext = $Label
 
@@ -53,18 +53,18 @@ var ability_k1_livingArmor = {"run": false, "plus_hp": 0}
 func fun_start_next_level() -> void:
 	time_text = 0
 	if (ability_k1_livingArmor.run):
-		print("ability_k1_livingArmor.run")
+		# print("ability_k1_livingArmor.run")
 		timer_ability_k_1_living_armor.start(10)
 	if (powerArmor_player.run):
-		print("powerArmor_player.run")
+		# print("powerArmor_player.run")
 		timer_ability_PowerArmor.start(7)
 
 func fun_end_current_level() -> void:
 	if (ability_k1_livingArmor.run):
-		print("ability_k1_livingArmor.run.stop() ")
+		# print("ability_k1_livingArmor.run.stop() ")
 		timer_ability_k_1_living_armor.stop()
 	if (powerArmor_player.run):
-		print("powerArmor_player.run.stop() ")
+		# print("powerArmor_player.run.stop() ")
 		timer_ability_PowerArmor.stop()
 
 
@@ -73,8 +73,8 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	print("hp_player - ", hp_player)
-	print(powerArmor_player)
+	# print("hp_player - ", hp_player)
+	# print(powerArmor_player)
 	# print(ability_k1_livingArmor)
 	# меняем анимацию исходя от процента hp
 	if (!Global.stop_game):
@@ -162,7 +162,6 @@ func _physics_process(delta: float) -> void:
 
 
 func _process(delta: float):
-	ltext.text = str(time_text)
 	# включение / выключение атаки
 	#if(Input.is_action_just_pressed("attack")):
 		#attack_bool = true

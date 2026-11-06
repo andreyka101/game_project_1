@@ -298,9 +298,9 @@ text = "Level 1"
 [node name="PlayerStatistics_VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 340.0
-offset_top = 130.0
+offset_top = 140.0
 offset_right = 723.0
-offset_bottom = 384.0
+offset_bottom = 394.0
 
 [node name="ShipSpeed_Label" type="Label" parent="PlayerStatistics_VBoxContainer"]
 layout_mode = 2
@@ -347,9 +347,9 @@ text = "продолжить"
 
 [node name="ShopItem_CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 0
-offset_top = 966.0
+offset_top = 799.0
 offset_right = 1080.0
-offset_bottom = 1307.0
+offset_bottom = 1223.0
 
 [node name="ShopItem_PanelContainer" type="PanelContainer" parent="ShopItem_CenterContainer"]
 layout_mode = 2
@@ -365,7 +365,7 @@ columns = 3
 layout_mode = 2
 theme_override_font_sizes/font_size = 39
 theme_override_styles/normal = SubResource("StyleBoxEmpty_mnfl7")
-text = "скорость"
+text = "защита"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -373,14 +373,14 @@ vertical_alignment = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 39
 theme_override_styles/normal = SubResource("StyleBoxEmpty_mnfl7")
-text = "защита"
+text = "сила"
 horizontal_alignment = 1
 
 [node name="Label3" type="Label" parent="ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 39
 theme_override_styles/normal = SubResource("StyleBoxEmpty_mnfl7")
-text = "сила"
+text = "скорость"
 horizontal_alignment = 1
 
 [node name="Slot1" type="Panel" parent="ShopItem_CenterContainer/ShopItem_PanelContainer/ShopItem_GridContainer"]
@@ -460,9 +460,9 @@ horizontal_alignment = 1
 
 [node name="InventoryСells_CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 0
-offset_top = 1396.0
+offset_top = 1329.0
 offset_right = 1080.0
-offset_bottom = 2213.0
+offset_bottom = 2146.0
 
 [node name="InventoryСells_PanelContainer" type="PanelContainer" parent="InventoryСells_CenterContainer"]
 layout_mode = 2
@@ -530,6 +530,34 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
 
+[node name="Slot9" type="Panel" parent="InventoryСells_CenterContainer/InventoryСells_PanelContainer/InventoryСells_GridContainer"]
+custom_minimum_size = Vector2(240, 267)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
+
+[node name="Slot10" type="Panel" parent="InventoryСells_CenterContainer/InventoryСells_PanelContainer/InventoryСells_GridContainer"]
+custom_minimum_size = Vector2(240, 267)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
+
+[node name="Slot11" type="Panel" parent="InventoryСells_CenterContainer/InventoryСells_PanelContainer/InventoryСells_GridContainer"]
+custom_minimum_size = Vector2(240, 267)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
+
+[node name="Slot12" type="Panel" parent="InventoryСells_CenterContainer/InventoryСells_PanelContainer/InventoryСells_GridContainer"]
+custom_minimum_size = Vector2(240, 267)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_sfd42")
+
 [node name="ItemsContainer" type="Control" parent="."]
 anchors_preset = 0
 
@@ -539,10 +567,10 @@ layout_mode = 1
 
 [node name="HealingButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 87.0
-offset_top = 520.0
-offset_right = 815.0
-offset_bottom = 759.0
+offset_left = 50.0
+offset_top = 503.0
+offset_right = 778.0
+offset_bottom = 742.0
 theme_override_font_sizes/font_size = 56
 text = "+ 25% HP
 

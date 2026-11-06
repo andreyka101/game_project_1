@@ -213,7 +213,7 @@ func _physics_process(delta: float) -> void:
 		if (super_enemy_star.rotation_degrees <= -360):
 			super_enemy_star.rotation_degrees += 360
 
-	if (position.y > 1700):
+	if (position.y > 2500):
 		print(Time.get_unix_time_from_system() - time_appearance_enemy)
 		self.queue_free()
 
