@@ -192,7 +192,11 @@ func _on_body_entered(body: Node2D) -> void:
 	# если касаемся корабля игрока то наносим ему урон и взрываемся
 	if (body.name == "Galaxy_ship" and !death):
 		death = true
-		body.hp_player -= damage
+		if(body.powerArmor_player.run and body.powerArmor_player.hp >= damage):
+			body.powerArmor_player.hp -= damage
+		else:
+			body.hp_player -= damage
+		# body.hp_player -= damage
 		sprite_head.play("explosion")
 		sprite_fire.play("explosion")
 		await sprite_head.animation_finished

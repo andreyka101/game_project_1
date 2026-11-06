@@ -73,7 +73,7 @@ func _on_button_buy_pressed() -> void:
 
 		match ability_type:
 			"защита":
-				if(galaxy_ship.hp_player <= galaxy_ship.hp_start_player):
+				if (galaxy_ship.hp_player <= galaxy_ship.hp_start_player):
 					galaxy_ship.hp_player -= round((galaxy_ship.hp_startStart_player / 100.0) * list_abilities_relative_level_int[num_level - 2] * 100) / 100.0
 					galaxy_ship.hp_player += round((galaxy_ship.hp_startStart_player / 100.0) * list_abilities_relative_level_int[num_level - 1] * 100) / 100.0
 				galaxy_ship.hp_start_player -= round((galaxy_ship.hp_startStart_player / 100.0) * list_abilities_relative_level_int[num_level - 2] * 100) / 100.0
@@ -188,6 +188,22 @@ func _on_button_buy_pressed() -> void:
 					Global.playerAbilityLaunch_k6_PerfectShot = {"run": true, "num": num_average_value}
 				else:
 					Global.playerAbilityLaunch_k6_PerfectShot = {"run": true, "num": num_average_value}
+			"энергоброня":
+				var num_this_type = 0
+				var num_average_value = 0
+				for cell in inventory_menu.cells_included_forces:
+					if (inventory_menu.cells_included_forces[cell].name_ability == "энергоброня"):
+						num_this_type += 1
+						num_average_value += list_abilities_relative_level_int[inventory_menu.cells_included_forces[cell].level_ability - 1]
+				if (num_this_type == 1):
+					galaxy_ship.powerArmor_player = {"run": true, "hp": 0, "hp_start": 0, "percentHP": 5 * num_this_type, "plus_hp": num_average_value}
+					galaxy_ship.powerArmor_player.hp = round((galaxy_ship.hp_start_player / 100.0) * galaxy_ship.powerArmor_player.percentHP)
+					galaxy_ship.powerArmor_player.hp_start = round((galaxy_ship.hp_start_player / 100.0) * galaxy_ship.powerArmor_player.percentHP)
+				else:
+					galaxy_ship.powerArmor_player = {"run": true, "hp": 0, "hp_start": 0, "percentHP": 5 * num_this_type, "plus_hp": num_average_value}
+					galaxy_ship.powerArmor_player.hp = round((galaxy_ship.hp_start_player / 100.0) * galaxy_ship.powerArmor_player.percentHP)
+					galaxy_ship.powerArmor_player.hp_start = round((galaxy_ship.hp_start_player / 100.0) * galaxy_ship.powerArmor_player.percentHP)
+				# level.power_armor_ship_battery.visible = true
 		
 		if (num_level < 10):
 			button_buy.text = str(num_price[num_level - 1] * num_multiplier_price) + " coin"

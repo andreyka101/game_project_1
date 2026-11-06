@@ -232,7 +232,11 @@ func _on_timer_timeout() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if(body.name == "Galaxy_ship" and death):
 		death = true
-		body.hp_player -= damage_ship
+		if(body.powerArmor_player.run and body.powerArmor_player.hp >= damage_ship):
+			body.powerArmor_player.hp -= damage_ship
+		else:
+			body.hp_player -= damage_ship
+		# body.hp_player -= damage_ship
 		sprite2D.play("explosion")
 		await sprite2D.animation_finished
 		var enemy_explosion_sound_scene = load("res://ALL_scenes/enemy_explosion_sound/enemy_explosion_sound.tscn")

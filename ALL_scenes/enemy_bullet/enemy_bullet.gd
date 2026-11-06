@@ -55,8 +55,11 @@ func _physics_process(delta: float) -> void:
 # наносим урон игроку при вхождении
 func _on_body_entered(body: Node2D) -> void:
 	if(body.name == "Galaxy_ship"):
-	
-		body.hp_player -= damage_bullet
+		if(body.powerArmor_player.run and body.powerArmor_player.hp >= damage_bullet):
+			body.powerArmor_player.hp -= damage_bullet
+		else:
+			body.hp_player -= damage_bullet
+		# body.hp_player -= damage_bullet
 		self.queue_free()
 		
 
