@@ -34,9 +34,16 @@ var stop_time = false
 var time_appearance_enemy
 var save_time = 0
 
+var start_move = false
+var local_common_timer = 0
+
 
 
 func _ready() -> void:
+	await get_tree().create_timer(local_common_timer, false).timeout
+	start_move = true
+
+	position = Vector2(randi_range(0, 1080), -100)
 	time_appearance_enemy = Time.get_unix_time_from_system()
 
 	if(super_enemy):
@@ -172,49 +179,50 @@ func _ready() -> void:
 	
 
 func _physics_process(delta: float) -> void:
-
-	if(Global.stop_game and !stop_time):
-		stop_time = true
-		save_time = Time.get_unix_time_from_system() - time_appearance_enemy
-
-	if(!Global.stop_game and stop_time):
-		stop_time = false
-		time_appearance_enemy = Time.get_unix_time_from_system() - save_time
-
-
-	if(Global.stop_game):
-		timer.paused = true
-		timer_position.paused = true
-		timer_star.paused = true
-	else:
-		timer.paused = false
-		timer_position.paused = false
-		timer_star.paused = false
-
 	# движение корабля
-	if(hp <= 0 and death):
-		death = false
-		# if (Global.stop_game):
-		# 	sprite2D.stop()
-		# else:
-		# 	sprite2D.play_backwards()
-		sprite2D.play("explosion")
-		await sprite2D.animation_finished
-		var enemy_explosion_sound_scene = load("res://ALL_scenes/enemy_explosion_sound/enemy_explosion_sound.tscn")
-		var enemy_explosion_sound = enemy_explosion_sound_scene.instantiate()
-		level.add_child(enemy_explosion_sound)
-		print(Time.get_unix_time_from_system() - time_appearance_enemy)
-		self.queue_free()
-	if((position.x <= position_save.x - 15 or position.x >= position_save.x + 15) or (position.y <= position_save.y - 15 or position.y >= position_save.y + 15)) and death and !Global.stop_game:
-		self.position += self.position.direction_to(position_save) * speed_ship * delta
+	if (start_move):
 
-	if((super_enemy or mega_enemy) and !Global.stop_game):
-		super_enemy_star.position += super_enemy_star.position.direction_to(move_star) * 30 * delta
-		super_enemy_star.rotation_degrees += speed_rotation_star
-		if (super_enemy_star.rotation_degrees >= 360):
-			super_enemy_star.rotation_degrees -= 360
-		if (super_enemy_star.rotation_degrees <= -360):
-			super_enemy_star.rotation_degrees += 360
+		if(Global.stop_game and !stop_time):
+			stop_time = true
+			save_time = Time.get_unix_time_from_system() - time_appearance_enemy
+
+		if(!Global.stop_game and stop_time):
+			stop_time = false
+			time_appearance_enemy = Time.get_unix_time_from_system() - save_time
+
+
+		if(Global.stop_game):
+			timer.paused = true
+			timer_position.paused = true
+			timer_star.paused = true
+		else:
+			timer.paused = false
+			timer_position.paused = false
+			timer_star.paused = false
+
+		if(hp <= 0 and death):
+			death = false
+			# if (Global.stop_game):
+			# 	sprite2D.stop()
+			# else:
+			# 	sprite2D.play_backwards()
+			sprite2D.play("explosion")
+			await sprite2D.animation_finished
+			var enemy_explosion_sound_scene = load("res://ALL_scenes/enemy_explosion_sound/enemy_explosion_sound.tscn")
+			var enemy_explosion_sound = enemy_explosion_sound_scene.instantiate()
+			level.add_child(enemy_explosion_sound)
+			print(Time.get_unix_time_from_system() - time_appearance_enemy)
+			self.queue_free()
+		if((position.x <= position_save.x - 15 or position.x >= position_save.x + 15) or (position.y <= position_save.y - 15 or position.y >= position_save.y + 15)) and death and !Global.stop_game:
+			self.position += self.position.direction_to(position_save) * speed_ship * delta
+
+		if((super_enemy or mega_enemy) and !Global.stop_game):
+			super_enemy_star.position += super_enemy_star.position.direction_to(move_star) * 30 * delta
+			super_enemy_star.rotation_degrees += speed_rotation_star
+			if (super_enemy_star.rotation_degrees >= 360):
+				super_enemy_star.rotation_degrees -= 360
+			if (super_enemy_star.rotation_degrees <= -360):
+				super_enemy_star.rotation_degrees += 360
 
 
 # создаем пулю раз в какое-то время

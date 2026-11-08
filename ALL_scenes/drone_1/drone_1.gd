@@ -21,41 +21,50 @@ var speed
 var enemy_level = 1
 var super_enemy = false
 var mega_enemy = false
-var move_star:Vector2
+var move_star: Vector2
 var speed_rotation_star
 var stop_time = false
 var time_appearance_enemy
 var save_time = 0
 
+var start_move = false
+var local_common_timer = 0
+
+
 
 func _ready() -> void:
+	# print("drone_Violet ", local_common_timer)
+	await get_tree().create_timer(local_common_timer, false).timeout
+	start_move = true
+
+	position = Vector2(randi_range(-200, 1280), -50)
 	time_appearance_enemy = Time.get_unix_time_from_system()
 
-	if(super_enemy):
+	if (super_enemy):
 		enemy_level += 1
-		var num_scale_star = randf_range(0.5 , 0.7)
-		super_enemy_star.scale = Vector2(num_scale_star , num_scale_star)
+		var num_scale_star = randf_range(0.5, 0.7)
+		super_enemy_star.scale = Vector2(num_scale_star, num_scale_star)
 		super_enemy_star.visible = true
 		if (randi_range(0, 1) == 1):
-			speed_rotation_star = randf_range(2 , 7)
+			speed_rotation_star = randf_range(2, 7)
 		else:
-			speed_rotation_star = randf_range(-2 , -7)
+			speed_rotation_star = randf_range(-2, -7)
 
-		move_star = Vector2(randf_range(-42,42) , randf_range(-42,42))
-		super_enemy_star.position = Vector2(randf_range(-42,42) , randf_range(-42,42))
-	elif(mega_enemy):
+		move_star = Vector2(randf_range(-42, 42), randf_range(-42, 42))
+		super_enemy_star.position = Vector2(randf_range(-42, 42), randf_range(-42, 42))
+	elif (mega_enemy):
 		enemy_level += 2
 		super_enemy_star.modulate = "ff0000"
-		var num_scale_star = randf_range(0.5 , 0.7)
-		super_enemy_star.scale = Vector2(num_scale_star , num_scale_star)
+		var num_scale_star = randf_range(0.5, 0.7)
+		super_enemy_star.scale = Vector2(num_scale_star, num_scale_star)
 		super_enemy_star.visible = true
 		if (randi_range(0, 1) == 1):
-			speed_rotation_star = randf_range(2 , 7)
+			speed_rotation_star = randf_range(2, 7)
 		else:
-			speed_rotation_star = randf_range(-2 , -7)
+			speed_rotation_star = randf_range(-2, -7)
 
-		move_star = Vector2(randf_range(-42,42) , randf_range(-42,42))
-		super_enemy_star.position = Vector2(randf_range(-42,42) , randf_range(-42,42))
+		move_star = Vector2(randf_range(-42, 42), randf_range(-42, 42))
+		super_enemy_star.position = Vector2(randf_range(-42, 42), randf_range(-42, 42))
 
 
 	# задаём направление для вращения головы дрона
@@ -64,31 +73,31 @@ func _ready() -> void:
 	else:
 		speed_rotation = -5
 	
-	if(enemy_level >= 1 and enemy_level < 5):
+	if (enemy_level >= 1 and enemy_level < 5):
 		speed = 150
-	elif(enemy_level >= 5 and enemy_level < 10):
+	elif (enemy_level >= 5 and enemy_level < 10):
 		speed = 175
-	elif(enemy_level >= 10 and enemy_level < 20):
+	elif (enemy_level >= 10 and enemy_level < 20):
 		speed = 200
-	elif(enemy_level >= 20 and enemy_level < 30):
+	elif (enemy_level >= 20 and enemy_level < 30):
 		speed = 225
-	elif(enemy_level >= 30 and enemy_level < 40):
+	elif (enemy_level >= 30 and enemy_level < 40):
 		speed = 250
-	elif(enemy_level >= 40 and enemy_level < 50):
+	elif (enemy_level >= 40 and enemy_level < 50):
 		speed = 275
-	elif(enemy_level >= 50 and enemy_level < 60):
+	elif (enemy_level >= 50 and enemy_level < 60):
 		speed = 300
-	elif(enemy_level >= 60 and enemy_level < 70):
+	elif (enemy_level >= 60 and enemy_level < 70):
 		speed = 350
-	elif(enemy_level >= 70 and enemy_level < 80):
+	elif (enemy_level >= 70 and enemy_level < 80):
 		speed = 400
-	elif(enemy_level >= 80 and enemy_level < 90):
+	elif (enemy_level >= 80 and enemy_level < 90):
 		speed = 450
-	elif(enemy_level >= 90 and enemy_level < 100):
+	elif (enemy_level >= 90 and enemy_level < 100):
 		speed = 500
-	elif(enemy_level >= 100 and enemy_level < 150):
+	elif (enemy_level >= 100 and enemy_level < 150):
 		speed = 550
-	elif(enemy_level >= 150):
+	elif (enemy_level >= 150):
 		speed = 600
 
 	if (enemy_level >= 1 and enemy_level <= 10):
@@ -121,12 +130,12 @@ func _ready() -> void:
 		
 
 func _process(delta: float) -> void:
-		
-	if(Global.stop_game and !stop_time):
+	if (Global.stop_game and !stop_time):
 		stop_time = true
-		save_time = Time.get_unix_time_from_system() - time_appearance_enemy
+		if (start_move):
+			save_time = Time.get_unix_time_from_system() - time_appearance_enemy
 
-	if(!Global.stop_game and stop_time):
+	if (!Global.stop_game and stop_time):
 		stop_time = false
 		time_appearance_enemy = Time.get_unix_time_from_system() - save_time
 
@@ -155,44 +164,44 @@ func _process(delta: float) -> void:
 
 	# дрон летит в сторону корабля игрока
 	
-	
-	if (hp <= 0 and !death):
-		sprite_fire.play("explosion")
-		sprite_head.play("explosion")
-		for element_scene in arr_enemy:
-			element_scene.hp -= damage
-		speed_rotation = 0
-		speed = 0
-		death = true
-		await sprite_head.animation_finished
-		var enemy_explosion_sound_scene = load("res://ALL_scenes/enemy_explosion_sound/enemy_explosion_sound.tscn")
-		var enemy_explosion_sound = enemy_explosion_sound_scene.instantiate()
-		level.add_child(enemy_explosion_sound)
-		print(Time.get_unix_time_from_system() - time_appearance_enemy)
-		self.queue_free()
-	# print(arr_enemy)
-	# for i in arr_enemy:
-		# print(i.hp)
-	
-	if (galaxy_ship.position != null and !Global.stop_game and !death):
-		position += self.position.direction_to(galaxy_ship.position) * speed * delta
-		look_at(galaxy_ship.position)
-	
+	if (start_move):
+		if (hp <= 0 and !death):
+			sprite_fire.play("explosion")
+			sprite_head.play("explosion")
+			for element_scene in arr_enemy:
+				element_scene.hp -= damage
+			speed_rotation = 0
+			speed = 0
+			death = true
+			await sprite_head.animation_finished
+			var enemy_explosion_sound_scene = load("res://ALL_scenes/enemy_explosion_sound/enemy_explosion_sound.tscn")
+			var enemy_explosion_sound = enemy_explosion_sound_scene.instantiate()
+			level.add_child(enemy_explosion_sound)
+			print(Time.get_unix_time_from_system() - time_appearance_enemy)
+			self.queue_free()
+		# print(arr_enemy)
+		# for i in arr_enemy:
+			# print(i.hp)
+		
+		if (galaxy_ship.position != null and !Global.stop_game and !death):
+			position += self.position.direction_to(galaxy_ship.position) * speed * delta
+			look_at(galaxy_ship.position)
+		
 
-	if((super_enemy or mega_enemy) and !Global.stop_game):
-		super_enemy_star.position += super_enemy_star.position.direction_to(move_star) * 30 * delta
-		super_enemy_star.rotation_degrees += speed_rotation_star
-		if (super_enemy_star.rotation_degrees >= 360):
-			super_enemy_star.rotation_degrees -= 360
-		if (super_enemy_star.rotation_degrees <= -360):
-			super_enemy_star.rotation_degrees += 360
+		if ((super_enemy or mega_enemy) and !Global.stop_game):
+			super_enemy_star.position += super_enemy_star.position.direction_to(move_star) * 30 * delta
+			super_enemy_star.rotation_degrees += speed_rotation_star
+			if (super_enemy_star.rotation_degrees >= 360):
+				super_enemy_star.rotation_degrees -= 360
+			if (super_enemy_star.rotation_degrees <= -360):
+				super_enemy_star.rotation_degrees += 360
 	
 
 func _on_body_entered(body: Node2D) -> void:
 	# если касаемся корабля игрока то наносим ему урон и взрываемся
 	if (body.name == "Galaxy_ship" and !death):
 		death = true
-		if(body.powerArmor_player.run and body.powerArmor_player.hp >= damage):
+		if (body.powerArmor_player.run and body.powerArmor_player.hp >= damage):
 			body.powerArmor_player.hp -= damage
 		else:
 			body.hp_player -= damage
@@ -278,5 +287,5 @@ func _on_boom_body_exited(body: Node2D) -> void:
 
 
 func _on_timer_star_timeout() -> void:
-	if(super_enemy or mega_enemy):
-		move_star = Vector2(randf_range(-42,42) , randf_range(-42,42))
+	if (super_enemy or mega_enemy):
+		move_star = Vector2(randf_range(-42, 42), randf_range(-42, 42))

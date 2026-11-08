@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cr3ywdl3c6ics" path="res://photo/parallax background var 1/parallax background 1.png" id="6_e43k7"]
 
 [node name="Main_menu" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_nv16c")
 
 [node name="ParallaxBackground_var_1" type="ParallaxBackground" parent="."]
@@ -71,6 +72,6 @@ offset_top = 1528.0
 offset_right = 265.0
 offset_bottom = 1583.0
 theme_override_font_sizes/font_size = 40
-text = "Alpha version 0.0.62K"
+text = "Alpha version 0.0.63A"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -32,6 +32,7 @@ var time_appearance_enemy
 var save_time = 0
 
 var start_move = false
+var local_common_timer = 0
 
 @onready var level = $"../.."
 
@@ -123,9 +124,11 @@ func _ready() -> void:
 		hp = (enemy_level * 4 * 50) * scale_num
 		damage = (((enemy_level * 4 * 50) * scale_num) / 10.0) * 8
 	
-	# await get_tree().create_timer(5).timeout
+	print("+ ++ + start meteorite timer (", local_common_timer, ") + ++ +")
+	await get_tree().create_timer(local_common_timer, false).timeout
 	start_move = true
-	position = Vector2(randi_range(-100, 1180), -90)
+	position = Vector2(randi_range(-100, 1180), -150)
+	print("- -- - stop meteorite timer - -- -")
 
 
 func _process(delta: float) -> void:
@@ -178,8 +181,11 @@ func _process(delta: float) -> void:
 			super_enemy_star.rotation_degrees += 360
 
 
-	if (position.y > 2500):
-		print(Time.get_unix_time_from_system() - time_appearance_enemy)
+	if (position.y > 2550):
+		# print("end_end")
+		# print(level.num_level_text/2.0)
+		# print(Time.get_unix_time_from_system() - time_appearance_enemy)
+		Global.coin_player = snapped(Global.coin_player - (level.num_level_text / 2.0), 0.01)
 		self.queue_free()
 
 

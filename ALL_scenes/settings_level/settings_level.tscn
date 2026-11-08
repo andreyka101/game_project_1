@@ -22,6 +22,7 @@ corner_radius_bottom_left = 30
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o7vg8"]
 
 [node name="Settings_level" type="Node2D"]
+process_mode = 3
 
 [node name="Background" type="Label" parent="."]
 offset_right = 720.0

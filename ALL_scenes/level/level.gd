@@ -8,8 +8,8 @@ var start_price_level = 3
 
 # var num_level_hard = 1
 # var num_level_text = 1
-# var price_level = 4
-# var start_price_level = 4
+# var price_level = 300
+# var start_price_level = 300
 
 # var num_level_hard = 101
 # var num_level_text = 101
@@ -35,6 +35,11 @@ var enemyShip_Red_scene = load("res://ALL_scenes/enemyShip_2/enemy_ship_2.tscn")
 var enemyShip_Black_scene = load("res://ALL_scenes/enemyShip_3/enemy_ship_3.tscn")
 var drone_Violet_scene = load("res://ALL_scenes/drone_1/drone_1.tscn")
 var drone_Уellow_scene = load("res://ALL_scenes/drone_2/drone_2.tscn")
+var common_timer_enemies = 0
+var common_timer_short_enemies_obj = {
+	"v1_violet": 0,
+	"v2_yellow": 0,
+}
 var arr_enemies = []
 
 var playerAbilityLaunch_k3_Сoin = 0
@@ -50,20 +55,29 @@ func _ready() -> void:
 	# label_dps.text = "DPS = " str((1 / galaxy_ship.time_timer) * galaxy_ship.damage)
 	# method_level()
 	# await get_tree().create_timer(2).timeout
-	# for i in range(1):
+	for i in range(20):
 	# 	creatingEnemies_meteorite()
-		# creatingEnemies_enemy_ship_White()
-		# creatingEnemies_enemy_ship_Red(1)
-		# creatingEnemies_enemy_ship_Black()
+	# 	creatingEnemies_enemy_ship_White()
+	# 	creatingEnemies_enemy_ship_Red()
+	# 	creatingEnemies_enemy_ship_Black()
 		# creatingEnemies_drone_Violet()
-		# creatingEnemies_drone_Уellow(1)
+		creatingEnemies_drone_Уellow()
 	# for enemy in arr_enemies:
 	# 	enemies.add_child(enemy)
 
 func creatingEnemies_meteorite(enemy_difficulty = 0):
 	if (price_level >= 1):
 		var meteorite: Area2D = meteorite_scene.instantiate()
-		meteorite.position = Vector2(-6000, 0)
+		meteorite.position = Vector2(-6000, -6000)
+		# -(/)
+		var local_timer = randf_range(0.3, 4)
+		if (common_timer_enemies != 0):
+			meteorite.local_common_timer = local_timer + common_timer_enemies
+			common_timer_enemies += local_timer
+		else:
+			meteorite.local_common_timer = 0.1
+			common_timer_enemies += 0.3
+		# -(/)
 		meteorite.enemy_level = (num_level_hard / 10) + 1
 		if (enemy_difficulty == 0):
 			meteorite.super_enemy = false
@@ -74,11 +88,20 @@ func creatingEnemies_meteorite(enemy_difficulty = 0):
 		price_level -= 1
 		# await get_tree().create_timer(randf_range(0.1, 0.5)).timeout
 		arr_enemies.append(meteorite)
-		# enemies.add_child(meteorite)
 func creatingEnemies_enemy_ship_White(enemy_difficulty = 0):
 	if (price_level >= 2):
 		var enemyShip_1: Area2D = enemyShip_White_scene.instantiate()
-		enemyShip_1.position = Vector2(randi_range(0, 1080), -50)
+		# enemyShip_1.position = Vector2(randi_range(0, 1080), -50)
+		enemyShip_1.position = Vector2(-6000, -6000)
+		# -(/)
+		var local_timer = randf_range(0.3, 4)
+		if (common_timer_enemies != 0):
+			enemyShip_1.local_common_timer = local_timer + common_timer_enemies
+			common_timer_enemies += local_timer
+		else:
+			enemyShip_1.local_common_timer = 0.1
+			common_timer_enemies += 0.3
+		# -(/)
 		enemyShip_1.enemy_level = (num_level_hard / 10) + 1
 		if (enemy_difficulty == 0):
 			enemyShip_1.super_enemy = false
@@ -92,7 +115,16 @@ func creatingEnemies_enemy_ship_White(enemy_difficulty = 0):
 func creatingEnemies_enemy_ship_Red(enemy_difficulty = 0):
 	if (price_level >= 2):
 		var enemyShip_2: Area2D = enemyShip_Red_scene.instantiate()
-		enemyShip_2.position = Vector2(randi_range(0, 1080), -50)
+		enemyShip_2.position = Vector2(-6000, -6000)
+		# -(/)
+		var local_timer = randf_range(0.3, 4)
+		if (common_timer_enemies != 0):
+			enemyShip_2.local_common_timer = local_timer + common_timer_enemies
+			common_timer_enemies += local_timer
+		else:
+			enemyShip_2.local_common_timer = 0.1
+			common_timer_enemies += 0.3
+		# -(/)
 		enemyShip_2.enemy_level = (num_level_hard / 10) + 1
 		if (enemy_difficulty == 0):
 			enemyShip_2.super_enemy = false
@@ -106,7 +138,16 @@ func creatingEnemies_enemy_ship_Red(enemy_difficulty = 0):
 func creatingEnemies_enemy_ship_Black(enemy_difficulty = 0):
 	if (price_level >= 3):
 		var enemyShip_3: Area2D = enemyShip_Black_scene.instantiate()
-		enemyShip_3.position = Vector2(randi_range(0, 1080), -50)
+		enemyShip_3.position = Vector2(-6000, -6000)
+		# -(/)
+		var local_timer = randf_range(0.3, 4)
+		if (common_timer_enemies != 0):
+			enemyShip_3.local_common_timer = local_timer + common_timer_enemies
+			common_timer_enemies += local_timer
+		else:
+			enemyShip_3.local_common_timer = 0.1
+			common_timer_enemies += 0.3
+		# -(/)
 		enemyShip_3.enemy_level = (num_level_hard / 10) + 1
 		if (enemy_difficulty == 0):
 			enemyShip_3.super_enemy = false
@@ -120,7 +161,17 @@ func creatingEnemies_enemy_ship_Black(enemy_difficulty = 0):
 func creatingEnemies_drone_Violet(enemy_difficulty = 0):
 	if (price_level >= 1):
 		var drone_1: Area2D = drone_Violet_scene.instantiate()
-		drone_1.position = Vector2(randi_range(-200, 1280), -10)
+		# drone_1.position = Vector2(randi_range(-200, 1280), -10)
+		drone_1.position = Vector2(-6000, -6000)
+		# -(/)
+		var local_timer = randf_range(2, 8)
+		if (common_timer_short_enemies_obj.v1_violet != 0):
+			drone_1.local_common_timer = local_timer + common_timer_short_enemies_obj.v1_violet
+			common_timer_short_enemies_obj.v1_violet += local_timer
+		else:
+			drone_1.local_common_timer = 3
+			common_timer_short_enemies_obj.v1_violet += 3
+		# -(/)
 		drone_1.enemy_level = (num_level_hard / 10) + 1
 		if (enemy_difficulty == 0):
 			drone_1.super_enemy = false
@@ -134,7 +185,17 @@ func creatingEnemies_drone_Violet(enemy_difficulty = 0):
 func creatingEnemies_drone_Уellow(enemy_difficulty = 0):
 	if (price_level >= 2):
 		var drone_2: CharacterBody2D = drone_Уellow_scene.instantiate()
-		drone_2.position = Vector2(randi_range(0, 1080), -150)
+		# drone_2.position = Vector2(randi_range(0, 1080), -150)
+		drone_2.position = Vector2(-6000, -6000)
+		# -(/)
+		var local_timer = randf_range(1, 6)
+		if (common_timer_short_enemies_obj.v2_yellow != 0):
+			drone_2.local_common_timer = local_timer + common_timer_short_enemies_obj.v2_yellow
+			common_timer_short_enemies_obj.v2_yellow += local_timer
+		else:
+			drone_2.local_common_timer = 1
+			common_timer_short_enemies_obj.v2_yellow += 1
+		# -(/)
 		drone_2.enemy_level = (num_level_hard / 10) + 1
 		if (enemy_difficulty == 0):
 			drone_2.super_enemy = false
@@ -283,12 +344,12 @@ func _process(delta: float) -> void:
 	# LINK - ----------------------------------------------
 	elif (len(enemies.get_children()) <= 5 and price_level != 0 and ((num_level_hard % 100) >= 1 and (num_level_hard % 100) < 23) and (num_level_hard / 100) == 1):
 		method_level()
-	# elif (len(enemies.get_children()) <= 2 and price_level != 0 and ((num_level_hard % 100) >= 23 and (num_level_hard % 100) < 36) and (num_level_hard / 100) == 0):
-	# 	method_level()
-	# elif (len(enemies.get_children()) <= 3 and price_level != 0 and ((num_level_hard % 100) >= 36 and (num_level_hard % 100) < 50) and (num_level_hard / 100) == 0):
-	# 	method_level()
-	# elif (len(enemies.get_children()) <= 4 and price_level != 0 and ((num_level_hard % 100) >= 50 and (num_level_hard % 100) < 74) and (num_level_hard / 100) == 0):
-	# 	method_level()
+	elif (len(enemies.get_children()) <= 6 and price_level != 0 and ((num_level_hard % 100) >= 23 and (num_level_hard % 100) < 36) and (num_level_hard / 100) == 1):
+		method_level()
+	elif (len(enemies.get_children()) <= 7 and price_level != 0 and ((num_level_hard % 100) >= 36 and (num_level_hard % 100) < 50) and (num_level_hard / 100) == 1):
+		method_level()
+	elif (len(enemies.get_children()) <= 8 and price_level != 0 and ((num_level_hard % 100) >= 50 and (num_level_hard % 100) < 74) and (num_level_hard / 100) == 1):
+		method_level()
 	# elif (len(enemies.get_children()) <= 5 and price_level != 0 and ((num_level_hard % 100) >= 74 and (num_level_hard % 100) <= 99 or (num_level_hard % 100) == 0) and (num_level_hard / 100) == 0):
 	# 	method_level()
 
@@ -391,8 +452,6 @@ func method_level():
 
 	# print(start_price_level)
 	while (price_level != 0 and number_enemies_on_wave != 0):
-
-
 		# print(number_enemies_on_wave)
 		# 3
 		if ((num_level_hard % 100) == 1):
@@ -1826,5 +1885,15 @@ func method_level():
 
 	for enemy in arr_enemies:
 		enemies.add_child(enemy)
-		await get_tree().create_timer(randf_range(0.5, 4)).timeout
 	arr_enemies = []
+	common_timer_enemies = 0
+	for el in common_timer_short_enemies_obj:
+		common_timer_short_enemies_obj[el] = 0
+
+
+func _on_stoppingbarrier_body_entered(body: Node2D) -> void:
+	for i_group in body.get_groups():
+		#print(i_group)
+		# если в группе есть пуля то наносим урон метеориту и удаляем пулю
+		if (i_group == "group_bullet"):
+			body.queue_free()

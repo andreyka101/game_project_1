@@ -37,8 +37,17 @@ var stop_time = false
 var time_appearance_enemy
 var save_time = 0
 
+var start_move = false
+var local_common_timer = 0
+
+
 
 func _ready() -> void:
+	print("drone_Уellow ", local_common_timer)
+	await get_tree().create_timer(local_common_timer, false).timeout
+	start_move = true
+
+	position = Vector2(randi_range(-200, 1280), -100)
 	time_appearance_enemy = Time.get_unix_time_from_system()
 
 	if (super_enemy):
@@ -158,64 +167,64 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if (Global.stop_game and !stop_time):
-		stop_time = true
-		save_time = Time.get_unix_time_from_system() - time_appearance_enemy
+	if (start_move):
+		if (Global.stop_game and !stop_time):
+			stop_time = true
+			save_time = Time.get_unix_time_from_system() - time_appearance_enemy
 
-	if (!Global.stop_game and stop_time):
-		stop_time = false
-		time_appearance_enemy = Time.get_unix_time_from_system() - save_time
-
-
-	if (start and self.position.y > 2):
-		start = false
-		await get_tree().create_timer(randf_range(0, 0.5)).timeout
-		timer.start(randf_range(timer_num[0], timer_num[1]))
-
-	if (Global.stop_game):
-		timer.paused = true
-		timer_star.paused = true
-	else:
-		timer.paused = false
-		timer_star.paused = false
+		if (!Global.stop_game and stop_time):
+			stop_time = false
+			time_appearance_enemy = Time.get_unix_time_from_system() - save_time
 
 
-	# print(velocity)
-	if (not shooting and galaxy_ship and !death and !Global.stop_game):
-		if (galaxy_ship.position and !Global.stop_game and (position.x <= galaxy_ship.position.x - 15 or position.x >= galaxy_ship.position.x + 15)):
-			if (galaxy_ship.position.x - self.position.x > 0):
-				self.velocity.x = drone_speed_to_side
-			else:
-				self.velocity.x = - drone_speed_to_side
+		if (start and self.position.y > 2):
+			start = false
+			await get_tree().create_timer(randf_range(0, 0.5)).timeout
+			timer.start(randf_range(timer_num[0], timer_num[1]))
+
+		if (Global.stop_game):
+			timer.paused = true
+			timer_star.paused = true
 		else:
-			self.velocity.x = 0
-		velocity.y = speed_drone
-	else:
-		self.velocity = Vector2(0, 0)
-		
+			timer.paused = false
+			timer_star.paused = false
 
-		if (hp <= 0 and !death):
-			death = true
-			collisionPolygon.visible = false
-			sprite2D.play("explosion")
-			await sprite2D.animation_finished
-			var enemy_explosion_sound_scene = load("res://ALL_scenes/enemy_explosion_sound/enemy_explosion_sound.tscn")
-			var enemy_explosion_sound = enemy_explosion_sound_scene.instantiate()
-			level.add_child(enemy_explosion_sound)
-			print(Time.get_unix_time_from_system() - time_appearance_enemy)
-			self.queue_free()
+		if (not shooting and galaxy_ship and !death and !Global.stop_game):
+			if (galaxy_ship.position and !Global.stop_game and (position.x <= galaxy_ship.position.x - 15 or position.x >= galaxy_ship.position.x + 15)):
+				if (galaxy_ship.position.x - self.position.x > 0):
+					self.velocity.x = drone_speed_to_side
+				else:
+					self.velocity.x = - drone_speed_to_side
+			else:
+				self.velocity.x = 0
+			velocity.y = speed_drone
+		else:
+			self.velocity = Vector2(0, 0)
+			
+
+			if (hp <= 0 and !death):
+				death = true
+				collisionPolygon.visible = false
+				sprite2D.play("explosion")
+				await sprite2D.animation_finished
+				var enemy_explosion_sound_scene = load("res://ALL_scenes/enemy_explosion_sound/enemy_explosion_sound.tscn")
+				var enemy_explosion_sound = enemy_explosion_sound_scene.instantiate()
+				level.add_child(enemy_explosion_sound)
+				print(Time.get_unix_time_from_system() - time_appearance_enemy)
+				self.queue_free()
 	
-	if ((super_enemy or mega_enemy) and !Global.stop_game):
-		super_enemy_star.position += super_enemy_star.position.direction_to(move_star) * 30 * delta
-		super_enemy_star.rotation_degrees += speed_rotation_star
-		if (super_enemy_star.rotation_degrees >= 360):
-			super_enemy_star.rotation_degrees -= 360
-		if (super_enemy_star.rotation_degrees <= -360):
-			super_enemy_star.rotation_degrees += 360
+		if ((super_enemy or mega_enemy) and !Global.stop_game):
+			super_enemy_star.position += super_enemy_star.position.direction_to(move_star) * 30 * delta
+			super_enemy_star.rotation_degrees += speed_rotation_star
+			if (super_enemy_star.rotation_degrees >= 360):
+				super_enemy_star.rotation_degrees -= 360
+			if (super_enemy_star.rotation_degrees <= -360):
+				super_enemy_star.rotation_degrees += 360
 
-	if (position.y > 2500):
-		print(Time.get_unix_time_from_system() - time_appearance_enemy)
-		self.queue_free()
+		if (position.y > 2500):
+			print(Time.get_unix_time_from_system() - time_appearance_enemy)
+			Global.coin_player = snapped(Global.coin_player - (level.num_level_text / 2.0), 0.01)
+			self.queue_free()
 
 	move_and_slide()
 
